@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskName": "任务-LQ_TC26xB_LIBtasking",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}

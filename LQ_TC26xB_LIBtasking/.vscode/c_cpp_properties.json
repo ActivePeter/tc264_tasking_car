@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/src/**",
+                "${workspaceFolder}/src/AppSw/Tricore/Driver",
+                "${workspaceFolder}/src/BaseSw/iLLD/TC26B/Tricore"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "__TASKING__"
+            ],
+            "windowsSdkVersion": "10.0.17763.0",
+            "compilerPath": "C:/Users/Administrator.VZMRW9ETL45BX39/.platformio/packages/toolchain-xtensa32/bin/xtensa-esp32-elf-gcc.exe",
+            "cStandard": "c99",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "clang-x64",
+            "compilerArgs": [
+                "-mlongcalls",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
