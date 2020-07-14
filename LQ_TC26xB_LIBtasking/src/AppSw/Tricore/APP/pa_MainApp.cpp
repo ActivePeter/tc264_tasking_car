@@ -29,12 +29,16 @@ unsigned short step = 0;
 					
 void startMainTask()
 {
+	UART_InitConfig(UART2_RX_P14_3, UART2_TX_P14_2, 115200);//2红色线
+	{
+		UART_PutStr(UART2, "init\r\n");
+	}
 	pa_BNO055_init();
 	ADC_InitConfig(ADC0, 100000); //初始化
 	ADC_InitConfig(ADC1, 100000);
 	ADC_InitConfig(ADC2, 100000);
 	ADC_InitConfig(ADC3, 100000);
-	UART_InitConfig(UART2_RX_P14_3, UART2_TX_P14_2, 115200);
+	
 	STM_InitConfig(STM0, STM_Channel_0, 100, []() { //微秒  //UART_PutStr(UART2,"ssss");
 		getadc();											  //getadc();
 	});
