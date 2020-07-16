@@ -1,23 +1,23 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-»ùÓÚiLLD_1_0_1_11_0µ×²ã³ÌĞò
+åŸºäºiLLD_1_0_1_11_0åº•å±‚ç¨‹åº
 
-ÀíÂÛÓĞ8¸ö×ª»»Æ÷£¬¿ÉÍ¬²½×ª»»£»Ã¿¸ö×ª»»Æ÷8¸öÍ¨µÀ£¬¾«¶ÈÎª8/10/12Î»¡£
+ç†è®ºæœ‰8ä¸ªè½¬æ¢å™¨ï¼Œå¯åŒæ­¥è½¬æ¢ï¼›æ¯ä¸ªè½¬æ¢å™¨8ä¸ªé€šé“ï¼Œç²¾åº¦ä¸º8/10/12ä½ã€‚
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #ifndef _LQ_ADC_H_
 #define _LQ_ADC_H_
@@ -31,7 +31,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "Cpu\Std\Platform_Types.h"
 
 /*
- * adc Í¨µÀ Ã¶¾Ù   ADC0¶ÔÓ¦¹Ü½Å AN0
+ * adc é€šé“ æšä¸¾   ADC0å¯¹åº”ç®¡è„š AN0
  */
 typedef enum
 {
@@ -44,11 +44,11 @@ typedef enum
 	ADC47= 0x2D19, ADC48= 0x2E1A, ADC49= 0x2F1B
 }ADC_Channel_t;
 
-/* »ñÈ¡ADC¶ÔÓ¦×é */
+/* è·å–ADCå¯¹åº”ç»„ */
 #define ADC_GetGroup(ADC_Channel)   ((ADC_Channel & 0xF000)>>12)
-/* »ñÈ¡ADC¶ÔÓ¦Í¨µÀ */
+/* è·å–ADCå¯¹åº”é€šé“ */
 #define ADC_GetChannel(ADC_Channel) ((ADC_Channel & 0x0F00)>>8)
-/* »ñÈ¡ADC¶ÔÓ¦¹Ü½ÅĞòÁĞºÅ ºê¶¨Òå */
+/* è·å–ADCå¯¹åº”ç®¡è„šåºåˆ—å· å®å®šä¹‰ */
 #define ADC_GetIndex(ADC_Channel)   (unsigned char)(ADC_Channel & 0x00FF)
 
 void ADC_InitConfig(ADC_Channel_t channel, unsigned long Freq_Hz);

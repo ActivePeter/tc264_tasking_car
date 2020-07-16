@@ -1,153 +1,153 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
-ÀíÂÛÓĞ8¸ö×ª»»Æ÷£¬¿ÉÍ¬²½×ª»»£»Ã¿¸ö×ª»»8¸öÍ¨µÀ£¬¾«¶ÈÎª8/10/12Î»¡£
-ADC¶Ë¿ÚAN¿ÉÒÔ×÷ÎªÊäÈë¿Ú£¬²»¿É×÷ÎªÊä³ö¿Ú£¬ÓëARMµ¥Æ¬»ú²»Í¬£¡
+ç†è®ºæœ‰8ä¸ªè½¬æ¢å™¨ï¼Œå¯åŒæ­¥è½¬æ¢ï¼›æ¯ä¸ªè½¬æ¢8ä¸ªé€šé“ï¼Œç²¾åº¦ä¸º8/10/12ä½ã€‚
+ADCç«¯å£ANå¯ä»¥ä½œä¸ºè¾“å…¥å£ï¼Œä¸å¯ä½œä¸ºè¾“å‡ºå£ï¼Œä¸ARMå•ç‰‡æœºä¸åŒï¼
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #include <LQ_ADC.h>
 
 /**
- * ADC¼Ä´æÆ÷
+ * ADCå¯„å­˜å™¨
  */
 IfxVadc_Adc vadc;
 
 /**
- * ADC×ª»»½á¹¹Ìå
+ * ADCè½¬æ¢ç»“æ„ä½“
  */
 Ifx_VADC_RES conversionResult;
 
 /**
- * ADC×ª»»×é
+ * ADCè½¬æ¢ç»„
  */
 IfxVadc_Adc_Group g_AdcGroup[3];
 
 /**
- * ADC×ª»»Í¨µÀÅäÖÃ½á¹¹Ìå
+ * ADCè½¬æ¢é€šé“é…ç½®ç»“æ„ä½“
  */
 IfxVadc_Adc_Channel g_AdcChannel[28];
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid ADC_init(void)
-*  ¹¦ÄÜËµÃ÷£ºADC³õÊ¼»¯º¯Êı
-*  ²ÎÊıËµÃ÷£ºchannel  ADCÍ¨µÀ
-*  ²ÎÊıËµÃ÷£ºFreq_Hz  ADCÍ¨µÀ²ÉÑùÆµÂÊ     ×¢Òâ ADCÓĞÈı¸öÄ£¿é Í¨µÀ0-13  16-25  35-49·Ö±ğÊôÓÚÕâÈı¸öÍ¨µÀ  ÕâÀïÊ¹ÓÃÉ¨Ãè²ÉÑù·½Ê½£¬Òò´ËÈç¹ûÒ»¸öADCÄ£¿éÍ¬Ê±³õÊ¼»¯ÁËN¸öÍ¨µÀ£¬ÔòADCÊµ¼Ê²ÉÓÃÂÊ = Freq_Hz / N
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼švoid ADC_init(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šADCåˆå§‹åŒ–å‡½æ•°
+*  å‚æ•°è¯´æ˜ï¼šchannel  ADCé€šé“
+*  å‚æ•°è¯´æ˜ï¼šFreq_Hz  ADCé€šé“é‡‡æ ·é¢‘ç‡     æ³¨æ„ ADCæœ‰ä¸‰ä¸ªæ¨¡å— é€šé“0-13  16-25  35-49åˆ†åˆ«å±äºè¿™ä¸‰ä¸ªé€šé“  è¿™é‡Œä½¿ç”¨æ‰«æé‡‡æ ·æ–¹å¼ï¼Œå› æ­¤å¦‚æœä¸€ä¸ªADCæ¨¡å—åŒæ—¶åˆå§‹åŒ–äº†Nä¸ªé€šé“ï¼Œåˆ™ADCå®é™…é‡‡ç”¨ç‡ = Freq_Hz / N
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 void ADC_InitConfig(ADC_Channel_t channel, unsigned long Freq_Hz)
 {
-	//ĞÂ½¨ÅäÖÃ
+	//æ–°å»ºé…ç½®
 	IfxVadc_Adc_Config adcConfig;
 	IfxVadc_Adc_initModuleConfig(&adcConfig, &MODULE_VADC);
 
 	adcConfig.supplyVoltage = IfxVadc_LowSupplyVoltageSelect_3V;
 
-	//³õÊ¼»¯Ä£¿é
+	//åˆå§‹åŒ–æ¨¡å—
 	IfxVadc_Adc_initModule(&vadc, &adcConfig);
 
-	//ĞÂ½¨ADC×éÅäÖÃ
+	//æ–°å»ºADCç»„é…ç½®
 	IfxVadc_Adc_GroupConfig adcGroupConfig;
 	IfxVadc_Adc_initGroupConfig(&adcGroupConfig, &vadc);
 
-	/* ÉèÖÃ²ÉÑùÊ±¼ä */
+	/* è®¾ç½®é‡‡æ ·æ—¶é—´ */
 	adcGroupConfig.inputClass[0].sampleTime = 1.0f/Freq_Hz;
 	adcGroupConfig.inputClass[1].sampleTime = 1.0f/Freq_Hz;
 
-	/* ÉèÖÃ·Ö±æÂÊ 12Î» */
+	/* è®¾ç½®åˆ†è¾¨ç‡ 12ä½ */
 	adcGroupConfig.inputClass[0].resolution = IfxVadc_ChannelResolution_12bit;
 	adcGroupConfig.inputClass[1].resolution = IfxVadc_ChannelResolution_12bit;
 
-#pragma warning 547         // ÆÁ±Î¾¯¸æ
-	//ĞŞ¸Ä×é
+#pragma warning 547         // å±è”½è­¦å‘Š
+	//ä¿®æ”¹ç»„
 	adcGroupConfig.groupId = ADC_GetGroup(channel);
-#pragma warning default     // ´ò¿ª¾¯¸æ
+#pragma warning default     // æ‰“å¼€è­¦å‘Š
 
-	//ÖØÒªËµÃ÷:Í¨³£ÓÃÍ¬Ò»¸ö×é×÷Îªmaster!
+	//é‡è¦è¯´æ˜:é€šå¸¸ç”¨åŒä¸€ä¸ªç»„ä½œä¸ºmaster!
 	adcGroupConfig.master = adcGroupConfig.groupId;
 
-	//Æô¶¯È«²¿ÖÙ²ÃÇëÇóÔ´£¬Ã¿¸öÇëÇóÔ´¿ÉÒÔË³Ğò´¥·¢1£¬4»òÕß8Â·×ª»»
+	//å¯åŠ¨å…¨éƒ¨ä»²è£è¯·æ±‚æºï¼Œæ¯ä¸ªè¯·æ±‚æºå¯ä»¥é¡ºåºè§¦å‘1ï¼Œ4æˆ–è€…8è·¯è½¬æ¢
 	adcGroupConfig.arbiter.requestSlotQueueEnabled          = FALSE;
 
-	//ÆôÓÃĞòÁĞÄ£Ê½£¬±ØĞëÆôÓÃ3ÖÖÇëÇóÔ´ÖĞµÄÒ»ÖÖ
+	//å¯ç”¨åºåˆ—æ¨¡å¼ï¼Œå¿…é¡»å¯ç”¨3ç§è¯·æ±‚æºä¸­çš„ä¸€ç§
 	adcGroupConfig.arbiter.requestSlotScanEnabled           = TRUE;
 
-	//ÆôÓÃÉ¨ÃèÄ£Ê½
+	//å¯ç”¨æ‰«ææ¨¡å¼
 	adcGroupConfig.arbiter.requestSlotBackgroundScanEnabled = FALSE;
 
-	//ÆôÓÃ±³¾°É¨Ãè
-	//Ê¹ÄÜËùÓĞµÄÃÅÎª "always" Ä£Ê½ (ÎŞ±ßÑØ¼ì²â)
+	//å¯ç”¨èƒŒæ™¯æ‰«æ
+	//ä½¿èƒ½æ‰€æœ‰çš„é—¨ä¸º "always" æ¨¡å¼ (æ— è¾¹æ²¿æ£€æµ‹)
 	adcGroupConfig.queueRequest.triggerConfig.gatingMode          = IfxVadc_GatingMode_disabled;
 	adcGroupConfig.scanRequest.triggerConfig.gatingMode           = IfxVadc_GatingMode_always;
 	adcGroupConfig.backgroundScanRequest.triggerConfig.gatingMode = IfxVadc_GatingMode_disabled;
-	//Æô¶¯×Ô¶¯É¨ÃèÄ£Ê½
+	//å¯åŠ¨è‡ªåŠ¨æ‰«ææ¨¡å¼
 	adcGroupConfig.scanRequest.autoscanEnabled = TRUE;
 
-	//³õÊ¼»¯×é
+	//åˆå§‹åŒ–ç»„
 	IfxVadc_Adc_initGroup(&g_AdcGroup[ADC_GetGroup(channel)], &adcGroupConfig);
 
-	//ĞÂ½¨Í¨µÀÅäÖÃ
+	//æ–°å»ºé€šé“é…ç½®
 	IfxVadc_Adc_ChannelConfig adcChannelConfig;
 
-	IfxVadc_Adc_initChannelConfig(&adcChannelConfig, &g_AdcGroup[ADC_GetGroup(channel)]);//³õÊ¼»¯
-	adcChannelConfig.channelId = (IfxVadc_ChannelId)(ADC_GetChannel(channel));           //Í¨µÀIDÑ¡Ôñ
-	adcChannelConfig.resultRegister = (IfxVadc_ChannelResult)(ADC_GetChannel(channel));  //¶ÔÓ¦Í¨µÀ×ª»»½á¹û½á´æÆ÷Ñ¡Ôñ
+	IfxVadc_Adc_initChannelConfig(&adcChannelConfig, &g_AdcGroup[ADC_GetGroup(channel)]);//åˆå§‹åŒ–
+	adcChannelConfig.channelId = (IfxVadc_ChannelId)(ADC_GetChannel(channel));           //é€šé“IDé€‰æ‹©
+	adcChannelConfig.resultRegister = (IfxVadc_ChannelResult)(ADC_GetChannel(channel));  //å¯¹åº”é€šé“è½¬æ¢ç»“æœç»“å­˜å™¨é€‰æ‹©
 
-	//Ê¹ÓÃ×¨ÓÃ½á¹û¼Ä´æÆ÷³õÊ¼»¯Í¨µÀ
+	//ä½¿ç”¨ä¸“ç”¨ç»“æœå¯„å­˜å™¨åˆå§‹åŒ–é€šé“
 	IfxVadc_Adc_initChannel(&g_AdcChannel[ADC_GetIndex(channel)], &adcChannelConfig);
-	//¼ÓÈë×Ô¶¯É¨Ãè
+	//åŠ å…¥è‡ªåŠ¨æ‰«æ
 	unsigned channels = (1 << adcChannelConfig.channelId);
 	unsigned mask = channels;
 	IfxVadc_Adc_setScan(&g_AdcGroup[ADC_GetGroup(channel)], channels, mask);
 
-	//¿ªÊ¼×Ô¶¯É¨Ãè
+	//å¼€å§‹è‡ªåŠ¨æ‰«æ
 	IfxVadc_Adc_startScan(&g_AdcGroup[ADC_GetGroup(channel)]);
 
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºunsigned short ADC_Read(ADC_Channel_t  chn)
-*  ¹¦ÄÜËµÃ÷£ºADC²É¼¯
-*  ²ÎÊıËµÃ÷£ºchn    : ADCÍ¨µÀ
-*  º¯Êı·µ»Ø£ºADCÊıÖµ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼šunsigned short ADC_Read(ADC_Channel_t  chn)
+*  åŠŸèƒ½è¯´æ˜ï¼šADCé‡‡é›†
+*  å‚æ•°è¯´æ˜ï¼šchn    : ADCé€šé“
+*  å‡½æ•°è¿”å›ï¼šADCæ•°å€¼
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 unsigned short ADC_Read(ADC_Channel_t  chn)
 {
-	//µÈ´ı×ª»»Íê³É
+	//ç­‰å¾…è½¬æ¢å®Œæˆ
 	do{
 		conversionResult = IfxVadc_Adc_getResult(&g_AdcChannel[ADC_GetIndex(chn)]);
 	} while( !conversionResult.B.VF );
 
-	return 	conversionResult.B.RESULT;//·µ»Ø×ª»»½á¹û
+	return 	conversionResult.B.RESULT;//è¿”å›è½¬æ¢ç»“æœ
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºunsigned short ADC_Read(ADC_Channel_t  chn)
-*  ¹¦ÄÜËµÃ÷£ºADC¶à´Î²É¼¯È¡Æ½¾ùÖµ
-*  ²ÎÊıËµÃ÷£ºchn    : ADCÍ¨µÀ
-*  ²ÎÊıËµÃ÷£ºcount  : ²É¼¯´ÎÊı
-*  º¯Êı·µ»Ø£ºADCÊıÖµ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼šunsigned short ADC_Read(ADC_Channel_t  chn)
+*  åŠŸèƒ½è¯´æ˜ï¼šADCå¤šæ¬¡é‡‡é›†å–å¹³å‡å€¼
+*  å‚æ•°è¯´æ˜ï¼šchn    : ADCé€šé“
+*  å‚æ•°è¯´æ˜ï¼šcount  : é‡‡é›†æ¬¡æ•°
+*  å‡½æ•°è¿”å›ï¼šADCæ•°å€¼
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 unsigned short ADC_ReadAverage(ADC_Channel_t  chn, uint8_t count)
 {
@@ -157,8 +157,8 @@ unsigned short ADC_ReadAverage(ADC_Channel_t  chn, uint8_t count)
 	{
 		sum += ADC_Read(chn);
 	}
-	return 	(unsigned short)(sum/count);//·µ»Ø×ª»»½á¹û
+	return 	(unsigned short)(sum/count);//è¿”å›è½¬æ¢ç»“æœ
 }
 /////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////Íê/////////////////////////////////////////////////
+//////////////////////////////////å®Œ/////////////////////////////////////////////////
 
