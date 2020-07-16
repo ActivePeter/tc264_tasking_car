@@ -56,14 +56,14 @@
 uint8 IfxAsclin_Asc_blockingRead(IfxAsclin_Asc *asclin)
 {
     Ifx_SizeT count = 1;
-    uint8     data;
+    uint8 data;
 
     while (IfxAsclin_Asc_read(asclin, &data, &count, TIME_INFINITE) != TRUE)
-    {}
+    {
+    }
 
     return data;
 }
-
 
 boolean IfxAsclin_Asc_blockingWrite(IfxAsclin_Asc *asclin, uint8 data)
 {
@@ -72,18 +72,15 @@ boolean IfxAsclin_Asc_blockingWrite(IfxAsclin_Asc *asclin, uint8 data)
     return IfxAsclin_Asc_write(asclin, &data, &count, TIME_INFINITE);
 }
 
-
 boolean IfxAsclin_Asc_canReadCount(IfxAsclin_Asc *asclin, Ifx_SizeT count, Ifx_TickTime timeout)
 {
     return Ifx_Fifo_canReadCount(asclin->rx, count, timeout);
 }
 
-
 boolean IfxAsclin_Asc_canWriteCount(IfxAsclin_Asc *asclin, Ifx_SizeT count, Ifx_TickTime timeout)
 {
     return Ifx_Fifo_canWriteCount(asclin->tx, count, timeout);
 }
-
 
 void IfxAsclin_Asc_clearRx(IfxAsclin_Asc *asclin)
 {
@@ -91,28 +88,25 @@ void IfxAsclin_Asc_clearRx(IfxAsclin_Asc *asclin)
     Ifx_Fifo_clear(asclin->rx);
 }
 
-
 void IfxAsclin_Asc_clearTx(IfxAsclin_Asc *asclin)
 {
     Ifx_Fifo_clear(asclin->tx);
     IfxAsclin_flushTxFifo(asclin->asclin);
 }
 
-
 void IfxAsclin_Asc_disableModule(IfxAsclin_Asc *asclin)
 {
-    Ifx_ASCLIN *asclinSFR = asclin->asclin;       /* getting the pointer to ASCLIN registers from module handler*/
-    uint16      psw       = IfxScuWdt_getCpuWatchdogPassword();
+    Ifx_ASCLIN *asclinSFR = asclin->asclin; /* getting the pointer to ASCLIN registers from module handler*/
+    uint16 psw = IfxScuWdt_getCpuWatchdogPassword();
     IfxScuWdt_clearCpuEndinit(psw);               /* clearing the endinit protection */
     IfxAsclin_setDisableModuleRequest(asclinSFR); /* disabling the module */
     IfxScuWdt_setCpuEndinit(psw);                 /* setting the endinit protection back on */
 }
 
-
 boolean IfxAsclin_Asc_flushTx(IfxAsclin_Asc *asclin, Ifx_TickTime timeout)
 {
     Ifx_TickTime deadline = getDeadLine(timeout);
-    boolean      result;
+    boolean result;
 
     /* Flush the software FIFO */
     result = Ifx_Fifo_flush(asclin->tx, timeout);
@@ -129,49 +123,42 @@ boolean IfxAsclin_Asc_flushTx(IfxAsclin_Asc *asclin, Ifx_TickTime timeout)
     return result;
 }
 
-
 sint32 IfxAsclin_Asc_getReadCount(IfxAsclin_Asc *asclin)
 {
     return Ifx_Fifo_readCount(asclin->rx);
 }
-
 
 IfxStdIf_DPipe_ReadEvent IfxAsclin_Asc_getReadEvent(IfxAsclin_Asc *asclin)
 {
     return &asclin->rx->eventWriter;
 }
 
-
 uint32 IfxAsclin_Asc_getSendCount(IfxAsclin_Asc *asclin)
 {
     return asclin->sendCount;
 }
-
 
 Ifx_TickTime IfxAsclin_Asc_getTxTimeStamp(IfxAsclin_Asc *asclin)
 {
     return asclin->txTimestamp;
 }
 
-
 sint32 IfxAsclin_Asc_getWriteCount(IfxAsclin_Asc *asclin)
 {
     return Ifx_Fifo_writeCount(asclin->tx);
 }
-
 
 IfxStdIf_DPipe_WriteEvent IfxAsclin_Asc_getWriteEvent(IfxAsclin_Asc *asclin)
 {
     return &asclin->tx->eventWriter;
 }
 
-
 IfxAsclin_Status IfxAsclin_Asc_initModule(IfxAsclin_Asc *asclin, const IfxAsclin_Asc_Config *config)
 {
-    Ifx_ASCLIN      *asclinSFR = config->asclin;                        /* pointer to ASCLIN registers*/
-    IfxAsclin_Status status    = IfxAsclin_Status_noError;
+    Ifx_ASCLIN *asclinSFR = config->asclin; /* pointer to ASCLIN registers*/
+    IfxAsclin_Status status = IfxAsclin_Status_noError;
 
-    asclin->asclin = asclinSFR;                                         /* adding register pointer to module handler*/
+    asclin->asclin = asclinSFR; /* adding register pointer to module handler*/
 
     IfxAsclin_enableModule(asclinSFR);                                  /* enabling the module*/
     IfxAsclin_setClockSource(asclinSFR, IfxAsclin_ClockSource_noClock); /* disabling the clock*/
@@ -179,11 +166,11 @@ IfxAsclin_Status IfxAsclin_Asc_initModule(IfxAsclin_Asc *asclin, const IfxAsclin
     IfxAsclin_setPrescaler(asclinSFR, config->baudrate.prescaler);      /* sets the prescaler */
     IfxAsclin_setClockSource(asclinSFR, config->clockSource);           /* temporary set the clock source for baudrate configuration*/
     status = (IfxAsclin_Status)IfxAsclin_setBitTiming(asclinSFR,        /* setting the baudrate bit fields to generate the required baudrate*/
-        config->baudrate.baudrate,
-        config->baudrate.oversampling,
-        config->bitTiming.samplePointPosition,
-        config->bitTiming.medianFilter);
-    IfxAsclin_setClockSource(asclinSFR, IfxAsclin_ClockSource_noClock);              /* disabling the clock again*/
+                                                      config->baudrate.baudrate,
+                                                      config->baudrate.oversampling,
+                                                      config->bitTiming.samplePointPosition,
+                                                      config->bitTiming.medianFilter);
+    IfxAsclin_setClockSource(asclinSFR, IfxAsclin_ClockSource_noClock); /* disabling the clock again*/
 
     IfxAsclin_enableLoopBackMode(asclinSFR, config->loopBack);                       /* selecting the loopback mode */
     IfxAsclin_enableParity(asclinSFR, config->frame.parityBit);                      /* setting parity enable */
@@ -234,8 +221,8 @@ IfxAsclin_Status IfxAsclin_Asc_initModule(IfxAsclin_Asc *asclin, const IfxAsclin
 
     IfxAsclin_setClockSource(asclinSFR, config->clockSource); /* select the clock source*/
 
-    IfxAsclin_disableAllFlags(asclinSFR);                     /* disable all flags */
-    IfxAsclin_clearAllFlags(asclinSFR);                       /* clear all flags */
+    IfxAsclin_disableAllFlags(asclinSFR); /* disable all flags */
+    IfxAsclin_clearAllFlags(asclinSFR);   /* clear all flags */
 
     /* HW error flags */
     asclin->errorFlags.ALL = 0;
@@ -267,13 +254,13 @@ IfxAsclin_Status IfxAsclin_Asc_initModule(IfxAsclin_Asc *asclin, const IfxAsclin
 
     /* transmission flags */
     asclin->rxSwFifoOverflow = FALSE;
-    asclin->txInProgress     = FALSE;
+    asclin->txInProgress = FALSE;
 
     /* Buffer mode */
     Ifx_SizeT elementSize;
     asclin->dataBufferMode = config->dataBufferMode;
-    asclin->txTimestamp    = 0;
-    asclin->sendCount      = 0;
+    asclin->txTimestamp = 0;
+    asclin->sendCount = 0;
 
     switch (asclin->dataBufferMode)
     {
@@ -342,69 +329,67 @@ IfxAsclin_Status IfxAsclin_Asc_initModule(IfxAsclin_Asc *asclin, const IfxAsclin
     IfxAsclin_enableRxFifoInlet(asclinSFR, TRUE);  // enabling Rx FIFO for recieving
     IfxAsclin_enableTxFifoOutlet(asclinSFR, TRUE); // enabling Tx FIFO for transmitting
 
-    IfxAsclin_flushRxFifo(asclinSFR);              // flushing Rx FIFO
-    IfxAsclin_flushTxFifo(asclinSFR);              // flushing Tx FIFO
+    IfxAsclin_flushRxFifo(asclinSFR); // flushing Rx FIFO
+    IfxAsclin_flushTxFifo(asclinSFR); // flushing Tx FIFO
 
     return status;
 }
-
 
 void IfxAsclin_Asc_initModuleConfig(IfxAsclin_Asc_Config *config, Ifx_ASCLIN *asclin)
 {
     config->asclin = asclin;
 
     /* loop back disabled */
-    config->loopBack = FALSE;                                                  /* no loop back*/
+    config->loopBack = FALSE; /* no loop back*/
 
     /* Default values for baudrate */
-    config->clockSource           = IfxAsclin_ClockSource_kernelClock;         /* kernel clock, fclc*/
-    config->baudrate.prescaler    = 1;                                         /* default prescaler*/
-    config->baudrate.baudrate     = 115200;                                    /* default baudrate (the fractional dividier setup will be calculated in initModule*/
-    config->baudrate.oversampling = IfxAsclin_OversamplingFactor_4;            /* default oversampling factor*/
+    config->clockSource = IfxAsclin_ClockSource_kernelClock;        /* kernel clock, fclc*/
+    config->baudrate.prescaler = 1;                                 /* default prescaler*/
+    config->baudrate.baudrate = 115200;                             /* default baudrate (the fractional dividier setup will be calculated in initModule*/
+    config->baudrate.oversampling = IfxAsclin_OversamplingFactor_4; /* default oversampling factor*/
 
     /* Default Values for Bit Timings */
-    config->bitTiming.medianFilter        = IfxAsclin_SamplesPerBit_one;       /* one sample per bit*/
-    config->bitTiming.samplePointPosition = IfxAsclin_SamplePointPosition_3;   /* sample point position at 3*/
+    config->bitTiming.medianFilter = IfxAsclin_SamplesPerBit_one;            /* one sample per bit*/
+    config->bitTiming.samplePointPosition = IfxAsclin_SamplePointPosition_3; /* sample point position at 3*/
     /* Default Values for Frame Control */
-    config->frame.idleDelay               = IfxAsclin_IdleDelay_0;             /* no idle delay*/
-    config->frame.stopBit                 = IfxAsclin_StopBit_1;               /* one stop bit*/
-    config->frame.frameMode               = IfxAsclin_FrameMode_asc;           /* ASC mode*/
-    config->frame.shiftDir                = IfxAsclin_ShiftDirection_lsbFirst; /* shift diection LSB first*/
-    config->frame.parityBit               = FALSE;                             /* disable parity*/
-    config->frame.parityType              = IfxAsclin_ParityType_even;         /* even parity (if parity enabled)*/
-    config->frame.dataLength              = IfxAsclin_DataLength_8;            /* number of bits per transfer 8*/
+    config->frame.idleDelay = IfxAsclin_IdleDelay_0;            /* no idle delay*/
+    config->frame.stopBit = IfxAsclin_StopBit_1;                /* one stop bit*/
+    config->frame.frameMode = IfxAsclin_FrameMode_asc;          /* ASC mode*/
+    config->frame.shiftDir = IfxAsclin_ShiftDirection_lsbFirst; /* shift diection LSB first*/
+    config->frame.parityBit = FALSE;                            /* disable parity*/
+    config->frame.parityType = IfxAsclin_ParityType_even;       /* even parity (if parity enabled)*/
+    config->frame.dataLength = IfxAsclin_DataLength_8;          /* number of bits per transfer 8*/
 
     /* Default Values for Fifo Control */
-    config->fifo.inWidth              = IfxAsclin_TxFifoInletWidth_1;          /* 8-bit wide write*/
-    config->fifo.outWidth             = IfxAsclin_RxFifoOutletWidth_1;         /* 8-bit wide read*/
-    config->fifo.txFifoInterruptLevel = IfxAsclin_TxFifoInterruptLevel_0;      /* txFifoInterruptLevel = 0. optimised to write upto 16 bytes at a time */
+    config->fifo.inWidth = IfxAsclin_TxFifoInletWidth_1;                  /* 8-bit wide write*/
+    config->fifo.outWidth = IfxAsclin_RxFifoOutletWidth_1;                /* 8-bit wide read*/
+    config->fifo.txFifoInterruptLevel = IfxAsclin_TxFifoInterruptLevel_0; /* txFifoInterruptLevel = 0. optimised to write upto 16 bytes at a time */
     config->fifo.rxFifoInterruptLevel = IfxAsclin_RxFifoInterruptLevel_1;
-    config->fifo.buffMode             = IfxAsclin_ReceiveBufferMode_rxFifo;    /* RxFIFO*/
+    config->fifo.buffMode = IfxAsclin_ReceiveBufferMode_rxFifo; /* RxFIFO*/
 
     /* Default Values for Interrupt Config */
-    config->interrupt.rxPriority    = 0;                                       /* receive interrupt priority 0*/
-    config->interrupt.txPriority    = 0;                                       /* transmit interrupt priority 0*/
-    config->interrupt.erPriority    = 0;                                       /* error interrupt priority 0*/
-    config->interrupt.typeOfService = IfxSrc_Tos_cpu0;                         /* type of service CPU0*/
+    config->interrupt.rxPriority = 0;                  /* receive interrupt priority 0*/
+    config->interrupt.txPriority = 0;                  /* transmit interrupt priority 0*/
+    config->interrupt.erPriority = 0;                  /* error interrupt priority 0*/
+    config->interrupt.typeOfService = IfxSrc_Tos_cpu0; /* type of service CPU0*/
 
     /* Enable error flags */
-    config->errorFlags.ALL = ~0;                                               /* all error flags enabled*/
+    config->errorFlags.ALL = ~0; /* all error flags enabled*/
 
     /* init pointers */
-    config->pins           = NULL_PTR;                                         /* pins to null pointer*/
-    config->rxBuffer       = NULL_PTR;                                         /* Rx Fifo buffer*/
-    config->txBuffer       = NULL_PTR;                                         /* Tx Fifo buffer*/
+    config->pins = NULL_PTR;     /* pins to null pointer*/
+    config->rxBuffer = NULL_PTR; /* Rx Fifo buffer*/
+    config->txBuffer = NULL_PTR; /* Tx Fifo buffer*/
 
-    config->txBufferSize   = 0;                                                /* Rx Fifo buffer size*/
-    config->rxBufferSize   = 0;                                                /* Rx Fifo buffer size*/
+    config->txBufferSize = 0; /* Rx Fifo buffer size*/
+    config->rxBufferSize = 0; /* Rx Fifo buffer size*/
 
     config->dataBufferMode = Ifx_DataBufferMode_normal;
 }
 
-
 void IfxAsclin_Asc_initiateTransmission(IfxAsclin_Asc *asclin)
 {
-    if (asclin->txInProgress == FALSE)     /* Send first byte: send init */
+    if (asclin->txInProgress == FALSE) /* Send first byte: send init */
     {
         if (Ifx_Fifo_isEmpty(asclin->tx) == FALSE)
         {
@@ -431,7 +416,6 @@ void IfxAsclin_Asc_initiateTransmission(IfxAsclin_Asc *asclin)
         }
     }
 }
-
 
 void IfxAsclin_Asc_isrError(IfxAsclin_Asc *asclin)
 {
@@ -469,7 +453,6 @@ void IfxAsclin_Asc_isrError(IfxAsclin_Asc *asclin)
     }
 }
 
-
 void IfxAsclin_Asc_isrReceive(IfxAsclin_Asc *asclin)
 {
     uint8 ascData[16]; /*FIFO size is 16 bytes*/
@@ -498,7 +481,7 @@ void IfxAsclin_Asc_isrReceive(IfxAsclin_Asc *asclin)
         {
             packedData.timestamp = now();
             IfxAsclin_read8(asclin->asclin, &ascData[0], 1);
-            packedData.data      = ascData[0];
+            packedData.data = ascData[0];
 
             if (Ifx_Fifo_write(asclin->rx, &packedData, sizeof(packedData), TIME_NULL) != 0)
             {
@@ -511,7 +494,6 @@ void IfxAsclin_Asc_isrReceive(IfxAsclin_Asc *asclin)
     }
 }
 
-
 void IfxAsclin_Asc_isrTransmit(IfxAsclin_Asc *asclin)
 {
     asclin->txTimestamp = now();
@@ -523,15 +505,15 @@ void IfxAsclin_Asc_isrTransmit(IfxAsclin_Asc *asclin)
         {
         case Ifx_DataBufferMode_normal:
         {
-            uint8          ascData[16];
-            uint16         count            = 0, i_count = 0;
+            uint8 ascData[16];
+            uint16 count = 0, i_count = 0;
             volatile uint8 hw_tx_fill_level = 0;
 
-            count            = Ifx_Fifo_readCount(asclin->tx); /*SW FIFO fill level*/
+            count = Ifx_Fifo_readCount(asclin->tx); /*SW FIFO fill level*/
 
             hw_tx_fill_level = IfxAsclin_getTxFifoFillLevel(asclin->asclin);
 
-            i_count          = (16 - hw_tx_fill_level);
+            i_count = (16 - hw_tx_fill_level);
 
             if (i_count > count)
             {
@@ -546,7 +528,7 @@ void IfxAsclin_Asc_isrTransmit(IfxAsclin_Asc *asclin)
         case Ifx_DataBufferMode_timeStampSingle:
         {
             Ifx_DataBufferMode_TimeStampSingle packedData;
-            uint8                              ascData;
+            uint8 ascData;
 
             Ifx_Fifo_read(asclin->tx, &packedData, sizeof(packedData), TIME_NULL);
 
@@ -563,7 +545,6 @@ void IfxAsclin_Asc_isrTransmit(IfxAsclin_Asc *asclin)
     }
 }
 
-
 boolean IfxAsclin_Asc_read(IfxAsclin_Asc *asclin, void *data, Ifx_SizeT *count, Ifx_TickTime timeout)
 {
     Ifx_SizeT left = Ifx_Fifo_read(asclin->rx, data, *count, timeout);
@@ -573,12 +554,10 @@ boolean IfxAsclin_Asc_read(IfxAsclin_Asc *asclin, void *data, Ifx_SizeT *count, 
     return left == 0;
 }
 
-
 void IfxAsclin_Asc_resetSendCount(IfxAsclin_Asc *asclin)
 {
     asclin->sendCount = 0;
 }
-
 
 boolean IfxAsclin_Asc_stdIfDPipeInit(IfxStdIf_DPipe *stdif, IfxAsclin_Asc *asclin)
 {
@@ -586,39 +565,38 @@ boolean IfxAsclin_Asc_stdIfDPipeInit(IfxStdIf_DPipe *stdif, IfxAsclin_Asc *ascli
     memset(stdif, 0, sizeof(IfxStdIf_DPipe));
 
     /* Set the API link */
-    stdif->driver         = asclin;
-    stdif->write          = (IfxStdIf_DPipe_Write) & IfxAsclin_Asc_write;
-    stdif->read           = (IfxStdIf_DPipe_Read) & IfxAsclin_Asc_read;
-    stdif->getReadCount   = (IfxStdIf_DPipe_GetReadCount) & IfxAsclin_Asc_getReadCount;
-    stdif->getReadEvent   = (IfxStdIf_DPipe_GetReadEvent) & IfxAsclin_Asc_getReadEvent;
-    stdif->getWriteCount  = (IfxStdIf_DPipe_GetWriteCount) & IfxAsclin_Asc_getWriteCount;
-    stdif->getWriteEvent  = (IfxStdIf_DPipe_GetWriteEvent) & IfxAsclin_Asc_getWriteEvent;
-    stdif->canReadCount   = (IfxStdIf_DPipe_CanReadCount) & IfxAsclin_Asc_canReadCount;
-    stdif->canWriteCount  = (IfxStdIf_DPipe_CanWriteCount) & IfxAsclin_Asc_canWriteCount;
-    stdif->flushTx        = (IfxStdIf_DPipe_FlushTx) & IfxAsclin_Asc_flushTx;
-    stdif->clearTx        = (IfxStdIf_DPipe_ClearTx) & IfxAsclin_Asc_clearTx;
-    stdif->clearRx        = (IfxStdIf_DPipe_ClearRx) & IfxAsclin_Asc_clearRx;
-    stdif->onReceive      = (IfxStdIf_DPipe_OnReceive) & IfxAsclin_Asc_isrReceive;
-    stdif->onTransmit     = (IfxStdIf_DPipe_OnTransmit) & IfxAsclin_Asc_isrTransmit;
-    stdif->onError        = (IfxStdIf_DPipe_OnError) & IfxAsclin_Asc_isrError;
-    stdif->getSendCount   = (IfxStdIf_DPipe_GetSendCount) & IfxAsclin_Asc_getSendCount;
-    stdif->getTxTimeStamp = (IfxStdIf_DPipe_GetTxTimeStamp) & IfxAsclin_Asc_getTxTimeStamp;
-    stdif->resetSendCount = (IfxStdIf_DPipe_ResetSendCount) & IfxAsclin_Asc_resetSendCount;
-    stdif->txDisabled     = FALSE;
+    stdif->driver = asclin;
+    stdif->write = (IfxStdIf_DPipe_Write)&IfxAsclin_Asc_write;
+    stdif->read = (IfxStdIf_DPipe_Read)&IfxAsclin_Asc_read;
+    stdif->getReadCount = (IfxStdIf_DPipe_GetReadCount)&IfxAsclin_Asc_getReadCount;
+    stdif->getReadEvent = (IfxStdIf_DPipe_GetReadEvent)&IfxAsclin_Asc_getReadEvent;
+    stdif->getWriteCount = (IfxStdIf_DPipe_GetWriteCount)&IfxAsclin_Asc_getWriteCount;
+    stdif->getWriteEvent = (IfxStdIf_DPipe_GetWriteEvent)&IfxAsclin_Asc_getWriteEvent;
+    stdif->canReadCount = (IfxStdIf_DPipe_CanReadCount)&IfxAsclin_Asc_canReadCount;
+    stdif->canWriteCount = (IfxStdIf_DPipe_CanWriteCount)&IfxAsclin_Asc_canWriteCount;
+    stdif->flushTx = (IfxStdIf_DPipe_FlushTx)&IfxAsclin_Asc_flushTx;
+    stdif->clearTx = (IfxStdIf_DPipe_ClearTx)&IfxAsclin_Asc_clearTx;
+    stdif->clearRx = (IfxStdIf_DPipe_ClearRx)&IfxAsclin_Asc_clearRx;
+    stdif->onReceive = (IfxStdIf_DPipe_OnReceive)&IfxAsclin_Asc_isrReceive;
+    stdif->onTransmit = (IfxStdIf_DPipe_OnTransmit)&IfxAsclin_Asc_isrTransmit;
+    stdif->onError = (IfxStdIf_DPipe_OnError)&IfxAsclin_Asc_isrError;
+    stdif->getSendCount = (IfxStdIf_DPipe_GetSendCount)&IfxAsclin_Asc_getSendCount;
+    stdif->getTxTimeStamp = (IfxStdIf_DPipe_GetTxTimeStamp)&IfxAsclin_Asc_getTxTimeStamp;
+    stdif->resetSendCount = (IfxStdIf_DPipe_ResetSendCount)&IfxAsclin_Asc_resetSendCount;
+    stdif->txDisabled = FALSE;
     return TRUE;
 }
-
 
 boolean IfxAsclin_Asc_write(IfxAsclin_Asc *asclin, const void *data, Ifx_SizeT *count, Ifx_TickTime timeout)
 {
     Ifx_SizeT left;
-    boolean   result       = TRUE;
-    boolean   tx_status    = asclin->txInProgress;
-    uint16    tx_fifo_size = (uint16)asclin->tx->size;
+    boolean result = TRUE;
+    boolean tx_status = asclin->txInProgress;
+    uint16 tx_fifo_size = (uint16)asclin->tx->size;
 
     if (*count != 0)
     {
-        if ((!tx_status) && (*count > tx_fifo_size))                 /*Transmission not initialised and data size is greater than S/W FIFO*/
+        if ((!tx_status) && (*count > tx_fifo_size)) /*Transmission not initialised and data size is greater than S/W FIFO*/
         {
             Ifx_Fifo_write(asclin->tx, data, tx_fifo_size, timeout); /*Fill upto the S/W FIFO size and initiate transmission*/
             IfxAsclin_Asc_initiateTransmission(asclin);
@@ -634,7 +612,7 @@ boolean IfxAsclin_Asc_write(IfxAsclin_Asc *asclin, const void *data, Ifx_SizeT *
         }
 
         *count -= left;
-        result  = left == 0;
+        result = left == 0;
     }
 
     return result;

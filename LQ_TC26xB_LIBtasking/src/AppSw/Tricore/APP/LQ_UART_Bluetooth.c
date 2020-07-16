@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËÐÄ°å
-¡¾±à    Ð´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.1 °æÈ¨ËùÓÐ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üÐÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æŽˆæƒ
+ã€æœ€åŽæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -20,19 +20,19 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <LQ_STM.h>
 #include <LQ_UART.h>
 
-//////////////////////////////////ÒÔÏÂ²¿·ÖÎª¹¦ÄÜ²âÊÔ/////////////////////////////////
+//////////////////////////////////ä»¥ä¸‹éƒ¨åˆ†ä¸ºåŠŸèƒ½æµ‹è¯•/////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
 
 
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid Test_Bluetooth(void);
-*  ¹¦ÄÜËµÃ÷£ºUART²âÊÔº¯Êý
-*  ²ÎÊýËµÃ÷£ºÎÞ
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼švoid Test_Bluetooth(void);
+*  åŠŸèƒ½è¯´æ˜Žï¼šUARTæµ‹è¯•å‡½æ•°
+*  å‚æ•°è¯´æ˜Žï¼šæ— 
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 void Test_Bluetooth(void)
 {
@@ -42,17 +42,17 @@ void Test_Bluetooth(void)
 	UART_InitConfig(UART3_RX_P00_1,UART3_TX_P00_0, 115200);
 	while(1)
 	{
-		UART_PutChar(UART0, 'L');                      //·¢ËÍ ×Ö½Úµ½UART¿Ú
-		delayms(500);                                  //ÑÓÊ±µÈ´ý
-		UART_PutChar(UART0,'Q');                       //·¢ËÍ ×Ö½Úµ½UART¿Ú
+		UART_PutChar(UART0, 'L');                      //å‘é€ å­—èŠ‚åˆ°UARTå£
+		delayms(500);                                  //å»¶æ—¶ç­‰å¾…
+		UART_PutChar(UART0,'Q');                       //å‘é€ å­—èŠ‚åˆ°UARTå£
 
-		UART_PutStr(UART0,"UART0 LongQiu \r\n");                //·¢ËÍ×Ö·û´®µ½ÉÏÎ»»ú
-		UART_PutStr(UART1,"UART1 LongQiu \r\n");                //·¢ËÍ×Ö·û´®µ½ÉÏÎ»»ú
-		UART_PutStr(UART2,"UART2 LongQiu \r\n");                //·¢ËÍ×Ö·û´®µ½ÉÏÎ»»ú
-		UART_PutStr(UART3,"UART3 LongQiu \r\n");                //·¢ËÍ×Ö·û´®µ½ÉÏÎ»»ú
+		UART_PutStr(UART0,"UART0 LongQiu \r\n");                //å‘é€å­—ç¬¦ä¸²åˆ°ä¸Šä½æœº
+		UART_PutStr(UART1,"UART1 LongQiu \r\n");                //å‘é€å­—ç¬¦ä¸²åˆ°ä¸Šä½æœº
+		UART_PutStr(UART2,"UART2 LongQiu \r\n");                //å‘é€å­—ç¬¦ä¸²åˆ°ä¸Šä½æœº
+		UART_PutStr(UART3,"UART3 LongQiu \r\n");                //å‘é€å­—ç¬¦ä¸²åˆ°ä¸Šä½æœº
 
-    	LED_Ctrl(LED0,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
-		delayms(500);              //ÑÓÊ±µÈ´ý
+    	LED_Ctrl(LED0,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
+		delayms(500);              //å»¶æ—¶ç­‰å¾…
 	}
 }
 

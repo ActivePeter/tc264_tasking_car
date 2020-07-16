@@ -1,22 +1,22 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
-»ùÓÚiLLD_1_0_1_11_0µ×²ã³ÌĞò
-STM×÷ÎªÏµÍ³¼¶µÄÈ«¾Ö¶¨Ê±Æ÷£¬¿ÉÒÔÎªÏµÍ³Ìá¹©»ù´¡Ê±ÖÓ£¬ÄÚÓĞÁ½¸ö±È½Ï¼Ä´æÆ÷£¬
-¿É²úÉúÁ½¸ö¶ÀÁ¢µÄÖĞ¶Ï£¬ÒÔÂú×ãĞèÇó¡£
+åŸºäºiLLD_1_0_1_11_0åº•å±‚ç¨‹åº
+STMä½œä¸ºç³»ç»Ÿçº§çš„å…¨å±€å®šæ—¶å™¨ï¼Œå¯ä»¥ä¸ºç³»ç»Ÿæä¾›åŸºç¡€æ—¶é’Ÿï¼Œå†…æœ‰ä¸¤ä¸ªæ¯”è¾ƒå¯„å­˜å™¨ï¼Œ
+å¯äº§ç”Ÿä¸¤ä¸ªç‹¬ç«‹çš„ä¸­æ–­ï¼Œä»¥æ»¡è¶³éœ€æ±‚ã€‚
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
@@ -25,155 +25,155 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£º
-*  ¹¦ÄÜËµÃ÷£º
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£ºSTMÖĞ¶Ï
+*  å‡½æ•°åç§°ï¼š
+*  åŠŸèƒ½è¯´æ˜ï¼š
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼šSTMä¸­æ–­
 *************************************************************************/
 IFX_INTERRUPT(STM0_CH0_IRQHandler, STM0_VECTABNUM, STM0_CH0_PRIORITY);
 IFX_INTERRUPT(STM0_CH1_IRQHandler, STM0_VECTABNUM, STM0_CH1_PRIORITY);
 IFX_INTERRUPT(STM1_CH0_IRQHandler, STM1_VECTABNUM, STM1_CH0_PRIORITY);
 IFX_INTERRUPT(STM1_CH1_IRQHandler, STM1_VECTABNUM, STM1_CH1_PRIORITY);
 
-/** Íâ²¿ÖĞ¶ÏCPU±êºÅ */
+/** å¤–éƒ¨ä¸­æ–­CPUæ ‡å· */
 const uint8 StmIrqVectabNum[2]  = {STM0_VECTABNUM, STM1_VECTABNUM};
 
-/** Íâ²¿ÖĞ¶ÏÓÅÏÈ¼¶ */
+/** å¤–éƒ¨ä¸­æ–­ä¼˜å…ˆçº§ */
 const uint8 StmIrqPriority[4]   = {STM0_CH0_PRIORITY, STM0_CH1_PRIORITY, STM1_CH0_PRIORITY, STM1_CH1_PRIORITY};
 
-/** Íâ²¿ÖĞ¶Ï·şÎñº¯ÊıµØÖ· */
+/** å¤–éƒ¨ä¸­æ–­æœåŠ¡å‡½æ•°åœ°å€ */
 const void *StmIrqFuncPointer[4] = {&STM0_CH0_IRQHandler, &STM0_CH1_IRQHandler, &STM1_CH0_IRQHandler, &STM1_CH1_IRQHandler};
 
 void (*tim_task1)();
 void (*tim_task2)();
 void (*tim_task3)();
 void (*tim_task4)();
-//	STM³õÊ¼»¯ÅäÖÃ½á¹¹Ìå
+//	STMåˆå§‹åŒ–é…ç½®ç»“æ„ä½“
 IfxStm_CompareConfig g_StmCompareConfig[4];
 
-//pa×Ô¼º¼ÓÈëµÄ»Øµ÷º¯ÊıÖ¸Õë±äÁ¿
+//paè‡ªå·±åŠ å…¥çš„å›è°ƒå‡½æ•°æŒ‡é’ˆå˜é‡
 
 
 /***********************************************************************************************/
-/********************************STMÍâ²¿ÖĞ¶Ï  ·şÎñº¯Êı******************************************/
+/********************************STMå¤–éƒ¨ä¸­æ–­  æœåŠ¡å‡½æ•°******************************************/
 /***********************************************************************************************/
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid STM0_CH0_IRQHandler(void)
-*  ¹¦ÄÜËµÃ÷£º
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£ºSTM0_CH0Ê¹ÓÃµÄÖĞ¶Ï·şÎñº¯Êı
+*  å‡½æ•°åç§°ï¼švoid STM0_CH0_IRQHandler(void)
+*  åŠŸèƒ½è¯´æ˜ï¼š
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼šSTM0_CH0ä½¿ç”¨çš„ä¸­æ–­æœåŠ¡å‡½æ•°
 *************************************************************************/
 void STM0_CH0_IRQHandler(void)
 {
-	/* ¿ªÆôCPUÖĞ¶Ï  ·ñÔòÖĞ¶Ï²»¿ÉÇ¶Ì× */
+	/* å¼€å¯CPUä¸­æ–­  å¦åˆ™ä¸­æ–­ä¸å¯åµŒå¥— */
 	IfxCpu_enableInterrupts();
 
-	//Çå³ıÖĞ¶Ï±êÖ¾
+	//æ¸…é™¤ä¸­æ–­æ ‡å¿—
 	IfxStm_clearCompareFlag(&MODULE_STM0, g_StmCompareConfig[0].comparator);
 
-	//¿ªÆôĞÂµÄÖĞ¶ÏÅäÖÃ£¬¿ªÊ¼ÏÂ´ÎÖĞ¶Ï
+	//å¼€å¯æ–°çš„ä¸­æ–­é…ç½®ï¼Œå¼€å§‹ä¸‹æ¬¡ä¸­æ–­
 	IfxStm_increaseCompare(&MODULE_STM0, g_StmCompareConfig[0].comparator, g_StmCompareConfig[0].ticks);
 
-	/* ÓÃ»§´úÂë */
-	LED_Ctrl(LED0,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
+	/* ç”¨æˆ·ä»£ç  */
+	LED_Ctrl(LED0,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 	(*tim_task1)();
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid STM0_CH1_IRQHandler(void)
-*  ¹¦ÄÜËµÃ÷£º
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£ºSTM0_CH1Ê¹ÓÃµÄÖĞ¶Ï·şÎñº¯Êı
+*  å‡½æ•°åç§°ï¼švoid STM0_CH1_IRQHandler(void)
+*  åŠŸèƒ½è¯´æ˜ï¼š
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼šSTM0_CH1ä½¿ç”¨çš„ä¸­æ–­æœåŠ¡å‡½æ•°
 *************************************************************************/
 void STM0_CH1_IRQHandler(void)
 {
-	/* ¿ªÆôCPUÖĞ¶Ï  ·ñÔòÖĞ¶Ï²»¿ÉÇ¶Ì× */
+	/* å¼€å¯CPUä¸­æ–­  å¦åˆ™ä¸­æ–­ä¸å¯åµŒå¥— */
 	IfxCpu_enableInterrupts();
 
-	//Çå³ıÖĞ¶Ï±êÖ¾
+	//æ¸…é™¤ä¸­æ–­æ ‡å¿—
 	IfxStm_clearCompareFlag(&MODULE_STM0, g_StmCompareConfig[1].comparator);
 
-	//¿ªÆôĞÂµÄÖĞ¶ÏÅäÖÃ£¬¿ªÊ¼ÏÂ´ÎÖĞ¶Ï
+	//å¼€å¯æ–°çš„ä¸­æ–­é…ç½®ï¼Œå¼€å§‹ä¸‹æ¬¡ä¸­æ–­
 	IfxStm_increaseCompare(&MODULE_STM0, g_StmCompareConfig[1].comparator, g_StmCompareConfig[1].ticks);
 
-	/* ÓÃ»§´úÂë */
-	LED_Ctrl(LED1,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
+	/* ç”¨æˆ·ä»£ç  */
+	LED_Ctrl(LED1,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid STM1_CH0_IRQHandler(void)
-*  ¹¦ÄÜËµÃ÷£º
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£ºSTM1_CH0Ê¹ÓÃµÄÖĞ¶Ï·şÎñº¯Êı
+*  å‡½æ•°åç§°ï¼švoid STM1_CH0_IRQHandler(void)
+*  åŠŸèƒ½è¯´æ˜ï¼š
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼šSTM1_CH0ä½¿ç”¨çš„ä¸­æ–­æœåŠ¡å‡½æ•°
 *************************************************************************/
 void STM1_CH0_IRQHandler(void)
 {
-	/* ¿ªÆôCPUÖĞ¶Ï  ·ñÔòÖĞ¶Ï²»¿ÉÇ¶Ì× */
+	/* å¼€å¯CPUä¸­æ–­  å¦åˆ™ä¸­æ–­ä¸å¯åµŒå¥— */
 	IfxCpu_enableInterrupts();
 
-	//Çå³ıÖĞ¶Ï±êÖ¾
+	//æ¸…é™¤ä¸­æ–­æ ‡å¿—
 	IfxStm_clearCompareFlag(&MODULE_STM1, g_StmCompareConfig[2].comparator);
 
-	//¿ªÆôĞÂµÄÖĞ¶ÏÅäÖÃ£¬¿ªÊ¼ÏÂ´ÎÖĞ¶Ï
+	//å¼€å¯æ–°çš„ä¸­æ–­é…ç½®ï¼Œå¼€å§‹ä¸‹æ¬¡ä¸­æ–­
 	IfxStm_increaseCompare(&MODULE_STM1, g_StmCompareConfig[2].comparator, g_StmCompareConfig[2].ticks);
 
-	/* ÓÃ»§´úÂë */
-	LED_Ctrl(LED1,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
+	/* ç”¨æˆ·ä»£ç  */
+	LED_Ctrl(LED1,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid STM1_CH1_IRQHandler(void)
-*  ¹¦ÄÜËµÃ÷£º
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£ºSTM1_CH1Ê¹ÓÃµÄÖĞ¶Ï·şÎñº¯Êı
+*  å‡½æ•°åç§°ï¼švoid STM1_CH1_IRQHandler(void)
+*  åŠŸèƒ½è¯´æ˜ï¼š
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼šSTM1_CH1ä½¿ç”¨çš„ä¸­æ–­æœåŠ¡å‡½æ•°
 *************************************************************************/
 void STM1_CH1_IRQHandler(void)
 {
-	/* ¿ªÆôCPUÖĞ¶Ï  ·ñÔòÖĞ¶Ï²»¿ÉÇ¶Ì× */
+	/* å¼€å¯CPUä¸­æ–­  å¦åˆ™ä¸­æ–­ä¸å¯åµŒå¥— */
 	IfxCpu_enableInterrupts();
 
-	//Çå³ıÖĞ¶Ï±êÖ¾
+	//æ¸…é™¤ä¸­æ–­æ ‡å¿—
 	IfxStm_clearCompareFlag(&MODULE_STM1, g_StmCompareConfig[3].comparator);
 
-	//¿ªÆôĞÂµÄÖĞ¶ÏÅäÖÃ£¬¿ªÊ¼ÏÂ´ÎÖĞ¶Ï
+	//å¼€å¯æ–°çš„ä¸­æ–­é…ç½®ï¼Œå¼€å§‹ä¸‹æ¬¡ä¸­æ–­
 	IfxStm_increaseCompare(&MODULE_STM1, g_StmCompareConfig[3].comparator, g_StmCompareConfig[3].ticks);
 
-	/* ÓÃ»§´úÂë */
-	LED_Ctrl(LED1,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
+	/* ç”¨æˆ·ä»£ç  */
+	LED_Ctrl(LED1,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 	uint32 i = 100;
 	while(i--)
 	{
 		uint32_t j = 100;
 		while(j--) NOP(100);
 	}
-	LED_Ctrl(LED0,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
+	LED_Ctrl(LED0,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 }
 
 
  /*************************************************************************
- *  º¯ÊıÃû³Æ£ºvoid STM_Init(STM_t stm, STM_Channel_t channel, uint32 us)
- *  ¹¦ÄÜËµÃ÷£ºSTM³õÊ¼»¯
- *  ²ÎÊıËµÃ÷£º
- * @param    stm      £º STM±êºÅ     STM0 ¡¢ STM1
- * @param    channel  £º STMÍ¨µÀ     STM_Channel_0  STM_Channel_1
- * @param    us       £º STM¶¨Ê±ÖĞ¶Ï Ê±¼ä
- *  º¯Êı·µ»Ø£ºÎŞ
- *  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
- *  ¾Ù    Àı£ºSTM_InitConfig(STM0, STM_Channel_0, 50000);  //STM0 Í¨µÀ0³õÊ¼»¯ 50000us ½øÈëÒ»´ÎÖĞ¶Ï
- *  ±¸    ×¢£ºÍâ²¿ÖĞ¶Ï·şÎñº¯ÊıÔÚLQ_STM.cÖĞ  ÖĞ¶ÏÓÅÏÈ¼¶ÅäÖÃÔÚLQ_STM.hÖĞ ¿ÉÒÔ×ÔĞĞĞŞ¸Ä
+ *  å‡½æ•°åç§°ï¼švoid STM_Init(STM_t stm, STM_Channel_t channel, uint32 us)
+ *  åŠŸèƒ½è¯´æ˜ï¼šSTMåˆå§‹åŒ–
+ *  å‚æ•°è¯´æ˜ï¼š
+ * @param    stm      ï¼š STMæ ‡å·     STM0 ã€ STM1
+ * @param    channel  ï¼š STMé€šé“     STM_Channel_0  STM_Channel_1
+ * @param    us       ï¼š STMå®šæ—¶ä¸­æ–­ æ—¶é—´
+ *  å‡½æ•°è¿”å›ï¼šæ— 
+ *  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+ *  ä¸¾    ä¾‹ï¼šSTM_InitConfig(STM0, STM_Channel_0, 50000);  //STM0 é€šé“0åˆå§‹åŒ– 50000us è¿›å…¥ä¸€æ¬¡ä¸­æ–­
+ *  å¤‡    æ³¨ï¼šå¤–éƒ¨ä¸­æ–­æœåŠ¡å‡½æ•°åœ¨LQ_STM.cä¸­  ä¸­æ–­ä¼˜å…ˆçº§é…ç½®åœ¨LQ_STM.hä¸­ å¯ä»¥è‡ªè¡Œä¿®æ”¹
  *************************************************************************/
  void STM_InitConfig(STM_t stm, STM_Channel_t channel, uint32 us,void (*task)())
  {
@@ -187,40 +187,40 @@ void STM1_CH1_IRQHandler(void)
 
  	IfxStm_CompareConfig *stmCompareConfig = &g_StmCompareConfig[Index];
 
- 	//µ÷ÓÃ½á¹¹ÌåÊµÏÖÅäÖÃ
+ 	//è°ƒç”¨ç»“æ„ä½“å®ç°é…ç½®
  	IfxStm_initCompareConfig(stmCompareConfig);
 
-     //¹ÒÆğ
+     //æŒ‚èµ·
  	IfxStm_enableOcdsSuspend(STM);
 
- 	//»ñÈ¡STMÄ£¿éµÄÎ¢Ãë¼ÆÊ± tick ÊıÖµ
+ 	//è·å–STMæ¨¡å—çš„å¾®ç§’è®¡æ—¶ tick æ•°å€¼
  	sint32 ticks = IfxStm_getTicksFromMicroseconds((Ifx_STM *)STM, us);
 
- 	//ĞŞ¸ÄticksÊıÖµ£¬Ê¹ÄÜ´¥·¢Êä³ö
+ 	//ä¿®æ”¹ticksæ•°å€¼ï¼Œä½¿èƒ½è§¦å‘è¾“å‡º
  	stmCompareConfig->ticks = ticks;
  	stmCompareConfig->comparator           = (IfxStm_Comparator)channel;
- 	stmCompareConfig->comparatorInterrupt  = (IfxStm_ComparatorInterrupt)channel; //ÖĞ¶ÏÑ¡Ôñ
- 	stmCompareConfig->triggerPriority      = StmIrqPriority[Index];               //ÖĞ¶ÏÓÅÏÈ¼¶ÉèÖÃ
- 	stmCompareConfig->typeOfService        = StmIrqVectabNum[stm];                //·şÎñÄÚºË
+ 	stmCompareConfig->comparatorInterrupt  = (IfxStm_ComparatorInterrupt)channel; //ä¸­æ–­é€‰æ‹©
+ 	stmCompareConfig->triggerPriority      = StmIrqPriority[Index];               //ä¸­æ–­ä¼˜å…ˆçº§è®¾ç½®
+ 	stmCompareConfig->typeOfService        = StmIrqVectabNum[stm];                //æœåŠ¡å†…æ ¸
 
- 	//±È½Ï¹¦ÄÜ³õÊ¼»¯
+ 	//æ¯”è¾ƒåŠŸèƒ½åˆå§‹åŒ–
  	IfxStm_initCompare(STM, stmCompareConfig);
- 	IfxCpu_Irq_installInterruptHandler((void*)StmIrqFuncPointer[Index], StmIrqPriority[Index]);//ÅäÖÃÖĞ¶Ïº¯ÊıºÍÖĞ¶ÏºÅ
+ 	IfxCpu_Irq_installInterruptHandler((void*)StmIrqFuncPointer[Index], StmIrqPriority[Index]);//é…ç½®ä¸­æ–­å‡½æ•°å’Œä¸­æ–­å·
 
  	restoreInterrupts(interruptState);
  }
 
 
  /*************************************************************************
- *  º¯ÊıÃû³Æ£ºvoid STM_DelayUs(STM_t stm, uint32 us)
- *  ¹¦ÄÜËµÃ÷£ºSTMÑÓÊ±
- *  ²ÎÊıËµÃ÷£º
- * @param    stm      £º STM±êºÅ     STM0 ¡¢ STM1
- * @param    us       £º STMÑÓÊ±     Ê±¼ä us
- *  º¯Êı·µ»Ø£ºÎŞ
- *  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
- *  ¾Ù    Àı£ºSTM_DelayUs(STM0, 5000);  //ÑÓÊ±5000us
- *  ±¸    ×¢£ºÊ¹ÓÃÑÓÊ±º¯ÊıÊ±£¬ÇëÈ·±£¶ÔÓ¦STMÄ£¿éµ÷ÓÃ¹ıSTM_Initº¯Êı
+ *  å‡½æ•°åç§°ï¼švoid STM_DelayUs(STM_t stm, uint32 us)
+ *  åŠŸèƒ½è¯´æ˜ï¼šSTMå»¶æ—¶
+ *  å‚æ•°è¯´æ˜ï¼š
+ * @param    stm      ï¼š STMæ ‡å·     STM0 ã€ STM1
+ * @param    us       ï¼š STMå»¶æ—¶     æ—¶é—´ us
+ *  å‡½æ•°è¿”å›ï¼šæ— 
+ *  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+ *  ä¸¾    ä¾‹ï¼šSTM_DelayUs(STM0, 5000);  //å»¶æ—¶5000us
+ *  å¤‡    æ³¨ï¼šä½¿ç”¨å»¶æ—¶å‡½æ•°æ—¶ï¼Œè¯·ç¡®ä¿å¯¹åº”STMæ¨¡å—è°ƒç”¨è¿‡STM_Initå‡½æ•°
  *************************************************************************/
  void STM_DelayUs(STM_t stm, uint32 us)
  {
@@ -230,12 +230,12 @@ void STM1_CH1_IRQHandler(void)
  }
 
  /*************************************************************************
- *  º¯ÊıÃû³Æ£ºvoid delayms(unsigned short stmms)
- *  ¹¦ÄÜËµÃ÷£ºÑÓÊ±º¯Êı
- *  ²ÎÊıËµÃ÷£ºÎŞ
- *  º¯Êı·µ»Ø£ºÎŞ
- *  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
- *  ±¸    ×¢£ºIfxStm_waitTicks(&MODULE_STM0, 1);´óÔ¼10Î¢Ãë
+ *  å‡½æ•°åç§°ï¼švoid delayms(unsigned short stmms)
+ *  åŠŸèƒ½è¯´æ˜ï¼šå»¶æ—¶å‡½æ•°
+ *  å‚æ•°è¯´æ˜ï¼šæ— 
+ *  å‡½æ•°è¿”å›ï¼šæ— 
+ *  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+ *  å¤‡    æ³¨ï¼šIfxStm_waitTicks(&MODULE_STM0, 1);å¤§çº¦10å¾®ç§’
  *************************************************************************/
  void delayms(unsigned short stmms)	//
  {
@@ -245,15 +245,15 @@ void STM1_CH1_IRQHandler(void)
    }
  }
  /*************************************************************************
- *  º¯ÊıÃû³Æ£ºuint32  STM_GetNowUs(STM_t stm)
- *  ¹¦ÄÜËµÃ÷£ºSTM»ñÈ¡µ±Ç°Ê±¼ä
- *  ²ÎÊıËµÃ÷£º
- * @param    stm      £º STM±êºÅ     STM0 ¡¢ STM1
- * @param    us       £º STMÑÓÊ±     Ê±¼ä us
- *  º¯Êı·µ»Ø£ºÎŞ
- *  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
- *  ¾Ù    Àı£ºint32_t NowTime =  STM_GetNowUs(STM0);  //»ñÈ¡STM0 µ±Ç°Ê±¼ä
- *  ±¸    ×¢£ºÊ¹ÓÃÑÓÊ±º¯ÊıÊ±£¬ÇëÈ·±£¶ÔÓ¦STMÄ£¿éµ÷ÓÃ¹ıSTM_Initº¯Êı
+ *  å‡½æ•°åç§°ï¼šuint32  STM_GetNowUs(STM_t stm)
+ *  åŠŸèƒ½è¯´æ˜ï¼šSTMè·å–å½“å‰æ—¶é—´
+ *  å‚æ•°è¯´æ˜ï¼š
+ * @param    stm      ï¼š STMæ ‡å·     STM0 ã€ STM1
+ * @param    us       ï¼š STMå»¶æ—¶     æ—¶é—´ us
+ *  å‡½æ•°è¿”å›ï¼šæ— 
+ *  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+ *  ä¸¾    ä¾‹ï¼šint32_t NowTime =  STM_GetNowUs(STM0);  //è·å–STM0 å½“å‰æ—¶é—´
+ *  å¤‡    æ³¨ï¼šä½¿ç”¨å»¶æ—¶å‡½æ•°æ—¶ï¼Œè¯·ç¡®ä¿å¯¹åº”STMæ¨¡å—è°ƒç”¨è¿‡STM_Initå‡½æ•°
  *************************************************************************/
  uint32  STM_GetNowUs(STM_t stm)
  {

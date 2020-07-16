@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËÐÄ°å
-¡¾±à    Ð´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.1 °æÈ¨ËùÓÐ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üÐÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æŽˆæƒ
+ã€æœ€åŽæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -22,7 +22,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <LQ_GPIO_LED.h>
 
 
-/* matlab ´úÂë  ¿ÉÒÔ¶Ô±ÈfftµÄ½á¹û
+/* matlab ä»£ç   å¯ä»¥å¯¹æ¯”fftçš„ç»“æžœ
 Fs = 1024;            % Sampling frequency
 T = 1/Fs;             % Sampling period
 L = 1024;             % Length of signal
@@ -46,93 +46,93 @@ ylabel('X(t)')
  */
 
 /////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////ÒÔÏÂ²¿·ÖÎª¹¦ÄÜ²âÊÔ/////////////////////////////////
+//////////////////////////////////ä»¥ä¸‹éƒ¨åˆ†ä¸ºåŠŸèƒ½æµ‹è¯•/////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
 
 
-//IFFT±ä»»½á¹û£¬±ØÐë¶ÔÆë256Î»£¬ÕûÊý±¶
+//IFFTå˜æ¢ç»“æžœï¼Œå¿…é¡»å¯¹é½256ä½ï¼Œæ•´æ•°å€
 __attribute__ ((aligned(256))) csint32 ifftOut[1024];
 
-//Ô´²¨ÐÎ£¬±ØÐë¶ÔÆë256Î»£¬ÕûÊý±¶
+//æºæ³¢å½¢ï¼Œå¿…é¡»å¯¹é½256ä½ï¼Œæ•´æ•°å€
 __attribute__ ((aligned(256))) int16_t fftIn[1024];
 
-//FFT±ä»»½á¹û£¬±ØÐë¶ÔÆë256Î»£¬ÕûÊý±¶
+//FFTå˜æ¢ç»“æžœï¼Œå¿…é¡»å¯¹é½256ä½ï¼Œæ•´æ•°å€
 __attribute__ ((aligned(256))) csint32 fftOut[1024];
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid Test_FFT(void)
-*  ¹¦ÄÜËµÃ÷£º²âÊÔFFT±ä»»
-*  ²ÎÊýËµÃ÷£ºÎÞ
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê4ÔÂ20ÈÕ
-*  ±¸    ×¢£º²âÊÔFFT±ä»»ºÍIFFT±ä»»    ×¢Òâ  Ó²¼þFFTÐèÒªTC264 DAµÄÐ¾Æ¬²ÅÓÐ´Ë¹¦ÄÜ
+*  å‡½æ•°åç§°ï¼švoid Test_FFT(void)
+*  åŠŸèƒ½è¯´æ˜Žï¼šæµ‹è¯•FFTå˜æ¢
+*  å‚æ•°è¯´æ˜Žï¼šæ— 
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´4æœˆ20æ—¥
+*  å¤‡    æ³¨ï¼šæµ‹è¯•FFTå˜æ¢å’ŒIFFTå˜æ¢    æ³¨æ„  ç¡¬ä»¶FFTéœ€è¦TC264 DAçš„èŠ¯ç‰‡æ‰æœ‰æ­¤åŠŸèƒ½
 *************************************************************************/
 void Test_FFT(void)
 {
-	uint16_t Fs = 1024;    //ÐÅºÅÆµÂÊ
+	uint16_t Fs = 1024;    //ä¿¡å·é¢‘çŽ‡
 
-	float    T  = 1.0f/Fs; //ÐÅºÅÖÜÆÚ
+	float    T  = 1.0f/Fs; //ä¿¡å·å‘¨æœŸ
 
-	uint16_t L  = 1024;    //³¤¶È
+	uint16_t L  = 1024;    //é•¿åº¦
 
-	/* ×öÒ»¸ö50HzºÍ120HzµÄÕýÐþµþ¼ÓÐÅºÅ  */
+	/* åšä¸€ä¸ª50Hzå’Œ120Hzçš„æ­£çŽ„å åŠ ä¿¡å·  */
 	int i = 0;
 	for(i = 0; i < L; i++)
 	{
 		fftIn[i] = 70*sin(2*IFX_PI*50*T*i) + 100*sin(2*IFX_PI*120*T*i);
 	}
 
-	/* ³õÊ¼»¯ FFT  */
+	/* åˆå§‹åŒ– FFT  */
    	FFT_InitConfig((uint32)fftIn, (uint32)fftOut, IfxFft_Length_1024);
 
-   	/* ¿ªÊ¼FFTÔËËã  */
+   	/* å¼€å§‹FFTè¿ç®—  */
 	FFT_Start();
 
 	while(1)
 	{
-		/* ³õÊ¼»¯Îª FFT  ×¢Òâ ÕâÀïFFTÊä³ö½á¹ûÊÇÊµ¼Ê½á¹ûµÄ64±¶  */
+		/* åˆå§‹åŒ–ä¸º FFT  æ³¨æ„ è¿™é‡ŒFFTè¾“å‡ºç»“æžœæ˜¯å®žé™…ç»“æžœçš„64å€  */
 		FFT_InitConfig((uint32)fftIn, (uint32)fftOut, IfxFft_Length_1024);
 
 		FFT_Start();
 
-		/* ³õÊ¼»¯Îª IFFT  */
+		/* åˆå§‹åŒ–ä¸º IFFT  */
 		IFFT_InitConfig((uint32)fftOut, (uint32)ifftOut, IfxFft_Length_1024);
 
 		FFT_Start();
 
-		LED_Ctrl(LED0,RVS);               //µçÆ½·­×ª,LEDÉÁË¸
+		LED_Ctrl(LED0,RVS);               //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 
 	}
 }
 
 
-//Ô´²¨ÐÎ£¬±ØÐë¶ÔÆë256Î»£¬ÕûÊý±¶
+//æºæ³¢å½¢ï¼Œå¿…é¡»å¯¹é½256ä½ï¼Œæ•´æ•°å€
 __attribute__ ((aligned(256))) cfloat32 sfftIn[1024];
 
-//IFFT±ä»»½á¹û£¬±ØÐë¶ÔÆë256Î»£¬ÕûÊý±¶
+//IFFTå˜æ¢ç»“æžœï¼Œå¿…é¡»å¯¹é½256ä½ï¼Œæ•´æ•°å€
 __attribute__ ((aligned(256))) cfloat32 sifftOut[1024];
 
-//FFT±ä»»½á¹û£¬±ØÐë¶ÔÆë256Î»£¬ÕûÊý±¶
+//FFTå˜æ¢ç»“æžœï¼Œå¿…é¡»å¯¹é½256ä½ï¼Œæ•´æ•°å€
 __attribute__ ((aligned(256))) cfloat32 sfftOut[1024];
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid Test_SoftFft(void)
-*  ¹¦ÄÜËµÃ÷£º²âÊÔÈí¼þFFT±ä»»
-*  ²ÎÊýËµÃ÷£ºÎÞ
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê4ÔÂ20ÈÕ
-*  ±¸    ×¢£º²âÊÔFFT±ä»»ºÍIFFT±ä»»    ×¢Òâ  ËùÓÐTC264 Ð¾Æ¬¶¼¿ÉÒÔ
+*  å‡½æ•°åç§°ï¼švoid Test_SoftFft(void)
+*  åŠŸèƒ½è¯´æ˜Žï¼šæµ‹è¯•è½¯ä»¶FFTå˜æ¢
+*  å‚æ•°è¯´æ˜Žï¼šæ— 
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´4æœˆ20æ—¥
+*  å¤‡    æ³¨ï¼šæµ‹è¯•FFTå˜æ¢å’ŒIFFTå˜æ¢    æ³¨æ„  æ‰€æœ‰TC264 èŠ¯ç‰‡éƒ½å¯ä»¥
 *************************************************************************/
 void Test_SoftFft(void)
 {
-	uint16_t Fs = 1024;    //ÐÅºÅÆµÂÊ
+	uint16_t Fs = 1024;    //ä¿¡å·é¢‘çŽ‡
 
-	float    T  = 1.0f/Fs; //ÐÅºÅÖÜÆÚ
+	float    T  = 1.0f/Fs; //ä¿¡å·å‘¨æœŸ
 
-	uint16_t L  = 1024;    //³¤¶È
+	uint16_t L  = 1024;    //é•¿åº¦
 
-	/* ×öÒ»¸ö50HzºÍ120HzµÄÕýÐþµþ¼ÓÐÅºÅ  */
+	/* åšä¸€ä¸ª50Hzå’Œ120Hzçš„æ­£çŽ„å åŠ ä¿¡å·  */
 	int i = 0;
 	for(i = 0; i < L; i++)
 	{
@@ -145,10 +145,10 @@ void Test_SoftFft(void)
 		//FFT
 		Ifx_FftF32_radix2(sfftOut, sfftIn, 1024);
 
-		//IFFT  ×¢Òâ ÕâÀïIFFTÊä³ö½á¹ûÊÇÊµ¼Ê½á¹ûµÄ1024±¶
+		//IFFT  æ³¨æ„ è¿™é‡ŒIFFTè¾“å‡ºç»“æžœæ˜¯å®žé™…ç»“æžœçš„1024å€
 		Ifx_FftF32_radix2I(sifftOut, sfftOut, 1024);
 
-		LED_Ctrl(LED0,RVS);               //µçÆ½·­×ª,LEDÉÁË¸
+		LED_Ctrl(LED0,RVS);               //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 
 	}
 }

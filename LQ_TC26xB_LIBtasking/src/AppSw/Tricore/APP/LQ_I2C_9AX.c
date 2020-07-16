@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -23,7 +23,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <stdio.h>
 
 /**
-  * @brief    ¾ÅÖá²âÊÔ
+  * @brief    ä¹è½´æµ‹è¯•
   *
   * @param
   *
@@ -33,17 +33,17 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
   *
   * @example
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void Test_9AX(void)
 {
     char  txt[30];
-	short aacx,aacy,aacz;	         //¼ÓËÙ¶È´«¸ĞÆ÷Ô­Ê¼Êı¾İ
-	short gyrox,gyroy,gyroz;        //ÍÓÂİÒÇÔ­Ê¼Êı¾İ
-    short magx, magy, magz;         //µØ´Å¼ÆÔ­Ê¼Êı¾İ
+	short aacx,aacy,aacz;	         //åŠ é€Ÿåº¦ä¼ æ„Ÿå™¨åŸå§‹æ•°æ®
+	short gyrox,gyroy,gyroz;        //é™€èºä»ªåŸå§‹æ•°æ®
+    short magx, magy, magz;         //åœ°ç£è®¡åŸå§‹æ•°æ®
 
-    OLED_Init();                      //LCD³õÊ¼»¯
-    OLED_CLS();                       //LCDÇåÆÁ
+    OLED_Init();                      //LCDåˆå§‹åŒ–
+    OLED_CLS();                       //LCDæ¸…å±
 
     IIC_Init();
 
@@ -54,14 +54,14 @@ void Test_9AX(void)
     {
 
     	OLED_P8x16Str(0,2,"9AX Test Fail");
-#pragma warning 557         // ÆÁ±Î¾¯¸æ
+#pragma warning 557         // å±è”½è­¦å‘Š
 		while (1);
-#pragma warning default     // ´ò¿ª¾¯¸æ
+#pragma warning default     // æ‰“å¼€è­¦å‘Š
     }
 
     while(1)
     {
-        FX_8700_GetACCRaw(&aacx,&aacy,&aacz);	  //µÃµ½¼ÓËÙ¶È´«¸ĞÆ÷Êı¾İ
+        FX_8700_GetACCRaw(&aacx,&aacy,&aacz);	  //å¾—åˆ°åŠ é€Ÿåº¦ä¼ æ„Ÿå™¨æ•°æ®
         FX_8700_GetMAGRaw(&magx, &magy, &magz);
         FX_21002_GetRaw(&gyrox, &gyroy, &gyroz);
 
@@ -92,17 +92,17 @@ void Test_9AX(void)
 
 
 /**
-  * @brief    ²»¾«È·ÑÓÊ±
+  * @brief    ä¸ç²¾ç¡®å»¶æ—¶
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @example  delayms_9ax(100);
   *
-  * @date     2019/4/22 ĞÇÆÚÒ»
+  * @date     2019/4/22 æ˜ŸæœŸä¸€
 */
 void delayms_9ax(signed short ms)
 {
@@ -119,17 +119,17 @@ void delayms_9ax(signed short ms)
 
 
 /*!
-  * @brief    ¾ÅÖá¼Ä´æÆ÷³õÊ¼»¯
+  * @brief    ä¹è½´å¯„å­˜å™¨åˆå§‹åŒ–
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      LQ9AX_Init();
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char LQ9AX_Init(void)
 {
@@ -141,8 +141,8 @@ unsigned char LQ9AX_Init(void)
 //        PRINTF("\n FX_8700 Init Fail \n");
         return 1;
     }
-    FX_8700_SetRate(800, 2);   // 800Hz  µØ´ÅºÍ¼ÓËÙ¶È¼Æ¶¼Ê¹ÄÜ
-    FX_8700_SetRange(4);       //¡À 4g
+    FX_8700_SetRate(800, 2);   // 800Hz  åœ°ç£å’ŒåŠ é€Ÿåº¦è®¡éƒ½ä½¿èƒ½
+    FX_8700_SetRange(4);       //Â± 4g
     FX_8700_Active(1);
 
 
@@ -154,9 +154,9 @@ unsigned char LQ9AX_Init(void)
 //        PRINTF("\n FX_2100 Init Fail \n");
         return 2;
     }
-    FX_21002_SetRate(800);     // 800Hz  ½ÇËÙ¶È¼Æ
-    FX_21002_SetRange(2000);   //¡À 2000dps
-    FX_21002_SetLP(2);         //µÍÍ¨ÂË²¨
+    FX_21002_SetRate(800);     // 800Hz  è§’é€Ÿåº¦è®¡
+    FX_21002_SetRange(2000);   //Â± 2000dps
+    FX_21002_SetLP(2);         //ä½é€šæ»¤æ³¢
     FX_21002_Active(1);
     delayms_9ax(10);
     return 0;
@@ -172,21 +172,21 @@ unsigned char LQ9AX_Init(void)
 
 
 /*!
-  * @brief    ÉèÖÃFXOS8700 ÊÇ·ñ¼¤»î
+  * @brief    è®¾ç½®FXOS8700 æ˜¯å¦æ¿€æ´»
   *
-  * @param    enable :  1£º¼¤»î  0£º´ı»ú
+  * @param    enable :  1ï¼šæ¿€æ´»  0ï¼šå¾…æœº
   *
-  * @return   0 : ³É¹¦  ÆäËû £º Ê§°Ü
+  * @return   0 : æˆåŠŸ  å…¶ä»– ï¼š å¤±è´¥
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
-  * @see      FX_8700_Active(1); //Ê¹ÄÜ
+  * @see      FX_8700_Active(1); //ä½¿èƒ½
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_8700_Active(unsigned char enable)
 {
-    /* ¿ªÆô¸ß·Ö±æÂÊÄ£Ê½ */
+    /* å¼€å¯é«˜åˆ†è¾¨ç‡æ¨¡å¼ */
     FX_Write_Byte(FXOS8700_ADDR, FXOS8701CQ_CTRL_REG2, 0x02);
 
     unsigned char reg = FX_Read_Byte(FXOS8700_ADDR, FXOS8701CQ_CTRL_REG1);
@@ -202,18 +202,18 @@ unsigned char FX_8700_Active(unsigned char enable)
 }
 
 /*!
-  * @brief    »ñÈ¡¼ÓËÙ¶È¼ÆÔ­Ê¼Êı¾İ
+  * @brief    è·å–åŠ é€Ÿåº¦è®¡åŸå§‹æ•°æ®
   *
-  * @param    ax,ay,az:¼ÓËÙ¶È¼Æx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
+  * @param    ax,ay,az:åŠ é€Ÿåº¦è®¡x,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
   *
-  * @return   0 : ³É¹¦  ÆäËû £º Ê§°Ü
+  * @return   0 : æˆåŠŸ  å…¶ä»– ï¼š å¤±è´¥
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      int16_t data[3];
-  * @see      FX_8700_GetACCRaw(&data[0], &data[1], &data[2]);//»ñÈ¡¼ÓËÙ¶ÈÔ­Ê¼Êı¾İ
+  * @see      FX_8700_GetACCRaw(&data[0], &data[1], &data[2]);//è·å–åŠ é€Ÿåº¦åŸå§‹æ•°æ®
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_8700_GetACCRaw(short *ax,short *ay,short *az)
 {
@@ -230,18 +230,18 @@ unsigned char FX_8700_GetACCRaw(short *ax,short *ay,short *az)
 
 
 /*!
-  * @brief    »ñÈ¡µØ´Å¼Æ¼ÆÔ­Ê¼Êı¾İ
+  * @brief    è·å–åœ°ç£è®¡è®¡åŸå§‹æ•°æ®
   *
-  * @param    mx,my,mz:µØ´Å¼Æx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
+  * @param    mx,my,mz:åœ°ç£è®¡x,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
   *
-  * @return   0 : ³É¹¦  ÆäËû £º Ê§°Ü
+  * @return   0 : æˆåŠŸ  å…¶ä»– ï¼š å¤±è´¥
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      int16_t data[3];
-  * @see      FX_8700_GetMAGRaw(&data[0], &data[1], &data[2]);//»ñÈ¡µØ´Å¼ÆÔ­Ê¼Êı¾İ
+  * @see      FX_8700_GetMAGRaw(&data[0], &data[1], &data[2]);//è·å–åœ°ç£è®¡åŸå§‹æ•°æ®
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_8700_GetMAGRaw(short *mx,short *my,short *mz)
 {
@@ -259,17 +259,17 @@ unsigned char FX_8700_GetMAGRaw(short *mx,short *my,short *mz)
 
 
 /*!
-  * @brief    ÉèÖÃFXOS8700 Á¿³Ì
+  * @brief    è®¾ç½®FXOS8700 é‡ç¨‹
   *
-  * @param    dps :  ÉèÖÃÁ¿³Ì µ¥Î» ¶ÈÃ¿Ãë
+  * @param    dps :  è®¾ç½®é‡ç¨‹ å•ä½ åº¦æ¯ç§’
   *
-  * @return   0 : ³É¹¦  ÆäËû £º Ê§°Ü
+  * @return   0 : æˆåŠŸ  å…¶ä»– ï¼š å¤±è´¥
   *
-  * @note     µØ´Å¼ÆºÍ¼ÓËÙ¶È¼Æ Á¿³ÌÊÇÒ»ÆğÉè¶¨µÄ ¡À2g;¡À0.244 mg/LSB   ¡À4g;¡À0.488 mg/LSB   ¡À8g ¡À0.976 mg/LSB
+  * @note     åœ°ç£è®¡å’ŒåŠ é€Ÿåº¦è®¡ é‡ç¨‹æ˜¯ä¸€èµ·è®¾å®šçš„ Â±2g;Â±0.244 mg/LSB   Â±4g;Â±0.488 mg/LSB   Â±8g Â±0.976 mg/LSB
   *
-  * @see      FX_8700_SetRange(4); //ÉèÖÃÁ¿³Ì ¡À4g
+  * @see      FX_8700_SetRange(4); //è®¾ç½®é‡ç¨‹ Â±4g
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_8700_SetRange(unsigned char mg)
 {
@@ -294,18 +294,18 @@ unsigned char FX_8700_SetRange(unsigned char mg)
 
 
 /*!
-  * @brief    ÉèÖÃFXOS8700 ²ÉÑùËÙÂÊ
+  * @brief    è®¾ç½®FXOS8700 é‡‡æ ·é€Ÿç‡
   *
-  * @param    fps  ÉèÖÃÊä³öËÙÂÊ µ¥Î» 1ÃëË¢ĞÂ¶àÉÙ´Î
-  * @param    mode 0: ½öÊ¹ÓÃ¼ÓËÙ¶È¼Æ  1£º½öÊ¹ÓÃµØ´Å¼Æ  2£º¼ÓËÙ¶È¼ÆºÍµØ´Å¼Æ¶¼ÓÃ£¨»áµ¼ÖÂÊä³öËÙÂÊ¼õ°ë£©
+  * @param    fps  è®¾ç½®è¾“å‡ºé€Ÿç‡ å•ä½ 1ç§’åˆ·æ–°å¤šå°‘æ¬¡
+  * @param    mode 0: ä»…ä½¿ç”¨åŠ é€Ÿåº¦è®¡  1ï¼šä»…ä½¿ç”¨åœ°ç£è®¡  2ï¼šåŠ é€Ÿåº¦è®¡å’Œåœ°ç£è®¡éƒ½ç”¨ï¼ˆä¼šå¯¼è‡´è¾“å‡ºé€Ÿç‡å‡åŠï¼‰
   *
-  * @return   0 : ³É¹¦  ÆäËû £º Ê§°Ü
+  * @return   0 : æˆåŠŸ  å…¶ä»– ï¼š å¤±è´¥
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
-  * @see      FX_8700_SetRate(800, 2);   // 800Hz  µØ´ÅºÍ¼ÓËÙ¶È¼Æ¶¼Ê¹ÄÜ
+  * @see      FX_8700_SetRate(800, 2);   // 800Hz  åœ°ç£å’ŒåŠ é€Ÿåº¦è®¡éƒ½ä½¿èƒ½
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_8700_SetRate(signed short fps, unsigned char mode)
 {
@@ -358,17 +358,17 @@ unsigned char FX_8700_SetRate(signed short fps, unsigned char mode)
 
 
 /*!
-  * @brief    FXOS8700 ×Ô¼ì
+  * @brief    FXOS8700 è‡ªæ£€
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   0 : Õı³£   ÆäËû£º´íÎó
+  * @return   0 : æ­£å¸¸   å…¶ä»–ï¼šé”™è¯¯
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
-  * @see      FX_8700_Check(); //»ñÈ¡ID ¼ì²éÊÇ·ñÁ¬½ÓÕı³£
+  * @see      FX_8700_Check(); //è·å–ID æ£€æŸ¥æ˜¯å¦è¿æ¥æ­£å¸¸
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_8700_Check(void)
 {
@@ -396,18 +396,18 @@ unsigned char FX_8700_Check(void)
 
 
 /*!
-  * @brief    »ñÈ¡½ÇËÙ¶È¼ÆÔ­Ê¼Êı¾İ
+  * @brief    è·å–è§’é€Ÿåº¦è®¡åŸå§‹æ•°æ®
   *
-  * @param    gyrox,gyroy,gyroz:ÍÓÂİÒÇx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
+  * @param    gyrox,gyroy,gyroz:é™€èºä»ªx,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
   *
-  * @return   0 : Õı³£   ÆäËû£º´íÎó
+  * @return   0 : æ­£å¸¸   å…¶ä»–ï¼šé”™è¯¯
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      int16_t data[3];
-  * @see      FX_21002_GetRaw(&data[0], &data[1], &data[2]);//»ñÈ¡ÍÓÂİÒÇÔ­Ê¼Êı¾İ
+  * @see      FX_21002_GetRaw(&data[0], &data[1], &data[2]);//è·å–é™€èºä»ªåŸå§‹æ•°æ®
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_21002_GetRaw(short * gyrox, short *gyroy, short *gyroz)
 {
@@ -424,17 +424,17 @@ unsigned char FX_21002_GetRaw(short * gyrox, short *gyroy, short *gyroz)
 
 
 /*!
-  * @brief    ÉèÖÃFXAS21002 ÊÇ·ñ¼¤»î
+  * @brief    è®¾ç½®FXAS21002 æ˜¯å¦æ¿€æ´»
   *
-  * @param    enable :  1£º¼¤»î  0£º´ı»ú
+  * @param    enable :  1ï¼šæ¿€æ´»  0ï¼šå¾…æœº
   *
-  * @return   0 : Õı³£   ÆäËû£º´íÎó
+  * @return   0 : æ­£å¸¸   å…¶ä»–ï¼šé”™è¯¯
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
-  * @see      FX_21002_Active(1); //Ê¹ÄÜFX_21002
+  * @see      FX_21002_Active(1); //ä½¿èƒ½FX_21002
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_21002_Active(unsigned char enable)
 {
@@ -453,23 +453,23 @@ unsigned char FX_21002_Active(unsigned char enable)
 
 
 /*!
-  * @brief    ÉèÖÃFXAS21002 ¸ßÍ¨ ÂË²¨
+  * @brief    è®¾ç½®FXAS21002 é«˜é€š æ»¤æ³¢
   *
-  * @param    BW :  ÉèÖÃ½ØÖ¹ÆµÂÊ£¨¾ßÌåÆµÂÊ¿´±í£©
+  * @param    BW :  è®¾ç½®æˆªæ­¢é¢‘ç‡ï¼ˆå…·ä½“é¢‘ç‡çœ‹è¡¨ï¼‰
   *
-  * @return   0 : Õı³£   ÆäËû£º´íÎó
+  * @return   0 : æ­£å¸¸   å…¶ä»–ï¼šé”™è¯¯
   *
-  * @note     ²»Í¬²ÉÑùÆµÂÊÏÂ  ¸ßÍ¨ÂË²¨¿ÉÒÔÉèÖÃµÄÖµÈëÏÂ±í
+  * @note     ä¸åŒé‡‡æ ·é¢‘ç‡ä¸‹  é«˜é€šæ»¤æ³¢å¯ä»¥è®¾ç½®çš„å€¼å…¥ä¸‹è¡¨
   *
-  *    mode        ²ÉÑùËÙÂÊ    800 Hz 400 Hz 200 Hz  100 Hz 50 Hz  25 Hz 12.5 Hz
-  *     0          ½ØÖ¹ÆµÂÊ      15    7.5    3.75   1.875  0.937 0.468  0.234
-  *     1          ½ØÖ¹ÆµÂÊ     7.7   3.85   1.925   0.963  0.481 0.241  0.120
-  *     2          ½ØÖ¹ÆµÂÊ     3.9   1.95   0.975   0.488  0.244 0.122  0.061
-  *     3          ½ØÖ¹ÆµÂÊ    1.98   0.99   0.495   0.248  0.124 0.062  0.031
+  *    mode        é‡‡æ ·é€Ÿç‡    800 Hz 400 Hz 200 Hz  100 Hz 50 Hz  25 Hz 12.5 Hz
+  *     0          æˆªæ­¢é¢‘ç‡      15    7.5    3.75   1.875  0.937 0.468  0.234
+  *     1          æˆªæ­¢é¢‘ç‡     7.7   3.85   1.925   0.963  0.481 0.241  0.120
+  *     2          æˆªæ­¢é¢‘ç‡     3.9   1.95   0.975   0.488  0.244 0.122  0.061
+  *     3          æˆªæ­¢é¢‘ç‡    1.98   0.99   0.495   0.248  0.124 0.062  0.031
   *
-  * @see      FX_21002_SetHP(0); //ÉèÖÃ¸ßÍ¨ÂË²¨
+  * @see      FX_21002_SetHP(0); //è®¾ç½®é«˜é€šæ»¤æ³¢
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_21002_SetHP(unsigned char mode)
 {
@@ -482,21 +482,21 @@ unsigned char FX_21002_SetHP(unsigned char mode)
 
 
 /*!
-  * @brief    ÉèÖÃFXAS21002 µÍÍ¨ ÂË²¨
+  * @brief    è®¾ç½®FXAS21002 ä½é€š æ»¤æ³¢
   *
-  * @param    BW :  ÉèÖÃ½ØÖ¹ÆµÂÊ£¨¾ßÌåÆµÂÊ¿´±í£©
+  * @param    BW :  è®¾ç½®æˆªæ­¢é¢‘ç‡ï¼ˆå…·ä½“é¢‘ç‡çœ‹è¡¨ï¼‰
   *
-  * @return   0 : Õı³£   ÆäËû£º´íÎó
+  * @return   0 : æ­£å¸¸   å…¶ä»–ï¼šé”™è¯¯
   *
-  * @note     ²»Í¬²ÉÑùÆµÂÊÏÂ  µÍÍ¨ÂË²¨¿ÉÒÔÉèÖÃµÄÖµÈëÏÂ±í
-  *  mode     ²ÉÑùËÙÂÊ  800 Hz  400 Hz  200 Hz  100 Hz  50 Hz  25 Hz  12.5 Hz
-  *  0        ½ØÖ¹ÆµÂÊ  256     128      64      32     16      8        4
-  *  1        ½ØÖ¹ÆµÂÊ  128      64      32      16      8      4       ¡ª
-  *  2        ½ØÖ¹ÆµÂÊ   64      32      16       8      4     ¡ª       ¡ª
+  * @note     ä¸åŒé‡‡æ ·é¢‘ç‡ä¸‹  ä½é€šæ»¤æ³¢å¯ä»¥è®¾ç½®çš„å€¼å…¥ä¸‹è¡¨
+  *  mode     é‡‡æ ·é€Ÿç‡  800 Hz  400 Hz  200 Hz  100 Hz  50 Hz  25 Hz  12.5 Hz
+  *  0        æˆªæ­¢é¢‘ç‡  256     128      64      32     16      8        4
+  *  1        æˆªæ­¢é¢‘ç‡  128      64      32      16      8      4       â€”
+  *  2        æˆªæ­¢é¢‘ç‡   64      32      16       8      4     â€”       â€”
   *
-  * @see      FX_21002_SetLP(0) //Èç¹û²ÉÑùËÙÂÊ 800Hz ÔòµÍÍ¨ÂË²¨½ØÖ¹ÆµÂÊ 256
+  * @see      FX_21002_SetLP(0) //å¦‚æœé‡‡æ ·é€Ÿç‡ 800Hz åˆ™ä½é€šæ»¤æ³¢æˆªæ­¢é¢‘ç‡ 256
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_21002_SetLP(unsigned char mode)
 {
@@ -509,17 +509,17 @@ unsigned char FX_21002_SetLP(unsigned char mode)
 
 
 /*!
-  * @brief    ÉèÖÃFXAS21002 Á¿³Ì
+  * @brief    è®¾ç½®FXAS21002 é‡ç¨‹
   *
-  * @param    dps :  ÉèÖÃÁ¿³Ì µ¥Î» ¶ÈÃ¿Ãë
+  * @param    dps :  è®¾ç½®é‡ç¨‹ å•ä½ åº¦æ¯ç§’
   *
-  * @return   0 : Õı³£   ÆäËû£º´íÎó
+  * @return   0 : æ­£å¸¸   å…¶ä»–ï¼šé”™è¯¯
   *
-  * @note     ¡À250dps;1,¡À500dps;2,¡À1000dps;3,¡À2000dps
+  * @note     Â±250dps;1,Â±500dps;2,Â±1000dps;3,Â±2000dps
   *
-  * @see      FX_21002_SetRange(2000); //ÉèÖÃÁ¿³Ì ¡À2000dps
+  * @see      FX_21002_SetRange(2000); //è®¾ç½®é‡ç¨‹ Â±2000dps
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_21002_SetRange(unsigned short dps)
 {
@@ -548,17 +548,17 @@ unsigned char FX_21002_SetRange(unsigned short dps)
 
 
 /*!
-  * @brief    ÉèÖÃFXAS21002 ²ÉÑùËÙÂÊ
+  * @brief    è®¾ç½®FXAS21002 é‡‡æ ·é€Ÿç‡
   *
-  * @param    fps ÉèÖÃÊä³öËÙÂÊ µ¥Î» 1ÃëË¢ĞÂ¶àÉÙ´Î
+  * @param    fps è®¾ç½®è¾“å‡ºé€Ÿç‡ å•ä½ 1ç§’åˆ·æ–°å¤šå°‘æ¬¡
   *
-  * @return   0 : Õı³£   ÆäËû£º´íÎó
+  * @return   0 : æ­£å¸¸   å…¶ä»–ï¼šé”™è¯¯
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
-  * @see      FX_21002_SetRate(800); //ÉèÖÃ²ÉÑùÂÊ800Hz
+  * @see      FX_21002_SetRate(800); //è®¾ç½®é‡‡æ ·ç‡800Hz
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_21002_SetRate(unsigned short fps)
 {
@@ -599,17 +599,17 @@ unsigned char FX_21002_SetRate(unsigned short fps)
 
 
 /*!
-  * @brief    FXAS21002 ×Ô¼ì
+  * @brief    FXAS21002 è‡ªæ£€
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   0 : Õı³£   ÆäËû£º´íÎó
+  * @return   0 : æ­£å¸¸   å…¶ä»–ï¼šé”™è¯¯
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
-  * @see      FX_21002_Check(); //×Ô¼ì
+  * @see      FX_21002_Check(); //è‡ªæ£€
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 unsigned char FX_21002_Check(void)
 {
@@ -636,7 +636,7 @@ unsigned char FX_21002_Check(void)
 
 
 /*--------------------------------------------------------------------------------------
-----------------------------------µ×²ãÇı¶¯ĞĞÊı------------------------------------------
+----------------------------------åº•å±‚é©±åŠ¨è¡Œæ•°------------------------------------------
 ----------------------------------------------------------------------------------------*/
 
 
@@ -644,21 +644,21 @@ unsigned char FX_21002_Check(void)
 
 
 /*!
-  * @brief    IIC Á¬Ğø¶Á
+  * @brief    IIC è¿ç»­è¯»
   *
-  * @param    addr:Æ÷¼şµØÖ·
-  * @param    reg :Òª¶ÁÈ¡µÄ¼Ä´æÆ÷µØÖ·
-  * @param    len :Òª¶ÁÈ¡µÄ³¤¶È
-  * @param    buf :¶ÁÈ¡µ½µÄÊı¾İ´æ´¢Çø
+  * @param    addr:å™¨ä»¶åœ°å€
+  * @param    reg :è¦è¯»å–çš„å¯„å­˜å™¨åœ°å€
+  * @param    len :è¦è¯»å–çš„é•¿åº¦
+  * @param    buf :è¯»å–åˆ°çš„æ•°æ®å­˜å‚¨åŒº
   *
-  * @return   0 £º¶ÁÈ¡³É¹¦
+  * @return   0 ï¼šè¯»å–æˆåŠŸ
   *
-  * @note     ÒÆÖ²Ê±Èç¹ûÊ¹ÓÃÄ£ÄâIIC ĞèÒªĞŞ¸ÄÕâÀï
+  * @note     ç§»æ¤æ—¶å¦‚æœä½¿ç”¨æ¨¡æ‹ŸIIC éœ€è¦ä¿®æ”¹è¿™é‡Œ
   *
   * @see      unsigned char buf[6],res;
-  * @see      res = FX_Read_Len(FXAS21002C_ADDR, FXAS21002C_OUT_X_MSB, 6, buf);//¶ÁÈ¡ÍÓÂİÒÇÊı¾İ
+  * @see      res = FX_Read_Len(FXAS21002C_ADDR, FXAS21002C_OUT_X_MSB, 6, buf);//è¯»å–é™€èºä»ªæ•°æ®
   *
-  * @date     2019/6/12 ĞÇÆÚÈı
+  * @date     2019/6/12 æ˜ŸæœŸä¸‰
   */
 unsigned char FX_Read_Len(unsigned char addr,unsigned char reg,unsigned char len,unsigned char *buf)
 {
@@ -668,19 +668,19 @@ unsigned char FX_Read_Len(unsigned char addr,unsigned char reg,unsigned char len
 
 
 /*!
-  * @brief    IIC Ğ´Ò»¸ö¼Ä´æÆ÷
+  * @brief    IIC å†™ä¸€ä¸ªå¯„å­˜å™¨
   *
-  * @param    addr  :Æ÷¼şµØÖ·
-  * @param    reg   :ÒªĞ´µÄ¼Ä´æÆ÷µØÖ·
-  * @param    value :ÒªĞ´ÈëµÄÖµ
+  * @param    addr  :å™¨ä»¶åœ°å€
+  * @param    reg   :è¦å†™çš„å¯„å­˜å™¨åœ°å€
+  * @param    value :è¦å†™å…¥çš„å€¼
   *
-  * @return   0 £º¶ÁÈ¡³É¹¦
+  * @return   0 ï¼šè¯»å–æˆåŠŸ
   *
-  * @note     ÒÆÖ²Ê±Èç¹ûÊ¹ÓÃÄ£ÄâIIC ĞèÒªĞŞ¸ÄÕâÀï
+  * @note     ç§»æ¤æ—¶å¦‚æœä½¿ç”¨æ¨¡æ‹ŸIIC éœ€è¦ä¿®æ”¹è¿™é‡Œ
   *
-  * @see      FX_Write_Byte(FXAS21002C_ADDR, FXAS21002C_CTRL_REG1, 0x00); //Ğ´Ò»¸ö¼Ä´æÆ÷
+  * @see      FX_Write_Byte(FXAS21002C_ADDR, FXAS21002C_CTRL_REG1, 0x00); //å†™ä¸€ä¸ªå¯„å­˜å™¨
   *
-  * @date     2019/6/12 ĞÇÆÚÈı
+  * @date     2019/6/12 æ˜ŸæœŸä¸‰
   */
 unsigned char FX_Write_Byte(unsigned char addr,unsigned char reg,unsigned char value)
 {
@@ -689,18 +689,18 @@ unsigned char FX_Write_Byte(unsigned char addr,unsigned char reg,unsigned char v
 
 
 /*!
-  * @brief    IIC ¶ÁÒ»¸ö¼Ä´æÆ÷
+  * @brief    IIC è¯»ä¸€ä¸ªå¯„å­˜å™¨
   *
-  * @param    addr  :Æ÷¼şµØÖ·
-  * @param    reg   :Òª¶ÁµÄ¼Ä´æÆ÷µØÖ·
+  * @param    addr  :å™¨ä»¶åœ°å€
+  * @param    reg   :è¦è¯»çš„å¯„å­˜å™¨åœ°å€
   *
-  * @return   0 £º¶ÁÈ¡³É¹¦
+  * @return   0 ï¼šè¯»å–æˆåŠŸ
   *
-  * @note     ÒÆÖ²Ê±Èç¹ûÊ¹ÓÃÄ£ÄâIIC ĞèÒªĞŞ¸ÄÕâÀï
+  * @note     ç§»æ¤æ—¶å¦‚æœä½¿ç”¨æ¨¡æ‹ŸIIC éœ€è¦ä¿®æ”¹è¿™é‡Œ
   *
-  * @see      FX_Read_Byte(FXAS21002C_ADDR, FXAS21002C_WHO_AM_I); //¶ÁÒ»¸ö¼Ä´æÆ÷
+  * @see      FX_Read_Byte(FXAS21002C_ADDR, FXAS21002C_WHO_AM_I); //è¯»ä¸€ä¸ªå¯„å­˜å™¨
   *
-  * @date     2019/6/12 ĞÇÆÚÈı
+  * @date     2019/6/12 æ˜ŸæœŸä¸‰
   */
 unsigned char FX_Read_Byte(unsigned char addr,unsigned char reg)
 {

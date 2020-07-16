@@ -1,42 +1,53 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
-»ùÓÚiLLD_1_0_1_11_0µ×²ã³ÌĞò
-ASCÒì²½´®ĞĞÍ¨ĞÅ£¬¿ÉÒÔ×÷ÎªUARTºÍÆû³µLIN×ÜÏßÊ¹ÓÃ£¬
+åŸºäºiLLD_1_0_1_11_0åº•å±‚ç¨‹åº
+ASCå¼‚æ­¥ä¸²è¡Œé€šä¿¡ï¼Œå¯ä»¥ä½œä¸ºUARTå’Œæ±½è½¦LINæ€»çº¿ä½¿ç”¨ï¼Œ
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 #include <LQ_UART.h>
 #include <LQ_GPIO.h>
+#include <LQ_GPIO_LED.h>
 
 
+#define ASC_TX_BUFFER_SIZE 64        //å‘é€ç¼“å†²åŒºé•¿åº¦
+#define ASC_RX_BUFFER_SIZE 64        //æ¥æ”¶ç¼“å†²åŒºé•¿åº¦
 
-#define ASC_TX_BUFFER_SIZE 64        //·¢ËÍ»º³åÇø³¤¶È
-#define ASC_RX_BUFFER_SIZE 64        //½ÓÊÕ»º³åÇø³¤¶È
 
-
-//´®¿ÚÍ¨ĞÅ½á¹¹Ìå
+//ä¸²å£é€šä¿¡ç»“æ„ä½“
 IfxAsclin_Asc g_UartConfig[4];
 
 static uint8 s_AscTxBuffer[4][ASC_TX_BUFFER_SIZE + sizeof(Ifx_Fifo) + 8];
 static uint8 s_AscRxBuffer[4][ASC_TX_BUFFER_SIZE + sizeof(Ifx_Fifo) + 8];
 
+unsigned char uartReceived=0;
 
+unsigned char uartHasReceivedData(){
+	if(uartReceived){
+		char a=uartReceived;
+		uartReceived=0;
+		return a;
+	}
+	else{
+		return 0;
+	}
+}
 
-/* UARTÖĞ¶Ï */
+/* UARTä¸­æ–­ */
 IFX_INTERRUPT(UART0_RX_IRQHandler, UART0_VECTABNUM, UART0_RX_PRIORITY);
 IFX_INTERRUPT(UART1_RX_IRQHandler, UART1_VECTABNUM, UART1_RX_PRIORITY);
 IFX_INTERRUPT(UART2_RX_IRQHandler, UART2_VECTABNUM, UART2_RX_PRIORITY);
@@ -51,32 +62,32 @@ IFX_INTERRUPT(UART2_ER_IRQHandler, UART2_VECTABNUM, UART2_ER_PRIORITY);
 IFX_INTERRUPT(UART3_ER_IRQHandler, UART3_VECTABNUM, UART3_ER_PRIORITY);
 
 
-/** UARTÖĞ¶ÏCPU±êºÅ */
+/** UARTä¸­æ–­CPUæ ‡å· */
 const uint8 UartIrqVectabNum[4] = {UART0_VECTABNUM, UART1_VECTABNUM, UART2_VECTABNUM, UART3_VECTABNUM};
 
-/** UARTÖĞ¶ÏÓÅÏÈ¼¶ */
+/** UARTä¸­æ–­ä¼˜å…ˆçº§ */
 const uint8 UartIrqPriority[12] = {UART0_RX_PRIORITY, UART0_TX_PRIORITY, UART0_ER_PRIORITY, UART1_RX_PRIORITY, UART1_TX_PRIORITY, UART1_ER_PRIORITY,
 		                           UART2_RX_PRIORITY, UART2_TX_PRIORITY, UART2_ER_PRIORITY, UART3_RX_PRIORITY, UART3_TX_PRIORITY, UART3_ER_PRIORITY};
 
-/** UARTÖĞ¶Ï·şÎñº¯ÊıµØÖ· */
+/** UARTä¸­æ–­æœåŠ¡å‡½æ•°åœ°å€ */
 const void *UartIrqFuncPointer[12] = {&UART0_RX_IRQHandler, &UART0_TX_IRQHandler, &UART0_ER_IRQHandler,
-									   &UART1_RX_IRQHandler, &UART1_TX_IRQHandler, &UART1_ER_IRQHandler,
+										&UART1_RX_IRQHandler, &UART1_TX_IRQHandler, &UART1_ER_IRQHandler,
 									   &UART2_RX_IRQHandler, &UART2_TX_IRQHandler, &UART2_ER_IRQHandler,
 									   &UART3_RX_IRQHandler, &UART3_TX_IRQHandler, &UART3_ER_IRQHandler,};
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid UART0_RX_IRQHandler(void)
-*  ¹¦ÄÜËµÃ÷£ºUART0_RX_IRQHandlerÖĞ¶Ï·şÎñº¯Êı
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼švoid UART0_RX_IRQHandler(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šUART0_RX_IRQHandlerä¸­æ–­æœåŠ¡å‡½æ•°
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 void UART0_RX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrReceive(&g_UartConfig[0]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 
 }
 
@@ -84,21 +95,21 @@ void UART0_TX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrTransmit(&g_UartConfig[0]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void UART0_ER_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrError(&g_UartConfig[0]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void UART1_RX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrReceive(&g_UartConfig[1]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 
 }
 
@@ -106,43 +117,63 @@ void UART1_TX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrTransmit(&g_UartConfig[1]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void UART1_ER_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrError(&g_UartConfig[1]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void UART2_RX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrReceive(&g_UartConfig[2]);
 
-	/* ÓÃ»§´úÂë */
+	// unsigned char tag[20]="hhh";
+	// int step=0;
+	// int readIndex=0;
+	// while(s_AscRxBuffer[2][readIndex]){
 
+	// 	if(s_AscRxBuffer[2][readIndex]==tag[step]){
+	// 		step++;
+	// 	}else{
+	// 		step=0;
+	// 	}
+	// 	readIndex++;
+	// 	if(step==3){
+	// 		break;
+	// 	}
+	// }
+
+	// 	PIN_Reverse(LED0p);
+	// 	PIN_Reverse(LED1p);
+	// 	PIN_Reverse(LED2p);
+	// 	PIN_Reverse(LED3p);
+	uartReceived=1;
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void UART2_TX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrTransmit(&g_UartConfig[2]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void UART2_ER_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrError(&g_UartConfig[2]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void UART3_RX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrReceive(&g_UartConfig[3]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 
 }
 
@@ -150,31 +181,31 @@ void UART3_TX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrTransmit(&g_UartConfig[3]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void UART3_ER_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrError(&g_UartConfig[3]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid UART_InitConfig(UART_RX_t RxPin, UART_TX_t TxPin, uint32 baudrate)
-*  ¹¦ÄÜËµÃ÷£º´®¿ÚÄ£¿é³õÊ¼»¯
-*  ²ÎÊıËµÃ÷£º
-  * @param    RxPin   £º ´®¿Ú½ÓÊÕ¹Ü½Å
-  * @param    TxPin   £º ´®¿Ú·¢ËÍ¹Ü½Å
-  * @param    baudrate£º ²¨ÌØÂÊ
-*  º¯Êı·µ»Ø£º×Ö½Ú
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºUART_InitConfig(UART0_RX_P14_1,UART0_TX_P14_0, 115200);   //³õÊ¼»¯´®¿Ú0 ²¨ÌØÂÊ 115200 ÎŞÆæÅ¼Ğ£Ñé 1Í£Ö¹Î» Ê¹ÓÃ¹Ü½ÅP14_0 P14_1
+*  å‡½æ•°åç§°ï¼švoid UART_InitConfig(UART_RX_t RxPin, UART_TX_t TxPin, uint32 baudrate)
+*  åŠŸèƒ½è¯´æ˜ï¼šä¸²å£æ¨¡å—åˆå§‹åŒ–
+*  å‚æ•°è¯´æ˜ï¼š
+  * @param    RxPin   ï¼š ä¸²å£æ¥æ”¶ç®¡è„š
+  * @param    TxPin   ï¼š ä¸²å£å‘é€ç®¡è„š
+  * @param    baudrateï¼š æ³¢ç‰¹ç‡
+*  å‡½æ•°è¿”å›ï¼šå­—èŠ‚
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šUART_InitConfig(UART0_RX_P14_1,UART0_TX_P14_0, 115200);   //åˆå§‹åŒ–ä¸²å£0 æ³¢ç‰¹ç‡ 115200 æ— å¥‡å¶æ ¡éªŒ 1åœæ­¢ä½ ä½¿ç”¨ç®¡è„šP14_0 P14_1
 *************************************************************************/
 void UART_InitConfig(UART_RX_t RxPin, UART_TX_t TxPin, uint32 baudrate)
 {
 	int i,j;
-	//¹Ø±ÕCPUÖĞ¶Ï
+	//å…³é—­CPUä¸­æ–­
 	IfxCpu_disableInterrupts();
 
 	Ifx_P *portRx = PIN_GetModule(RxPin);
@@ -215,33 +246,33 @@ void UART_InitConfig(UART_RX_t RxPin, UART_TX_t TxPin, uint32 baudrate)
 
 	if(IfxAsclin_Rx->module != IfxAsclin_Tx->module)
 	{
-#pragma warning 557         // ÆÁ±Î¾¯¸æ
-		while (1);          // ¼ì²é RXºÍTX ÊÇ·ñÎªÍ¬Ò»UART
-#pragma warning default     // ´ò¿ª¾¯¸æ
+#pragma warning 557         // å±è”½è­¦å‘Š
+		while (1);          // æ£€æŸ¥ RXå’ŒTX æ˜¯å¦ä¸ºåŒä¸€UART
+#pragma warning default     // æ‰“å¼€è­¦å‘Š
 	}
 
-	//ĞÂ½¨´®¿ÚÅäÖÃ½á¹¹Ìå
+	//æ–°å»ºä¸²å£é…ç½®ç»“æ„ä½“
 	IfxAsclin_Asc_Config ascConfig;
 
-	//³õÊ¼»¯Ä£¿é
+	//åˆå§‹åŒ–æ¨¡å—
 	IfxAsclin_Asc_initModuleConfig(&ascConfig, IfxAsclin_Tx->module);
 
-	ascConfig.baudrate.baudrate  = (float)baudrate;        //²¨ÌØÂÊ
-	ascConfig.frame.frameMode    = IfxAsclin_FrameMode_asc;//Êı¾İÖ¡Ä£Ê½
-	ascConfig.frame.dataLength   = IfxAsclin_DataLength_8; //Êı¾İ³¤¶È
-	ascConfig.frame.stopBit      = IfxAsclin_StopBit_1;    //Í£Ö¹Î»
-	ascConfig.frame.shiftDir     = IfxAsclin_ShiftDirection_lsbFirst;//ÒÆÎ»·½Ïò
-	ascConfig.frame.parityBit    = FALSE;//ÎŞÆæÅ¼Ğ£Ñé
+	ascConfig.baudrate.baudrate  = (float)baudrate;        //æ³¢ç‰¹ç‡
+	ascConfig.frame.frameMode    = IfxAsclin_FrameMode_asc;//æ•°æ®å¸§æ¨¡å¼
+	ascConfig.frame.dataLength   = IfxAsclin_DataLength_8; //æ•°æ®é•¿åº¦
+	ascConfig.frame.stopBit      = IfxAsclin_StopBit_1;    //åœæ­¢ä½
+	ascConfig.frame.shiftDir     = IfxAsclin_ShiftDirection_lsbFirst;//ç§»ä½æ–¹å‘
+	ascConfig.frame.parityBit    = FALSE;//æ— å¥‡å¶æ ¡éªŒ
 
 	uint8_t uartNum = IfxAsclin_getIndex(IfxAsclin_Tx->module);
 
-	//ÖĞ¶ÏÓÅÏÈ¼¶ÅäÖÃ
+	//ä¸­æ–­ä¼˜å…ˆçº§é…ç½®
 	ascConfig.interrupt.rxPriority = UartIrqPriority[uartNum * 3];
 	ascConfig.interrupt.txPriority = UartIrqPriority[uartNum * 3 + 1];
 	ascConfig.interrupt.erPriority = UartIrqPriority[uartNum * 3 + 2];
 	ascConfig.interrupt.typeOfService = UartIrqVectabNum[uartNum];
 
-	//½ÓÊÕºÍ·¢ËÍFIFOµÄÅäÖÃ
+	//æ¥æ”¶å’Œå‘é€FIFOçš„é…ç½®
 	ascConfig.txBuffer     = &s_AscTxBuffer[uartNum][0];
 	ascConfig.txBufferSize = ASC_TX_BUFFER_SIZE;
 	ascConfig.rxBuffer     = &s_AscRxBuffer[uartNum][0];
@@ -257,25 +288,25 @@ void UART_InitConfig(UART_RX_t RxPin, UART_TX_t TxPin, uint32 baudrate)
 	};
 	ascConfig.pins = &pins;
 
-	//µ÷ÓÃÉÏÃæ½á¹¹ÌåËùÔ¤ÉèµÄ²ÎÊı£¬Íê³ÉÄ£¿éµÄ³õÊ¼»¯
+	//è°ƒç”¨ä¸Šé¢ç»“æ„ä½“æ‰€é¢„è®¾çš„å‚æ•°ï¼Œå®Œæˆæ¨¡å—çš„åˆå§‹åŒ–
 	IfxAsclin_Asc_initModule(&g_UartConfig[uartNum], &ascConfig);
 
-	//½ÓÊÕ£¬·¢ËÍºÍ´íÎóÖĞ¶ÏÅäÖÃ
+	//æ¥æ”¶ï¼Œå‘é€å’Œé”™è¯¯ä¸­æ–­é…ç½®
 	IfxCpu_Irq_installInterruptHandler((void*)UartIrqFuncPointer[uartNum * 3],     UartIrqPriority[uartNum * 3]);
 	IfxCpu_Irq_installInterruptHandler((void*)UartIrqFuncPointer[uartNum * 3 + 1], UartIrqPriority[uartNum * 3 + 1]);
 	IfxCpu_Irq_installInterruptHandler((void*)UartIrqFuncPointer[uartNum * 3 + 2], UartIrqPriority[uartNum * 3 + 2]);
 
-	//¿ªÆôCPUÖĞ¶Ï
+	//å¼€å¯CPUä¸­æ–­
 	IfxCpu_enableInterrupts();
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid UART_PutChar(UART_t  uratn, char ch)
-*  ¹¦ÄÜËµÃ÷£ºUART·¢ËÍ×Ö½Úº¯Êı,Ê¹ÓÃÇ°ÇëÏÈ³õÊ¼»¯¶ÔÓ¦´®¿Ú
-*  ²ÎÊıËµÃ÷£ºuratn £º UART0 - UART3/ ch    £º Òª´òÓ¡µÄ×Ö·û
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºUART_PutChar(UART0, 'a');  //´òÓ¡×Ö·ûa
+*  å‡½æ•°åç§°ï¼švoid UART_PutChar(UART_t  uratn, char ch)
+*  åŠŸèƒ½è¯´æ˜ï¼šUARTå‘é€å­—èŠ‚å‡½æ•°,ä½¿ç”¨å‰è¯·å…ˆåˆå§‹åŒ–å¯¹åº”ä¸²å£
+*  å‚æ•°è¯´æ˜ï¼šuratn ï¼š UART0 - UART3/ ch    ï¼š è¦æ‰“å°çš„å­—ç¬¦
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šUART_PutChar(UART0, 'a');  //æ‰“å°å­—ç¬¦a
 *************************************************************************/
 void UART_PutChar(UART_t  uratn, char ch)
 {
@@ -283,12 +314,12 @@ void UART_PutChar(UART_t  uratn, char ch)
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid UART_PutStr(UART_t  uratn, char *str)
-*  ¹¦ÄÜËµÃ÷£ºUART·¢ËÍ×Ö·û´®º¯Êı(Óö NULL Í£Ö¹·¢ËÍ),Ê¹ÓÃÇ°ÇëÏÈ³õÊ¼»¯¶ÔÓ¦´®¿Ú
-*  ²ÎÊıËµÃ÷£ºuratn £º UART0 - UART3/ str   £º Òª´òÓ¡µÄ×Ö·û´®µØÖ·
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºUART_PutStr(UART3, "123456789"); //·¢ËÍ9¸ö×Ö½Ú
+*  å‡½æ•°åç§°ï¼švoid UART_PutStr(UART_t  uratn, char *str)
+*  åŠŸèƒ½è¯´æ˜ï¼šUARTå‘é€å­—ç¬¦ä¸²å‡½æ•°(é‡ NULL åœæ­¢å‘é€),ä½¿ç”¨å‰è¯·å…ˆåˆå§‹åŒ–å¯¹åº”ä¸²å£
+*  å‚æ•°è¯´æ˜ï¼šuratn ï¼š UART0 - UART3/ str   ï¼š è¦æ‰“å°çš„å­—ç¬¦ä¸²åœ°å€
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šUART_PutStr(UART3, "123456789"); //å‘é€9ä¸ªå­—èŠ‚
 *************************************************************************/
 void UART_PutStr(UART_t  uratn, char *str)
 {
@@ -299,15 +330,15 @@ void UART_PutStr(UART_t  uratn, char *str)
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid UART_PutBuff(UART_t  uratn, uint8_t *buff, uint32 len)
-*  ¹¦ÄÜËµÃ÷£ºUART·¢ËÍ×Ö½Úº¯Êı,Ê¹ÓÃÇ°ÇëÏÈ³õÊ¼»¯¶ÔÓ¦´®¿Ú
-*  ²ÎÊıËµÃ÷£º
-* @param    uratn £º UART0 - UART3
-* @param    buff  £º Òª´òÓ¡µÄ×Ö·û´®µØÖ·
-* @param    len   £º Òª´òÓ¡µÄ³¤¶È
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºUART_PutBuff(UART4, "123456789",5);//Êµ¼Ê·¢ËÍ5¸ö×Ö½Ú¡®1¡¯¡®2¡¯¡®3¡¯¡®4¡¯¡®5¡¯
+*  å‡½æ•°åç§°ï¼švoid UART_PutBuff(UART_t  uratn, uint8_t *buff, uint32 len)
+*  åŠŸèƒ½è¯´æ˜ï¼šUARTå‘é€å­—èŠ‚å‡½æ•°,ä½¿ç”¨å‰è¯·å…ˆåˆå§‹åŒ–å¯¹åº”ä¸²å£
+*  å‚æ•°è¯´æ˜ï¼š
+* @param    uratn ï¼š UART0 - UART3
+* @param    buff  ï¼š è¦æ‰“å°çš„å­—ç¬¦ä¸²åœ°å€
+* @param    len   ï¼š è¦æ‰“å°çš„é•¿åº¦
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šUART_PutBuff(UART4, "123456789",5);//å®é™…å‘é€5ä¸ªå­—èŠ‚â€˜1â€™â€˜2â€™â€˜3â€™â€˜4â€™â€˜5â€™
 *************************************************************************/
 void UART_PutBuff(UART_t  uratn, uint8_t *buff, uint32 len)
 {
@@ -319,12 +350,12 @@ void UART_PutBuff(UART_t  uratn, uint8_t *buff, uint32 len)
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºIfx_SizeT UART_GetCount(UART_t  uratn)
-*  ¹¦ÄÜËµÃ÷£º»ñÈ¡ ½ÓÊÕ»º³åÇø ´æ·Åµ±Ç°½ÓÊÕÊı¾İ¸öÊı
-*  ²ÎÊıËµÃ÷£º uratn £º UART0 - UART3
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼šIfx_SizeT UART_GetCount(UART_t  uratn)
+*  åŠŸèƒ½è¯´æ˜ï¼šè·å– æ¥æ”¶ç¼“å†²åŒº å­˜æ”¾å½“å‰æ¥æ”¶æ•°æ®ä¸ªæ•°
+*  å‚æ•°è¯´æ˜ï¼š uratn ï¼š UART0 - UART3
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 uint8 UART_GetCount(UART_t  uratn)
 {
@@ -332,31 +363,31 @@ uint8 UART_GetCount(UART_t  uratn)
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºchar UART_GetChar(UART_t  uratn)
-*  ¹¦ÄÜËµÃ÷£ºUART¶ÁÈ¡×Ö½Ú Ê¹ÓÃÇ°ÇëÏÈ³õÊ¼»¯¶ÔÓ¦´®¿Ú µ÷ÓÃÇ°ÇëÈ·ÈÏÓĞ½ÓÊÕµ½Êı¾İ ·ñÔò»áµÈ´ıÊı¾İµ½À´
-*  ²ÎÊıËµÃ÷£ºuratn £º UART0 - UART3
-*  º¯Êı·µ»Ø£º¶ÁÈ¡×Ö½Ú
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºUART_GetChar(UART3); //½ÓÊÕÒ»¸ö×Ö·û
+*  å‡½æ•°åç§°ï¼šchar UART_GetChar(UART_t  uratn)
+*  åŠŸèƒ½è¯´æ˜ï¼šUARTè¯»å–å­—èŠ‚ ä½¿ç”¨å‰è¯·å…ˆåˆå§‹åŒ–å¯¹åº”ä¸²å£ è°ƒç”¨å‰è¯·ç¡®è®¤æœ‰æ¥æ”¶åˆ°æ•°æ® å¦åˆ™ä¼šç­‰å¾…æ•°æ®åˆ°æ¥
+*  å‚æ•°è¯´æ˜ï¼šuratn ï¼š UART0 - UART3
+*  å‡½æ•°è¿”å›ï¼šè¯»å–å­—èŠ‚
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šUART_GetChar(UART3); //æ¥æ”¶ä¸€ä¸ªå­—ç¬¦
 *************************************************************************/
 char UART_GetChar(UART_t  uratn)
 {
 	uint8 data=0;
 	Ifx_SizeT count = 1;
 
-	/* »ñÈ¡½ÓÊÕµ½µÄÒ»¸ö×Ö½ÚÊı¾İ ×¢ÒâÈç¹ûÃ»ÓĞ½ÓÊÕµ½£¬»áÒ»Ö±µÈ´ı */
+	/* è·å–æ¥æ”¶åˆ°çš„ä¸€ä¸ªå­—èŠ‚æ•°æ® æ³¨æ„å¦‚æœæ²¡æœ‰æ¥æ”¶åˆ°ï¼Œä¼šä¸€ç›´ç­‰å¾… */
 	IfxAsclin_Asc_read(&g_UartConfig[uratn], &data, &count, TIME_INFINITE);
 
 	return 	data;
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºchar UART_GetBuff(UART_t  uratn, uint8_t *data, uint8_t len)
-*  ¹¦ÄÜËµÃ÷£º½ÓÊÕÒ»¶¨³¤¶È×Ö·û Ê¹ÓÃÇ°ÇëÏÈ³õÊ¼»¯¶ÔÓ¦´®¿Ú µ÷ÓÃÇ°ÇëÈ·ÈÏÓĞ½ÓÊÕµ½Êı¾İ ·ñÔò»á½ÓÊÜÊ§°Ü
-*  ²ÎÊıËµÃ÷£ºuratn £º UART0 - UART3
-*  º¯Êı·µ»Ø£º0:¶ÁÈ¡Õı³£  ÆäËû ¶ÁÈ¡Ê§°Ü
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºART_GetChar(UART0, data, 10); //½ÓÊÕ10¸ö×Ö·û
+*  å‡½æ•°åç§°ï¼šchar UART_GetBuff(UART_t  uratn, uint8_t *data, uint8_t len)
+*  åŠŸèƒ½è¯´æ˜ï¼šæ¥æ”¶ä¸€å®šé•¿åº¦å­—ç¬¦ ä½¿ç”¨å‰è¯·å…ˆåˆå§‹åŒ–å¯¹åº”ä¸²å£ è°ƒç”¨å‰è¯·ç¡®è®¤æœ‰æ¥æ”¶åˆ°æ•°æ® å¦åˆ™ä¼šæ¥å—å¤±è´¥
+*  å‚æ•°è¯´æ˜ï¼šuratn ï¼š UART0 - UART3
+*  å‡½æ•°è¿”å›ï¼š0:è¯»å–æ­£å¸¸  å…¶ä»– è¯»å–å¤±è´¥
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šART_GetChar(UART0, data, 10); //æ¥æ”¶10ä¸ªå­—ç¬¦
 *************************************************************************/
 char UART_GetBuff(UART_t  uratn, uint8_t *data, uint8_t len)
 {
@@ -364,10 +395,10 @@ char UART_GetBuff(UART_t  uratn, uint8_t *data, uint8_t len)
 
 	if(UART_GetCount(uratn) < len)
 	{
-		return 1;  //ÅĞ¶Ïµ±Ç°½ÓÊÕµ½µÄÊı¾İÊıÁ¿ ²»¹»¶ÁÈ¡³¤¶È
+		return 1;  //åˆ¤æ–­å½“å‰æ¥æ”¶åˆ°çš„æ•°æ®æ•°é‡ ä¸å¤Ÿè¯»å–é•¿åº¦
 	}
 
-	/* »ñÈ¡½ÓÊÕµ½Êı¾İ  */
+	/* è·å–æ¥æ”¶åˆ°æ•°æ®  */
 	IfxAsclin_Asc_read(&g_UartConfig[uratn], data, &count, TIME_INFINITE);
 	return 	0;
 }
