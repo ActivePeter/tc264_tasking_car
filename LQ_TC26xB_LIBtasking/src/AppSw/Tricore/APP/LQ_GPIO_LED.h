@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËÐÄ°å
-¡¾±à    Ð´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.1 °æÈ¨ËùÓÐ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üÐÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æŽˆæƒ
+ã€æœ€åŽæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -19,31 +19,31 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define __LQ_LED_H_
 
 
-//¶¨ÒåÄ£¿éºÅ
+//å®šä¹‰æ¨¡å—å·
 typedef enum
 {
-    LED0=0,  //ºËÐÄ°åÉÏLED0
-    LED1=1,  //ºËÐÄ°åÉÏLED1
-    LED2=2,  //Ä¸°åÉÏLED0
-	LED3=3,   //Ä¸°åÉÏLED1
+    LED0=0,  //æ ¸å¿ƒæ¿ä¸ŠLED0
+    LED1=1,  //æ ¸å¿ƒæ¿ä¸ŠLED1
+    LED2=2,  //æ¯æ¿ä¸ŠLED0
+	LED3=3,   //æ¯æ¿ä¸ŠLED1
 	LEDALL=4
 } LEDn_e;
 
 typedef enum
 {
-    ON=0,  //ÁÁ
-    OFF=1, //Ãð
-    RVS=2, //·´×ª
+    ON=0,  //äº®
+    OFF=1, //ç­
+    RVS=2, //åè½¬
 }LEDs_e;
 
-//¶¨ÒåµÄ¹Ü½ÅÒª¶ÔÓ¦Êµ¼Ê°´¼ü
-#define LED0p      P10_6   //ºËÐÄ°åÉÏLED0 ´äÂÌ
-#define LED1p      P10_5   //ºËÐÄ°åÉÏLED1 À¶µÆ
-#define LED2p      P20_6   //Ä¸°åÉÏLED0
-#define LED3p      P20_7   //Ä¸°åÉÏLED1
+//å®šä¹‰çš„ç®¡è„šè¦å¯¹åº”å®žé™…æŒ‰é”®
+#define LED0p      P10_6   //æ ¸å¿ƒæ¿ä¸ŠLED0 ç¿ ç»¿
+#define LED1p      P10_5   //æ ¸å¿ƒæ¿ä¸ŠLED1 è“ç¯
+#define LED2p      P20_6   //æ¯æ¿ä¸ŠLED0
+#define LED3p      P20_7   //æ¯æ¿ä¸ŠLED1
 
-/*********************** UART¹¦ÄÜº¯Êý **************************/
-//³õÊ¼»¯
+/*********************** UARTåŠŸèƒ½å‡½æ•° **************************/
+//åˆå§‹åŒ–
 void GPIO_LED_Init(void);
 void LED_Ctrl(LEDn_e LEDno, LEDs_e sta);
 void Test_GPIO_LED(void);

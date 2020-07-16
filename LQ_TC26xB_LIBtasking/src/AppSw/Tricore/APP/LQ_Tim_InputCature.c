@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËÐÄ°å
-¡¾±à    Ð´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.1 °æÈ¨ËùÓÐ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üÐÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æŽˆæƒ
+ã€æœ€åŽæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -25,28 +25,28 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid Test_GTM_ATOM_PWM(void)
-*  ¹¦ÄÜËµÃ÷£ºGTM²âÊÔº¯Êý
-*  ²ÎÊýËµÃ÷£ºÎÞ
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ22ÈÕ
-*  ±¸    ×¢£ºP20.7×÷ÎªPWMÊä³ö¿Ú£¬P33.12×÷ÎªTIMÊäÈë¿Ú£¬Á½Õß¶Ì½Óºó£¬´®¿ÚP14.0·¢ËÍµ½ÉÏÎ»»ú
-*  Ä¬ÈÏÆµÂÊÊÇ125HZ£¬Õ¼¿Õ±È50%
+*  å‡½æ•°åç§°ï¼švoid Test_GTM_ATOM_PWM(void)
+*  åŠŸèƒ½è¯´æ˜Žï¼šGTMæµ‹è¯•å‡½æ•°
+*  å‚æ•°è¯´æ˜Žï¼šæ— 
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ22æ—¥
+*  å¤‡    æ³¨ï¼šP20.7ä½œä¸ºPWMè¾“å‡ºå£ï¼ŒP33.12ä½œä¸ºTIMè¾“å…¥å£ï¼Œä¸¤è€…çŸ­æŽ¥åŽï¼Œä¸²å£P14.0å‘é€åˆ°ä¸Šä½æœº
+*  é»˜è®¤é¢‘çŽ‡æ˜¯125HZï¼Œå ç©ºæ¯”50%
 *************************************************************************/
 void LQ_TIM_InputCature(void)
 {
 	char txt[16];
 	float measuredPwmFreq_Hz, measuredPwmDutyCycle;
 	TIM_InitConfig(IfxGtm_TIM0_0_TIN34_P33_12_IN);//P20_7_OUT  P33_12_IN
-	TOM_PWM_InitConfig(IfxGtm_TOM0_11_TOUT63_P20_7_OUT, 5000, 125);//³õÊ¼»¯P20_7 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ125Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
+	TOM_PWM_InitConfig(IfxGtm_TOM0_11_TOUT63_P20_7_OUT, 5000, 125);//åˆå§‹åŒ–P20_7 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘çŽ‡125Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
 	while(1)
 	{
 		TIM_GetPwm(IfxGtm_TIM0_0_TIN34_P33_12_IN, &measuredPwmFreq_Hz, &measuredPwmDutyCycle);
 		sprintf(txt,"\nHz:%05f;dty:%f  ", measuredPwmFreq_Hz, measuredPwmDutyCycle);
 
-		//´®¿Ú·¢ËÍµ½ÉÏÎ»»ú
-		UART_PutStr(UART0,txt);//Êý¾ÝÊä³öµ½ÉÏÎ»»ú£¬Èç£ºHz:00124;dty:00050£¬Èç¹ûÊäÈëÐü¿ÕÔòÎªËæ»úÊý
-    	LED_Ctrl(LED0,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
-		delayms(500);              //ÑÓÊ±µÈ´ý
+		//ä¸²å£å‘é€åˆ°ä¸Šä½æœº
+		UART_PutStr(UART0,txt);//æ•°æ®è¾“å‡ºåˆ°ä¸Šä½æœºï¼Œå¦‚ï¼šHz:00124;dty:00050ï¼Œå¦‚æžœè¾“å…¥æ‚¬ç©ºåˆ™ä¸ºéšæœºæ•°
+    	LED_Ctrl(LED0,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
+		delayms(500);              //å»¶æ—¶ç­‰å¾…
 	}
 }

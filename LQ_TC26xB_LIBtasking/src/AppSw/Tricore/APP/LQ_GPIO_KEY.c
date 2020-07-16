@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -24,16 +24,16 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid GPIO_KEY_Init(void)
-*  ¹¦ÄÜËµÃ÷£ºGPIO³õÊ¼»¯º¯Êı
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼švoid GPIO_KEY_Init(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šGPIOåˆå§‹åŒ–å‡½æ•°
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 void GPIO_KEY_Init(void)
 {
-	  // ³õÊ¼»¯,ÊäÈë¿Ú£¬¸ßµçÆ½
+	  // åˆå§‹åŒ–,è¾“å…¥å£ï¼Œé«˜ç”µå¹³
 	  PIN_InitConfig(KEY0p, PIN_MODE_INPUT, 1);
 	  PIN_InitConfig(KEY1p, PIN_MODE_INPUT, 1);
 	  PIN_InitConfig(KEY2p, PIN_MODE_INPUT, 1);
@@ -41,77 +41,77 @@ void GPIO_KEY_Init(void)
 	  PIN_InitConfig(DSW1p, PIN_MODE_INPUT, 1);
 }
 
-#pragma warning 544         // ÆÁ±Î¾¯¸æ
+#pragma warning 544         // å±è”½è­¦å‘Š
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºunsigned char KEY_Read(KEYn_e KEYno)
-*  ¹¦ÄÜËµÃ÷£º¶ÁÈ¡°´¼ü×´Ì¬
-*  ²ÎÊıËµÃ÷£ºKEYn_e KEYno°´¼ü±àºÅ
-*  º¯Êı·µ»Ø£º°´¼ü×´Ì¬£¬0/1
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼šunsigned char KEY_Read(KEYn_e KEYno)
+*  åŠŸèƒ½è¯´æ˜ï¼šè¯»å–æŒ‰é”®çŠ¶æ€
+*  å‚æ•°è¯´æ˜ï¼šKEYn_e KEYnoæŒ‰é”®ç¼–å·
+*  å‡½æ•°è¿”å›ï¼šæŒ‰é”®çŠ¶æ€ï¼Œ0/1
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 unsigned char KEY_Read(KEYn_e KEYno)
 {
     switch(KEYno)
     {
       case KEY0:
-        return PIN_Read(KEY0p);//Ä¸°åÉÏ°´¼ü0
+        return PIN_Read(KEY0p);//æ¯æ¿ä¸ŠæŒ‰é”®0
       break;
 
       case KEY1:
-        return PIN_Read(KEY1p);//Ä¸°åÉÏ°´¼ü1
+        return PIN_Read(KEY1p);//æ¯æ¿ä¸ŠæŒ‰é”®1
       break;
 
       case KEY2:
-        return PIN_Read(KEY2p);//Ä¸°åÉÏ°´¼ü2
+        return PIN_Read(KEY2p);//æ¯æ¿ä¸ŠæŒ‰é”®2
       break;
 
       case DSW0:
-        return PIN_Read(DSW0p);//Ä¸°åÉÏ²¦Âë¿ª¹Ø0
+        return PIN_Read(DSW0p);//æ¯æ¿ä¸Šæ‹¨ç å¼€å…³0
       break;
 
       case DSW1:
-        return PIN_Read(DSW1p);//Ä¸°åÉÏ²¦Âë¿ª¹Ø1
+        return PIN_Read(DSW1p);//æ¯æ¿ä¸Šæ‹¨ç å¼€å…³1
       break;
       default:
         return 0XFF;
     }
     return 0;
 }
-#pragma warning default     // ´ò¿ª¾¯¸æ
+#pragma warning default     // æ‰“å¼€è­¦å‘Š
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºunsigned char KEY_Read_All(void)
-*  ¹¦ÄÜËµÃ÷£º¶ÁÈ¡È«²¿°´¼ü×´Ì¬
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£º°´¼ü×éºÏ×´Ì¬£¬0--7°ËÖÖ×´Ì¬
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º¶ÁÈ¡Èı¸ö°´¼ü×´Ì¬£¬·½±ã×éºÏ¼üÊ¹ÓÃ
+*  å‡½æ•°åç§°ï¼šunsigned char KEY_Read_All(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šè¯»å–å…¨éƒ¨æŒ‰é”®çŠ¶æ€
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæŒ‰é”®ç»„åˆçŠ¶æ€ï¼Œ0--7å…«ç§çŠ¶æ€
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šè¯»å–ä¸‰ä¸ªæŒ‰é”®çŠ¶æ€ï¼Œæ–¹ä¾¿ç»„åˆé”®ä½¿ç”¨
 *************************************************************************/
 unsigned char KEY_Read_All(void)
 {
    unsigned char tm=0;
 
-   tm = (PIN_Read(KEY0p)|(PIN_Read(KEY1p)<<1)|(PIN_Read(KEY2p)<<2));//¶ÁÈ¡¸÷¸ö°´¼ü×´Ì¬²¢±àÂë
+   tm = (PIN_Read(KEY0p)|(PIN_Read(KEY1p)<<1)|(PIN_Read(KEY2p)<<2));//è¯»å–å„ä¸ªæŒ‰é”®çŠ¶æ€å¹¶ç¼–ç 
    if(tm==0x07)
 	{
 	   return 0;
 	}
-   //while(tm == (PIN_Read(KEY0p)|(PIN_Read(KEY1p)<<1)|(PIN_Read(KEY2p)<<2)));//µÈ´ı°´¼üÊÍ·Å
+   //while(tm == (PIN_Read(KEY0p)|(PIN_Read(KEY1p)<<1)|(PIN_Read(KEY2p)<<2)));//ç­‰å¾…æŒ‰é”®é‡Šæ”¾
 
    return  (~tm)&0X07;
 }
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid Test_GPIO_KEY(void)
-*  ¹¦ÄÜËµÃ÷£º²âÊÔ³ÌĞò
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º°´ÏÂKEY0/1/2ÈÎÒâ¼ü LEDÈ«ÁÁ
+*  å‡½æ•°åç§°ï¼švoid Test_GPIO_KEY(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šæµ‹è¯•ç¨‹åº
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šæŒ‰ä¸‹KEY0/1/2ä»»æ„é”® LEDå…¨äº®
 *************************************************************************/
 void Test_GPIO_KEY(void)
  {
@@ -122,35 +122,35 @@ void Test_GPIO_KEY(void)
  	{
  		k= KEY_Read(KEY0)& KEY_Read(KEY1)& KEY_Read(KEY2);
 
- 		if(k==0) LED_Ctrl(LEDALL, ON); //°´ÏÂKEY0/1/2ÈÎÒâ¼ü LEDÈ«ÁÁ
- 		else     LED_Ctrl(LEDALL, OFF);//ËÉ¿ªKEY0/1/2ÈÎÒâ¼ü LEDÈ«Ãğ
+ 		if(k==0) LED_Ctrl(LEDALL, ON); //æŒ‰ä¸‹KEY0/1/2ä»»æ„é”® LEDå…¨äº®
+ 		else     LED_Ctrl(LEDALL, OFF);//æ¾å¼€KEY0/1/2ä»»æ„é”® LEDå…¨ç­
 
- 		delayms(100);                //ÑÓÊ±µÈ´ı
+ 		delayms(100);                //å»¶æ—¶ç­‰å¾…
  	}
  }
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid Test_ComKEY_Tft(void)
-*  ¹¦ÄÜËµÃ÷£º²âÊÔ×éºÏ°´¼ü²¢ÔÚ²ÊÆÁÏÔÊ¾
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º°´¼ü×´Ì¬²ÊÆÁÏÔÊ¾
+*  å‡½æ•°åç§°ï¼švoid Test_ComKEY_Tft(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šæµ‹è¯•ç»„åˆæŒ‰é”®å¹¶åœ¨å½©å±æ˜¾ç¤º
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šæŒ‰é”®çŠ¶æ€å½©å±æ˜¾ç¤º
 *************************************************************************/
 void Test_ComKEY_Tft(void)
  {
 	unsigned char k=0xFF;
 
-	TFTSPI_Init(0);        //LCD³õÊ¼»¯  0:ºáÆÁ  1£ºÊúÆÁ
-	TFTSPI_CLS(u16BLUE);   //À¶É«ÆÁÄ»
-	TFTSPI_Show_Logo(0,37);//ÏÔÊ¾ÁúÇñLOGO
-	TFTSPI_P16x16Str(0,0,"±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼",u16RED,u16BLUE);		//×Ö·û´®ÏÔÊ¾
-	TFTSPI_P8X16Str(0,1,"Long Qiu i.s.t.",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
-	delayms(1000);              //ÑÓÊ±µÈ´ı
-	TFTSPI_Init(1);        //LCD³õÊ¼»¯  0:ºáÆÁ  1£ºÊúÆÁ
-	TFTSPI_CLS(u16BLACK);   //ºÚÉ«ÆÁÄ»
-	TFTSPI_P8X16Str(0,1,"KEY Pressed:  ",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+	TFTSPI_Init(0);        //LCDåˆå§‹åŒ–  0:æ¨ªå±  1ï¼šç«–å±
+	TFTSPI_CLS(u16BLUE);   //è“è‰²å±å¹•
+	TFTSPI_Show_Logo(0,37);//æ˜¾ç¤ºé¾™é‚±LOGO
+	TFTSPI_P16x16Str(0,0,"åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€",u16RED,u16BLUE);		//å­—ç¬¦ä¸²æ˜¾ç¤º
+	TFTSPI_P8X16Str(0,1,"Long Qiu i.s.t.",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
+	delayms(1000);              //å»¶æ—¶ç­‰å¾…
+	TFTSPI_Init(1);        //LCDåˆå§‹åŒ–  0:æ¨ªå±  1ï¼šç«–å±
+	TFTSPI_CLS(u16BLACK);   //é»‘è‰²å±å¹•
+	TFTSPI_P8X16Str(0,1,"KEY Pressed:  ",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
 
 	GPIO_KEY_Init();
  	while(1)
@@ -160,34 +160,34 @@ void Test_ComKEY_Tft(void)
  		switch(k)
  		{
  		  case NOKEYDOWN:
- 			 //TFTSPI_P8X16Str(35,3,"NO key!  ",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+ 			 //TFTSPI_P8X16Str(35,3,"NO key!  ",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
  		  break;
  		  case KEY0DOWN:
- 		 	 TFTSPI_P8X16Str(35,3,"KEY0!    ",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+ 		 	 TFTSPI_P8X16Str(35,3,"KEY0!    ",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
  		  break;
  		  case KEY1DOWN:
- 		 	 TFTSPI_P8X16Str(35,3,"KEY1!    ",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+ 		 	 TFTSPI_P8X16Str(35,3,"KEY1!    ",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
  		  break;
  		  case KEY2DOWN:
- 		 	 TFTSPI_P8X16Str(35,3,"KEY2!    ",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+ 		 	 TFTSPI_P8X16Str(35,3,"KEY2!    ",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
  		  break;
  		  case KEY01DOWN:
- 			 TFTSPI_P8X16Str(35,3,"KEY0&1!  ",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+ 			 TFTSPI_P8X16Str(35,3,"KEY0&1!  ",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
  		  break;
  		  case KEY02DOWN:
- 		 	 TFTSPI_P8X16Str(35,3,"KEY0&2!  ",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+ 		 	 TFTSPI_P8X16Str(35,3,"KEY0&2!  ",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
  		  break;
  		  case KEY12DOWN:
- 		 	 TFTSPI_P8X16Str(35,3,"KEY1&2!  ",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+ 		 	 TFTSPI_P8X16Str(35,3,"KEY1&2!  ",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
  		  break;
  		  case KEY012DOWN:
- 		 	 TFTSPI_P8X16Str(35,3,"KEY0&1&2!",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+ 		 	 TFTSPI_P8X16Str(35,3,"KEY0&1&2!",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
  		  break;
  		  default:
  		  break;
  		 }
- 		LED_Ctrl(LED0,RVS);        //ËÄ¸öLEDÍ¬Ê±ÉÁË¸
- 		delayms(100);              //ÑÓÊ±µÈ´ı
+ 		LED_Ctrl(LED0,RVS);        //å››ä¸ªLEDåŒæ—¶é—ªçƒ
+ 		delayms(100);              //å»¶æ—¶ç­‰å¾…
  	}
  }
 

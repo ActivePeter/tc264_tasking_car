@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËÐÄ°å
-¡¾±à    Ð´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.1 °æÈ¨ËùÓÐ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üÐÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æŽˆæƒ
+ã€æœ€åŽæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
@@ -24,25 +24,25 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <IfxGpt12_reg.h>
 #include <Platform_Types.h>
 /**
-* @brief ENC Âö³å¹Ü½Å
+* @brief ENC è„‰å†²ç®¡è„š
 */
 typedef enum
 {
-  ENC2_InPut_P00_7 = 0x0200, ENC2_InPut_P33_7 = 0x0201,//00.7ÉãÏñÍ·ÏñËØÕ¼ÓÃ
-  ENC3_InPut_P02_6 = 0x0300,                           //02.6ÉãÏñÍ·Êý¾Ý¿ÚÕ¼ÓÃ
+  ENC2_InPut_P00_7 = 0x0200, ENC2_InPut_P33_7 = 0x0201,//00.7æ‘„åƒå¤´åƒç´ å ç”¨
+  ENC3_InPut_P02_6 = 0x0300,                           //02.6æ‘„åƒå¤´æ•°æ®å£å ç”¨
   ENC4_InPut_P02_8 = 0x0400,                           //
   ENC5_InPut_P10_3 = 0x0501,                           //
   ENC6_InPut_P20_3 = 0x0600, ENC6_InPut_P10_2 = 0x0601 //
 }ENC_InputPin_t;
 
 /**
-* @brief ENC ·½Ïò¹Ü½Å
+* @brief ENC æ–¹å‘ç®¡è„š
 */
 typedef enum
 {
-  ENC2_Dir_P00_8 = 0x0200, ENC2_Dir_P33_6 = 0x0201,   //00.8ÉãÏñÍ·Õ¼ÓÃ
-  ENC3_Dir_P02_7 = 0x0300,                            //02.7ÉãÏñÍ·Êý¾Ý¿ÚÕ¼ÓÃ
-  ENC4_Dir_P00_9 = 0x0400, ENC4_Dir_P33_5 = 0x0401,   //00.9ÉãÏñÍ·Õ¼ÓÃ
+  ENC2_Dir_P00_8 = 0x0200, ENC2_Dir_P33_6 = 0x0201,   //00.8æ‘„åƒå¤´å ç”¨
+  ENC3_Dir_P02_7 = 0x0300,                            //02.7æ‘„åƒå¤´æ•°æ®å£å ç”¨
+  ENC4_Dir_P00_9 = 0x0400, ENC4_Dir_P33_5 = 0x0401,   //00.9æ‘„åƒå¤´å ç”¨
   ENC5_Dir_P10_1 = 0x0501,
   ENC6_Dir_P20_0 = 0x0600
 }ENC_DirPin_t;

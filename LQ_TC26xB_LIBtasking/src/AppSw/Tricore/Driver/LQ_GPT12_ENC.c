@@ -1,30 +1,30 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËÐÄ°å
-¡¾±à    Ð´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.1 °æÈ¨ËùÓÐ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üÐÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æŽˆæƒ
+ã€æœ€åŽæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 
-Í¨ÓÃ¶¨Ê±Æ÷µ¥ÔªGPT1 ºÍGPT2 Ä£¿é¾ßÓÐ·Ç³£Áé»îµÄ¶à¹¦ÄÜ¶¨Ê±Æ÷½á¹¹£¬¿ÉÓÃ×÷¶¨
-Ê±¡¢ÊÂ¼þ¼ÆÊý¡¢Âö¿í²âÁ¿¡¢Âö³åÉú³É¡¢±¶Æµ¼°ÆäËüÓÃÍ¾¡£
-ËüÃÇ°üÀ¨5 ¸ö16 Î»¶¨Ê±Æ÷£¬·Öµ½Á½¸ö¶¨Ê±Æ÷GPT1 ºÍGPT2 Ä£¿éÖÐ¡£Ã¿¸öÄ£¿éÖÐµÄ¸÷
-¸ö¶¨Ê±Æ÷¿ÉÔÚÐí¶à²»Í¬µÄÄ£Ê½ÖÐ¶ÀÁ¢ÔËÐÐ£¬ÈçÃÅ¿Ø¶¨Ê±Æ÷Ä£Ê½¡¢¼ÆÊýÄ£Ê½¡¢»òÕßºÍÍ¬Ä£¿é
-ÖÐÆäËü¶¨Ê±Æ÷¼¶Áª¹¤×÷¡£Ã¿¸öÄ£¿é¾ßÓÐÊäÈë/Êä³ö¹¦ÄÜºÍÓëÆäÏà¹ØµÄ×¨ÓÃÖÐ¶Ï¡£
+é€šç”¨å®šæ—¶å™¨å•å…ƒGPT1 å’ŒGPT2 æ¨¡å—å…·æœ‰éžå¸¸çµæ´»çš„å¤šåŠŸèƒ½å®šæ—¶å™¨ç»“æž„ï¼Œå¯ç”¨ä½œå®š
+æ—¶ã€äº‹ä»¶è®¡æ•°ã€è„‰å®½æµ‹é‡ã€è„‰å†²ç”Ÿæˆã€å€é¢‘åŠå…¶å®ƒç”¨é€”ã€‚
+å®ƒä»¬åŒ…æ‹¬5 ä¸ª16 ä½å®šæ—¶å™¨ï¼Œåˆ†åˆ°ä¸¤ä¸ªå®šæ—¶å™¨GPT1 å’ŒGPT2 æ¨¡å—ä¸­ã€‚æ¯ä¸ªæ¨¡å—ä¸­çš„å„
+ä¸ªå®šæ—¶å™¨å¯åœ¨è®¸å¤šä¸åŒçš„æ¨¡å¼ä¸­ç‹¬ç«‹è¿è¡Œï¼Œå¦‚é—¨æŽ§å®šæ—¶å™¨æ¨¡å¼ã€è®¡æ•°æ¨¡å¼ã€æˆ–è€…å’ŒåŒæ¨¡å—
+ä¸­å…¶å®ƒå®šæ—¶å™¨çº§è”å·¥ä½œã€‚æ¯ä¸ªæ¨¡å—å…·æœ‰è¾“å…¥/è¾“å‡ºåŠŸèƒ½å’Œä¸Žå…¶ç›¸å…³çš„ä¸“ç”¨ä¸­æ–­ã€‚
 
-GPT1 Ä£¿éÓÐÈý¸ö¶¨Ê±Æ÷/¼ÆÊýÆ÷£ºÄÚºË¶¨Ê±Æ÷T3 ºÍÁ½¸ö¸¨Öú¶¨Ê±Æ÷T2¡¢T4¡£×î´óµÄ·Ö±æ
-ÂÊÎªfGPT/4¡£GPT1 Ä£¿éµÄ¸¨Öú¶¨Ê±Æ÷¿ÉÎªÄÚºË¶¨Ê±Æ÷ÓÐÑ¡ÔñµÄÅäÖÃ³ÉÖØÔØ»ò²¶×½¼Ä´æÆ÷¡£
-GPT2 Ä£¿éÓÐÁ½¸ö¶¨Ê±Æ÷/¼ÆÊýÆ÷£ºÄÚºË¶¨Ê±Æ÷T6 ºÍ¸¨Öú¶¨Ê±Æ÷T5¡£×î´óµÄ·Ö±æÂÊÎªfGPT/2¡£
+GPT1 æ¨¡å—æœ‰ä¸‰ä¸ªå®šæ—¶å™¨/è®¡æ•°å™¨ï¼šå†…æ ¸å®šæ—¶å™¨T3 å’Œä¸¤ä¸ªè¾…åŠ©å®šæ—¶å™¨T2ã€T4ã€‚æœ€å¤§çš„åˆ†è¾¨
+çŽ‡ä¸ºfGPT/4ã€‚GPT1 æ¨¡å—çš„è¾…åŠ©å®šæ—¶å™¨å¯ä¸ºå†…æ ¸å®šæ—¶å™¨æœ‰é€‰æ‹©çš„é…ç½®æˆé‡è½½æˆ–æ•æ‰å¯„å­˜å™¨ã€‚
+GPT2 æ¨¡å—æœ‰ä¸¤ä¸ªå®šæ—¶å™¨/è®¡æ•°å™¨ï¼šå†…æ ¸å®šæ—¶å™¨T6 å’Œè¾…åŠ©å®šæ—¶å™¨T5ã€‚æœ€å¤§çš„åˆ†è¾¨çŽ‡ä¸ºfGPT/2ã€‚
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
@@ -34,97 +34,97 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid ENC_InitConfig(ENC_InputPin_t InputPin, ENC_DirPin_t DirPin)
-*  ¹¦ÄÜËµÃ÷£ºENC ³õÊ¼»¯
-*  ²ÎÊýËµÃ÷£º
-*  InputPin  £º ENCÂö³åÊäÈë¹Ü½Å  LQ_GPT12_ENC.h ÖÐÃ¶¾ÙÌå
-*  DirPin    £º ENC·½Ïò¹Ü½Å      LQ_GPT12_ENC.h ÖÐÃ¶¾ÙÌå
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºENC_InitConfig(ENC2_InPut_P33_7, ENC2_Dir_P33_6); //³õÊ¼»¯ENC2 P33_7×÷ÎªÂö³å¼ÆÊý¹Ü½Å  P33_6×÷Îª·½Ïò¹Ü½Å
+*  å‡½æ•°åç§°ï¼švoid ENC_InitConfig(ENC_InputPin_t InputPin, ENC_DirPin_t DirPin)
+*  åŠŸèƒ½è¯´æ˜Žï¼šENC åˆå§‹åŒ–
+*  å‚æ•°è¯´æ˜Žï¼š
+*  InputPin  ï¼š ENCè„‰å†²è¾“å…¥ç®¡è„š  LQ_GPT12_ENC.h ä¸­æžšä¸¾ä½“
+*  DirPin    ï¼š ENCæ–¹å‘ç®¡è„š      LQ_GPT12_ENC.h ä¸­æžšä¸¾ä½“
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šENC_InitConfig(ENC2_InPut_P33_7, ENC2_Dir_P33_6); //åˆå§‹åŒ–ENC2 P33_7ä½œä¸ºè„‰å†²è®¡æ•°ç®¡è„š  P33_6ä½œä¸ºæ–¹å‘ç®¡è„š
 *************************************************************************/
 void ENC_InitConfig(ENC_InputPin_t InputPin, ENC_DirPin_t DirPin)
 {
-  //³õÊ¼»¯È«¾ÖÊ±ÖÓ
+  //åˆå§‹åŒ–å…¨å±€æ—¶é’Ÿ
   IfxGpt12_enableModule(&MODULE_GPT120);
   if(ENC_GetTimer(InputPin) != ENC_GetTimer(DirPin))
   {
-#pragma warning 557         // ÆÁ±Î¾¯¸æ
-    while(1); //Çë¼ì²é ENCÂö³åÊäÈë¹Ü½ÅºÍ·½Ïò¹Ü½ÅÊÇ·ñÎªÍ¬Ò»¸ö ENC
-#pragma warning default     // ´ò¿ª¾¯¸æ
+#pragma warning 557         // å±è”½è­¦å‘Š
+    while(1); //è¯·æ£€æŸ¥ ENCè„‰å†²è¾“å…¥ç®¡è„šå’Œæ–¹å‘ç®¡è„šæ˜¯å¦ä¸ºåŒä¸€ä¸ª ENC
+#pragma warning default     // æ‰“å¼€è­¦å‘Š
   }
   switch(ENC_GetTimer(InputPin))
   {
   case 2:
-    //ÉèÖÃT2 ¼ÆÊýÄ£Ê½
+    //è®¾ç½®T2 è®¡æ•°æ¨¡å¼
     IfxGpt12_T2_setMode(&MODULE_GPT120, IfxGpt12_Mode_counter);
-    //ÉèÖÃT2 ¼ÆÊýÄ£Ê½   TxIn ÉÏÉýÑØ¼ÆÊý
+    //è®¾ç½®T2 è®¡æ•°æ¨¡å¼   TxIn ä¸Šå‡æ²¿è®¡æ•°
     IfxGpt12_T2_setIncrementalInterfaceInputMode(&MODULE_GPT120, IfxGpt12_IncrementalInterfaceInputMode_bothEdgesTxIN);
     IfxGpt12_T2_setCounterInputMode(&MODULE_GPT120, IfxGpt12_CounterInputMode_risingEdgeTxIN);
-    //ÉèÖÃT2 ¸¨Öú¹Ü½Å A
+    //è®¾ç½®T2 è¾…åŠ©ç®¡è„š A
     IfxGpt12_T2_setEudInput(&MODULE_GPT120, (IfxGpt12_EudInput)(DirPin & 0x0f));
     IfxGpt12_T2_setInput(&MODULE_GPT120, (IfxGpt12_Input)(InputPin & 0x0f));
-    //¼ÆÊý·½Ïò  Ê¹ÓÃÍâ²¿¹Ü½Å¿ØÖÆ
+    //è®¡æ•°æ–¹å‘  ä½¿ç”¨å¤–éƒ¨ç®¡è„šæŽ§åˆ¶
     IfxGpt12_T2_setDirectionSource(&MODULE_GPT120, IfxGpt12_TimerDirectionSource_external);
-    //ÉèÖÃÏòÉÏ¼ÆÊý
+    //è®¾ç½®å‘ä¸Šè®¡æ•°
     IfxGpt12_T2_setTimerDirection(&MODULE_GPT120,IfxGpt12_TimerDirection_up);
     IfxGpt12_T2_run(&MODULE_GPT120, IfxGpt12_TimerRun_start);
     break;
   case 3:
-    //ÉèÖÃT3 ¼ÆÊýÄ£Ê½
+    //è®¾ç½®T3 è®¡æ•°æ¨¡å¼
     IfxGpt12_T3_setMode(&MODULE_GPT120, IfxGpt12_Mode_counter);
-    //ÉèÖÃT2 ¼ÆÊýÄ£Ê½   TxIn ÉÏÉýÑØ¼ÆÊý
+    //è®¾ç½®T2 è®¡æ•°æ¨¡å¼   TxIn ä¸Šå‡æ²¿è®¡æ•°
     IfxGpt12_T3_setIncrementalInterfaceInputMode(&MODULE_GPT120, IfxGpt12_IncrementalInterfaceInputMode_bothEdgesTxIN);
     IfxGpt12_T3_setCounterInputMode(&MODULE_GPT120, IfxGpt12_CounterInputMode_risingEdgeTxIN);
-    //ÉèÖÃT2 ¸¨Öú¹Ü½Å A
+    //è®¾ç½®T2 è¾…åŠ©ç®¡è„š A
     IfxGpt12_T3_setEudInput(&MODULE_GPT120, (IfxGpt12_EudInput)(DirPin & 0x0f));
     IfxGpt12_T3_setInput(&MODULE_GPT120, (IfxGpt12_Input)(InputPin & 0x0f));
-    //¼ÆÊý·½Ïò  Ê¹ÓÃÍâ²¿¹Ü½Å¿ØÖÆ
+    //è®¡æ•°æ–¹å‘  ä½¿ç”¨å¤–éƒ¨ç®¡è„šæŽ§åˆ¶
     IfxGpt12_T3_setDirectionSource(&MODULE_GPT120, IfxGpt12_TimerDirectionSource_external);
-    //ÉèÖÃÏòÉÏ¼ÆÊý
+    //è®¾ç½®å‘ä¸Šè®¡æ•°
     IfxGpt12_T3_setTimerDirection(&MODULE_GPT120,IfxGpt12_TimerDirection_up);
     IfxGpt12_T3_run(&MODULE_GPT120, IfxGpt12_TimerRun_start);
     break;
   case 4:
-    //ÉèÖÃT4 ¼ÆÊýÄ£Ê½
+    //è®¾ç½®T4 è®¡æ•°æ¨¡å¼
     IfxGpt12_T4_setMode(&MODULE_GPT120, IfxGpt12_Mode_counter);
-    //ÉèÖÃT4 ¼ÆÊýÄ£Ê½   TxIn ÉÏÉýÑØ¼ÆÊý
+    //è®¾ç½®T4 è®¡æ•°æ¨¡å¼   TxIn ä¸Šå‡æ²¿è®¡æ•°
     IfxGpt12_T4_setIncrementalInterfaceInputMode(&MODULE_GPT120, IfxGpt12_IncrementalInterfaceInputMode_bothEdgesTxIN);
     IfxGpt12_T4_setCounterInputMode(&MODULE_GPT120, IfxGpt12_CounterInputMode_risingEdgeTxIN);
-    //ÉèÖÃT4 ¸¨Öú¹Ü½Å A
+    //è®¾ç½®T4 è¾…åŠ©ç®¡è„š A
     IfxGpt12_T4_setEudInput(&MODULE_GPT120, (IfxGpt12_EudInput)(DirPin & 0x0f));
     IfxGpt12_T4_setInput(&MODULE_GPT120, (IfxGpt12_Input)(InputPin & 0x0f));
-    //¼ÆÊý·½Ïò  Ê¹ÓÃÍâ²¿¹Ü½Å¿ØÖÆ
+    //è®¡æ•°æ–¹å‘  ä½¿ç”¨å¤–éƒ¨ç®¡è„šæŽ§åˆ¶
     IfxGpt12_T4_setDirectionSource(&MODULE_GPT120, IfxGpt12_TimerDirectionSource_external);
-    //ÉèÖÃÏòÉÏ¼ÆÊý
+    //è®¾ç½®å‘ä¸Šè®¡æ•°
     IfxGpt12_T4_setTimerDirection(&MODULE_GPT120,IfxGpt12_TimerDirection_up);
     IfxGpt12_T4_run(&MODULE_GPT120, IfxGpt12_TimerRun_start);
     break;
   case 5:
-    //ÉèÖÃT5¼ÆÊýÄ£Ê½
+    //è®¾ç½®T5è®¡æ•°æ¨¡å¼
     IfxGpt12_T5_setMode(&MODULE_GPT120, IfxGpt12_Mode_counter);
-    //ÉèÖÃT5 ¼ÆÊýÄ£Ê½   TxIn ÉÏÉýÑØ¼ÆÊý
+    //è®¾ç½®T5 è®¡æ•°æ¨¡å¼   TxIn ä¸Šå‡æ²¿è®¡æ•°
     IfxGpt12_T5_setCounterInputMode(&MODULE_GPT120, IfxGpt12_CounterInputMode_risingEdgeTxIN);
-    //ÉèÖÃT5 ¸¨Öú¹Ü½Å A
+    //è®¾ç½®T5 è¾…åŠ©ç®¡è„š A
     IfxGpt12_T5_setEudInput(&MODULE_GPT120, (IfxGpt12_EudInput)(DirPin & 0x0f));
     IfxGpt12_T5_setInput(&MODULE_GPT120, (IfxGpt12_Input)(InputPin & 0x0f));
-    //¼ÆÊý·½Ïò  Ê¹ÓÃÍâ²¿¹Ü½Å¿ØÖÆ
+    //è®¡æ•°æ–¹å‘  ä½¿ç”¨å¤–éƒ¨ç®¡è„šæŽ§åˆ¶
     IfxGpt12_T5_setDirectionSource(&MODULE_GPT120, IfxGpt12_TimerDirectionSource_external);
-    //ÉèÖÃÏòÉÏ¼ÆÊý
+    //è®¾ç½®å‘ä¸Šè®¡æ•°
     IfxGpt12_T5_setTimerDirection(&MODULE_GPT120,IfxGpt12_TimerDirection_up);
     IfxGpt12_T5_run(&MODULE_GPT120, IfxGpt12_TimerRun_start);
     break;
   case 6:
-    //ÉèÖÃT6 ¼ÆÊýÄ£Ê½
+    //è®¾ç½®T6 è®¡æ•°æ¨¡å¼
     IfxGpt12_T6_setMode(&MODULE_GPT120, IfxGpt12_Mode_counter);
-    //ÉèÖÃT6 ¼ÆÊýÄ£Ê½   TxIn ÉÏÉýÑØ¼ÆÊý
+    //è®¾ç½®T6 è®¡æ•°æ¨¡å¼   TxIn ä¸Šå‡æ²¿è®¡æ•°
     IfxGpt12_T6_setCounterInputMode(&MODULE_GPT120, IfxGpt12_CounterInputMode_risingEdgeTxIN);
-    //ÉèÖÃT6 ¸¨Öú¹Ü½Å A
+    //è®¾ç½®T6 è¾…åŠ©ç®¡è„š A
     IfxGpt12_T6_setEudInput(&MODULE_GPT120, (IfxGpt12_EudInput)(DirPin & 0x0f));
     IfxGpt12_T6_setInput(&MODULE_GPT120, (IfxGpt12_Input)(InputPin & 0x0f));
-    //¼ÆÊý·½Ïò  Ê¹ÓÃÍâ²¿¹Ü½Å¿ØÖÆ
+    //è®¡æ•°æ–¹å‘  ä½¿ç”¨å¤–éƒ¨ç®¡è„šæŽ§åˆ¶
     IfxGpt12_T6_setDirectionSource(&MODULE_GPT120, IfxGpt12_TimerDirectionSource_external);
-    //ÉèÖÃÏòÉÏ¼ÆÊý
+    //è®¾ç½®å‘ä¸Šè®¡æ•°
     IfxGpt12_T6_setTimerDirection(&MODULE_GPT120,IfxGpt12_TimerDirection_up);
     IfxGpt12_T6_run(&MODULE_GPT120, IfxGpt12_TimerRun_start);
     break;
@@ -132,12 +132,12 @@ void ENC_InitConfig(ENC_InputPin_t InputPin, ENC_DirPin_t DirPin)
 }
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid ENC_InitConfig(ENC_InputPin_t InputPin, ENC_DirPin_t DirPin)
-*  ¹¦ÄÜËµÃ÷£ºENC µÃµ½¼ÆÊýÖµ,Ê¹ÓÃÇ°ÐèÒª¶ÔENC³õÊ¼»¯
-*  ²ÎÊýËµÃ÷£ºInputPin  £º ENCÂö³åÊäÈë¹Ü½Å  LQ_GPT12_ENC.h ÖÐÃ¶¾ÙÌå
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºENC_GetCounter(ENC2_InPut_P00_7); //»ñÈ¡ENC2Âö³å¼ÆÊýÖµ
+*  å‡½æ•°åç§°ï¼švoid ENC_InitConfig(ENC_InputPin_t InputPin, ENC_DirPin_t DirPin)
+*  åŠŸèƒ½è¯´æ˜Žï¼šENC å¾—åˆ°è®¡æ•°å€¼,ä½¿ç”¨å‰éœ€è¦å¯¹ENCåˆå§‹åŒ–
+*  å‚æ•°è¯´æ˜Žï¼šInputPin  ï¼š ENCè„‰å†²è¾“å…¥ç®¡è„š  LQ_GPT12_ENC.h ä¸­æžšä¸¾ä½“
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šENC_GetCounter(ENC2_InPut_P00_7); //èŽ·å–ENC2è„‰å†²è®¡æ•°å€¼
 *************************************************************************/
 int16_t ENC_GetCounter(ENC_InputPin_t InputPin)
 {

@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËÐÄ°å
-¡¾±à    Ð´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.1 °æÈ¨ËùÓÐ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üÐÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æŽˆæƒ
+ã€æœ€åŽæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -21,16 +21,16 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <LQ_STM.h>
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid LED_Init(void)
-*  ¹¦ÄÜËµÃ÷£ºGPIO³õÊ¼»¯º¯Êý LEDµÆËùÓÃP10.6¡¢P10.5¡¢P15.4ºÍP15.6³õÊ¼»¯
-*  ²ÎÊýËµÃ÷£ºÎÞ
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼švoid LED_Init(void)
+*  åŠŸèƒ½è¯´æ˜Žï¼šGPIOåˆå§‹åŒ–å‡½æ•° LEDç¯æ‰€ç”¨P10.6ã€P10.5ã€P15.4å’ŒP15.6åˆå§‹åŒ–
+*  å‚æ•°è¯´æ˜Žï¼šæ— 
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 void GPIO_LED_Init(void)
 {
-	  // ³õÊ¼»¯,ÊäÈë¿Ú£¬¸ßµçÆ½
+	  // åˆå§‹åŒ–,è¾“å…¥å£ï¼Œé«˜ç”µå¹³
 	  PIN_InitConfig(LED0p, PIN_MODE_OUTPUT, 0);
 	  PIN_InitConfig(LED1p, PIN_MODE_OUTPUT, 0);
 	  PIN_InitConfig(LED2p, PIN_MODE_OUTPUT, 0);
@@ -38,12 +38,12 @@ void GPIO_LED_Init(void)
 }
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid LED_Ctrl(LEDn_e LEDno, LEDs_e sta)
-*  ¹¦ÄÜËµÃ÷£ºLED¿ØÖÆ
-*  ²ÎÊýËµÃ÷£ºLEDn_e LEDno±àºÅ,LEDs_e sta×´Ì¬ÁÁ/Ãð/·­×ª
-*  º¯Êý·µ»Ø£º°´¼ü×´Ì¬£¬0/1
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼švoid LED_Ctrl(LEDn_e LEDno, LEDs_e sta)
+*  åŠŸèƒ½è¯´æ˜Žï¼šLEDæŽ§åˆ¶
+*  å‚æ•°è¯´æ˜Žï¼šLEDn_e LEDnoç¼–å·,LEDs_e staçŠ¶æ€äº®/ç­/ç¿»è½¬
+*  å‡½æ•°è¿”å›žï¼šæŒ‰é”®çŠ¶æ€ï¼Œ0/1
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 void LED_Ctrl(LEDn_e LEDno, LEDs_e sta)
 {
@@ -100,19 +100,19 @@ void LED_Ctrl(LEDn_e LEDno, LEDs_e sta)
     }
 }
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid Test_GPIO_LED(void)
-*  ¹¦ÄÜËµÃ÷£º²âÊÔ³ÌÐò
-*  ²ÎÊýËµÃ÷£ºÎÞ
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ººËÐÄ°åÉÏµÄLEDµÆÉÁË¸--ËÄ¸öLEDÍ¬Ê±ÉÁË¸
+*  å‡½æ•°åç§°ï¼švoid Test_GPIO_LED(void)
+*  åŠŸèƒ½è¯´æ˜Žï¼šæµ‹è¯•ç¨‹åº
+*  å‚æ•°è¯´æ˜Žï¼šæ— 
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šæ ¸å¿ƒæ¿ä¸Šçš„LEDç¯é—ªçƒ--å››ä¸ªLEDåŒæ—¶é—ªçƒ
 *************************************************************************/
 void Test_GPIO_LED(void)
  {
 	GPIO_LED_Init();
  	while(1)
  	{
- 		LED_Ctrl(LEDALL,RVS);        //ËÄ¸öLEDÍ¬Ê±ÉÁË¸
- 		delayms(100);                //ÑÓÊ±µÈ´ý
+ 		LED_Ctrl(LEDALL,RVS);        //å››ä¸ªLEDåŒæ—¶é—ªçƒ
+ 		delayms(100);                //å»¶æ—¶ç­‰å¾…
  	}
  }

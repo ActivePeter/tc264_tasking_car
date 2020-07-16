@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -28,12 +28,12 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid LQ_Atom_8chPWM(void)
-*  ¹¦ÄÜËµÃ÷£ºGTM²âÊÔº¯Êı
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê4ÔÂ1ÈÕ
-*  ±¸    ×¢£º²»Í¬ÆµÂÊÏÂµÄ8Â·ºôÎüµÆ£¬ÓÃ¶Å°îÏß½Óµ½LEDµÆ¿ÉÒÔ¿´µ½µÆÁÁ¶È½¥±ä
+*  å‡½æ•°åç§°ï¼švoid LQ_Atom_8chPWM(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šGTMæµ‹è¯•å‡½æ•°
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´4æœˆ1æ—¥
+*  å¤‡    æ³¨ï¼šä¸åŒé¢‘ç‡ä¸‹çš„8è·¯å‘¼å¸ç¯ï¼Œç”¨æœé‚¦çº¿æ¥åˆ°LEDç¯å¯ä»¥çœ‹åˆ°ç¯äº®åº¦æ¸å˜
 *************************************************************************/
 void LQ_Atom_8chPWM(void)
 {
@@ -63,18 +63,18 @@ void LQ_Atom_8chPWM(void)
 			delayms(10);
 		}
 
-		//Flash_LED();//À¶µÆºôÎüP10.5
-    	LED_Ctrl(LED0,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
-		delayms(500);              //ÑÓÊ±µÈ´ı
+		//Flash_LED();//è“ç¯å‘¼å¸P10.5
+    	LED_Ctrl(LED0,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
+		delayms(500);              //å»¶æ—¶ç­‰å¾…
 	}
 }
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid Test_GTM_ATOM_8chPWM(void)
-*  ¹¦ÄÜËµÃ÷£ºGTM²âÊÔº¯Êı
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê4ÔÂ1ÈÕ
-*  ±¸    ×¢£ºÇı¶¯ËÄ¸öµç»ú
+*  å‡½æ•°åç§°ï¼švoid Test_GTM_ATOM_8chPWM(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šGTMæµ‹è¯•å‡½æ•°
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´4æœˆ1æ—¥
+*  å¤‡    æ³¨ï¼šé©±åŠ¨å››ä¸ªç”µæœº
 *************************************************************************/
 void LQ_Atom_Motor_8chPWM(void)
 {
@@ -82,9 +82,9 @@ void LQ_Atom_Motor_8chPWM(void)
 	char txt[16];
 
 
-	TFTSPI_Init(1);        //LCD³õÊ¼»¯  0:ºáÆÁ  1£ºÊúÆÁ
-	TFTSPI_CLS(u16BLUE);   //À¶É«ÆÁÄ»
-	TFTSPI_P8X16Str(0, 3, "Test Motor",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+	TFTSPI_Init(1);        //LCDåˆå§‹åŒ–  0:æ¨ªå±  1ï¼šç«–å±
+	TFTSPI_CLS(u16BLUE);   //è“è‰²å±å¹•
+	TFTSPI_P8X16Str(0, 3, "Test Motor",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
 	GPIO_KEY_Init();
 
 	ATOM_PWM_InitConfig(ATOMPWM0, 5000, 12500);
@@ -98,22 +98,22 @@ void LQ_Atom_Motor_8chPWM(void)
 
 	while(1)
 	{
-		if(KEY_Read(KEY0)==0)//°´ÏÂKEY0¼ü£¬Õ¼¿Õ±È¼õĞ¡
+		if(KEY_Read(KEY0)==0)//æŒ‰ä¸‹KEY0é”®ï¼Œå ç©ºæ¯”å‡å°
 		{
 			if(duty>500)
 				duty-=500;
 		}
-		if(KEY_Read(KEY2)==0)//°´ÏÂKEY2¼ü£¬Õ¼¿Õ±È¼Ó´ó
+		if(KEY_Read(KEY2)==0)//æŒ‰ä¸‹KEY2é”®ï¼Œå ç©ºæ¯”åŠ å¤§
 		{
-			if(duty<ATOM_PWM_MAX)//ÂúÕ¼¿Õ±ÈÎª10000
+			if(duty<ATOM_PWM_MAX)//æ»¡å ç©ºæ¯”ä¸º10000
 				duty+=500;
 		}
-		if(KEY_Read(KEY1)==0)//°´ÏÂKEY1¼ü£¬Õ¼¿Õ±ÈÖĞÖµ
+		if(KEY_Read(KEY1)==0)//æŒ‰ä¸‹KEY1é”®ï¼Œå ç©ºæ¯”ä¸­å€¼
 		{
 			duty=5000;
 		}
 
-		ATOM_PWM_SetDuty(ATOMPWM0, duty, 12500);//Çı¶¯ËÄ¸öµç»ú
+		ATOM_PWM_SetDuty(ATOMPWM0, duty, 12500);//é©±åŠ¨å››ä¸ªç”µæœº
 		ATOM_PWM_SetDuty(ATOMPWM1, 5000, 12500);
 		ATOM_PWM_SetDuty(ATOMPWM2, duty, 12500);
 		ATOM_PWM_SetDuty(ATOMPWM3, 5000, 12500);
@@ -123,59 +123,59 @@ void LQ_Atom_Motor_8chPWM(void)
 		//ATOM_PWM_SetDuty(ATOMPWM7, duty, 12500);
 
 		sprintf(txt, "PWM: %05d;", duty);
-		TFTSPI_P8X16Str(0, 5, txt,u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+		TFTSPI_P8X16Str(0, 5, txt,u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
 		UART_PutStr(UART0,txt);
 
-    	LED_Ctrl(LED0,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
-		delayms(200);              //ÑÓÊ±µÈ´ı
+    	LED_Ctrl(LED0,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
+		delayms(200);              //å»¶æ—¶ç­‰å¾…
 	}
 }
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid LQ_ATom_Servo_2chPWM(void)
-*  ¹¦ÄÜËµÃ÷£ºGTM²âÊÔº¯Êı
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê4ÔÂ1ÈÕ
-*  ±¸    ×¢£ºÇı¶¯2¸ö¶æ»ú£¬ÇĞ¼Ç¶æ»ú²»ÄÜ¿¨ËÀÅ¶£¬ÏÈ±ê¶¨È·ÈÏºóÔÙÅ¡ÉÏ¶æÅÌ
+*  å‡½æ•°åç§°ï¼švoid LQ_ATom_Servo_2chPWM(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šGTMæµ‹è¯•å‡½æ•°
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´4æœˆ1æ—¥
+*  å¤‡    æ³¨ï¼šé©±åŠ¨2ä¸ªèˆµæœºï¼Œåˆ‡è®°èˆµæœºä¸èƒ½å¡æ­»å“¦ï¼Œå…ˆæ ‡å®šç¡®è®¤åå†æ‹§ä¸Šèˆµç›˜
 *************************************************************************/
 void LQ_ATom_Servo_2chPWM(void)
 {
 	unsigned short duty=1570;
 	char txt[16];
 
-	TFTSPI_Init(1);        //LCD³õÊ¼»¯  0:ºáÆÁ  1£ºÊúÆÁ
-	TFTSPI_CLS(u16BLUE);   //À¶É«ÆÁÄ»
-	TFTSPI_P8X16Str(0, 3, "Test Servo",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+	TFTSPI_Init(1);        //LCDåˆå§‹åŒ–  0:æ¨ªå±  1ï¼šç«–å±
+	TFTSPI_CLS(u16BLUE);   //è“è‰²å±å¹•
+	TFTSPI_P8X16Str(0, 3, "Test Servo",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
 	GPIO_KEY_Init();
 
-	ATOM_PWM_InitConfig(ATOMSERVO1, 1500, 100);//¶æ»úÆµÂÊÎª100HZ£¬³õÊ¼ÖµÎª1.5msÖĞÖµ
-	ATOM_PWM_InitConfig(ATOMSERVO2, 1500, 100);//¶æ»úÀíÂÛ·¶Î§Îª£º0.5ms--2.5ms£¬´ó¶à¶æ»úÊµ¼Ê±ÈÕâ¸ö·¶Î§Ğ¡
+	ATOM_PWM_InitConfig(ATOMSERVO1, 1500, 100);//èˆµæœºé¢‘ç‡ä¸º100HZï¼Œåˆå§‹å€¼ä¸º1.5msä¸­å€¼
+	ATOM_PWM_InitConfig(ATOMSERVO2, 1500, 100);//èˆµæœºç†è®ºèŒƒå›´ä¸ºï¼š0.5ms--2.5msï¼Œå¤§å¤šèˆµæœºå®é™…æ¯”è¿™ä¸ªèŒƒå›´å°
 
 	while(1)
 	{
-		if(KEY_Read(KEY0)==0)//°´ÏÂKEY0¼ü£¬Õ¼¿Õ±È¼õĞ¡£¬¶æ»úË³Ê±Õë×ª¶¯
+		if(KEY_Read(KEY0)==0)//æŒ‰ä¸‹KEY0é”®ï¼Œå ç©ºæ¯”å‡å°ï¼Œèˆµæœºé¡ºæ—¶é’ˆè½¬åŠ¨
 		{
 			if(duty>1370)
 			duty-=10;
 		}
-		if(KEY_Read(KEY2)==0)//°´ÏÂKEY2¼ü£¬Õ¼¿Õ±È¼Ó´ó£¬¶æ»úÄæÊ±Õë×ª¶¯
+		if(KEY_Read(KEY2)==0)//æŒ‰ä¸‹KEY2é”®ï¼Œå ç©ºæ¯”åŠ å¤§ï¼Œèˆµæœºé€†æ—¶é’ˆè½¬åŠ¨
 		{
 			if(duty<1770)
 			duty+=10;
 		}
-		if(KEY_Read(KEY1)==0)//°´ÏÂKEY1¼ü£¬¶æ»ú»ØÎ»ÖĞÖµ
+		if(KEY_Read(KEY1)==0)//æŒ‰ä¸‹KEY1é”®ï¼Œèˆµæœºå›ä½ä¸­å€¼
 		{
 			duty=1570;
 		}
 
-		ATOM_PWM_SetDuty(ATOMSERVO2, duty, 100);//Çı¶¯Á½¸ö¶æ»ú
+		ATOM_PWM_SetDuty(ATOMSERVO2, duty, 100);//é©±åŠ¨ä¸¤ä¸ªèˆµæœº
 		ATOM_PWM_SetDuty(ATOMSERVO1, duty, 100);
 
 		sprintf(txt, "PWM: %05d;", duty);
-		TFTSPI_P8X16Str(0, 5, txt,u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+		TFTSPI_P8X16Str(0, 5, txt,u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
 		UART_PutStr(UART0,txt);
 
-    	LED_Ctrl(LED0,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
-		delayms(200);              //ÑÓÊ±µÈ´ı
+    	LED_Ctrl(LED0,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
+		delayms(200);              //å»¶æ—¶ç­‰å¾…
 	}
 }

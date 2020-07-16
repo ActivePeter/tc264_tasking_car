@@ -98,7 +98,10 @@ void IIC_Stop(void)
     iic_delay();
 	iic_delay();
 	iic_delay();
-	IIC_SCL_H; 
+	while(!PIN_Read(SOFT_IIC_SCL_PIN)){
+		IIC_SCL_H;
+		//UART_PutStr(UART2,"scl_L\r\n");
+	}
     iic_delay();
 	iic_delay();
 	iic_delay();
@@ -123,11 +126,20 @@ uint8 IIC_WaitAck(void)
 	//SDA_IN; //SDA设置为输入  （从机给一个低电平做为应答） 
 	//IIC_SDA_H;iic_delay();	   
 	
+	
+	// while(!IIC_SDA_READ){
+	// 	IIC_SDA_H;
+	// 	IIC_SCL_L;
+	// }
 	IIC_SCL_H;iic_delay();
 	while(!PIN_Read(SOFT_IIC_SCL_PIN)){
 		IIC_SCL_H;
 		//UART_PutStr(UART2,"scl_L\r\n");
-	}	 
+	}
+	// while(!IIC_SDA_READ){
+	// 	IIC_SCL_H;
+	// 	IIC_SDA_H;
+	// }
 	while(IIC_SDA_READ)
 	{
 		ucErrTime++;
@@ -139,7 +151,21 @@ uint8 IIC_WaitAck(void)
 		}
 	}
 	IIC_SCL_L; //时钟输出0 	   
-	UART_PutStr(UART2,"IIC_WaitAck_suc\r\n");
+	uint8  i = 0;
+	for(i = 0; i < 30; i++) //修改这里可以调整IIC速率
+	{
+		iic_delay(); /* delay */
+	}
+	// while(1){}
+	//UART_PutStr(UART2,"IIC_WaitAck_suc\r\n");
+	// while(1){
+	// 	IIC_SCL_H;
+	// 	IIC_SDA_H;
+	// 	iic_delay(); 
+	// 	iic_delay(); 
+	// 	IIC_SCL_;
+	// 	IIC_SDA_L;
+	// }
 	return 0;  
 } 
 
@@ -202,7 +228,12 @@ void IIC_NAck(void)
 void IIC_SendByte(uint8 data_t)
 {                        
     uint8  t;
-    SDA_OUT; 	    
+    SDA_OUT; 	
+	// IIC_SDA_H;
+	// while(!IIC_SDA_READ){
+	// 	IIC_SDA_H;
+	// }
+	// IIC_SDA_L;
     IIC_SCL_L; //拉低时钟开始数据传输
     for(t=0;t<8;t++)
     {   
@@ -240,6 +271,7 @@ void IIC_SendByte(uint8 data_t)
 *************************************************************************/
 uint8 IIC_ReadByte(uint8 ack)
 {
+	//while(1){}
 	uint8  i,receive=0;
 	SDA_IN; //SDA设置为输入模式 等待接收从机返回数据
     for(i=0;i<8;i++ )
@@ -247,12 +279,13 @@ uint8 IIC_ReadByte(uint8 ack)
         IIC_SCL_L; 
 		iic_delay();
 		iic_delay();
-		iic_delay();
         IIC_SCL_H;
+		iic_delay();
+		iic_delay();
         receive<<=1;
         if(IIC_SDA_READ)receive++; //从机发送的电平
         iic_delay();
-    }					 
+    }				 
     if(ack)
         IIC_Ack(); //发送ACK 
     else

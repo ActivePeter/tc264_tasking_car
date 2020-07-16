@@ -7,10 +7,13 @@ extern "C"
 #include <LQ_ADC.h>
 #include <LQ_STM.h>
 #include <LQ_GTM.h>
+#include <LQ_GPT12_ENC.h>
 #include "string.h"
 #include "math.h"
 #include "pa_CommonLib/pa_BNO055.h"
 }
+
+#include "pa_CommonLib/pa_MecanumModel.h"
 
 #define adc_arrlen 2000
 unsigned short adc_arr1[adc_arrlen];
@@ -26,39 +29,90 @@ unsigned short step = 0;
 #define PWM6		IfxGtm_TOM1_4_TOUT30_P33_8_OUT
 #define PWM7		IfxGtm_TOM1_1_TOUT31_P33_9_OUT
 #define PWM8		IfxGtm_TOM0_2_TOUT33_P33_11_OUT
-					
-void startMainTask()
-{
-	UART_InitConfig(UART2_RX_P14_3, UART2_TX_P14_2, 115200);//2ºìÉ«Ïß
+
+int cnt=0;
+char flag_50ms=1;
+SpeedOfMotors speedOfMotors;
+
+pa_MecanumModel mecanumModel();
+
+void initVariable(){//åˆå§‹åŒ–å˜é‡
+	speedOfMotors.speedOfM1=0;
+	speedOfMotors.speedOfM2=0;
+	speedOfMotors.speedOfM3=0;
+	speedOfMotors.speedOfM4=0;
+}
+void initFuncs(){//åˆå§‹åŒ–åŠŸèƒ½
+	UART_InitConfig(UART2_RX_P14_3, UART2_TX_P14_2, 115200);//2çº¢è‰²çº¿
 	{
 		UART_PutStr(UART2, "init\r\n");
 	}
-	pa_BNO055_init();
-	ADC_InitConfig(ADC0, 100000); //³õÊ¼»¯
+	//pa_BNO055_init();
+
+	ADC_InitConfig(ADC0, 100000); //åˆå§‹åŒ–
 	ADC_InitConfig(ADC1, 100000);
 	ADC_InitConfig(ADC2, 100000);
 	ADC_InitConfig(ADC3, 100000);
 	
-	STM_InitConfig(STM0, STM_Channel_0, 100, []() { //Î¢Ãë  //UART_PutStr(UART2,"ssss");
+	//adcé‡‡é›†ä»¥åŠæ§åˆ¶ å®šæ—¶å™¨ä¸­æ–­
+	STM_InitConfig(STM0, STM_Channel_0, 100, []() { //å¾®ç§’  //UART_PutStr(UART2,"ssss");
 		getadc();											  //getadc();
+		cnt++;
+		if(cnt==500){
+			cnt=0;
+			flag_50ms=1;
+		}
 	});
 
-	//ÓÒÉÏ
-	TOM_PWM_InitConfig(PWM2, 1000, 10000);//³õÊ¼»¯P33_13 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
-	TOM_PWM_InitConfig(PWM3, 0, 10000);//³õÊ¼»¯P33_7 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
+	// //å³ä¸Š
+	// TOM_PWM_InitConfig(PWM2, 1000, 10000);//åˆå§‹åŒ–P33_13 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
+	// TOM_PWM_InitConfig(PWM3, 0, 10000);//åˆå§‹åŒ–P33_7 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
 	
 
-	TOM_PWM_InitConfig(PWM1, 1000, 10000);//³õÊ¼»¯P33_10 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
-	TOM_PWM_InitConfig(PWM4, 0, 10000);//³õÊ¼»¯P33_6 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
+	// TOM_PWM_InitConfig(PWM1, 1000, 10000);//åˆå§‹åŒ–P33_10 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
+	// TOM_PWM_InitConfig(PWM4, 0, 10000);//åˆå§‹åŒ–P33_6 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
 
-	TOM_PWM_InitConfig(PWM5, 1000, 10000);//³õÊ¼»¯P33_10 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
-	TOM_PWM_InitConfig(PWM6, 0, 10000);//³õÊ¼»¯P33_13 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
+	// TOM_PWM_InitConfig(PWM5, 1000, 10000);//åˆå§‹åŒ–P33_10 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
+	// TOM_PWM_InitConfig(PWM6, 0, 10000);//åˆå§‹åŒ–P33_13 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
 
-	TOM_PWM_InitConfig(PWM7, 1000, 10000);//³õÊ¼»¯P33_7 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
-	TOM_PWM_InitConfig(PWM8, 0, 10000);//³õÊ¼»¯P33_6 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
+	// TOM_PWM_InitConfig(PWM7, 1000, 10000);//åˆå§‹åŒ–P33_7 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
+	// TOM_PWM_InitConfig(PWM8, 0, 10000);//åˆå§‹åŒ–P33_6 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
+
+	ENC_InitConfig(ENC2_InPut_P33_7, ENC2_Dir_P33_6);
+  //ENC_InitConfig(ENC3_InPut_P02_6, ENC3_Dir_P02_7);//æ‘„åƒå¤´å†²çªï¼Œä¸å»ºè®®ç”¨
+	ENC_InitConfig(ENC4_InPut_P02_8, ENC4_Dir_P33_5);
+	ENC_InitConfig(ENC5_InPut_P10_3, ENC5_Dir_P10_1);
+	ENC_InitConfig(ENC6_InPut_P20_3, ENC6_Dir_P20_0);
+
+
+}
+
+void startMainTask()
+{
+	initVariable();
+	initFuncs();
 	while (1)
 	{
-		crossCorrelation_noFFT();
+		//æ‰§è¡Œæ§åˆ¶ç®—æ³•
+		if(flag_50ms==1){
+			flag_50ms=0;
+			speedOfMotors.speedOfM1 = ENC_GetCounter(ENC2_InPut_P33_7);
+			speedOfMotors.speedOfM2 = ENC_GetCounter(ENC4_InPut_P02_8);
+			speedOfMotors.speedOfM3 = ENC_GetCounter(ENC5_InPut_P10_3);
+			speedOfMotors.speedOfM4 = ENC_GetCounter(ENC6_InPut_P20_3);
+
+			{
+				char buf[30] = {0};
+				sprintf(buf,"%5d %5d %5d %5d\r\n",
+				speedOfMotors.speedOfM1,
+				speedOfMotors.speedOfM2,
+				speedOfMotors.speedOfM3,
+				speedOfMotors.speedOfM4);
+				UART_PutStr(UART2, buf);
+			}
+			
+		}
+		//crossCorrelation_noFFT();
 	}
 }
 void paLinearInterpolation(unsigned short to1,unsigned short to2,unsigned short count){
@@ -69,7 +123,6 @@ void paLinearInterpolation(unsigned short to1,unsigned short to2,unsigned short 
 	int deltaValue1=to1-from1;
 	int deltaValue2=to2-from2;
 	for(unsigned short i=0;i<count;i++){
-		
 		addValueToArr(
 			(unsigned short)(from1+(deltaValue1*(i+1))/count),
 			(unsigned short)(from2+(deltaValue2*(i+1))/count)

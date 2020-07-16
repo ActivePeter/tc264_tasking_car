@@ -13,3 +13,7 @@ vscode如何不红。需要在json中添加宏定义__TASKING__
 
 ![image-20200713032243475](http://tuchuang.hanbaoaaa.xyz/image-20200713032243475.png)
 
+### 编码器
+
+![image-20200715210816635](http://tuchuang.hanbaoaaa.xyz/image-20200715210816635.png)
+
