@@ -4,12 +4,14 @@
 class pa_PID
 {
 public:
-    pa_PID(float kp,float ki,float kd);
+    pa_PID(float kp1,float ki1,float kd1);
     float calcPid(float err);
-private:
+    void setPid(float kp,float ki,float kd);
     float kp;
     float ki;
     float kd;
+private:
+    
     float lastErr=0;
 };
 

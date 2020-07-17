@@ -36,6 +36,13 @@ static uint8 s_AscRxBuffer[4][ASC_TX_BUFFER_SIZE + sizeof(Ifx_Fifo) + 8];
 
 unsigned char uartReceived=0;
 
+void changeLED(){
+	PIN_Reverse(LED0p);
+            PIN_Reverse(LED1p);
+            PIN_Reverse(LED2p);
+            PIN_Reverse(LED3p);
+}
+
 unsigned char uartHasReceivedData(){
 	if(uartReceived){
 		char a=uartReceived;
@@ -108,7 +115,7 @@ void UART0_ER_IRQHandler(void)
 void UART1_RX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrReceive(&g_UartConfig[1]);
-
+	
 	/* 用户代码 */
 
 }
@@ -130,7 +137,7 @@ void UART1_ER_IRQHandler(void)
 void UART2_RX_IRQHandler(void)
 {
 	IfxAsclin_Asc_isrReceive(&g_UartConfig[2]);
-
+	uartReceived=1;
 	// unsigned char tag[20]="hhh";
 	// int step=0;
 	// int readIndex=0;
@@ -151,7 +158,7 @@ void UART2_RX_IRQHandler(void)
 	// 	PIN_Reverse(LED1p);
 	// 	PIN_Reverse(LED2p);
 	// 	PIN_Reverse(LED3p);
-	uartReceived=1;
+	
 	/* 用户代码 */
 }
 

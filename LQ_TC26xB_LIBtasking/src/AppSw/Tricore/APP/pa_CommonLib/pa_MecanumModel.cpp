@@ -24,8 +24,10 @@ void pa_MecanumModel::updateKinematics(float vx, float vy, float av)
 
 pa_KinematicsMotorVelocities pa_MecanumModel::calcMotorsStates()
 {
-    this->motorVelocities.velocityM1 = kinematicsModel.velocity.y - kinematicsModel.velocity.x + kinematicsModel.angularVelocity * (modelW + modelH);
-    this->motorVelocities.velocityM2 = kinematicsModel.velocity.y + kinematicsModel.velocity.x - kinematicsModel.angularVelocity * (modelW + modelH);
-    this->motorVelocities.velocityM3 = kinematicsModel.velocity.y - kinematicsModel.velocity.x - kinematicsModel.angularVelocity * (modelW + modelH);
-    this->motorVelocities.velocityM4 = kinematicsModel.velocity.y + kinematicsModel.velocity.x + kinematicsModel.angularVelocity * (modelW + modelH);
+    this->motorVelocities.velocityM1 = kinematicsModel.velocity.y + kinematicsModel.velocity.x + kinematicsModel.angularVelocity * (modelW + modelH);
+    this->motorVelocities.velocityM2 = kinematicsModel.velocity.y - kinematicsModel.velocity.x - kinematicsModel.angularVelocity * (modelW + modelH);
+    this->motorVelocities.velocityM3 = kinematicsModel.velocity.y + kinematicsModel.velocity.x - kinematicsModel.angularVelocity * (modelW + modelH);
+    this->motorVelocities.velocityM4 = kinematicsModel.velocity.y - kinematicsModel.velocity.x + kinematicsModel.angularVelocity * (modelW + modelH);
 }
+
+//如果轮子是

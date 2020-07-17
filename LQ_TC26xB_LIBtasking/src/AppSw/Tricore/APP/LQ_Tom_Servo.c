@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -30,12 +30,12 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define TOMSERVO2         IfxGtm_TOM0_13_TOUT35_P33_13_OUT
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid Test_Servo(void);
-*  ¹¦ÄÜËµÃ÷£º²âÊÔ¶æ»ú×ª¶¯
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ22ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼švoid Test_Servo(void);
+*  åŠŸèƒ½è¯´æ˜ï¼šæµ‹è¯•èˆµæœºè½¬åŠ¨
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ22æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 
 void LQ_Tom_Servo_2chPWM(void)
@@ -43,25 +43,25 @@ void LQ_Tom_Servo_2chPWM(void)
 	unsigned short duty=0;
 	char txt[16];
 
-	TFTSPI_Init(1);        //LCD³õÊ¼»¯  0:ºáÆÁ  1£ºÊúÆÁ
-	TFTSPI_CLS(u16BLUE);   //À¶É«ÆÁÄ»
-	TFTSPI_P8X16Str(0, 3, "Test Servo",u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+	TFTSPI_Init(1);        //LCDåˆå§‹åŒ–  0:æ¨ªå±  1ï¼šç«–å±
+	TFTSPI_CLS(u16BLUE);   //è“è‰²å±å¹•
+	TFTSPI_P8X16Str(0, 3, "Test Servo",u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
 	GPIO_KEY_Init();
-	TOM_PWM_InitConfig(TOMSERVO1, 5000, 100);//³õÊ¼»¯P33_10 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
-	TOM_PWM_InitConfig(TOMSERVO2, 5000, 100);//³õÊ¼»¯P33_13 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
+	TOM_PWM_InitConfig(TOMSERVO1, 5000, 100);//åˆå§‹åŒ–P33_10 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
+	TOM_PWM_InitConfig(TOMSERVO2, 5000, 100);//åˆå§‹åŒ–P33_13 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
 	while(1)
 	{
-		if(KEY_Read(KEY0)==0)//°´ÏÂKEY0¼ü£¬Õ¼¿Õ±È¼õĞ¡£¬¶æ»úË³Ê±Õë×ª¶¯
+		if(KEY_Read(KEY0)==0)//æŒ‰ä¸‹KEY0é”®ï¼Œå ç©ºæ¯”å‡å°ï¼Œèˆµæœºé¡ºæ—¶é’ˆè½¬åŠ¨
 		{
 			//if(duty>950)
 				duty-=100;
 		}
-		if(KEY_Read(KEY2)==0)//°´ÏÂKEY2¼ü£¬Õ¼¿Õ±È¼Ó´ó£¬¶æ»úÄæÊ±Õë×ª¶¯
+		if(KEY_Read(KEY2)==0)//æŒ‰ä¸‹KEY2é”®ï¼Œå ç©ºæ¯”åŠ å¤§ï¼Œèˆµæœºé€†æ—¶é’ˆè½¬åŠ¨
 		{
 			//if(duty<1050)
 				duty+=100;
 		}
-		if(KEY_Read(KEY1)==0)//°´ÏÂKEY1¼ü£¬¶æ»ú»ØÎ»ÖĞÖµ
+		if(KEY_Read(KEY1)==0)//æŒ‰ä¸‹KEY1é”®ï¼Œèˆµæœºå›ä½ä¸­å€¼
 		{
 			duty=1000;
 		}
@@ -70,10 +70,10 @@ void LQ_Tom_Servo_2chPWM(void)
 		TOM_PWM_SetDuty(TOMSERVO1, duty, 50);
 
 		sprintf(txt, "PWM: %05d;", duty);
-		TFTSPI_P8X16Str(0, 5, txt,u16WHITE,u16BLACK);		//×Ö·û´®ÏÔÊ¾
+		TFTSPI_P8X16Str(0, 5, txt,u16WHITE,u16BLACK);		//å­—ç¬¦ä¸²æ˜¾ç¤º
 		UART_PutStr(UART0,txt);
 
-    	LED_Ctrl(LED0,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
-		delayms(200);              //ÑÓÊ±µÈ´ı
+    	LED_Ctrl(LED0,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
+		delayms(200);              //å»¶æ—¶ç­‰å¾…
 	}
 }

@@ -1,16 +1,20 @@
 
 extern "C"
 {
+
 #include "pa_MainApp.h"
 #include "stdio.h"
 #include <LQ_UART.h>
 #include <LQ_ADC.h>
 #include <LQ_STM.h>
-#include <LQ_GTM.h>
+
 #include <LQ_GPT12_ENC.h>
 #include "string.h"
 #include "math.h"
 #include "pa_CommonLib/pa_BNO055.h"
+#include "pa_CommonLib/pa_MotorManager.h"
+#include <LQ_Atom_Motor.h>
+#include "math.h"
 }
 
 #include "pa_CommonLib/pa_PID.h"
@@ -22,21 +26,15 @@ unsigned short adc_arr2[adc_arrlen];
 
 unsigned short step = 0;
 
-#define PWM1 IfxGtm_TOM0_0_TOUT32_P33_10_OUT
-#define PWM2 IfxGtm_TOM0_13_TOUT35_P33_13_OUT
-#define PWM3 IfxGtm_TOM0_3_TOUT29_P33_7_OUT
-#define PWM4 IfxGtm_TOM1_2_TOUT28_P33_6_OUT
-#define PWM5 IfxGtm_TOM0_1_TOUT27_P33_5_OUT
-#define PWM6 IfxGtm_TOM1_4_TOUT30_P33_8_OUT
-#define PWM7 IfxGtm_TOM1_1_TOUT31_P33_9_OUT
-#define PWM8 IfxGtm_TOM0_2_TOUT33_P33_11_OUT
-
 int cnt = 0;
 char flag_50ms = 1;
 SpeedOfMotors speedOfMotors;
 
-pa_MecanumModel mecanumModel();
-pa_PID speedPid();
+pa_MecanumModel mecanumModel;
+pa_PID pid_Motor1 = pa_PID(1, 0, 0);
+pa_PID pid_Motor2 = pa_PID(1, 0, 0);
+pa_PID pid_Motor3 = pa_PID(1, 0, 0);
+pa_PID pid_Motor4 = pa_PID(1, 0, 0);
 
 void initVariable()
 { //初始化变量
@@ -44,10 +42,24 @@ void initVariable()
 	speedOfMotors.speedOfM2 = 0;
 	speedOfMotors.speedOfM3 = 0;
 	speedOfMotors.speedOfM4 = 0;
+	pid_Motor1.setPid(0.001, 0, 0);
+	pid_Motor2.setPid(0.001, 0, 0);
+	pid_Motor3.setPid(0.001, 0, 0);
+	pid_Motor4.setPid(0.001, 0, 0);
 }
 void initFuncs()
-{															 //初始化功能
+{
+	// ATOM_PWM_InitConfig(ATOMPWM0, 4000, 15000);
+	// ATOM_PWM_InitConfig(ATOMPWM1, 5000, 15000);
+	// ATOM_PWM_InitConfig(ATOMPWM2, 6000, 15000);
+	// ATOM_PWM_InitConfig(ATOMPWM3, 7000, 15000);
+	// ATOM_PWM_InitConfig(ATOMPWM4, 8000, 15000);
+	// ATOM_PWM_InitConfig(ATOMPWM5, 9000, 15000);
+	// ATOM_PWM_InitConfig(ATOMPWM6, 3000, 15000);
+	// ATOM_PWM_InitConfig(ATOMPWM7, 2000, 15000);
+	//初始化功能
 	UART_InitConfig(UART2_RX_P14_3, UART2_TX_P14_2, 115200); //2红色线
+	//UART_InitConfig(UART1_RX_P02_3, UART1_TX_P02_2, 115200);
 	{
 		UART_PutStr(UART2, "init\r\n");
 	}
@@ -62,6 +74,13 @@ void initFuncs()
 	STM_InitConfig(STM0, STM_Channel_0, 100, []() { //微秒  //UART_PutStr(UART2,"ssss");
 		getadc();									//getadc();
 		cnt++;
+		if (cnt % 100 == 0)
+		{
+			speedOfMotors.speedOfM1 = ENC_GetCounter(ENC3_InPut_P02_6);
+			speedOfMotors.speedOfM2 = -ENC_GetCounter(ENC2_InPut_P33_7);
+			speedOfMotors.speedOfM3 = -ENC_GetCounter(ENC6_InPut_P20_3);
+			speedOfMotors.speedOfM4 = ENC_GetCounter(ENC5_InPut_P10_3);
+		}
 		if (cnt == 500)
 		{
 			cnt = 0;
@@ -69,26 +88,16 @@ void initFuncs()
 		}
 	});
 
-	// //右上
-	// TOM_PWM_InitConfig(PWM2, 1000, 10000);//初始化P33_13 作为PWM输出口 频率100Hz 占空比 百分之(5000/TOM_PWM_MAX)*100
-	// TOM_PWM_InitConfig(PWM3, 0, 10000);//初始化P33_7 作为PWM输出口 频率100Hz 占空比 百分之(5000/TOM_PWM_MAX)*100
-
-	// TOM_PWM_InitConfig(PWM1, 1000, 10000);//初始化P33_10 作为PWM输出口 频率100Hz 占空比 百分之(5000/TOM_PWM_MAX)*100
-	// TOM_PWM_InitConfig(PWM4, 0, 10000);//初始化P33_6 作为PWM输出口 频率100Hz 占空比 百分之(5000/TOM_PWM_MAX)*100
-
-	// TOM_PWM_InitConfig(PWM5, 1000, 10000);//初始化P33_10 作为PWM输出口 频率100Hz 占空比 百分之(5000/TOM_PWM_MAX)*100
-	// TOM_PWM_InitConfig(PWM6, 0, 10000);//初始化P33_13 作为PWM输出口 频率100Hz 占空比 百分之(5000/TOM_PWM_MAX)*100
-
-	// TOM_PWM_InitConfig(PWM7, 1000, 10000);//初始化P33_7 作为PWM输出口 频率100Hz 占空比 百分之(5000/TOM_PWM_MAX)*100
-	// TOM_PWM_InitConfig(PWM8, 0, 10000);//初始化P33_6 作为PWM输出口 频率100Hz 占空比 百分之(5000/TOM_PWM_MAX)*100
+	pa_initMotorPwm();
 
 	ENC_InitConfig(ENC2_InPut_P33_7, ENC2_Dir_P33_6);
 	//ENC_InitConfig(ENC3_InPut_P02_6, ENC3_Dir_P02_7);//摄像头冲突，不建议用
-	ENC_InitConfig(ENC4_InPut_P02_8, ENC4_Dir_P33_5);
+	ENC_InitConfig(ENC3_InPut_P02_6, ENC3_Dir_P02_7);
 	ENC_InitConfig(ENC5_InPut_P10_3, ENC5_Dir_P10_1);
 	ENC_InitConfig(ENC6_InPut_P20_3, ENC6_Dir_P20_0);
 }
 
+int tagetSpeed = 100;
 void startMainTask()
 {
 	initVariable();
@@ -99,29 +108,140 @@ void startMainTask()
 		//执行控制算法
 		if (flag_50ms == 1)
 		{
-			flag_50ms = 0;
-			speedOfMotors.speedOfM1 = ENC_GetCounter(ENC2_InPut_P33_7);
-			speedOfMotors.speedOfM2 = ENC_GetCounter(ENC4_InPut_P02_8);
-			speedOfMotors.speedOfM3 = ENC_GetCounter(ENC5_InPut_P10_3);
-			speedOfMotors.speedOfM4 = ENC_GetCounter(ENC6_InPut_P20_3);
-			
-			if (uartHasReceivedData())
+			flag_50ms = 0; //50ms清0
+
+			// pa_updateMotorPwm(1,-pid_Motor1.calcPid(speedOfMotors.speedOfM1-tagetSpeed));
+			// pa_updateMotorPwm(2,-pid_Motor2.calcPid(speedOfMotors.speedOfM2-tagetSpeed));
+			float out = -pid_Motor3.calcPid(speedOfMotors.speedOfM3 - tagetSpeed);
+			pa_updateMotorPwm(3, out);
+			// pa_updateMotorPwm(2,300);
+			// pa_updateMotorPwm(4,-pid_Motor4.calcPid(speedOfMotors.speedOfM4-tagetSpeed));
+
+			checkUartData();
 			{
-				unsigned char recData[30] = {0};
-				UART_GetBuff(UART2, recData, UART_GetCount(UART2));
-				UART_PutStr(UART2, (char *)recData);
+				char buf[30] = {0};
+				// sprintf(buf,"%5d %5d %5d %5d\r\n",
+				// speedOfMotors.speedOfM1,
+				// speedOfMotors.speedOfM2,
+				// speedOfMotors.speedOfM3,
+				// speedOfMotors.speedOfM4);
+				sprintf(buf, "%5d %f\r\n",
+						speedOfMotors.speedOfM3, out);
+
+				UART_PutStr(UART2, buf);
 			}
-			// {
-			// 	char buf[30] = {0};
-			// 	sprintf(buf,"%5d %5d %5d %5d\r\n",
-			// 	speedOfMotors.speedOfM1,
-			// 	speedOfMotors.speedOfM2,
-			// 	speedOfMotors.speedOfM3,
-			// 	speedOfMotors.speedOfM4);
-			// 	UART_PutStr(UART2, buf);
-			// }
 		}
 		//crossCorrelation_noFFT();
+	}
+}
+void checkUartData()
+{
+	if (uartHasReceivedData())
+	{
+		unsigned char recData[30] = {0};
+		UART_GetBuff(UART2, recData, UART_GetCount(UART2));
+
+		int index = 2;
+		char state1 = 0, state2 = 0;
+		char dataValid = 0;
+		char xiaoshu = 0;
+		float data = 0;
+		state1 = recData[0];
+		state2 = recData[1];
+		while (recData[index])
+		{
+			if (state1 == 's' && (state2 == 'p' || state2 == 'i' || state2 == 'd'||state2=='s'))
+			{
+				if (recData[index] <= '9' && recData[index] >= '0')
+				{
+					if (!xiaoshu)
+					{
+						data = recData[index] - 48 + data * 10;
+					}
+					else
+					{
+						data = data + pow(0.1, xiaoshu) * (recData[index] - 48);
+						xiaoshu++;
+					}
+				}
+				else if (recData[index] == '.')
+				{
+					xiaoshu = 1;
+				}
+				else if (recData[index] == '!')
+				{
+					dataValid = 1;
+					break;
+				}
+			}
+			else
+			{
+				break;
+			}
+			index++;
+		}
+		if (dataValid)
+		{
+			if (state1 == 's')
+			{
+				switch (state2)
+				{
+				case 'p':
+				{
+					char buffer[30] = "";
+					sprintf(buffer, "set p from %f to %f\r\n", pid_Motor1.kp, data);
+					UART_PutStr(UART2, buffer);
+				}
+					pid_Motor1.kp = data;
+					pid_Motor2.kp = data;
+					pid_Motor3.kp = data;
+					pid_Motor4.kp = data;
+					break;
+				// case 'i':
+				// 	{
+				// 		char buffer[30] = "";
+				// 		sprintf(buffer, "set i from %f to %f\r\n",pid_Motor1.ki, data);
+				// 		UART_PutStr(UART2, buffer);
+				// 	}
+				// 	pid_Motor1.ki=data;
+				// 	pid_Motor2.ki=data;
+				// 	pid_Motor3.ki=data;
+				// 	pid_Motor4.ki=data;
+				// 	break;
+				case 'd':
+				{
+					char buffer[30] = "";
+					sprintf(buffer, "set d from %f to %f\r\n", pid_Motor1.kd, data);
+					UART_PutStr(UART2, buffer);
+				}
+					pid_Motor1.kd = data;
+					pid_Motor2.kd = data;
+					pid_Motor3.kd = data;
+					pid_Motor4.kd = data;
+					/* code */
+					break;
+				case 's':
+				{
+					char buffer[30] = "";
+					sprintf(buffer, "set s from %f to %f\r\n", tagetSpeed, data);
+					UART_PutStr(UART2, buffer);
+				}
+					tagetSpeed=data;
+					/* code */
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		else
+		{
+			UART_PutStr(UART2, "invalidData:");
+			UART_PutStr(UART2, (char *)recData);
+			UART_PutStr(UART2, "\r\n");
+		}
+
+		changeLED();
 	}
 }
 void paLinearInterpolation(unsigned short to1, unsigned short to2, unsigned short count)

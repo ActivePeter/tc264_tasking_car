@@ -132,4 +132,6 @@ char UART_GetChar(UART_t  uratn);
 char UART_GetBuff(UART_t  uratn, uint8_t *data, uint8_t len);
 unsigned char uartHasReceivedData();
 
+void changeLED();
+
 #endif /* 0_APPSW_TRICORE_APP_LQ_ASC_H_ */

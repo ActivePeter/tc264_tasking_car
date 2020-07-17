@@ -1,20 +1,20 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-��ƽ    ̨�������������ܿƼ�TC264DA���İ�
-����    д��ZYF/chiusir
-��E-mail  ��chiusir@163.com
-�������汾��V1.1 ��Ȩ���У���λʹ��������ϵ��Ȩ
-�������¡�2020��4��10��
-�������Ϣ�ο����е�ַ��
-����    վ��http://www.lqist.cn
-���Ա����̡�http://longqiu.taobao.com
+【平    台】北京龙邱智能科技TC264DA核心板
+【编    写】ZYF/chiusir
+【E-mail  】chiusir@163.com
+【软件版本】V1.1 版权所有，单位使用请先联系授权
+【最后更新】2020年4月10日
+【相关信息参考下列地址】
+【网    站】http://www.lqist.cn
+【淘宝店铺】http://longqiu.taobao.com
 ------------------------------------------------
-��dev.env.��Hightec4.9.3/Tasking6.3�����ϰ汾
-��Target �� TC264DA
-��Crystal�� 20.000Mhz
-��SYS PLL�� 200MHz
+【dev.env.】Hightec4.9.3/Tasking6.3及以上版本
+【Target 】 TC264DA
+【Crystal】 20.000Mhz
+【SYS PLL】 200MHz
 ________________________________________________________________
 
-����iLLD_1_0_1_11_0�ײ����
+基于iLLD_1_0_1_11_0底层程序
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #ifndef _LQ_SPI_H_
@@ -31,59 +31,59 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <IfxSrc_cfg.h>
 
 
-/** SPI0�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI0接收中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI0_RX_PRIORITY    160
 
-/** SPI0�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI0发送中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI0_TX_PRIORITY    161
 
-/** SPI0�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI0错误中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI0_ER_PRIORITY    162
 
-/** SPI0�жϷ��������ȼ� �жϹ��ĸ��ں˹����� ��Χ��0��CPU0   1��CPU1   3��DMA*/
+/** SPI0中断服务函数优先级 中断归哪个内核管理？ 范围：0：CPU0   1：CPU1   3：DMA*/
 #define  SPI0_VECTABNUM    0
 
 
-/** SPI1�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI1接收中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI1_RX_PRIORITY    170
 
-/** SPI1�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI1发送中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI1_TX_PRIORITY    171
 
-/** SPI1�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI1错误中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI1_ER_PRIORITY    172
 
-/** SPI1�жϷ��������ȼ� �жϹ��ĸ��ں˹����� ��Χ��0��CPU0   1��CPU1   3��DMA*/
+/** SPI1中断服务函数优先级 中断归哪个内核管理？ 范围：0：CPU0   1：CPU1   3：DMA*/
 #define  SPI1_VECTABNUM    0
 
 
-/** SPI2�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI2接收中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI2_RX_PRIORITY    180
 
-/** SPI2�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI2发送中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI2_TX_PRIORITY    181
 
-/** SPI2�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI2错误中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI2_ER_PRIORITY    182
 
-/** SPI2�жϷ��������ȼ� �жϹ��ĸ��ں˹����� ��Χ��0��CPU0   1��CPU1   3��DMA*/
+/** SPI2中断服务函数优先级 中断归哪个内核管理？ 范围：0：CPU0   1：CPU1   3：DMA*/
 #define  SPI2_VECTABNUM    0
 
 
-/** SPI3�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI3接收中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI3_RX_PRIORITY    190
 
-/** SPI3�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI3发送中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI3_TX_PRIORITY    191
 
-/** SPI3�����жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** SPI3错误中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  SPI3_ER_PRIORITY    192
 
-/** SPI3�жϷ��������ȼ� �жϹ��ĸ��ں˹����� ��Χ��0��CPU0   1��CPU1   3��DMA*/
+/** SPI3中断服务函数优先级 中断归哪个内核管理？ 范围：0：CPU0   1：CPU1   3：DMA*/
 #define  SPI3_VECTABNUM    0
 
 /**
- * SPI CLK�ܽ�ö��
+ * SPI CLK管脚枚举
  */
 typedef enum
 {
@@ -94,7 +94,7 @@ typedef enum
 }SPI_CLK_t;
 
 /**
- * SPI MISO/MRST �ܽ�ö��
+ * SPI MISO/MRST 管脚枚举
  */
 typedef enum
 {
@@ -105,7 +105,7 @@ typedef enum
 }SPI_MISO_t;
 
 /**
- * SPI MISO/MTSR �ܽ�ö��
+ * SPI MISO/MTSR 管脚枚举
  */
 typedef enum
 {
@@ -116,7 +116,7 @@ typedef enum
 }SPI_MOSI_t;
 
 /**
- * SPI Ƭѡ�ܽ�ö��
+ * SPI 片选管脚枚举
  */
 typedef enum
 {
@@ -127,7 +127,7 @@ typedef enum
 }SPI_CS_t;
 
 /**
- * SPI ö��
+ * SPI 枚举
  */
 typedef enum
 {

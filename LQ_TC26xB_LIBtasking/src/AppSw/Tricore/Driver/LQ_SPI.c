@@ -1,20 +1,20 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
-»ùÓÚiLLD_1_0_1_11_0µ×²ã³ÌĞò
+åŸºäºiLLD_1_0_1_11_0åº•å±‚ç¨‹åº
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
@@ -22,99 +22,99 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 /**
- *  ASC SPIÍ¨ĞÅ½á¹¹Ìå
+ *  ASC SPIé€šä¿¡ç»“æ„ä½“
  */
 IfxAsclin_Spi g_SpiConfig[4];
 
-/** SPIÖĞ¶ÏCPU±êºÅ */
+/** SPIä¸­æ–­CPUæ ‡å· */
 const uint8 SpiIrqVectabNum[4] = {SPI0_VECTABNUM, SPI1_VECTABNUM, SPI2_VECTABNUM, SPI3_VECTABNUM};
 
-/** SPIÖĞ¶ÏÓÅÏÈ¼¶ */
+/** SPIä¸­æ–­ä¼˜å…ˆçº§ */
 const uint8 SpiIrqPriority[12] = {SPI0_RX_PRIORITY, SPI0_TX_PRIORITY, SPI0_ER_PRIORITY, SPI1_RX_PRIORITY, SPI1_TX_PRIORITY, SPI1_ER_PRIORITY,
 		                           SPI2_RX_PRIORITY, SPI2_TX_PRIORITY, SPI2_ER_PRIORITY, SPI3_RX_PRIORITY, SPI3_TX_PRIORITY, SPI3_ER_PRIORITY};
 
 
 /***********************************************************************************************/
 /***********************************************************************************************/
-/*****************ASC SPIÖĞ¶ÏÓÅÏÈ¼¶ ºÍ Ö¸ÏòÄÚºËÅäÖÃ ÓÃ»§¿ÉÒÔ×ÔĞĞĞŞ¸Ä************************/
+/*****************ASC SPIä¸­æ–­ä¼˜å…ˆçº§ å’Œ æŒ‡å‘å†…æ ¸é…ç½® ç”¨æˆ·å¯ä»¥è‡ªè¡Œä¿®æ”¹************************/
 /***********************************************************************************************/
 /***********************************************************************************************/
 /**
-  * @brief    SPI0_RX_IRQHandlerÖĞ¶Ï·şÎñº¯Êı
-  * @note     SPI0 ½ÓÊÕÖĞ¶Ï·şÎñº¯Êı
+  * @brief    SPI0_RX_IRQHandlerä¸­æ–­æœåŠ¡å‡½æ•°
+  * @note     SPI0 æ¥æ”¶ä¸­æ–­æœåŠ¡å‡½æ•°
   */
 void SPI0_RX_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrReceive(&g_SpiConfig[0]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI0_TX_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrTransmit(&g_SpiConfig[0]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI0_ER_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrError(&g_SpiConfig[0]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI1_RX_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrReceive(&g_SpiConfig[1]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI1_TX_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrTransmit(&g_SpiConfig[1]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI1_ER_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrError(&g_SpiConfig[1]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI2_RX_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrReceive(&g_SpiConfig[2]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI2_TX_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrTransmit(&g_SpiConfig[2]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI2_ER_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrError(&g_SpiConfig[2]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI3_RX_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrReceive(&g_SpiConfig[3]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI3_TX_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrTransmit(&g_SpiConfig[3]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void SPI3_ER_IRQHandler(void)
 {
 	IfxAsclin_Spi_isrError(&g_SpiConfig[3]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
-/* SPIÖĞ¶Ï */
+/* SPIä¸­æ–­ */
 IFX_INTERRUPT(SPI0_RX_IRQHandler, SPI0_VECTABNUM, SPI0_RX_PRIORITY);
 IFX_INTERRUPT(SPI1_RX_IRQHandler, SPI1_VECTABNUM, SPI1_RX_PRIORITY);
 IFX_INTERRUPT(SPI2_RX_IRQHandler, SPI2_VECTABNUM, SPI2_RX_PRIORITY);
@@ -128,24 +128,24 @@ IFX_INTERRUPT(SPI1_ER_IRQHandler, SPI1_VECTABNUM, SPI1_ER_PRIORITY);
 IFX_INTERRUPT(SPI2_ER_IRQHandler, SPI2_VECTABNUM, SPI2_ER_PRIORITY);
 IFX_INTERRUPT(SPI3_ER_IRQHandler, SPI3_VECTABNUM, SPI3_ER_PRIORITY);
 
-/** SPIÖĞ¶Ï·şÎñº¯ÊıµØÖ· */
+/** SPIä¸­æ–­æœåŠ¡å‡½æ•°åœ°å€ */
 const void *SpiIrqFuncPointer[12] = {&SPI0_RX_IRQHandler, &SPI0_TX_IRQHandler, &SPI0_ER_IRQHandler,
 									&SPI1_RX_IRQHandler, &SPI1_TX_IRQHandler, &SPI1_ER_IRQHandler,
 									&SPI2_RX_IRQHandler, &SPI2_TX_IRQHandler, &SPI2_ER_IRQHandler,
 									&SPI3_RX_IRQHandler, &SPI3_TX_IRQHandler, &SPI3_ER_IRQHandler,};
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid SPI_InitConfig(SPI_CLK_t clkPin, SPI_MISO_t misoPin, SPI_MOSI_t mosiPin, SPI_CS_t csPin, uint32_t baudrate)
-*  ¹¦ÄÜËµÃ÷£ºSPI Ö÷»úÄ£Ê½³õÊ¼»¯
-*  ²ÎÊıËµÃ÷£º
-  * @param    clkPin      £º SPI  clk¹Ü½Å
-  * @param    misoPin     :  SPI  MISO¹Ü½Å
-  * @param    misoPin     :  SPI  MOSI¹Ü½Å
-  * @param    misoPin     :  SPI  CS¹Ü½Å
-  * @param    baudrate    £º SPI ²¨ÌØÂÊ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºÕâÀïÊµ¼ÊÊÇ½«Asc¿ÚÓÃ×÷SPI£¬Èç¹ûÊ¹ÓÃÁËAsc0µ±×÷SPI0£¬ÄÇÃ´Asc0 ¾Í²»¿ÉÓÃ×÷´®¿Ú0
-*  			SPI_InitConfig(SPI3_CLK_P15_6, SPI3_MISO_P15_7, SPI3_MOSI_P20_0, SPI3_CS_P21_2, 10000000U); //³õÊ¼»¯SPI3 10MËÙÂÊ
+*  å‡½æ•°åç§°ï¼švoid SPI_InitConfig(SPI_CLK_t clkPin, SPI_MISO_t misoPin, SPI_MOSI_t mosiPin, SPI_CS_t csPin, uint32_t baudrate)
+*  åŠŸèƒ½è¯´æ˜ï¼šSPI ä¸»æœºæ¨¡å¼åˆå§‹åŒ–
+*  å‚æ•°è¯´æ˜ï¼š
+  * @param    clkPin      ï¼š SPI  clkç®¡è„š
+  * @param    misoPin     :  SPI  MISOç®¡è„š
+  * @param    misoPin     :  SPI  MOSIç®¡è„š
+  * @param    misoPin     :  SPI  CSç®¡è„š
+  * @param    baudrate    ï¼š SPI æ³¢ç‰¹ç‡
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šè¿™é‡Œå®é™…æ˜¯å°†Ascå£ç”¨ä½œSPIï¼Œå¦‚æœä½¿ç”¨äº†Asc0å½“ä½œSPI0ï¼Œé‚£ä¹ˆAsc0 å°±ä¸å¯ç”¨ä½œä¸²å£0
+*  			SPI_InitConfig(SPI3_CLK_P15_6, SPI3_MISO_P15_7, SPI3_MOSI_P20_0, SPI3_CS_P21_2, 10000000U); //åˆå§‹åŒ–SPI3 10Mé€Ÿç‡
 *************************************************************************/
 void SPI_InitConfig(SPI_CLK_t clkPin, SPI_MISO_t misoPin, SPI_MOSI_t mosiPin, SPI_CS_t csPin, uint32_t baudrate)
 {
@@ -157,21 +157,21 @@ void SPI_InitConfig(SPI_CLK_t clkPin, SPI_MISO_t misoPin, SPI_MOSI_t mosiPin, SP
 	IfxAsclin_Slso_Out * IfxAsclin_CS   = IfxAsclin_Slso_Out_pinTable[spiNum][SPI_GetIndex(csPin)];
 
 
-    /* ¹ØÖĞ¶Ï  */
+    /* å…³ä¸­æ–­  */
     boolean              interruptState = IfxCpu_disableInterrupts();
 
     /* create module config */
     IfxAsclin_Spi_Config spiConfig;
     IfxAsclin_Spi_initModuleConfig(&spiConfig, IfxAsclin_Sclk->module);
 
-    spiConfig.frame.shiftDir        = IfxAsclin_ShiftDirection_msbFirst;/* MSB ÔÚÇ° */
+    spiConfig.frame.shiftDir        = IfxAsclin_ShiftDirection_msbFirst;/* MSB åœ¨å‰ */
 
     /* set the desired baudrate */
     spiConfig.baudrate.prescaler    = 1;
-    spiConfig.baudrate.baudrate     = (float)baudrate;                 /* spi ËÙ¶È */
+    spiConfig.baudrate.baudrate     = (float)baudrate;                 /* spi é€Ÿåº¦ */
     spiConfig.baudrate.oversampling = IfxAsclin_OversamplingFactor_4;
 
-    spiConfig.inputOutput.cpol      = IfxAsclin_ClockPolarity_idleHigh; /* clk ¿ÕÏĞ×´Ì¬¸ßµçÆ½ */
+    spiConfig.inputOutput.cpol      = IfxAsclin_ClockPolarity_idleHigh; /* clk ç©ºé—²çŠ¶æ€é«˜ç”µå¹³ */
 
     /* ISR priorities and interrupt target */
     spiConfig.interrupt.rxPriority    = SpiIrqPriority[spiNum * 3];     /* see also \ref IfxLld_Asclin */
@@ -192,7 +192,7 @@ void SPI_InitConfig(SPI_CLK_t clkPin, SPI_MISO_t misoPin, SPI_MOSI_t mosiPin, SP
     /* initialize module */
     IfxAsclin_Spi_initModule(&g_SpiConfig[spiNum], &spiConfig);
 
-    //½ÓÊÕ£¬·¢ËÍºÍ´íÎóÖĞ¶ÏÅäÖÃ
+    //æ¥æ”¶ï¼Œå‘é€å’Œé”™è¯¯ä¸­æ–­é…ç½®
 	IfxCpu_Irq_installInterruptHandler((void*)SpiIrqFuncPointer[spiNum * 3],     (uint32)SpiIrqPriority[spiNum * 3]);
 	IfxCpu_Irq_installInterruptHandler((void*)SpiIrqFuncPointer[spiNum * 3 + 1], (uint32)SpiIrqPriority[spiNum * 3 + 1]);
 	IfxCpu_Irq_installInterruptHandler((void*)SpiIrqFuncPointer[spiNum * 3 + 2], (uint32)SpiIrqPriority[spiNum * 3 + 2]);
@@ -202,24 +202,24 @@ void SPI_InitConfig(SPI_CLK_t clkPin, SPI_MISO_t misoPin, SPI_MOSI_t mosiPin, SP
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºuint8 SPI_ReadWriteNByte(SPI_t spi, uint8_t *txData, uint8_t *rxData, uint32_t len)
-*  ¹¦ÄÜËµÃ÷£ºSPI¶ÁĞ´N¸ö×Ö½Ú
-*  ²ÎÊıËµÃ÷£º
-  * @param    spi     £º  SPI0 - SPI3
-  * @param    txData  £º  Ğ´ÈëµÄbuff
-  * @param    rxData  £º  ¶Á³öµÄbuff
-  * @param    len     £º  ³¤¶È
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºÕâÀïÊµ¼ÊÊÇ½«Asc¿ÚÓÃ×÷SPI£¬Èç¹ûÊ¹ÓÃÁËAsc0µ±×÷SPI0£¬ÄÇÃ´Asc0 ¾Í²»¿ÉÓÃ×÷´®¿Ú0
-*  			SPI_ReadWriteNByte(SPI3, buff, buff, 2); //Ê¹ÓÃSPI3 ¶ÁĞ´Á½¸ö×Ö½Ú
+*  å‡½æ•°åç§°ï¼šuint8 SPI_ReadWriteNByte(SPI_t spi, uint8_t *txData, uint8_t *rxData, uint32_t len)
+*  åŠŸèƒ½è¯´æ˜ï¼šSPIè¯»å†™Nä¸ªå­—èŠ‚
+*  å‚æ•°è¯´æ˜ï¼š
+  * @param    spi     ï¼š  SPI0 - SPI3
+  * @param    txData  ï¼š  å†™å…¥çš„buff
+  * @param    rxData  ï¼š  è¯»å‡ºçš„buff
+  * @param    len     ï¼š  é•¿åº¦
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šè¿™é‡Œå®é™…æ˜¯å°†Ascå£ç”¨ä½œSPIï¼Œå¦‚æœä½¿ç”¨äº†Asc0å½“ä½œSPI0ï¼Œé‚£ä¹ˆAsc0 å°±ä¸å¯ç”¨ä½œä¸²å£0
+*  			SPI_ReadWriteNByte(SPI3, buff, buff, 2); //ä½¿ç”¨SPI3 è¯»å†™ä¸¤ä¸ªå­—èŠ‚
 *************************************************************************/
 uint8 SPI_ReadWriteNByte(SPI_t spi, uint8_t *txData, uint8_t *rxData, uint32_t len)
 {
-	/* SPI´«Êä½á¹¹Ìå */
+	/* SPIä¼ è¾“ç»“æ„ä½“ */
     IfxAsclin_Spi_exchange(&g_SpiConfig[spi], txData, rxData, len);
 
-    /* µÈ´ı´«Êä½áÊø  */
+    /* ç­‰å¾…ä¼ è¾“ç»“æŸ  */
 	while (IfxAsclin_Spi_getStatus(&g_SpiConfig[spi]) == IfxAsclin_Spi_Status_busy);
 
 	return 0;

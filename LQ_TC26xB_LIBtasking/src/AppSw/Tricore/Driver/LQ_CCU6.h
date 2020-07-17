@@ -1,21 +1,21 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-��ƽ    ̨�������������ܿƼ�TC264DA���İ�
-����    д��ZYF/chiusir
-��E-mail  ��chiusir@163.com
-�������汾��V1.1 ��Ȩ���У���λʹ��������ϵ��Ȩ
-�������¡�2020��4��10��
-�������Ϣ�ο����е�ַ��
-����    վ��http://www.lqist.cn
-���Ա����̡�http://longqiu.taobao.com
+【平    台】北京龙邱智能科技TC264DA核心板
+【编    写】ZYF/chiusir
+【E-mail  】chiusir@163.com
+【软件版本】V1.1 版权所有，单位使用请先联系授权
+【最后更新】2020年4月10日
+【相关信息参考下列地址】
+【网    站】http://www.lqist.cn
+【淘宝店铺】http://longqiu.taobao.com
 ------------------------------------------------
-��dev.env.��Hightec4.9.3/Tasking6.3�����ϰ汾
-��Target �� TC264DA
-��Crystal�� 20.000Mhz
-��SYS PLL�� 200MHz
+【dev.env.】Hightec4.9.3/Tasking6.3及以上版本
+【Target 】 TC264DA
+【Crystal】 20.000Mhz
+【SYS PLL】 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-*  ��    ע��TC264 ������CCU6ģ��  ÿ��ģ��������������ʱ��  ������ʱ���ж�
+*  备    注：TC264 有两个CCU6模块  每个模块有两个独立定时器  触发定时器中断
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #ifndef SRC_APPSW_TRICORE_DRIVER_LQ_CCU6_H_
@@ -36,7 +36,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 /**
- * 	CCU6ģ��ö��
+ * 	CCU6模块枚举
  */
 typedef enum
 {
@@ -45,7 +45,7 @@ typedef enum
 }CCU6_t;
 
 /**
- * 	CCU6ͨ��ö��
+ * 	CCU6通道枚举
  */
 typedef enum
 {
@@ -53,36 +53,36 @@ typedef enum
 	CCU6_Channel1,
 }CCU6_Channel_t;
 
-/** CCU6��ʱ���ж� CCU60  channel0 �жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** CCU6定时器中断 CCU60  channel0 中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  CCU60_CH0_PRIORITY    80
 
-/** CCU6��ʱ���ж� CCU60  channel1 �жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** CCU6定时器中断 CCU60  channel1 中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  CCU60_CH1_PRIORITY    81
 
-/** CCU6��ʱ���ж� CCU60   �жϹ��ĸ��ں˹����� ��Χ��0��CPU0   1��CPU1   3��DMA*/
+/** CCU6定时器中断 CCU60   中断归哪个内核管理？ 范围：0：CPU0   1：CPU1   3：DMA*/
 #define  CCU60_VECTABNUM       0
 
 
 
-/** CCU6��ʱ���ж� CCU61  channel0 �жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** CCU6定时器中断 CCU61  channel0 中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  CCU61_CH0_PRIORITY    82
 
-/** CCU6��ʱ���ж� CCU61  channel1 �жϷ��������ȼ�   ��Χ��1-255   ����Խ�� ���ȼ�Խ��  ע�����ȼ���Ҫ�ظ� */
+/** CCU6定时器中断 CCU61  channel1 中断服务函数优先级   范围：1-255   数字越大 优先级越高  注意优先级不要重复 */
 #define  CCU61_CH1_PRIORITY    83
 
-/** CCU6��ʱ���ж� CCU61  �жϹ��ĸ��ں˹����� ��Χ��0��CPU0   1��CPU1   3��DMA*/
+/** CCU6定时器中断 CCU61  中断归哪个内核管理？ 范围：0：CPU0   1：CPU1   3：DMA*/
 #define  CCU61_VECTABNUM       0
 
 
 /*************************************************************************
-*  �������ƣ�CCU6_InitConfig CCU6
-*  ����˵������ʱ�������жϳ�ʼ��
-*  ����˵����ccu6    �� ccu6ģ��            CCU6_0 �� CCU6_1
-*  ����˵����channel �� ccu6ģ��ͨ��  CCU6_Channel0 �� CCU6_Channel1
-*  ����˵����us      �� ccu6ģ��  �ж�����ʱ��  ��λus
-*  �������أ���
-*  �޸�ʱ�䣺2020��3��30��
-*  ��    ע��
+*  函数名称：CCU6_InitConfig CCU6
+*  功能说明：定时器周期中断初始化
+*  参数说明：ccu6    ： ccu6模块            CCU6_0 、 CCU6_1
+*  参数说明：channel ： ccu6模块通道  CCU6_Channel0 、 CCU6_Channel1
+*  参数说明：us      ： ccu6模块  中断周期时间  单位us
+*  函数返回：无
+*  修改时间：2020年3月30日
+*  备    注：
 *************************************************************************/
 void CCU6_InitConfig(CCU6_t ccu6, CCU6_Channel_t channel, uint32 us);
 

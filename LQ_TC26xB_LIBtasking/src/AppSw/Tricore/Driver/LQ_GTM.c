@@ -1,24 +1,24 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-Í¨ÓÃ¶¨Ê±Æ÷Ä£¿é£¨GTM£©
-ÓĞ4¸öATOM×ÓÄ£¿é£¬Ã¿¸ö×ÓÄ£¿éÓĞ8Â·¿É¶ÀÁ¢ÅäÖÃµÄÍ¨µÀ
-ÓĞ3¸öTIM×ÓÄ£¿é£¬Ã¿¸ö×ÓÄ£¿éÓĞ8Â·¿É¶ÀÁ¢ÅäÖÃµÄÍ¨µÀ
-ÓĞ2¸öTOM×ÓÄ£¿é£¬Ã¿¸ö×ÓÄ£¿éÓĞ16Â·¿É¶ÀÁ¢ÅäÖÃµÄÍ¨µÀ
+é€šç”¨å®šæ—¶å™¨æ¨¡å—ï¼ˆGTMï¼‰
+æœ‰4ä¸ªATOMå­æ¨¡å—ï¼Œæ¯ä¸ªå­æ¨¡å—æœ‰8è·¯å¯ç‹¬ç«‹é…ç½®çš„é€šé“
+æœ‰3ä¸ªTIMå­æ¨¡å—ï¼Œæ¯ä¸ªå­æ¨¡å—æœ‰8è·¯å¯ç‹¬ç«‹é…ç½®çš„é€šé“
+æœ‰2ä¸ªTOMå­æ¨¡å—ï¼Œæ¯ä¸ªå­æ¨¡å—æœ‰16è·¯å¯ç‹¬ç«‹é…ç½®çš„é€šé“
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
@@ -26,70 +26,70 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////ATOM PWM¹¦ÄÜº¯Êı    //////////////////////////////////
+///////////////////////////////////ATOM PWMåŠŸèƒ½å‡½æ•°    //////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
-//PWM ÅäÖÃ½á¹¹Ìå
+//PWM é…ç½®ç»“æ„ä½“
 IfxGtm_Atom_Pwm_Driver g_AtomDriverPWM[32];
 IfxGtm_Atom_Pwm_Config g_atomConfig;
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid ATOM_PWM_InitConfig(IfxGtm_Atom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
-*  ¹¦ÄÜËµÃ÷£º³õÊ¼»¯ATOMÎªPWMÊä³ö¹¦ÄÜ
-*  ²ÎÊıËµÃ÷£º
-  * @param    pin            £º    PWMÍ¨µÀ  IfxGtm_PinMap.hÖĞ ÒÑ¾­¶¨ÒåÁË¶ÔÓ¦µÄPWM¹Ü½Å
-  * @param    duty           £º    Õ¼¿Õ±È * ATOM_PWM_MAX
-  * @param    pwmFreq_Hz     £º    ÆµÂÊ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê4ÔÂ1ÈÕ
-*  ±¸    ×¢£ºPWM_InitConfig(IfxGtm_ATOM0_0_TOUT53_P21_2_OUT, 5000, 100);//³õÊ¼»¯P21_2 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/ATOM_PWM_MAX)*100
+*  å‡½æ•°åç§°ï¼švoid ATOM_PWM_InitConfig(IfxGtm_Atom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
+*  åŠŸèƒ½è¯´æ˜ï¼šåˆå§‹åŒ–ATOMä¸ºPWMè¾“å‡ºåŠŸèƒ½
+*  å‚æ•°è¯´æ˜ï¼š
+  * @param    pin            ï¼š    PWMé€šé“  IfxGtm_PinMap.hä¸­ å·²ç»å®šä¹‰äº†å¯¹åº”çš„PWMç®¡è„š
+  * @param    duty           ï¼š    å ç©ºæ¯” * ATOM_PWM_MAX
+  * @param    pwmFreq_Hz     ï¼š    é¢‘ç‡
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´4æœˆ1æ—¥
+*  å¤‡    æ³¨ï¼šPWM_InitConfig(IfxGtm_ATOM0_0_TOUT53_P21_2_OUT, 5000, 100);//åˆå§‹åŒ–P21_2 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/ATOM_PWM_MAX)*100
 *************************************************************************/
 void ATOM_PWM_InitConfig(IfxGtm_Atom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
 {
-	IfxGtm_enable(&MODULE_GTM); /* Ê¹ÄÜ GTM */
+	IfxGtm_enable(&MODULE_GTM); /* ä½¿èƒ½ GTM */
 
-	IfxGtm_Cmu_setClkFrequency(&MODULE_GTM, IfxGtm_Cmu_Clk_0, ATOM_PWM_CLK); //ÉèÖÃ CMU clock 100M ÆµÂÊ
-	IfxGtm_Cmu_enableClocks(&MODULE_GTM, IFXGTM_CMU_CLKEN_CLK0);             //Ê¹ÄÜ CMU clock 0
+	IfxGtm_Cmu_setClkFrequency(&MODULE_GTM, IfxGtm_Cmu_Clk_0, ATOM_PWM_CLK); //è®¾ç½® CMU clock 100M é¢‘ç‡
+	IfxGtm_Cmu_enableClocks(&MODULE_GTM, IFXGTM_CMU_CLKEN_CLK0);             //ä½¿èƒ½ CMU clock 0
 
 	IfxGtm_Atom_Pwm_initConfig(&g_atomConfig, &MODULE_GTM);
 
-	g_atomConfig.atom = pin.atom;                                //Ñ¡ÔñPWMÊä³ö¹Ü½Å
-	g_atomConfig.atomChannel = pin.channel;                      //Ñ¡ÔñPWMÊä³ö¹Ü½Å¶ÔÓ¦µÄÍ¨µÀ
-	g_atomConfig.pin.outputPin = &pin;                           //ÉèÖÃÊä³ö¹Ü½Å
-	g_atomConfig.period = ATOM_PWM_CLK / pwmFreq_Hz;             //ÉèÖÃÊä³öÖÜÆÚ
-	g_atomConfig.dutyCycle = (uint32)(duty * ((float)g_atomConfig.period / ATOM_PWM_MAX));//ÉèÖÃÕ¼¿Õ±È
+	g_atomConfig.atom = pin.atom;                                //é€‰æ‹©PWMè¾“å‡ºç®¡è„š
+	g_atomConfig.atomChannel = pin.channel;                      //é€‰æ‹©PWMè¾“å‡ºç®¡è„šå¯¹åº”çš„é€šé“
+	g_atomConfig.pin.outputPin = &pin;                           //è®¾ç½®è¾“å‡ºç®¡è„š
+	g_atomConfig.period = ATOM_PWM_CLK / pwmFreq_Hz;             //è®¾ç½®è¾“å‡ºå‘¨æœŸ
+	g_atomConfig.dutyCycle = (uint32)(duty * ((float)g_atomConfig.period / ATOM_PWM_MAX));//è®¾ç½®å ç©ºæ¯”
 
 	uint8 tempNum = (uint8)pin.atom * 8 + (uint8)pin.channel;
 
-	IfxGtm_Atom_Pwm_init(&g_AtomDriverPWM[tempNum], &g_atomConfig);      //ATOM_PWM³õÊ¼»¯
-	IfxGtm_Atom_Pwm_start(&g_AtomDriverPWM[tempNum], TRUE);              //¿ªÊ¼Êä³öPWM
+	IfxGtm_Atom_Pwm_init(&g_AtomDriverPWM[tempNum], &g_atomConfig);      //ATOM_PWMåˆå§‹åŒ–
+	IfxGtm_Atom_Pwm_start(&g_AtomDriverPWM[tempNum], TRUE);              //å¼€å§‹è¾“å‡ºPWM
 
-	g_atomConfig.synchronousUpdateEnabled = TRUE;                        //Ê¹ÄÜPWMÍ¬²½¸üĞÂ
+	g_atomConfig.synchronousUpdateEnabled = TRUE;                        //ä½¿èƒ½PWMåŒæ­¥æ›´æ–°
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid ATOM_PWM_SetDuty(IfxGtm_Atom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
-*  ¹¦ÄÜËµÃ÷£ºÉèÖÃPWMÆµÂÊºÍÕ¼¿Õ±È
-*  ²ÎÊıËµÃ÷£º
-   pin            £ºPWMÍ¨µÀ IfxGtm_PinMap.hÖĞ ÒÑ¾­¶¨ÒåÁË¶ÔÓ¦µÄPWM¹Ü½Å
-   duty           £ºÕ¼¿Õ±È * ATOM_PWM_MAX
-   pwmFreq_Hz     : PWMÆµÂÊ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê4ÔÂ1ÈÕ
-*  ±¸    ×¢£ºATOM_PWM_SetDuty(IfxGtm_ATOM0_0_TOUT53_P21_2_OUT, 5000, 1000);//ÉèÖÃP21_2  ÆµÂÊ 1000hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/ATOM_PWM_MAX)*100
+*  å‡½æ•°åç§°ï¼švoid ATOM_PWM_SetDuty(IfxGtm_Atom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
+*  åŠŸèƒ½è¯´æ˜ï¼šè®¾ç½®PWMé¢‘ç‡å’Œå ç©ºæ¯”
+*  å‚æ•°è¯´æ˜ï¼š
+   pin            ï¼šPWMé€šé“ IfxGtm_PinMap.hä¸­ å·²ç»å®šä¹‰äº†å¯¹åº”çš„PWMç®¡è„š
+   duty           ï¼šå ç©ºæ¯” * ATOM_PWM_MAX
+   pwmFreq_Hz     : PWMé¢‘ç‡
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´4æœˆ1æ—¥
+*  å¤‡    æ³¨ï¼šATOM_PWM_SetDuty(IfxGtm_ATOM0_0_TOUT53_P21_2_OUT, 5000, 1000);//è®¾ç½®P21_2  é¢‘ç‡ 1000hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/ATOM_PWM_MAX)*100
 *************************************************************************/
 void ATOM_PWM_SetDuty(IfxGtm_Atom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
 {
-	g_atomConfig.atom = pin.atom;                                //Ñ¡ÔñPWMÊä³ö¹Ü½Å
-	g_atomConfig.atomChannel = pin.channel;                      //Ñ¡ÔñPWMÊä³ö¹Ü½Å¶ÔÓ¦µÄÍ¨µÀ
-	g_atomConfig.pin.outputPin = &pin;                           //ÉèÖÃÊä³ö¹Ü½Å
-	g_atomConfig.period = ATOM_PWM_CLK / pwmFreq_Hz;             //ÉèÖÃÊä³öÖÜÆÚ
-	g_atomConfig.dutyCycle = (uint32)(duty * ((float)g_atomConfig.period / ATOM_PWM_MAX));//ÉèÖÃÕ¼¿Õ±È
+	g_atomConfig.atom = pin.atom;                                //é€‰æ‹©PWMè¾“å‡ºç®¡è„š
+	g_atomConfig.atomChannel = pin.channel;                      //é€‰æ‹©PWMè¾“å‡ºç®¡è„šå¯¹åº”çš„é€šé“
+	g_atomConfig.pin.outputPin = &pin;                           //è®¾ç½®è¾“å‡ºç®¡è„š
+	g_atomConfig.period = ATOM_PWM_CLK / pwmFreq_Hz;             //è®¾ç½®è¾“å‡ºå‘¨æœŸ
+	g_atomConfig.dutyCycle = (uint32)(duty * ((float)g_atomConfig.period / ATOM_PWM_MAX));//è®¾ç½®å ç©ºæ¯”
 
 	uint8 tempNum = (uint8)pin.atom * 8 + (uint8)pin.channel;
 
-	IfxGtm_Atom_Pwm_init(&g_AtomDriverPWM[tempNum], &g_atomConfig);  //ATOM_PWM³õÊ¼»¯
-	IfxGtm_Atom_Pwm_start(&g_AtomDriverPWM[tempNum], TRUE);          //¿ªÊ¼Êä³öPWM
+	IfxGtm_Atom_Pwm_init(&g_AtomDriverPWM[tempNum], &g_atomConfig);  //ATOM_PWMåˆå§‹åŒ–
+	IfxGtm_Atom_Pwm_start(&g_AtomDriverPWM[tempNum], TRUE);          //å¼€å§‹è¾“å‡ºPWM
 }
 
 
@@ -99,38 +99,38 @@ void ATOM_PWM_SetDuty(IfxGtm_Atom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_H
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////TOM PWM¹¦ÄÜº¯Êı    //////////////////////////////////
+///////////////////////////////////TOM PWMåŠŸèƒ½å‡½æ•°    //////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
 
-//PWM ÅäÖÃ½á¹¹Ìå
+//PWM é…ç½®ç»“æ„ä½“
 IfxGtm_Tom_Pwm_Config tomConfig;
 IfxGtm_Tom_Pwm_Driver tomDriverPWM[32];
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid TOM_PWM_InitConfig(IfxGtm_Atom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
-*  ¹¦ÄÜËµÃ÷£º³õÊ¼»¯ATOMÎªPWMÊä³ö¹¦ÄÜ
-*  ²ÎÊıËµÃ÷£º
-  * @param    pin            £º    PWMÍ¨µÀ  IfxGtm_PinMap.hÖĞ ÒÑ¾­¶¨ÒåÁË¶ÔÓ¦µÄPWM¹Ü½Å
-  * @param    duty           £º    Õ¼¿Õ±È * TOM_PWM_MAX
-  * @param    pwmFreq_Hz     £º    ÆµÂÊ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê4ÔÂ1ÈÕ
-*  ±¸    ×¢£ºTOM_PWM_InitConfig(IfxGtm_TOM0_11_TOUT63_P20_7_OUT, 5000, 125);//³õÊ¼»¯P20_7 ×÷ÎªPWMÊä³ö¿Ú ÆµÂÊ100Hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
+*  å‡½æ•°åç§°ï¼švoid TOM_PWM_InitConfig(IfxGtm_Atom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
+*  åŠŸèƒ½è¯´æ˜ï¼šåˆå§‹åŒ–ATOMä¸ºPWMè¾“å‡ºåŠŸèƒ½
+*  å‚æ•°è¯´æ˜ï¼š
+  * @param    pin            ï¼š    PWMé€šé“  IfxGtm_PinMap.hä¸­ å·²ç»å®šä¹‰äº†å¯¹åº”çš„PWMç®¡è„š
+  * @param    duty           ï¼š    å ç©ºæ¯” * TOM_PWM_MAX
+  * @param    pwmFreq_Hz     ï¼š    é¢‘ç‡
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´4æœˆ1æ—¥
+*  å¤‡    æ³¨ï¼šTOM_PWM_InitConfig(IfxGtm_TOM0_11_TOUT63_P20_7_OUT, 5000, 125);//åˆå§‹åŒ–P20_7 ä½œä¸ºPWMè¾“å‡ºå£ é¢‘ç‡100Hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
 *************************************************************************/
 void TOM_PWM_InitConfig(IfxGtm_Tom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
 {
-	IfxGtm_enable(&MODULE_GTM); /* Ê¹ÄÜ GTM */
+	IfxGtm_enable(&MODULE_GTM); /* ä½¿èƒ½ GTM */
 
     IfxGtm_Cmu_enableClocks(&MODULE_GTM, IFXGTM_CMU_CLKEN_FXCLK);       /* Enable the FXU clocks               */
 
     IfxGtm_Tom_Pwm_initConfig(&tomConfig, &MODULE_GTM);                 /* Initialize default parameters            */
 
-	tomConfig.tom = pin.tom;                                 //Ñ¡ÔñPWMÊä³ö¹Ü½Å
-	tomConfig.tomChannel = pin.channel;                      //Ñ¡ÔñPWMÊä³ö¹Ü½Å¶ÔÓ¦µÄÍ¨µÀ
-	tomConfig.pin.outputPin = &pin;                           //ÉèÖÃÊä³ö¹Ü½Å
-	tomConfig.period = TOM_PWM_CLK / pwmFreq_Hz;              //ÉèÖÃÊä³öÖÜÆÚ
-	tomConfig.dutyCycle = (uint32)(duty * ((float)tomConfig.period / TOM_PWM_MAX));//ÉèÖÃÕ¼¿Õ±È
-    tomConfig.synchronousUpdateEnabled = TRUE;                        //Ê¹ÄÜPWMÍ¬²½¸üĞÂ
+	tomConfig.tom = pin.tom;                                 //é€‰æ‹©PWMè¾“å‡ºç®¡è„š
+	tomConfig.tomChannel = pin.channel;                      //é€‰æ‹©PWMè¾“å‡ºç®¡è„šå¯¹åº”çš„é€šé“
+	tomConfig.pin.outputPin = &pin;                           //è®¾ç½®è¾“å‡ºç®¡è„š
+	tomConfig.period = TOM_PWM_CLK / pwmFreq_Hz;              //è®¾ç½®è¾“å‡ºå‘¨æœŸ
+	tomConfig.dutyCycle = (uint32)(duty * ((float)tomConfig.period / TOM_PWM_MAX));//è®¾ç½®å ç©ºæ¯”
+    tomConfig.synchronousUpdateEnabled = TRUE;                        //ä½¿èƒ½PWMåŒæ­¥æ›´æ–°
 	tomConfig.clock = IfxGtm_Tom_Ch_ClkSrc_cmuFxclk1;                   /* Select the FXU clock 1              */
 
     uint8 tempNum = (uint8)pin.tom * 16 + (uint8)pin.channel;
@@ -139,28 +139,28 @@ void TOM_PWM_InitConfig(IfxGtm_Tom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_
 
 }
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid TOM_PWM_SetDuty(IfxGtm_Tom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
-*  ¹¦ÄÜËµÃ÷£ºÉèÖÃPWMÆµÂÊºÍÕ¼¿Õ±È
-*  ²ÎÊıËµÃ÷£º
-   pin            £ºPWMÍ¨µÀ IfxGtm_PinMap.hÖĞ ÒÑ¾­¶¨ÒåÁË¶ÔÓ¦µÄPWM¹Ü½Å
-   duty           £ºÕ¼¿Õ±È * TOM_PWM_MAX
-   pwmFreq_Hz     : PWMÆµÂÊ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê4ÔÂ1ÈÕ
-*  ±¸    ×¢£ºTOM_PWM_SetDuty(IfxGtm_TOM0_11_TOUT63_P20_7_OUT, 5000, 1000);//ÉèÖÃP20_7  ÆµÂÊ 1000hz Õ¼¿Õ±È °Ù·ÖÖ®(5000/TOM_PWM_MAX)*100
+*  å‡½æ•°åç§°ï¼švoid TOM_PWM_SetDuty(IfxGtm_Tom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
+*  åŠŸèƒ½è¯´æ˜ï¼šè®¾ç½®PWMé¢‘ç‡å’Œå ç©ºæ¯”
+*  å‚æ•°è¯´æ˜ï¼š
+   pin            ï¼šPWMé€šé“ IfxGtm_PinMap.hä¸­ å·²ç»å®šä¹‰äº†å¯¹åº”çš„PWMç®¡è„š
+   duty           ï¼šå ç©ºæ¯” * TOM_PWM_MAX
+   pwmFreq_Hz     : PWMé¢‘ç‡
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´4æœˆ1æ—¥
+*  å¤‡    æ³¨ï¼šTOM_PWM_SetDuty(IfxGtm_TOM0_11_TOUT63_P20_7_OUT, 5000, 1000);//è®¾ç½®P20_7  é¢‘ç‡ 1000hz å ç©ºæ¯” ç™¾åˆ†ä¹‹(5000/TOM_PWM_MAX)*100
 *************************************************************************/
 void TOM_PWM_SetDuty(IfxGtm_Tom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
 {
-	tomConfig.tom = pin.tom;                                //Ñ¡ÔñPWMÊä³ö¹Ü½Å
-	tomConfig.tomChannel = pin.channel;                      //Ñ¡ÔñPWMÊä³ö¹Ü½Å¶ÔÓ¦µÄÍ¨µÀ
-	tomConfig.pin.outputPin = &pin;                           //ÉèÖÃÊä³ö¹Ü½Å
-	tomConfig.period = TOM_PWM_CLK / pwmFreq_Hz;             //ÉèÖÃÊä³öÖÜÆÚ
-	tomConfig.dutyCycle = (uint32)(duty * ((float)tomConfig.period / TOM_PWM_MAX));//ÉèÖÃÕ¼¿Õ±È
+	tomConfig.tom = pin.tom;                                //é€‰æ‹©PWMè¾“å‡ºç®¡è„š
+	tomConfig.tomChannel = pin.channel;                      //é€‰æ‹©PWMè¾“å‡ºç®¡è„šå¯¹åº”çš„é€šé“
+	tomConfig.pin.outputPin = &pin;                           //è®¾ç½®è¾“å‡ºç®¡è„š
+	tomConfig.period = TOM_PWM_CLK / pwmFreq_Hz;             //è®¾ç½®è¾“å‡ºå‘¨æœŸ
+	tomConfig.dutyCycle = (uint32)(duty * ((float)tomConfig.period / TOM_PWM_MAX));//è®¾ç½®å ç©ºæ¯”
 
 	uint8 tempNum = (uint8)pin.tom * 16 + (uint8)pin.channel;
 
-	IfxGtm_Tom_Pwm_init(&tomDriverPWM[tempNum], &tomConfig);  //ATOM_PWM³õÊ¼»¯
-	IfxGtm_Tom_Pwm_start(&tomDriverPWM[tempNum], TRUE);          //¿ªÊ¼Êä³öPWM
+	IfxGtm_Tom_Pwm_init(&tomDriverPWM[tempNum], &tomConfig);  //ATOM_PWMåˆå§‹åŒ–
+	IfxGtm_Tom_Pwm_start(&tomDriverPWM[tempNum], TRUE);          //å¼€å§‹è¾“å‡ºPWM
 }
 
 
@@ -168,7 +168,7 @@ void TOM_PWM_SetDuty(IfxGtm_Tom_ToutMap pin, uint32_t duty, uint32_t pwmFreq_Hz)
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////TIM Âö³å²¶×½¹¦ÄÜº¯Êı    ///////////////////////////////
+///////////////////////////////TIM è„‰å†²æ•æ‰åŠŸèƒ½å‡½æ•°    ///////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
 IfxGtm_Tim_In g_driverTIM[24];                          /* TIM driver structure                                     */
@@ -176,12 +176,12 @@ IfxGtm_Tim_In_Config configTIM;
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid TIM_InitConfig(void)
-*  ¹¦ÄÜËµÃ÷£ºTIM³õÊ¼»¯
-*  ²ÎÊıËµÃ÷£ºÎŞ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ22ÈÕ
-*  ±¸    ×¢£ºP33.12×÷ÎªTIMÊäÈë¿Ú
+*  å‡½æ•°åç§°ï¼švoid TIM_InitConfig(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šTIMåˆå§‹åŒ–
+*  å‚æ•°è¯´æ˜ï¼šæ— 
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ22æ—¥
+*  å¤‡    æ³¨ï¼šP33.12ä½œä¸ºTIMè¾“å…¥å£
 *************************************************************************/
 void TIM_InitConfig(IfxGtm_Tim_TinMap pin)
 {
@@ -198,14 +198,14 @@ void TIM_InitConfig(IfxGtm_Tim_TinMap pin)
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid TIM_GetPwm(void)
-*  ¹¦ÄÜËµÃ÷£º»ñÈ¡TIMÊäÈëĞÅºÅµÄÖÜÆÚºÍÕ¼¿Õ±È
-*  ²ÎÊıËµÃ÷£ºpin        TIM¹Ü½Å
-*  ²ÎÊıËµÃ÷£ºPeriod     ÖÜÆÚ
-*  ²ÎÊıËµÃ÷£ºDuty       Õ¼¿Õ±È
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ22ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼švoid TIM_GetPwm(void)
+*  åŠŸèƒ½è¯´æ˜ï¼šè·å–TIMè¾“å…¥ä¿¡å·çš„å‘¨æœŸå’Œå ç©ºæ¯”
+*  å‚æ•°è¯´æ˜ï¼špin        TIMç®¡è„š
+*  å‚æ•°è¯´æ˜ï¼šPeriod     å‘¨æœŸ
+*  å‚æ•°è¯´æ˜ï¼šDuty       å ç©ºæ¯”
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ22æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 void TIM_GetPwm(IfxGtm_Tim_TinMap pin, float32 *PwmFreq_Hz, float32 *Duty)
 {

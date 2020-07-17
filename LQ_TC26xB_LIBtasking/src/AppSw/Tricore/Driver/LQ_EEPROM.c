@@ -1,44 +1,44 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-eeprom Ò»¹²96Kb ·ÖÎª12¸öÉÈÇø   Ã¿¸öÉÈÇø8K  Ã¿¸öÉÈÇø·ÖÎª1024Ò³   Ã¿Ò³8¸ö×Ö½Ú
+eeprom ä¸€å…±96Kb åˆ†ä¸º12ä¸ªæ‰‡åŒº   æ¯ä¸ªæ‰‡åŒº8K  æ¯ä¸ªæ‰‡åŒºåˆ†ä¸º1024é¡µ   æ¯é¡µ8ä¸ªå­—èŠ‚
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #include <LQ_EEPROM.h>
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid EEPROM_EraseSector(unsigned char sector)
-*  ¹¦ÄÜËµÃ÷£ºeeprom²Á³öÉÈÇø
-*  ²ÎÊıËµÃ÷£ºsector   £º  ÉÈÇø·¶Î§  0-11
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºEEPROM_EraseSector(0);   //²Á³öÉÈÇø0
+*  å‡½æ•°åç§°ï¼švoid EEPROM_EraseSector(unsigned char sector)
+*  åŠŸèƒ½è¯´æ˜ï¼šeepromæ“¦å‡ºæ‰‡åŒº
+*  å‚æ•°è¯´æ˜ï¼šsector   ï¼š  æ‰‡åŒºèŒƒå›´  0-11
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šEEPROM_EraseSector(0);   //æ“¦å‡ºæ‰‡åŒº0
 *************************************************************************/
 void EEPROM_EraseSector(unsigned char sector)
 {
-	/* ¼ÆËãÉÈÇøÆğÊ¼µØÖ· */
+	/* è®¡ç®—æ‰‡åŒºèµ·å§‹åœ°å€ */
 	unsigned long sector_addr = IfxFlash_dFlashTableEepLog[sector].start;
 
 	unsigned short endinitSfty_pw;
 
 	endinitSfty_pw = IfxScuWdt_getSafetyWatchdogPassword();
 
-	/* ²Á³öÉÈÇø */
+	/* æ“¦å‡ºæ‰‡åŒº */
 	IfxScuWdt_clearSafetyEndinit(endinitSfty_pw);
 	IfxFlash_eraseSector(sector_addr);
 	IfxScuWdt_setSafetyEndinit(endinitSfty_pw);
@@ -47,21 +47,21 @@ void EEPROM_EraseSector(unsigned char sector)
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid EEPROM_EraseSector(unsigned char sector)
-*  ¹¦ÄÜËµÃ÷£ºeepromĞ´ÈëÊı¾İ
-*  ²ÎÊıËµÃ÷£º
-  * @param    sector   £º  ÉÈÇø   ·¶Î§  0-11
-  * @param    page     £º  Ò³     ·¶Î§  0-1023
-  * @param    buff     £º  ´æ·ÅĞ´ÈëÊı¾İ
-  * @param    len      £º  Ğ´ÈëÊı¾İ¸öÊı
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºEEPROM_Write(0, 0, u32wBuff, 24);   //ÏòÉÈÇø0  µÚ0Ò³  Ğ´Èë24¸öunsigned longÊı¾İ
+*  å‡½æ•°åç§°ï¼švoid EEPROM_EraseSector(unsigned char sector)
+*  åŠŸèƒ½è¯´æ˜ï¼šeepromå†™å…¥æ•°æ®
+*  å‚æ•°è¯´æ˜ï¼š
+  * @param    sector   ï¼š  æ‰‡åŒº   èŒƒå›´  0-11
+  * @param    page     ï¼š  é¡µ     èŒƒå›´  0-1023
+  * @param    buff     ï¼š  å­˜æ”¾å†™å…¥æ•°æ®
+  * @param    len      ï¼š  å†™å…¥æ•°æ®ä¸ªæ•°
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šEEPROM_Write(0, 0, u32wBuff, 24);   //å‘æ‰‡åŒº0  ç¬¬0é¡µ  å†™å…¥24ä¸ªunsigned longæ•°æ®
 *************************************************************************/
 void EEPROM_Write(unsigned char sector, unsigned short page, unsigned long * buff, unsigned short len)
 {
 	int i;
-	/* ¼ÆËãÉÈÇøÆğÊ¼µØÖ· */
+	/* è®¡ç®—æ‰‡åŒºèµ·å§‹åœ°å€ */
 	unsigned long sector_addr = IfxFlash_dFlashTableEepLog[sector].start;
 
 	unsigned short endinitSfty_pw;
@@ -70,18 +70,18 @@ void EEPROM_Write(unsigned char sector, unsigned short page, unsigned long * buf
 
 	for(i = 0; i < len/2; i++)
 	{
-		/* ÒªĞ´ÈëÒ³µØÖ· */
+		/* è¦å†™å…¥é¡µåœ°å€ */
 		unsigned long pageAddr = sector_addr + (page + i)* IFXFLASH_DFLASH_PAGE_LENGTH;
 
 		IfxFlash_enterPageMode(pageAddr);
 
-		/* ²ìÃ¦ */
+		/* å¯Ÿå¿™ */
 		IfxFlash_waitUnbusy(0, IfxFlash_FlashType_D0);
 
-		/* Ğ´Èë»º³åÇø  */
+		/* å†™å…¥ç¼“å†²åŒº  */
 		IfxFlash_loadPage2X32(pageAddr, buff[2*i], buff[2*i + 1]);
 
-		/* Ğ´Èëeeprom  */
+		/* å†™å…¥eeprom  */
 		IfxScuWdt_clearSafetyEndinit(endinitSfty_pw);
 		IfxFlash_writePage(pageAddr);
 		IfxScuWdt_setSafetyEndinit(endinitSfty_pw);
@@ -91,18 +91,18 @@ void EEPROM_Write(unsigned char sector, unsigned short page, unsigned long * buf
 
 	if(len%2)
 	{
-		/* ÒªĞ´ÈëÒ³µØÖ· */
+		/* è¦å†™å…¥é¡µåœ°å€ */
 		unsigned long pageAddr = sector_addr + (page + len/2)* IFXFLASH_DFLASH_PAGE_LENGTH;
 
 		IfxFlash_enterPageMode(pageAddr);
 
-		/* ²ìÃ¦ */
+		/* å¯Ÿå¿™ */
 		IfxFlash_waitUnbusy(0, IfxFlash_FlashType_D0);
 
-		/* Ğ´Èë»º³åÇø  */
+		/* å†™å…¥ç¼“å†²åŒº  */
 		IfxFlash_loadPage2X32(pageAddr, buff[len], 0);
 
-		/* Ğ´Èëeeprom  */
+		/* å†™å…¥eeprom  */
 		IfxScuWdt_clearSafetyEndinit(endinitSfty_pw);
 		IfxFlash_writePage(pageAddr);
 		IfxScuWdt_setSafetyEndinit(endinitSfty_pw);
@@ -114,24 +114,24 @@ void EEPROM_Write(unsigned char sector, unsigned short page, unsigned long * buf
 
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºvoid EEPROM_Read(unsigned char sector, unsigned short page, unsigned long * rbuff, unsigned short len)
-*  ¹¦ÄÜËµÃ÷£ºeeprom¶ÁÈ¡
-*  ²ÎÊıËµÃ÷£º
-  * @param    sector   £º  ÉÈÇø   ·¶Î§  0-11
-  * @param    page     £º  Ò³     ·¶Î§  0-1023
-  * @param    buff     £º  ´æ·ÅĞ´ÈëÊı¾İ
-  * @param    len      £º  Ğ´ÈëÊı¾İ¸öÊı
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºEEPROM_Read(0, 0, u32rBuff, 24);   //¶ÁÈ¡ÉÈÇø0  µÚ0Ò³  ¿ªÊ¼µÄ24¸öunsigned longÊı¾İ
+*  å‡½æ•°åç§°ï¼švoid EEPROM_Read(unsigned char sector, unsigned short page, unsigned long * rbuff, unsigned short len)
+*  åŠŸèƒ½è¯´æ˜ï¼šeepromè¯»å–
+*  å‚æ•°è¯´æ˜ï¼š
+  * @param    sector   ï¼š  æ‰‡åŒº   èŒƒå›´  0-11
+  * @param    page     ï¼š  é¡µ     èŒƒå›´  0-1023
+  * @param    buff     ï¼š  å­˜æ”¾å†™å…¥æ•°æ®
+  * @param    len      ï¼š  å†™å…¥æ•°æ®ä¸ªæ•°
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šEEPROM_Read(0, 0, u32rBuff, 24);   //è¯»å–æ‰‡åŒº0  ç¬¬0é¡µ  å¼€å§‹çš„24ä¸ªunsigned longæ•°æ®
 *************************************************************************/
 void EEPROM_Read(unsigned char sector, unsigned short page, unsigned long * rbuff, unsigned short len)
 {
 	int i;
-	/* ¼ÆËãÉÈÇøÆğÊ¼µØÖ· */
+	/* è®¡ç®—æ‰‡åŒºèµ·å§‹åœ°å€ */
 	unsigned long sector_addr = IfxFlash_dFlashTableEepLog[sector].start;
 
-	/* Òª¶ÁÒ³µØÖ· */
+	/* è¦è¯»é¡µåœ°å€ */
 	volatile unsigned long * pageAddr = (unsigned long*)(sector_addr + page * IFXFLASH_DFLASH_PAGE_LENGTH);
 
 	for(i = 0; i < len; i++)

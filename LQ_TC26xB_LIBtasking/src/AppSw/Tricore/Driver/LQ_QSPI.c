@@ -1,20 +1,20 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
-»ùÓÚiLLD_1_0_1_11_0µ×²ã³ÌĞò
+åŸºäºiLLD_1_0_1_11_0åº•å±‚ç¨‹åº
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
@@ -22,99 +22,99 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 
-/** QSPIÖĞ¶ÏCPU±êºÅ */
+/** QSPIä¸­æ–­CPUæ ‡å· */
 const uint8 QSpiIrqVectabNum[4] = {QSPI0_VECTABNUM, QSPI1_VECTABNUM, QSPI2_VECTABNUM, QSPI3_VECTABNUM};
 
-/** QSPIÖĞ¶ÏÓÅÏÈ¼¶ */
+/** QSPIä¸­æ–­ä¼˜å…ˆçº§ */
 const uint8 QSpiIrqPriority[12] = {QSPI0_RX_PRIORITY, QSPI0_TX_PRIORITY, QSPI0_ER_PRIORITY, QSPI1_RX_PRIORITY, QSPI1_TX_PRIORITY, QSPI1_ER_PRIORITY,
 		                           QSPI2_RX_PRIORITY, QSPI2_TX_PRIORITY, QSPI2_ER_PRIORITY, QSPI3_RX_PRIORITY, QSPI3_TX_PRIORITY, QSPI3_ER_PRIORITY};
 
-/** QSPI ÅäÖÃ½á¹¹Ìå */
+/** QSPI é…ç½®ç»“æ„ä½“ */
 IfxQspi_SpiMaster         g_QSPIConfig[4];
 IfxQspi_SpiMaster_Channel g_QspiMasterChannel[4];
 /***********************************************************************************************/
 /***********************************************************************************************/
-/*****************    QSPIÖĞ¶ÏÓÅÏÈ¼¶ ºÍ Ö¸ÏòÄÚºËÅäÖÃ ÓÃ»§¿ÉÒÔ×ÔĞĞĞŞ¸Ä*******************************/
+/*****************    QSPIä¸­æ–­ä¼˜å…ˆçº§ å’Œ æŒ‡å‘å†…æ ¸é…ç½® ç”¨æˆ·å¯ä»¥è‡ªè¡Œä¿®æ”¹*******************************/
 /***********************************************************************************************/
 /***********************************************************************************************/
 /**
-  * @brief    QSPI0_RX_IRQHandlerÖĞ¶Ï·şÎñº¯Êı
-  * @note     QSPI0 ½ÓÊÕÖĞ¶Ï·şÎñº¯Êı
+  * @brief    QSPI0_RX_IRQHandlerä¸­æ–­æœåŠ¡å‡½æ•°
+  * @note     QSPI0 æ¥æ”¶ä¸­æ–­æœåŠ¡å‡½æ•°
   */
 void QSPI0_RX_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrReceive(&g_QSPIConfig[0]);
 
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI0_TX_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrTransmit(&g_QSPIConfig[0]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI0_ER_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrError(&g_QSPIConfig[0]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI1_RX_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrReceive(&g_QSPIConfig[1]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI1_TX_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrTransmit(&g_QSPIConfig[1]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI1_ER_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrError(&g_QSPIConfig[1]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI2_RX_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrReceive(&g_QSPIConfig[2]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI2_TX_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrTransmit(&g_QSPIConfig[2]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI2_ER_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrError(&g_QSPIConfig[2]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI3_RX_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrReceive(&g_QSPIConfig[3]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI3_TX_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrTransmit(&g_QSPIConfig[3]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
 void QSPI3_ER_IRQHandler(void)
 {
 	IfxQspi_SpiMaster_isrError(&g_QSPIConfig[3]);
-	/* ÓÃ»§´úÂë */
+	/* ç”¨æˆ·ä»£ç  */
 }
 
-/* QSPIÖĞ¶Ï */
+/* QSPIä¸­æ–­ */
 IFX_INTERRUPT(QSPI0_RX_IRQHandler, QSPI0_VECTABNUM, QSPI0_RX_PRIORITY);
 IFX_INTERRUPT(QSPI1_RX_IRQHandler, QSPI1_VECTABNUM, QSPI1_RX_PRIORITY);
 IFX_INTERRUPT(QSPI2_RX_IRQHandler, QSPI2_VECTABNUM, QSPI2_RX_PRIORITY);
@@ -128,27 +128,27 @@ IFX_INTERRUPT(QSPI1_ER_IRQHandler, QSPI1_VECTABNUM, QSPI1_ER_PRIORITY);
 IFX_INTERRUPT(QSPI2_ER_IRQHandler, QSPI2_VECTABNUM, QSPI2_ER_PRIORITY);
 IFX_INTERRUPT(QSPI3_ER_IRQHandler, QSPI3_VECTABNUM, QSPI3_ER_PRIORITY);
 
-/** QSPIÖĞ¶Ï·şÎñº¯ÊıµØÖ· */
+/** QSPIä¸­æ–­æœåŠ¡å‡½æ•°åœ°å€ */
 const void *QSPIIrqFuncPointer[12] = {&QSPI0_RX_IRQHandler, &QSPI0_TX_IRQHandler, &QSPI0_ER_IRQHandler,
 									&QSPI1_RX_IRQHandler, &QSPI1_TX_IRQHandler, &QSPI1_ER_IRQHandler,
 									&QSPI2_RX_IRQHandler, &QSPI2_TX_IRQHandler, &QSPI2_ER_IRQHandler,
 									&QSPI3_RX_IRQHandler, &QSPI3_TX_IRQHandler, &QSPI3_ER_IRQHandler,};
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºQSPI_InitConfig(QSPI_CLK_t clkPin, QSPI_MISO_t misoPin, QSPI_MOSI_t mosiPin, QSPI_CS_t cQSPIn, uint32_t baudrate, uint8_t mode)
-*  ¹¦ÄÜËµÃ÷£ºQSPI Ö÷»úÄ£Ê½³õÊ¼»¯
-*  ²ÎÊıËµÃ÷£º
-  * @param    clkPin      £º QSPI  clk¹Ü½Å
-  * @param    misoPin     :  QSPI  MISO¹Ü½Å
-  * @param    misoPin     :  QSPI  MOSI¹Ü½Å
-  * @param    misoPin     :  QSPI  CS¹Ü½Å
-  * @param    baudrate    £º QSPI ²¨ÌØÂÊ
-  * @param      mode            0: CLK¿ÕÏĞÊ±¿ÌÎªµÍµçÆ½ ÔÚµÚÒ»¸öCLKÌø±ßÑØ ²¶»ñÊı¾İ
-  * @param      mode            1: CLK¿ÕÏĞÊ±¿ÌÎªµÍµçÆ½ ÔÚµÚ¶ş¸öCLKÌø±ßÑØ ²¶»ñÊı¾İ
-  * @param      mode            2: CLK¿ÕÏĞÊ±¿ÌÎª¸ßµçÆ½ ÔÚµÚÒ»¸öCLKÌø±ßÑØ ²¶»ñÊı¾İ
-  * @param      mode            3: CLK¿ÕÏĞÊ±¿ÌÎª¸ßµçÆ½ ÔÚµÚ¶ş¸öCLKÌø±ßÑØ ²¶»ñÊı¾İ
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£ºQSPI_InitConfig(QSPI2_CLK_P15_8, QSPI2_MISO_P15_7, QSPI2_MOSI_P15_5, QSPI2_CS_P15_2, 5000000, 3);
+*  å‡½æ•°åç§°ï¼šQSPI_InitConfig(QSPI_CLK_t clkPin, QSPI_MISO_t misoPin, QSPI_MOSI_t mosiPin, QSPI_CS_t cQSPIn, uint32_t baudrate, uint8_t mode)
+*  åŠŸèƒ½è¯´æ˜ï¼šQSPI ä¸»æœºæ¨¡å¼åˆå§‹åŒ–
+*  å‚æ•°è¯´æ˜ï¼š
+  * @param    clkPin      ï¼š QSPI  clkç®¡è„š
+  * @param    misoPin     :  QSPI  MISOç®¡è„š
+  * @param    misoPin     :  QSPI  MOSIç®¡è„š
+  * @param    misoPin     :  QSPI  CSç®¡è„š
+  * @param    baudrate    ï¼š QSPI æ³¢ç‰¹ç‡
+  * @param      mode            0: CLKç©ºé—²æ—¶åˆ»ä¸ºä½ç”µå¹³ åœ¨ç¬¬ä¸€ä¸ªCLKè·³è¾¹æ²¿ æ•è·æ•°æ®
+  * @param      mode            1: CLKç©ºé—²æ—¶åˆ»ä¸ºä½ç”µå¹³ åœ¨ç¬¬äºŒä¸ªCLKè·³è¾¹æ²¿ æ•è·æ•°æ®
+  * @param      mode            2: CLKç©ºé—²æ—¶åˆ»ä¸ºé«˜ç”µå¹³ åœ¨ç¬¬ä¸€ä¸ªCLKè·³è¾¹æ²¿ æ•è·æ•°æ®
+  * @param      mode            3: CLKç©ºé—²æ—¶åˆ»ä¸ºé«˜ç”µå¹³ åœ¨ç¬¬äºŒä¸ªCLKè·³è¾¹æ²¿ æ•è·æ•°æ®
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼šQSPI_InitConfig(QSPI2_CLK_P15_8, QSPI2_MISO_P15_7, QSPI2_MOSI_P15_5, QSPI2_CS_P15_2, 5000000, 3);
 *
 *************************************************************************/
 void QSPI_InitConfig(QSPI_CLK_t clkPin, QSPI_MISO_t misoPin, QSPI_MOSI_t mosiPin, QSPI_CS_t cQSPIn, uint32_t baudrate, uint8_t mode)
@@ -206,31 +206,31 @@ void QSPI_InitConfig(QSPI_CLK_t clkPin, QSPI_MISO_t misoPin, QSPI_MOSI_t mosiPin
 		spiMasterChannelConfig.sls.output.mode   = slsOutput.mode;
 		spiMasterChannelConfig.sls.output.driver = slsOutput.driver;
 		spiMasterChannelConfig.base.mode.csInactiveDelay = 100;
-		spiMasterChannelConfig.base.mode.csLeadDelay     = 100;                    /* CSÇ°ÖÃÑÓÊ± */
+		spiMasterChannelConfig.base.mode.csLeadDelay     = 100;                    /* CSå‰ç½®å»¶æ—¶ */
 		spiMasterChannelConfig.base.mode.csTrailDelay    = 100;
-		spiMasterChannelConfig.base.mode.dataHeading = SpiIf_DataHeading_msbFirst;  /* MSBÔÚÇ°      */
+		spiMasterChannelConfig.base.mode.dataHeading = SpiIf_DataHeading_msbFirst;  /* MSBåœ¨å‰      */
 		spiMasterChannelConfig.base.mode.dataWidth = 8;                             /* 8bit     */
-		spiMasterChannelConfig.base.baudrate = (float)baudrate;                     /* ÉèÖÃËÙ¶È    */
-		spiMasterChannelConfig.base.mode.csActiveLevel = Ifx_ActiveState_low;       /* CSÎªµÍÓĞĞ§*/
+		spiMasterChannelConfig.base.baudrate = (float)baudrate;                     /* è®¾ç½®é€Ÿåº¦    */
+		spiMasterChannelConfig.base.mode.csActiveLevel = Ifx_ActiveState_low;       /* CSä¸ºä½æœ‰æ•ˆ*/
 
 	    if(mode / 2)
 	    {
-	    	spiMasterChannelConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleHigh;  //Ê±ÖÓ¿ÕÏĞÊ±Îª¸ßµçÆ½
+	    	spiMasterChannelConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleHigh;  //æ—¶é’Ÿç©ºé—²æ—¶ä¸ºé«˜ç”µå¹³
 	    }
 	    else
 	    {
-	    	spiMasterChannelConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleLow;   //Ê±ÖÓ¿ÕÏĞÊ±ÎªµÍµçÆ½
+	    	spiMasterChannelConfig.base.mode.clockPolarity = SpiIf_ClockPolarity_idleLow;   //æ—¶é’Ÿç©ºé—²æ—¶ä¸ºä½ç”µå¹³
 	    }
 
 	    if(mode % 2)
 	    {
-	    	spiMasterChannelConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnTrailingEdge;  //´®ĞĞÍ¬²½Ê±ÖÓµÄµÚ¶ş¸öÌø±äÑØ£¨ÉÏÉı»òÏÂ½µ£©Êı¾İ±»²ÉÑù
+	    	spiMasterChannelConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnTrailingEdge;  //ä¸²è¡ŒåŒæ­¥æ—¶é’Ÿçš„ç¬¬äºŒä¸ªè·³å˜æ²¿ï¼ˆä¸Šå‡æˆ–ä¸‹é™ï¼‰æ•°æ®è¢«é‡‡æ ·
 	    }
 	    else
 	    {
-	    	spiMasterChannelConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnLeadingEdge;  //´®ĞĞÍ¬²½Ê±ÖÓµÄµÚÒ»¸öÌø±äÑØ£¨ÉÏÉı»òÏÂ½µ£©Êı¾İ±»²ÉÑù
+	    	spiMasterChannelConfig.base.mode.shiftClock = SpiIf_ShiftClock_shiftTransmitDataOnLeadingEdge;  //ä¸²è¡ŒåŒæ­¥æ—¶é’Ÿçš„ç¬¬ä¸€ä¸ªè·³å˜æ²¿ï¼ˆä¸Šå‡æˆ–ä¸‹é™ï¼‰æ•°æ®è¢«é‡‡æ ·
 	    }
-	    //½ÓÊÕ£¬·¢ËÍºÍ´íÎóÖĞ¶ÏÅäÖÃ
+	    //æ¥æ”¶ï¼Œå‘é€å’Œé”™è¯¯ä¸­æ–­é…ç½®
 		IfxCpu_Irq_installInterruptHandler((void*)QSPIIrqFuncPointer[QSPINum * 3],     (uint32)QSpiIrqPriority[QSPINum * 3]);
 		IfxCpu_Irq_installInterruptHandler((void*)QSPIIrqFuncPointer[QSPINum * 3 + 1], (uint32)QSpiIrqPriority[QSPINum * 3 + 1]);
 		IfxCpu_Irq_installInterruptHandler((void*)QSPIIrqFuncPointer[QSPINum * 3 + 2], (uint32)QSpiIrqPriority[QSPINum * 3 + 2]);
@@ -243,24 +243,24 @@ void QSPI_InitConfig(QSPI_CLK_t clkPin, QSPI_MISO_t misoPin, QSPI_MOSI_t mosiPin
 }
 
 /*************************************************************************
-*  º¯ÊıÃû³Æ£ºuint8 QSPI_ReadWriteNByte(QSPI_t QSPI, uint8_t *txData, uint8_t *rxData, uint32_t len)
-*  ¹¦ÄÜËµÃ÷£ºQSPI¶ÁĞ´N¸ö×Ö½Ú
-*  ²ÎÊıËµÃ÷£º
-  * @param    QSPI     £º  QSPI0 - QSPI3
-  * @param    txData  £º  Ğ´ÈëµÄbuff
-  * @param    rxData  £º  ¶Á³öµÄbuff
-  * @param    len     £º  ³¤¶È
-*  º¯Êı·µ»Ø£ºÎŞ
-*  ĞŞ¸ÄÊ±¼ä£º2020Äê3ÔÂ10ÈÕ
-*  ±¸    ×¢£º
-*  			QSPI_ReadWriteNByte(QSPI3, buff, buff, 2); //Ê¹ÓÃQSPI3 ¶ÁĞ´Á½¸ö×Ö½Ú
+*  å‡½æ•°åç§°ï¼šuint8 QSPI_ReadWriteNByte(QSPI_t QSPI, uint8_t *txData, uint8_t *rxData, uint32_t len)
+*  åŠŸèƒ½è¯´æ˜ï¼šQSPIè¯»å†™Nä¸ªå­—èŠ‚
+*  å‚æ•°è¯´æ˜ï¼š
+  * @param    QSPI     ï¼š  QSPI0 - QSPI3
+  * @param    txData  ï¼š  å†™å…¥çš„buff
+  * @param    rxData  ï¼š  è¯»å‡ºçš„buff
+  * @param    len     ï¼š  é•¿åº¦
+*  å‡½æ•°è¿”å›ï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ10æ—¥
+*  å¤‡    æ³¨ï¼š
+*  			QSPI_ReadWriteNByte(QSPI3, buff, buff, 2); //ä½¿ç”¨QSPI3 è¯»å†™ä¸¤ä¸ªå­—èŠ‚
 *************************************************************************/
 uint8 QSPI_ReadWriteNByte(QSPI_t QSPI, uint8_t *txData, uint8_t *rxData, uint16 len)
 {
-	/* ¿ªÊ¼´«Êä */
+	/* å¼€å§‹ä¼ è¾“ */
 	IfxQspi_SpiMaster_exchange(&g_QspiMasterChannel[QSPI], txData, rxData, len);
 
-	/* µÈ´ı´«Êä½áÊø  */
+	/* ç­‰å¾…ä¼ è¾“ç»“æŸ  */
 	while (IfxQspi_SpiMaster_getStatus(&g_QspiMasterChannel[QSPI]) == SpiIf_Status_busy) ;
 
 	return 0;
