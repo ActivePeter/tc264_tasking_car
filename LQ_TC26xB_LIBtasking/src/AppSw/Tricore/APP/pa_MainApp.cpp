@@ -20,14 +20,17 @@ extern "C"
 #include "pa_CommonLib/pa_PID.h"
 #include "pa_CommonLib/pa_MecanumModel.h"
 
-#define adc_arrlen 2000
+#define adc_arrlen 2048
 unsigned short adc_arr1[adc_arrlen];
 unsigned short adc_arr2[adc_arrlen];
+
+unsigned short adcValue1;
+unsigned short adcValue2;
 
 unsigned short step = 0;
 
 int cnt = 0;
-char flag_50ms = 1;
+char flag_5ms = 1;
 SpeedOfMotors speedOfMotors;
 
 pa_MecanumModel mecanumModel;
@@ -42,10 +45,10 @@ void initVariable()
 	speedOfMotors.speedOfM2 = 0;
 	speedOfMotors.speedOfM3 = 0;
 	speedOfMotors.speedOfM4 = 0;
-	pid_Motor1.setPid(0.001, 0, 0);
-	pid_Motor2.setPid(0.001, 0, 0);
-	pid_Motor3.setPid(0.001, 0, 0);
-	pid_Motor4.setPid(0.001, 0, 0);
+	pid_Motor1.setPid(17, 0.2, 3);
+	pid_Motor2.setPid(17, 0.2, 1);
+	pid_Motor3.setPid(17, 0.2, 1);
+	pid_Motor4.setPid(17, 0.2, 1);
 }
 void initFuncs()
 {
@@ -73,19 +76,22 @@ void initFuncs()
 	//adc采集以及控制 定时器中断
 	STM_InitConfig(STM0, STM_Channel_0, 100, []() { //微秒  //UART_PutStr(UART2,"ssss");
 		getadc();									//getadc();
-		cnt++;
-		if (cnt % 100 == 0)
+
+		// if (cnt % 100 == 0)
+		// {
+
+		// }
+		if (cnt == 50)
 		{
+			cnt = 0;
+			flag_5ms = 1;
+
 			speedOfMotors.speedOfM1 = ENC_GetCounter(ENC3_InPut_P02_6);
 			speedOfMotors.speedOfM2 = -ENC_GetCounter(ENC2_InPut_P33_7);
 			speedOfMotors.speedOfM3 = -ENC_GetCounter(ENC6_InPut_P20_3);
 			speedOfMotors.speedOfM4 = ENC_GetCounter(ENC5_InPut_P10_3);
 		}
-		if (cnt == 500)
-		{
-			cnt = 0;
-			flag_50ms = 1;
-		}
+		cnt++;
 	});
 
 	pa_initMotorPwm();
@@ -97,25 +103,50 @@ void initFuncs()
 	ENC_InitConfig(ENC6_InPut_P20_3, ENC6_Dir_P20_0);
 }
 
-int tagetSpeed = 100;
+int targetSpeed = 0;
+
 void startMainTask()
 {
 	initVariable();
 	initFuncs();
-
+	int cnt5ms = 0;
 	while (1)
 	{
 		//执行控制算法
-		if (flag_50ms == 1)
+		if (flag_5ms == 1)
 		{
-			flag_50ms = 0; //50ms清0
+			flag_5ms = 0; //50ms清0
+			cnt5ms = cnt5ms + 1;
+			if (cnt5ms >= 1000)
+			{
+				targetSpeed = -targetSpeed;
 
-			// pa_updateMotorPwm(1,-pid_Motor1.calcPid(speedOfMotors.speedOfM1-tagetSpeed));
-			// pa_updateMotorPwm(2,-pid_Motor2.calcPid(speedOfMotors.speedOfM2-tagetSpeed));
-			float out = -pid_Motor3.calcPid(speedOfMotors.speedOfM3 - tagetSpeed);
-			pa_updateMotorPwm(3, out);
-			// pa_updateMotorPwm(2,300);
-			// pa_updateMotorPwm(4,-pid_Motor4.calcPid(speedOfMotors.speedOfM4-tagetSpeed));
+				cnt5ms = 0;
+			}
+			// pa_updateMotorPwm(1, 1000);
+			// pa_updateMotorPwm(2, 1000);
+			// pa_updateMotorPwm(3, 1000);
+			// pa_updateMotorPwm(4, 1000);
+			if (fabs(targetSpeed) < 50)
+			{
+				pa_updateMotorPwm(1, 0);
+				pa_updateMotorPwm(2, 0);
+				pa_updateMotorPwm(3, 0);
+				pa_updateMotorPwm(4, 0);
+				pid_Motor1.iSum = 0;
+				pid_Motor2.iSum = 0;
+				pid_Motor3.iSum = 0;
+				pid_Motor4.iSum = 0;
+			}
+			else
+			{
+				pa_updateMotorPwm(1, -pid_Motor1.calcPid(speedOfMotors.speedOfM1 + targetSpeed));
+				pa_updateMotorPwm(2, -pid_Motor2.calcPid(speedOfMotors.speedOfM2 - targetSpeed));
+				float out = -pid_Motor3.calcPid(speedOfMotors.speedOfM3 - targetSpeed);
+				pa_updateMotorPwm(3, out);
+				// pa_updateMotorPwm(2,300);
+				pa_updateMotorPwm(4, -pid_Motor4.calcPid(speedOfMotors.speedOfM4 + targetSpeed));
+			}
 
 			checkUartData();
 			{
@@ -125,13 +156,25 @@ void startMainTask()
 				// speedOfMotors.speedOfM2,
 				// speedOfMotors.speedOfM3,
 				// speedOfMotors.speedOfM4);
-				sprintf(buf, "%5d %f\r\n",
-						speedOfMotors.speedOfM3, out);
+				// sprintf(buf, "%5d %5d %5d %5d %5d\r\n",
+				// 		speedOfMotors.speedOfM1,
+				// 		speedOfMotors.speedOfM2,
+				// 		speedOfMotors.speedOfM3,
+				// 		speedOfMotors.speedOfM4, targetSpeed);
 
-				UART_PutStr(UART2, buf);
+				// UART_PutStr(UART2, buf);
 			}
 		}
-		//crossCorrelation_noFFT();
+		//adc值实时
+		// {
+		// 	char buf[30] = {0};
+		// 	sprintf(buf, "%5d %5d\r\n",
+		// 			adcValue1,
+		// 			adcValue2);
+
+		// 	UART_PutStr(UART2, buf);
+		// }
+		crossCorrelation_noFFT();
 	}
 }
 void checkUartData()
@@ -150,7 +193,7 @@ void checkUartData()
 		state2 = recData[1];
 		while (recData[index])
 		{
-			if (state1 == 's' && (state2 == 'p' || state2 == 'i' || state2 == 'd'||state2=='s'))
+			if (state1 == 's' && (state2 == 'p' || state2 == 'i' || state2 == 'd' || state2 == 's'))
 			{
 				if (recData[index] <= '9' && recData[index] >= '0')
 				{
@@ -197,17 +240,22 @@ void checkUartData()
 					pid_Motor3.kp = data;
 					pid_Motor4.kp = data;
 					break;
-				// case 'i':
-				// 	{
-				// 		char buffer[30] = "";
-				// 		sprintf(buffer, "set i from %f to %f\r\n",pid_Motor1.ki, data);
-				// 		UART_PutStr(UART2, buffer);
-				// 	}
-				// 	pid_Motor1.ki=data;
-				// 	pid_Motor2.ki=data;
-				// 	pid_Motor3.ki=data;
-				// 	pid_Motor4.ki=data;
-				// 	break;
+				case 'i':
+				{
+					char buffer[30] = "";
+					sprintf(buffer, "set i from %f to %f\r\n", pid_Motor1.ki, data);
+					UART_PutStr(UART2, buffer);
+				}
+					pid_Motor1.iSum = 0;
+					pid_Motor2.iSum = 0;
+					pid_Motor3.iSum = 0;
+					pid_Motor4.iSum = 0;
+
+					pid_Motor1.ki = data;
+					pid_Motor2.ki = data;
+					pid_Motor3.ki = data;
+					pid_Motor4.ki = data;
+					break;
 				case 'd':
 				{
 					char buffer[30] = "";
@@ -223,10 +271,10 @@ void checkUartData()
 				case 's':
 				{
 					char buffer[30] = "";
-					sprintf(buffer, "set s from %f to %f\r\n", tagetSpeed, data);
+					sprintf(buffer, "set s from %f to %f\r\n", targetSpeed, data);
 					UART_PutStr(UART2, buffer);
 				}
-					tagetSpeed=data;
+					targetSpeed = data;
 					/* code */
 					break;
 				default:
@@ -259,24 +307,44 @@ void paLinearInterpolation(unsigned short to1, unsigned short to2, unsigned shor
 			(unsigned short)(from2 + (deltaValue2 * (i + 1)) / count));
 	}
 }
+
+char endBuffer = 0;
+
 void addValueToArr(unsigned short value1, unsigned short value2)
 {
-
+	if (endBuffer)
+	{
+		return;
+	}
 	// {
 	// 	char buffer[30] = "";
 	// 	sprintf(buffer, "%d\r\n",value1);
 	// 	UART_PutStr(UART2, buffer);
 	// }
+
+	
 	adc_arr1[step] = value1;
 	adc_arr2[step] = value2;
 
+
+	// adc_arr1[step] = value1==0?1:value1;
+	// adc_arr2[step] = value2==0?1:value2;
+
 	step += 1;
-	step %= adc_arrlen;
+	if (step == adc_arrlen)
+	{
+		step = 0;
+		endBuffer = 1;
+	}
+	//step %= adc_arrlen;
 }
+
 void getadc()
 {
 	unsigned short adc1_val = ADC_Read(ADC1) / 20;
 	unsigned short adc2_val = ADC_Read(ADC2) / 20;
+	adcValue1 = adc1_val;
+	adcValue2 = adc2_val;
 	addValueToArr(adc1_val, adc2_val);
 	//paLinearInterpolation(adc1_val,adc2_val,3);
 	// adc_arr1[step] = adc1_val;
@@ -289,17 +357,31 @@ void getadc()
 	// step+=1;
 	// step %= adc_arrlen;
 }
-unsigned short adc_arr1_copy[adc_arrlen];
-unsigned short adc_arr2_copy[adc_arrlen];
+// unsigned short adc_arr1_copy[adc_arrlen];
+// unsigned short adc_arr2_copy[adc_arrlen];
 bool lockRead = false;
 void crossCorrelation_noFFT()
 {
 	long max = 0, maxpos = 0;
-#define detectRange 20
+#define detectRange 10
 	int i = -detectRange;
-
-	memcpy(adc_arr1_copy, adc_arr1, adc_arrlen);
-	memcpy(adc_arr2_copy, adc_arr2, adc_arrlen);
+	if (endBuffer)
+	{
+		// memcpy(adc_arr1_copy, adc_arr1, adc_arrlen);
+		// memcpy(adc_arr2_copy, adc_arr2, adc_arrlen);
+		// // 发送收集到的adc*************************************************
+		// // for (int a = 0; a < adc_arrlen; a++)
+		// // {
+		// // 	{
+		// // 		char buffer[30] = "";
+		// // 		sprintf(buffer, "%d %d\r\n", adc_arr1[a], adc_arr2[a]);
+		// // 		UART_PutStr(UART2, buffer);
+		// // 	}
+		// // }
+		// // UART_PutStr(UART2, "done\r\n");
+		// // **********************************************
+		endBuffer=0;
+	}
 
 	for (; i < detectRange; i++)
 	{
@@ -318,7 +400,7 @@ void crossCorrelation_noFFT()
 			}
 			// if (t + i < 0 || t + i > adc_arrlen - 1)
 			// 	continue;
-			sum += (long)adc_arr1_copy[first_pos] * adc_arr2_copy[second_pos];
+			sum += (long)adc_arr1[first_pos] * adc_arr2[second_pos];
 		}
 		if (sum > max)
 		{
@@ -338,5 +420,4 @@ void crossCorrelation_noFFT()
 		UART_PutStr(UART2, buffer);
 	}
 
-	//printf("%d\r\n", maxpos);
 }

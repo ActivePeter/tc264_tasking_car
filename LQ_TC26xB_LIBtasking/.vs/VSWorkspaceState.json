@@ -4,7 +4,9 @@
     "\\src",
     "\\src\\AppSw",
     "\\src\\AppSw\\Tricore",
-    "\\src\\AppSw\\Tricore\\APP"
+    "\\src\\AppSw\\Tricore\\APP",
+    "\\src\\AppSw\\Tricore\\APP\\pa_CommonLib"
   ],
+  "SelectedNode": "\\src\\AppSw\\Tricore\\APP\\pa_MainApp.cpp",
   "PreviewInSolutionExplorer": false
 }

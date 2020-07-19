@@ -1,6 +1,7 @@
 #ifndef __pa_PID_H_
 #define __pa_PID_H_
 
+#define Max_iSum 1000
 class pa_PID
 {
 public:
@@ -10,6 +11,7 @@ public:
     float kp;
     float ki;
     float kd;
+    float iSum=0;//积分项
 private:
     
     float lastErr=0;

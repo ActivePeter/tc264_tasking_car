@@ -22,10 +22,30 @@ void pa_initMotorPwm()
 void pa_updateMotorPwm(char index, float speed)
 {
 
-    unsigned int pwmDuty = (int)speed;
-    char dir=pwmDuty>0;
+    switch (index)
+    {
+    case 1:
+        speed*=1.19444f;
+        break;
+    case 2:
+        speed*=1.075f;
+        /* code */
+        break;
+    case 3:
+        
+        /* code */
+        break;
+    case 4:
+        
+        /* code */
+        break;
+    default:
+        break;
+    }
+    int pwmDuty = (int)speed;
+    char dir=speed>0;
     if(!dir)pwmDuty=-pwmDuty;
-    pwmDuty+=300;
+    pwmDuty+=100;
     if(pwmDuty>5000){
         pwmDuty=5000;
     }
