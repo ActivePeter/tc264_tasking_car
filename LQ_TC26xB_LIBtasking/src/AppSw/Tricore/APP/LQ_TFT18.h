@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -20,10 +20,10 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #include "stdint.h"
 
-/*******************½Ó¿Ú¶¨Òå******************************/
+/*******************æ¥å£å®šä¹‰******************************/
 
-#define APP_LCD_WIDTH  LCD_WIDTH//Òº¾§ÆÁ¿í¶È
-#define APP_LCD_HEIGHT LCD_HEIGHT//Òº¾§ÆÁ¸ß¶È
+#define APP_LCD_WIDTH  LCD_WIDTH//æ¶²æ™¶å±å®½åº¦
+#define APP_LCD_HEIGHT LCD_HEIGHT//æ¶²æ™¶å±é«˜åº¦
 
 #define TFT18W        162
 #define TFT18H        132
@@ -33,428 +33,428 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #define u16BLUE	    0x001f
 #define u16PURPLE	0xf81f
 #define u16YELLOW	0xffe0
-#define u16CYAN	    0x07ff 		//À¶ÂÌÉ«
+#define u16CYAN	    0x07ff 		//è“ç»¿è‰²
 #define u16ORANGE	0xfc08
 #define u16BLACK	0x0000
 #define u16WHITE	0xffff
 
 /*!
-  * @brief    TFT18³õÊ¼»¯
+  * @brief    TFT18åˆå§‹åŒ–
   *
-  * @param    type £º 0:ºáÆÁ  1£ºÊúÆÁ
+  * @param    type ï¼š 0:æ¨ªå±  1ï¼šç«–å±
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     Èç¹ûĞŞ¸Ä¹Ü½Å ĞèÒªĞŞ¸Ä³õÊ¼»¯µÄ¹Ü½Å
+  * @note     å¦‚æœä¿®æ”¹ç®¡è„š éœ€è¦ä¿®æ”¹åˆå§‹åŒ–çš„ç®¡è„š
   *
   * @see      TFTSPI_Init(1);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Init(uint8_t type);
 
 /*!
-  * @brief    Ğ´ÃüÁî
+  * @brief    å†™å‘½ä»¤
   *
-  * @param    cmd £ºÃüÁî
+  * @param    cmd ï¼šå‘½ä»¤
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÄÚ²¿µ÷ÓÃ
+  * @note     å†…éƒ¨è°ƒç”¨
   *
   * @see      TFTSPI_Write_Cmd(0xb7); //LCD Driveing control
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Write_Cmd(uint8_t cmd);
 
 /*!
-  * @brief    Ğ´×Ö½Ú
+  * @brief    å†™å­—èŠ‚
   *
-  * @param    dat £ºÊı¾İ
+  * @param    dat ï¼šæ•°æ®
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÄÚ²¿µ÷ÓÃ
+  * @note     å†…éƒ¨è°ƒç”¨
   *
   * @see      TFTSPI_Write_Byte(0x00);	//CRL=0
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Write_Byte(uint8_t dat);
 
 
 /*!
-  * @brief    Ğ´°ë×Ö
+  * @brief    å†™åŠå­—
   *
-  * @param    dat £ºÊı¾İ
+  * @param    dat ï¼šæ•°æ®
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      TFTSPI_Write_Word(0xFFFF);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Write_Word(uint16_t dat);
 
 
 /*!
-  * @brief    ÖØĞÂ¶¨Î»ÊäÈëĞÅÏ¢Î»ÖÃ
+  * @brief    é‡æ–°å®šä½è¾“å…¥ä¿¡æ¯ä½ç½®
   *
-  * @param    xs £ºÆğÊ¼x
-  * @param    ys £ºÆğÊ¼y
-  * @param    xe £º½áÊøx
-  * @param    ys £º½áÊøy
+  * @param    xs ï¼šèµ·å§‹x
+  * @param    ys ï¼šèµ·å§‹y
+  * @param    xe ï¼šç»“æŸx
+  * @param    ys ï¼šç»“æŸy
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÄÚ²¿µ÷ÓÃ
+  * @note     å†…éƒ¨è°ƒç”¨
   *
   * @see      TFTSPI_Set_Pos(10, 20, 30, 40);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Set_Pos(uint8_t xs,uint8_t ys,uint8_t xe,uint8_t ye);
 
 /*!
-  * @brief    Ìî³äÖ¸¶¨ÇøÓò
+  * @brief    å¡«å……æŒ‡å®šåŒºåŸŸ
   *
-  * @param    xs £ºÆğÊ¼x
-  * @param    ys £ºÆğÊ¼y
-  * @param    xe £º½áÊøx
-  * @param    ys £º½áÊøy
-  * @param    color £ºÌî³äµÄÑÕÉ«
+  * @param    xs ï¼šèµ·å§‹x
+  * @param    ys ï¼šèµ·å§‹y
+  * @param    xe ï¼šç»“æŸx
+  * @param    ys ï¼šç»“æŸy
+  * @param    color ï¼šå¡«å……çš„é¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÆğÊ¼¡¢ÖÕÖ¹ºá×ø±ê(0-127)£¬×İ×ø±ê(0-159),ÏÔÊ¾ÑÕÉ«uint16
+  * @note     èµ·å§‹ã€ç»ˆæ­¢æ¨ªåæ ‡(0-127)ï¼Œçºµåæ ‡(0-159),æ˜¾ç¤ºé¢œè‰²uint16
   *
   * @see      TFTSPI_Fill_Area(10, 20, 30, 40, u16YELLOW);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Fill_Area(uint8_t xs,uint8_t ys,uint8_t xe,uint8_t ye,uint16_t color);
 
 /*!
-  * @brief    È«ÆÁÏÔÊ¾µ¥É«»­Ãæ
+  * @brief    å…¨å±æ˜¾ç¤ºå•è‰²ç”»é¢
   *
-  * @param    color £ºÌî³äµÄÑÕÉ«
+  * @param    color ï¼šå¡«å……çš„é¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÆğÊ¼¡¢ÖÕÖ¹ºá×ø±ê(0-127)£¬×İ×ø±ê(0-159),ÏÔÊ¾ÑÕÉ«uint16
+  * @note     èµ·å§‹ã€ç»ˆæ­¢æ¨ªåæ ‡(0-127)ï¼Œçºµåæ ‡(0-159),æ˜¾ç¤ºé¢œè‰²uint16
   *
   * @see      TFTSPI_CLS(u16YELLOW);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_CLS(uint16_t color);
 
 
 /*!
-  * @brief    Ìî³ä¾ØĞÎÇøÓò
+  * @brief    å¡«å……çŸ©å½¢åŒºåŸŸ
   *
-  * @param    xs £ºÆğÊ¼x
-  * @param    ys £ºÆğÊ¼y
-  * @param    xe £º½áÊøx
-  * @param    ys £º½áÊøy
-  * @param    color_dat £ºÌî³äµÄÑÕÉ«
+  * @param    xs ï¼šèµ·å§‹x
+  * @param    ys ï¼šèµ·å§‹y
+  * @param    xe ï¼šç»“æŸx
+  * @param    ys ï¼šç»“æŸy
+  * @param    color_dat ï¼šå¡«å……çš„é¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÆğÊ¼¡¢ÖÕÖ¹ºá×ø±ê(0-127)£¬×İ×ø±ê(0-159),ÏÔÊ¾ÑÕÉ«uint16
+  * @note     èµ·å§‹ã€ç»ˆæ­¢æ¨ªåæ ‡(0-127)ï¼Œçºµåæ ‡(0-159),æ˜¾ç¤ºé¢œè‰²uint16
   *
   * @see      TFTSPI_Draw_Part(10, 20, 30, 40, u16YELLOW);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Draw_Part(uint8_t xs,uint8_t ys,uint8_t xe,uint8_t ye,uint16_t color_dat);
 
 /*!
-  * @brief    »­¾ØĞÎ±ß¿ò
+  * @brief    ç”»çŸ©å½¢è¾¹æ¡†
   *
-  * @param    xs £ºÆğÊ¼x
-  * @param    ys £ºÆğÊ¼y
-  * @param    xe £º½áÊøx
-  * @param    ys £º½áÊøy
-  * @param    color_dat £ºÑÕÉ«
+  * @param    xs ï¼šèµ·å§‹x
+  * @param    ys ï¼šèµ·å§‹y
+  * @param    xe ï¼šç»“æŸx
+  * @param    ys ï¼šç»“æŸy
+  * @param    color_dat ï¼šé¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÆğÊ¼¡¢ÖÕÖ¹ºá×ø±ê(0-127)£¬×İ×ø±ê(0-159),ÏÔÊ¾ÑÕÉ«uint16
+  * @note     èµ·å§‹ã€ç»ˆæ­¢æ¨ªåæ ‡(0-127)ï¼Œçºµåæ ‡(0-159),æ˜¾ç¤ºé¢œè‰²uint16
   *
   * @see      TFTSPI_Draw_Rectangle(10, 20, 30, 40, u16YELLOW);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Draw_Rectangle(uint8_t xs,uint8_t ys,uint8_t xe,uint8_t ye,uint16_t color_dat);
 
 /*!
-  * @brief    »­Ô²
+  * @brief    ç”»åœ†
   *
-  * @param    x £ºÔ²ĞÄx   (0-127)
-  * @param    y £ºÔ²ĞÄy   (0-159)
-  * @param    r £º°ë¾¶    (0-128)
-  * @param    color_dat £ºÑÕÉ«
+  * @param    x ï¼šåœ†å¿ƒx   (0-127)
+  * @param    y ï¼šåœ†å¿ƒy   (0-159)
+  * @param    r ï¼šåŠå¾„    (0-128)
+  * @param    color_dat ï¼šé¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     Ô²ĞÄ×ø±ê²»Òª³¬³öÆÁÄ»·¶Î§
+  * @note     åœ†å¿ƒåæ ‡ä¸è¦è¶…å‡ºå±å¹•èŒƒå›´
   *
   * @see      TFTSPI_Draw_Circle(50, 50, 30, u16YELLOW);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Draw_Circle(uint8_t x,uint8_t y,uint8_t r,uint16_t color_dat);
 
 /*!
-  * @brief    »­Ïß
+  * @brief    ç”»çº¿
   *
-  * @param    xs £ºÆğÊ¼x
-  * @param    ys £ºÆğÊ¼y
-  * @param    xe £º½áÊøx
-  * @param    ys £º½áÊøy
-  * @param    color_dat £ºÑÕÉ«
+  * @param    xs ï¼šèµ·å§‹x
+  * @param    ys ï¼šèµ·å§‹y
+  * @param    xe ï¼šç»“æŸx
+  * @param    ys ï¼šç»“æŸy
+  * @param    color_dat ï¼šé¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÆğÊ¼¡¢ÖÕÖ¹ºá×ø±ê(0-127)£¬×İ×ø±ê(0-159),ÏÔÊ¾ÑÕÉ«uint16
+  * @note     èµ·å§‹ã€ç»ˆæ­¢æ¨ªåæ ‡(0-127)ï¼Œçºµåæ ‡(0-159),æ˜¾ç¤ºé¢œè‰²uint16
   *
   * @see      TFTSPI_Draw_Line(10, 20, 30, 40, u16YELLOW);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Draw_Line(uint8_t xs,uint8_t ys,uint8_t xe,uint8_t ye,uint16_t color_dat);
 
 /*!
-  * @brief    »­µã
+  * @brief    ç”»ç‚¹
   *
-  * @param    x £ºx
-  * @param    y £ºy
-  * @param    color_dat £ºÑÕÉ«
+  * @param    x ï¼šx
+  * @param    y ï¼šy
+  * @param    color_dat ï¼šé¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÆğÊ¼¡¢ÖÕÖ¹ºá×ø±ê(0-127)£¬×İ×ø±ê(0-159),ÏÔÊ¾ÑÕÉ«uint16
+  * @note     èµ·å§‹ã€ç»ˆæ­¢æ¨ªåæ ‡(0-127)ï¼Œçºµåæ ‡(0-159),æ˜¾ç¤ºé¢œè‰²uint16
   *
   * @see      TFTSPI_Draw_Dot(10, 20, u16YELLOW);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Draw_Dot(uint8_t x,uint8_t y,uint16_t color_dat);
 
 /*!
-  * @brief    ÏÔÊ¾Í¼Æ¬
+  * @brief    æ˜¾ç¤ºå›¾ç‰‡
   *
-  * @param    xs £ºÆğÊ¼x
-  * @param    ys £ºÆğÊ¼y
-  * @param    xe £º½áÊøx
-  * @param    ys £º½áÊøy
-  * @param    ppic £ºÍ¼Æ¬Êı¾İ
+  * @param    xs ï¼šèµ·å§‹x
+  * @param    ys ï¼šèµ·å§‹y
+  * @param    xe ï¼šç»“æŸx
+  * @param    ys ï¼šç»“æŸy
+  * @param    ppic ï¼šå›¾ç‰‡æ•°æ®
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÆğÊ¼¡¢ÖÕÖ¹ºá×ø±ê(0-127)£¬×İ×ø±ê(0-159),ÏÔÊ¾ÑÕÉ«uint16
+  * @note     èµ·å§‹ã€ç»ˆæ­¢æ¨ªåæ ‡(0-127)ï¼Œçºµåæ ‡(0-159),æ˜¾ç¤ºé¢œè‰²uint16
   *
   * @see
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Show_Pic(uint8_t xs,uint8_t ys,uint8_t xe,uint8_t ye,const char *ppic);
 
 /*!
-  * @brief    Òº¾§×Ö·û´®Êä³ö(6*8×ÖÌå)
+  * @brief    æ¶²æ™¶å­—ç¬¦ä¸²è¾“å‡º(6*8å­—ä½“)
   *
-  * @param    x: 0 - 20 (ĞĞ)
-  * @param    y: 0 - 19 (ÁĞ)
-  * @param    word_color: ×ÖÌåÑÕÉ«
-  * @param    back_color: ±³¾°ÑÕÉ«
+  * @param    x: 0 - 20 (è¡Œ)
+  * @param    y: 0 - 19 (åˆ—)
+  * @param    word_color: å­—ä½“é¢œè‰²
+  * @param    back_color: èƒŒæ™¯é¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      TFTSPI_P6X8Str(1, 1, "123456", u16YELLOW, u16RED);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_P6X8Str(uint8_t x, uint8_t y, char *s_dat,uint16_t word_color,uint16_t back_color);
 
 /*!
-  * @brief    Òº¾§×Ö·û´®Êä³ö(8*8×ÖÌå)
+  * @brief    æ¶²æ™¶å­—ç¬¦ä¸²è¾“å‡º(8*8å­—ä½“)
   *
-  * @param    x:0 - 15 (ĞĞ)
-  * @param    y:0 - 19 (ÁĞ)
-  * @param    word_color: ×ÖÌåÑÕÉ«
-  * @param    back_color: ±³¾°ÑÕÉ«
+  * @param    x:0 - 15 (è¡Œ)
+  * @param    y:0 - 19 (åˆ—)
+  * @param    word_color: å­—ä½“é¢œè‰²
+  * @param    back_color: èƒŒæ™¯é¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      TFTSPI_P8X8Str(1, 1, "123456", u16YELLOW, u16RED);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_P8X8Str(uint8_t x, uint8_t y, char *s_dat,uint16_t word_color,uint16_t back_color);
 
 /*!
-  * @brief    Òº¾§×Ö·û´®Êä³ö(8*16×ÖÌå)
+  * @brief    æ¶²æ™¶å­—ç¬¦ä¸²è¾“å‡º(8*16å­—ä½“)
   *
-  * @param    x: x: 0 -15   (ĞĞ)
-  * @param    y: y: 0 -9  	 (ÁĞ)
-  * @param    word_color: ×ÖÌåÑÕÉ«
-  * @param    back_color: ±³¾°ÑÕÉ«
+  * @param    x: x: 0 -15   (è¡Œ)
+  * @param    y: y: 0 -9  	 (åˆ—)
+  * @param    word_color: å­—ä½“é¢œè‰²
+  * @param    back_color: èƒŒæ™¯é¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      TFTSPI_P8X16Str(1, 1, "123456", u16YELLOW, u16RED);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_P8X16Str(uint8_t x, uint8_t y, char *s_dat,uint16_t word_color,uint16_t back_color);
 
 /*!
-  * @brief    Òº¾§ºº×Ö×Ö·û´®Êä³ö(8*16×ÖÌå)
+  * @brief    æ¶²æ™¶æ±‰å­—å­—ç¬¦ä¸²è¾“å‡º(8*16å­—ä½“)
   *
-  * @param    x: 0 - 7	(ĞĞ)
-  * @param    y: 0 -12	(ÁĞ)
-  * @param    word_color: ×ÖÌåÑÕÉ«
-  * @param    back_color: ±³¾°ÑÕÉ«
+  * @param    x: 0 - 7	(è¡Œ)
+  * @param    y: 0 -12	(åˆ—)
+  * @param    word_color: å­—ä½“é¢œè‰²
+  * @param    back_color: èƒŒæ™¯é¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ºº×ÖÖ»ÄÜÊÇ×Ö¿âÀïµÄ ×Ö¿âÃ»ÓĞµÄĞèÒª×ÔĞĞÌí¼Ó
+  * @note     æ±‰å­—åªèƒ½æ˜¯å­—åº“é‡Œçš„ å­—åº“æ²¡æœ‰çš„éœ€è¦è‡ªè¡Œæ·»åŠ 
   *
   * @see      TFTSPI_P16x12Str(1, 1, "123456", u16YELLOW, u16RED);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_P16x12Str(uint8_t x, uint8_t y, char *s_dat,uint16_t word_color,uint16_t back_color);
 
 /*!
-  * @brief    Òº¾§ºº×Ö×Ö·û´®Êä³ö(16*16×ÖÌå)
+  * @brief    æ¶²æ™¶æ±‰å­—å­—ç¬¦ä¸²è¾“å‡º(16*16å­—ä½“)
   *
-  * @param    x: 0 - 7	(ĞĞ)
-  * @param    y: 0 - 9	(ÁĞ)
-  * @param    word_color: ×ÖÌåÑÕÉ«
-  * @param    back_color: ±³¾°ÑÕÉ«
+  * @param    x: 0 - 7	(è¡Œ)
+  * @param    y: 0 - 9	(åˆ—)
+  * @param    word_color: å­—ä½“é¢œè‰²
+  * @param    back_color: èƒŒæ™¯é¢œè‰²
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ºº×ÖÖ»ÄÜÊÇ×Ö¿âÀïµÄ ×Ö¿âÃ»ÓĞµÄĞèÒª×ÔĞĞÌí¼Ó
+  * @note     æ±‰å­—åªèƒ½æ˜¯å­—åº“é‡Œçš„ å­—åº“æ²¡æœ‰çš„éœ€è¦è‡ªè¡Œæ·»åŠ 
   *
   * @see      TFTSPI_P16x16Str(1, 1, "123456", u16YELLOW, u16RED);
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_P16x16Str(uint8_t x, uint8_t y, char *s_dat,uint16_t word_color,uint16_t back_color);
 
 
 /*!
-  * @brief    ÏÔÊ¾Í¼Æ¬
+  * @brief    æ˜¾ç¤ºå›¾ç‰‡
   *
-  * @param    xs £ºÆğÊ¼x
-  * @param    ys £ºÆğÊ¼y
-  * @param    xe £º½áÊøx
-  * @param    ys £º½áÊøy
-  * @param    ppic £ºÍ¼Æ¬Êı¾İ
+  * @param    xs ï¼šèµ·å§‹x
+  * @param    ys ï¼šèµ·å§‹y
+  * @param    xe ï¼šç»“æŸx
+  * @param    ys ï¼šç»“æŸy
+  * @param    ppic ï¼šå›¾ç‰‡æ•°æ®
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÆğÊ¼¡¢ÖÕÖ¹ºá×ø±ê(0-127)£¬×İ×ø±ê(0-159),ÏÔÊ¾ÑÕÉ«uint16
+  * @note     èµ·å§‹ã€ç»ˆæ­¢æ¨ªåæ ‡(0-127)ï¼Œçºµåæ ‡(0-159),æ˜¾ç¤ºé¢œè‰²uint16
   *
   * @see
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Show_Pic2(uint8_t xs,uint8_t ys,uint8_t w,uint8_t h,const char *ppic) ;
 
 
 /*!
-  * @brief    ÏÔÊ¾µç³ØÍ¼±ê
+  * @brief    æ˜¾ç¤ºç”µæ± å›¾æ ‡
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      TFTSPI_Show_Battery_Icon();
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Show_Battery_Icon(void);
 
 /*!
-  * @brief    ÏÔÊ¾±êÇ©
+  * @brief    æ˜¾ç¤ºæ ‡ç­¾
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      TFTSPI_Show_Title();
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Show_Title(void);
 
 /*!
-  * @brief    ÏÔÊ¾ÁúÇñLOG
+  * @brief    æ˜¾ç¤ºé¾™é‚±LOG
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      TFTSPI_Show_Logo();
   *
-  * @date     2019/6/13 ĞÇÆÚËÄ
+  * @date     2019/6/13 æ˜ŸæœŸå››
   */
 void TFTSPI_Show_Logo(uint8_t xs,uint8_t ys);
 
 /*!
-  * @brief    TFT18ÆÁ uint8_t »Ò¶ÈÊı¾İÏÔÊ¾
+  * @brief    TFT18å± uint8_t ç°åº¦æ•°æ®æ˜¾ç¤º
   *
-  * @param    high_start £º ÏÔÊ¾Í¼Ïñ¿ªÊ¼Î»ÖÃ
-  * @param    wide_start £º ÏÔÊ¾Í¼Ïñ¿ªÊ¼Î»ÖÃ
-  * @param    high £º ÏÔÊ¾Í¼Ïñ¸ß¶È
-  * @param    wide £º ÏÔÊ¾Í¼Ïñ¿í¶È
-  * @param    Pixle£º ÏÔÊ¾Í¼ÏñÊı¾İµØÖ·
+  * @param    high_start ï¼š æ˜¾ç¤ºå›¾åƒå¼€å§‹ä½ç½®
+  * @param    wide_start ï¼š æ˜¾ç¤ºå›¾åƒå¼€å§‹ä½ç½®
+  * @param    high ï¼š æ˜¾ç¤ºå›¾åƒé«˜åº¦
+  * @param    wide ï¼š æ˜¾ç¤ºå›¾åƒå®½åº¦
+  * @param    Pixleï¼š æ˜¾ç¤ºå›¾åƒæ•°æ®åœ°å€
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ×¢Òâ ÆÁÄ»×óÉÏÎª £¨0£¬0£©
+  * @note     æ³¨æ„ å±å¹•å·¦ä¸Šä¸º ï¼ˆ0ï¼Œ0ï¼‰
   *
   * @see
   *
-  * @date     2019/12/3 ĞÇÆÚ¶ş
+  * @date     2019/12/3 æ˜ŸæœŸäºŒ
   */
 void TFTSPI_Road(uint8_t high_start, uint8_t wide_start, uint8_t high, uint8_t wide, uint8_t *Pixle);
 
 /*!
-  * @brief    TFT18ÆÁ uint8_t ¶şÖµ»¯Êı¾İÏÔÊ¾
+  * @brief    TFT18å± uint8_t äºŒå€¼åŒ–æ•°æ®æ˜¾ç¤º
   *
-  * @param    high_start £º ÏÔÊ¾Í¼Ïñ¿ªÊ¼Î»ÖÃ
-  * @param    wide_start £º ÏÔÊ¾Í¼Ïñ¿ªÊ¼Î»ÖÃ
-  * @param    high £º ÏÔÊ¾Í¼Ïñ¸ß¶È
-  * @param    wide £º ÏÔÊ¾Í¼Ïñ¿í¶È
-  * @param    Pixle£º ÏÔÊ¾Í¼ÏñÊı¾İµØÖ·
+  * @param    high_start ï¼š æ˜¾ç¤ºå›¾åƒå¼€å§‹ä½ç½®
+  * @param    wide_start ï¼š æ˜¾ç¤ºå›¾åƒå¼€å§‹ä½ç½®
+  * @param    high ï¼š æ˜¾ç¤ºå›¾åƒé«˜åº¦
+  * @param    wide ï¼š æ˜¾ç¤ºå›¾åƒå®½åº¦
+  * @param    Pixleï¼š æ˜¾ç¤ºå›¾åƒæ•°æ®åœ°å€
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ×¢Òâ ÆÁÄ»×óÉÏÎª £¨0£¬0£©
+  * @note     æ³¨æ„ å±å¹•å·¦ä¸Šä¸º ï¼ˆ0ï¼Œ0ï¼‰
   *
   * @see
   *
-  * @date     2019/12/3 ĞÇÆÚ¶ş
+  * @date     2019/12/3 æ˜ŸæœŸäºŒ
   */
 void TFTSPI_BinRoad(uint8_t high_start, uint8_t wide_start, uint8_t high, uint8_t wide, uint8_t *Pixle);
 

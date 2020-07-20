@@ -3,6 +3,8 @@ extern "C"
 {
 
 #include "pa_MainApp.h"
+
+
 #include "stdio.h"
 #include <LQ_UART.h>
 #include <LQ_ADC.h>
@@ -10,7 +12,6 @@ extern "C"
 
 #include <LQ_GPT12_ENC.h>
 #include "string.h"
-#include "math.h"
 #include "pa_CommonLib/pa_BNO055.h"
 #include "pa_CommonLib/pa_MotorManager.h"
 #include <LQ_Atom_Motor.h>
@@ -19,6 +20,8 @@ extern "C"
 
 #include "pa_CommonLib/pa_PID.h"
 #include "pa_CommonLib/pa_MecanumModel.h"
+#include "pa_CommonLib/pa_UartManager.h"
+#include "pa_CommonLib/pa_GlobalCpp.h"
 
 #define adc_arrlen 2048
 unsigned short adc_arr1[adc_arrlen];
@@ -39,6 +42,12 @@ pa_PID pid_Motor2 = pa_PID(1, 0, 0);
 pa_PID pid_Motor3 = pa_PID(1, 0, 0);
 pa_PID pid_Motor4 = pa_PID(1, 0, 0);
 
+pa_GlobalCpp globalCpp;
+
+pa_GlobalCpp pa_GlobalCpp::getGlobalCpp(){
+	return globalCpp;
+}
+
 void initVariable()
 { //初始化变量
 	speedOfMotors.speedOfM1 = 0;
@@ -49,6 +58,10 @@ void initVariable()
 	pid_Motor2.setPid(17, 0.2, 1);
 	pid_Motor3.setPid(17, 0.2, 1);
 	pid_Motor4.setPid(17, 0.2, 1);
+	globalCpp.pid_Motor1=&pid_Motor1;
+	globalCpp.pid_Motor2=&pid_Motor2;
+	globalCpp.pid_Motor3=&pid_Motor3;
+	globalCpp.pid_Motor4=&pid_Motor4;
 }
 void initFuncs()
 {
@@ -103,8 +116,6 @@ void initFuncs()
 	ENC_InitConfig(ENC6_InPut_P20_3, ENC6_Dir_P20_0);
 }
 
-int targetSpeed = 0;
-
 void startMainTask()
 {
 	initVariable();
@@ -119,7 +130,7 @@ void startMainTask()
 			cnt5ms = cnt5ms + 1;
 			if (cnt5ms >= 1000)
 			{
-				targetSpeed = -targetSpeed;
+				globalCpp.targetSpeed = -globalCpp.targetSpeed;
 
 				cnt5ms = 0;
 			}
@@ -127,7 +138,7 @@ void startMainTask()
 			// pa_updateMotorPwm(2, 1000);
 			// pa_updateMotorPwm(3, 1000);
 			// pa_updateMotorPwm(4, 1000);
-			if (fabs(targetSpeed) < 50)
+			if (fabs(globalCpp.targetSpeed) < 50)
 			{
 				pa_updateMotorPwm(1, 0);
 				pa_updateMotorPwm(2, 0);
@@ -140,12 +151,12 @@ void startMainTask()
 			}
 			else
 			{
-				pa_updateMotorPwm(1, -pid_Motor1.calcPid(speedOfMotors.speedOfM1 + targetSpeed));
-				pa_updateMotorPwm(2, -pid_Motor2.calcPid(speedOfMotors.speedOfM2 - targetSpeed));
-				float out = -pid_Motor3.calcPid(speedOfMotors.speedOfM3 - targetSpeed);
+				pa_updateMotorPwm(1, -pid_Motor1.calcPid(speedOfMotors.speedOfM1 + globalCpp.targetSpeed));
+				pa_updateMotorPwm(2, -pid_Motor2.calcPid(speedOfMotors.speedOfM2 - globalCpp.targetSpeed));
+				float out = -pid_Motor3.calcPid(speedOfMotors.speedOfM3 - globalCpp.targetSpeed);
 				pa_updateMotorPwm(3, out);
 				// pa_updateMotorPwm(2,300);
-				pa_updateMotorPwm(4, -pid_Motor4.calcPid(speedOfMotors.speedOfM4 + targetSpeed));
+				pa_updateMotorPwm(4, -pid_Motor4.calcPid(speedOfMotors.speedOfM4 + globalCpp.targetSpeed));
 			}
 
 			checkUartData();
@@ -160,7 +171,7 @@ void startMainTask()
 				// 		speedOfMotors.speedOfM1,
 				// 		speedOfMotors.speedOfM2,
 				// 		speedOfMotors.speedOfM3,
-				// 		speedOfMotors.speedOfM4, targetSpeed);
+				// 		speedOfMotors.speedOfM4, globalCpp.targetSpeed);
 
 				// UART_PutStr(UART2, buf);
 			}
@@ -177,121 +188,7 @@ void startMainTask()
 		crossCorrelation_noFFT();
 	}
 }
-void checkUartData()
-{
-	if (uartHasReceivedData())
-	{
-		unsigned char recData[30] = {0};
-		UART_GetBuff(UART2, recData, UART_GetCount(UART2));
 
-		int index = 2;
-		char state1 = 0, state2 = 0;
-		char dataValid = 0;
-		char xiaoshu = 0;
-		float data = 0;
-		state1 = recData[0];
-		state2 = recData[1];
-		while (recData[index])
-		{
-			if (state1 == 's' && (state2 == 'p' || state2 == 'i' || state2 == 'd' || state2 == 's'))
-			{
-				if (recData[index] <= '9' && recData[index] >= '0')
-				{
-					if (!xiaoshu)
-					{
-						data = recData[index] - 48 + data * 10;
-					}
-					else
-					{
-						data = data + pow(0.1, xiaoshu) * (recData[index] - 48);
-						xiaoshu++;
-					}
-				}
-				else if (recData[index] == '.')
-				{
-					xiaoshu = 1;
-				}
-				else if (recData[index] == '!')
-				{
-					dataValid = 1;
-					break;
-				}
-			}
-			else
-			{
-				break;
-			}
-			index++;
-		}
-		if (dataValid)
-		{
-			if (state1 == 's')
-			{
-				switch (state2)
-				{
-				case 'p':
-				{
-					char buffer[30] = "";
-					sprintf(buffer, "set p from %f to %f\r\n", pid_Motor1.kp, data);
-					UART_PutStr(UART2, buffer);
-				}
-					pid_Motor1.kp = data;
-					pid_Motor2.kp = data;
-					pid_Motor3.kp = data;
-					pid_Motor4.kp = data;
-					break;
-				case 'i':
-				{
-					char buffer[30] = "";
-					sprintf(buffer, "set i from %f to %f\r\n", pid_Motor1.ki, data);
-					UART_PutStr(UART2, buffer);
-				}
-					pid_Motor1.iSum = 0;
-					pid_Motor2.iSum = 0;
-					pid_Motor3.iSum = 0;
-					pid_Motor4.iSum = 0;
-
-					pid_Motor1.ki = data;
-					pid_Motor2.ki = data;
-					pid_Motor3.ki = data;
-					pid_Motor4.ki = data;
-					break;
-				case 'd':
-				{
-					char buffer[30] = "";
-					sprintf(buffer, "set d from %f to %f\r\n", pid_Motor1.kd, data);
-					UART_PutStr(UART2, buffer);
-				}
-					pid_Motor1.kd = data;
-					pid_Motor2.kd = data;
-					pid_Motor3.kd = data;
-					pid_Motor4.kd = data;
-					/* code */
-					break;
-				case 's':
-				{
-					char buffer[30] = "";
-					sprintf(buffer, "set s from %f to %f\r\n", targetSpeed, data);
-					UART_PutStr(UART2, buffer);
-				}
-					targetSpeed = data;
-					/* code */
-					break;
-				default:
-					break;
-				}
-			}
-		}
-		else
-		{
-			UART_PutStr(UART2, "invalidData:");
-			UART_PutStr(UART2, (char *)recData);
-			UART_PutStr(UART2, "\r\n");
-		}
-
-		changeLED();
-	}
-}
 void paLinearInterpolation(unsigned short to1, unsigned short to2, unsigned short count)
 {
 
@@ -322,10 +219,8 @@ void addValueToArr(unsigned short value1, unsigned short value2)
 	// 	UART_PutStr(UART2, buffer);
 	// }
 
-	
 	adc_arr1[step] = value1;
 	adc_arr2[step] = value2;
-
 
 	// adc_arr1[step] = value1==0?1:value1;
 	// adc_arr2[step] = value2==0?1:value2;
@@ -380,7 +275,7 @@ void crossCorrelation_noFFT()
 		// // }
 		// // UART_PutStr(UART2, "done\r\n");
 		// // **********************************************
-		endBuffer=0;
+		endBuffer = 0;
 	}
 
 	for (; i < detectRange; i++)
@@ -419,5 +314,4 @@ void crossCorrelation_noFFT()
 		sprintf(buffer, "%d\r\n", maxpos);
 		UART_PutStr(UART2, buffer);
 	}
-
 }
