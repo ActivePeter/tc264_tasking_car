@@ -5,6 +5,7 @@
 class pa_PID
 {
 public:
+    pa_PID();
     pa_PID(float kp1,float ki1,float kd1);
     float calcPid(float err);
     void setPid(float kp,float ki,float kd);

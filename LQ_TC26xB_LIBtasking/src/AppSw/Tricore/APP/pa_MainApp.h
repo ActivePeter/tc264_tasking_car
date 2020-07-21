@@ -6,13 +6,14 @@
 
 void startMainTask();
 void getadc();
-void crossCorrelation_noFFT();
+char crossCorrelation_noFFT(unsigned short arr1[],unsigned short arr2[]);
 void linearInterpolation();
-void addValueToArr(unsigned short value1,unsigned short value2);
+void addValueToArr(unsigned short value1, unsigned short value2,unsigned short value3, unsigned short value4);
 void paLinearInterpolation(unsigned short to1,unsigned short to2,unsigned short count);
 void initVariable();
 void initFuncs();
-
+void checkSignalStable();
+void checkBeaconOn();
 
 typedef struct {
     int speedOfM1;

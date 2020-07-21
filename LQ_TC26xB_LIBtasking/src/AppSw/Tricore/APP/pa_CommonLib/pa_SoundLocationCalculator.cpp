@@ -57,7 +57,7 @@ char pa_SoundLocationCalculator::crossCorrelation_noFFT(unsigned short adc_arr1[
     //         // }
     //     }
 	// 	endBuffer = 0;
-	}
+	// }
 
 	
 	// UART_PutStr(UART2, "0\r\n");

@@ -1,21 +1,21 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËÐÄ°å
-¡¾±à    Ð´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼þ°æ±¾¡¿V1.1 °æÈ¨ËùÓÐ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üÐÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØÐÅÏ¢²Î¿¼ÏÂÁÐµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æŽˆæƒ
+ã€æœ€åŽæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-*  ±¸    ×¢£ºTC264 ÓÐÁ½¸öCCU6Ä£¿é  Ã¿¸öÄ£¿éÓÐÁ½¸ö¶ÀÁ¢¶¨Ê±Æ÷  ´¥·¢¶¨Ê±Æ÷ÖÐ¶Ï
+*  å¤‡    æ³¨ï¼šTC264 æœ‰ä¸¤ä¸ªCCU6æ¨¡å—  æ¯ä¸ªæ¨¡å—æœ‰ä¸¤ä¸ªç‹¬ç«‹å®šæ—¶å™¨  è§¦å‘å®šæ—¶å™¨ä¸­æ–­
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
@@ -32,113 +32,113 @@ IFX_INTERRUPT(CCU60_CH1_IRQHandler, CCU60_VECTABNUM, CCU60_CH1_PRIORITY);
 IFX_INTERRUPT(CCU61_CH0_IRQHandler, CCU61_VECTABNUM, CCU61_CH0_PRIORITY);
 IFX_INTERRUPT(CCU61_CH1_IRQHandler, CCU61_VECTABNUM, CCU61_CH1_PRIORITY);
 
-/** CCU6ÖÐ¶ÏCPU±êºÅ */
+/** CCU6ä¸­æ–­CPUæ ‡å· */
 const uint8 Ccu6IrqVectabNum[2]  = {CCU60_VECTABNUM, CCU61_VECTABNUM};
 
-/** CCU6ÖÐ¶ÏÓÅÏÈ¼¶ */
+/** CCU6ä¸­æ–­ä¼˜å…ˆçº§ */
 const uint8 Ccu6IrqPriority[4]   = {CCU60_CH0_PRIORITY, CCU60_CH1_PRIORITY, CCU61_CH0_PRIORITY, CCU61_CH1_PRIORITY};
 
-/** CCU6ÖÐ¶Ï·þÎñº¯ÊýµØÖ· */
+/** CCU6ä¸­æ–­æœåŠ¡å‡½æ•°åœ°å€ */
 const void *Ccu6IrqFuncPointer[4] = {&CCU60_CH0_IRQHandler, &CCU60_CH1_IRQHandler, &CCU61_CH0_IRQHandler, &CCU61_CH1_IRQHandler};
 
 
 
 /***********************************************************************************************/
-/********************************CCU6Íâ²¿ÖÐ¶Ï  ·þÎñº¯Êý******************************************/
+/********************************CCU6å¤–éƒ¨ä¸­æ–­  æœåŠ¡å‡½æ•°******************************************/
 /***********************************************************************************************/
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid CCU60_CH0_IRQHandler(void)
-*  ¹¦ÄÜËµÃ÷£º
-*  ²ÎÊýËµÃ÷£ºÎÞ
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£ºCCU60_CH0Ê¹ÓÃµÄÖÐ¶Ï·þÎñº¯Êý
+*  å‡½æ•°åç§°ï¼švoid CCU60_CH0_IRQHandler(void)
+*  åŠŸèƒ½è¯´æ˜Žï¼š
+*  å‚æ•°è¯´æ˜Žï¼šæ— 
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼šCCU60_CH0ä½¿ç”¨çš„ä¸­æ–­æœåŠ¡å‡½æ•°
 *************************************************************************/
 void CCU60_CH0_IRQHandler(void)
 {
-	/* ¿ªÆôCPUÖÐ¶Ï  ·ñÔòÖÐ¶Ï²»¿ÉÇ¶Ì× */
+	/* å¼€å¯CPUä¸­æ–­  å¦åˆ™ä¸­æ–­ä¸å¯åµŒå¥— */
 	IfxCpu_enableInterrupts();
 
-	//Çå³ýÖÐ¶Ï±êÖ¾
+	//æ¸…é™¤ä¸­æ–­æ ‡å¿—
 	IfxCcu6_clearInterruptStatusFlag(&MODULE_CCU60, IfxCcu6_InterruptSource_t12PeriodMatch);
 
-	/* ÓÃ»§´úÂë */
-	LED_Ctrl(LED0,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
+	/* ç”¨æˆ·ä»£ç  */
+	LED_Ctrl(LED0,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 }
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid CCU60_CH1_IRQHandler(void)
-*  ¹¦ÄÜËµÃ÷£º
-*  ²ÎÊýËµÃ÷£ºÎÞ
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£ºCCU60_CH1Ê¹ÓÃµÄÖÐ¶Ï·þÎñº¯Êý
+*  å‡½æ•°åç§°ï¼švoid CCU60_CH1_IRQHandler(void)
+*  åŠŸèƒ½è¯´æ˜Žï¼š
+*  å‚æ•°è¯´æ˜Žï¼šæ— 
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼šCCU60_CH1ä½¿ç”¨çš„ä¸­æ–­æœåŠ¡å‡½æ•°
 *************************************************************************/
 void CCU60_CH1_IRQHandler(void)
 {
-	/* ¿ªÆôCPUÖÐ¶Ï  ·ñÔòÖÐ¶Ï²»¿ÉÇ¶Ì× */
+	/* å¼€å¯CPUä¸­æ–­  å¦åˆ™ä¸­æ–­ä¸å¯åµŒå¥— */
 	IfxCpu_enableInterrupts();
 
-	//Çå³ýÖÐ¶Ï±êÖ¾
+	//æ¸…é™¤ä¸­æ–­æ ‡å¿—
 	IfxCcu6_clearInterruptStatusFlag(&MODULE_CCU60, IfxCcu6_InterruptSource_t13PeriodMatch);
 
-	/* ÓÃ»§´úÂë */
-	LED_Ctrl(LED1,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
+	/* ç”¨æˆ·ä»£ç  */
+	LED_Ctrl(LED1,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 
 }
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid CCU61_CH0_IRQHandler(void)
-*  ¹¦ÄÜËµÃ÷£º
-*  ²ÎÊýËµÃ÷£ºÎÞ
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£ºCCU61_CH0Ê¹ÓÃµÄÖÐ¶Ï·þÎñº¯Êý
+*  å‡½æ•°åç§°ï¼švoid CCU61_CH0_IRQHandler(void)
+*  åŠŸèƒ½è¯´æ˜Žï¼š
+*  å‚æ•°è¯´æ˜Žï¼šæ— 
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼šCCU61_CH0ä½¿ç”¨çš„ä¸­æ–­æœåŠ¡å‡½æ•°
 *************************************************************************/
 void CCU61_CH0_IRQHandler(void)
 {
-	/* ¿ªÆôCPUÖÐ¶Ï  ·ñÔòÖÐ¶Ï²»¿ÉÇ¶Ì× */
+	/* å¼€å¯CPUä¸­æ–­  å¦åˆ™ä¸­æ–­ä¸å¯åµŒå¥— */
 	IfxCpu_enableInterrupts();
 
-	//Çå³ýÖÐ¶Ï±êÖ¾
+	//æ¸…é™¤ä¸­æ–­æ ‡å¿—
 	IfxCcu6_clearInterruptStatusFlag(&MODULE_CCU61, IfxCcu6_InterruptSource_t12PeriodMatch);
 
-	/* ÓÃ»§´úÂë */
-	LED_Ctrl(LED1,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
+	/* ç”¨æˆ·ä»£ç  */
+	LED_Ctrl(LED1,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 
 }
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºvoid CCU61_CH1_IRQHandler(void)
-*  ¹¦ÄÜËµÃ÷£º
-*  ²ÎÊýËµÃ÷£ºÎÞ
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£ºCCU61_CH1Ê¹ÓÃµÄÖÐ¶Ï·þÎñº¯Êý
+*  å‡½æ•°åç§°ï¼švoid CCU61_CH1_IRQHandler(void)
+*  åŠŸèƒ½è¯´æ˜Žï¼š
+*  å‚æ•°è¯´æ˜Žï¼šæ— 
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼šCCU61_CH1ä½¿ç”¨çš„ä¸­æ–­æœåŠ¡å‡½æ•°
 *************************************************************************/
 void CCU61_CH1_IRQHandler(void)
 {
-	/* ¿ªÆôCPUÖÐ¶Ï  ·ñÔòÖÐ¶Ï²»¿ÉÇ¶Ì× */
+	/* å¼€å¯CPUä¸­æ–­  å¦åˆ™ä¸­æ–­ä¸å¯åµŒå¥— */
 	IfxCpu_enableInterrupts();
 
-	//Çå³ýÖÐ¶Ï±êÖ¾
+	//æ¸…é™¤ä¸­æ–­æ ‡å¿—
 	IfxCcu6_clearInterruptStatusFlag(&MODULE_CCU61, IfxCcu6_InterruptSource_t13PeriodMatch);
 
-	/* ÓÃ»§´úÂë */
-	LED_Ctrl(LED0,RVS);        //µçÆ½·­×ª,LEDÉÁË¸
+	/* ç”¨æˆ·ä»£ç  */
+	LED_Ctrl(LED0,RVS);        //ç”µå¹³ç¿»è½¬,LEDé—ªçƒ
 }
 
 
 /*************************************************************************
-*  º¯ÊýÃû³Æ£ºCCU6_InitConfig CCU6
-*  ¹¦ÄÜËµÃ÷£º¶¨Ê±Æ÷ÖÜÆÚÖÐ¶Ï³õÊ¼»¯
-*  ²ÎÊýËµÃ÷£ºccu6    £º ccu6Ä£¿é            CCU60 ¡¢ CCU61
-*  ²ÎÊýËµÃ÷£ºchannel £º ccu6Ä£¿éÍ¨µÀ  CCU6_Channel0 ¡¢ CCU6_Channel1
-*  ²ÎÊýËµÃ÷£ºus      £º ccu6Ä£¿é  ÖÐ¶ÏÖÜÆÚÊ±¼ä  µ¥Î»us
-*  º¯Êý·µ»Ø£ºÎÞ
-*  ÐÞ¸ÄÊ±¼ä£º2020Äê3ÔÂ30ÈÕ
-*  ±¸    ×¢£º
+*  å‡½æ•°åç§°ï¼šCCU6_InitConfig CCU6
+*  åŠŸèƒ½è¯´æ˜Žï¼šå®šæ—¶å™¨å‘¨æœŸä¸­æ–­åˆå§‹åŒ–
+*  å‚æ•°è¯´æ˜Žï¼šccu6    ï¼š ccu6æ¨¡å—            CCU60 ã€ CCU61
+*  å‚æ•°è¯´æ˜Žï¼šchannel ï¼š ccu6æ¨¡å—é€šé“  CCU6_Channel0 ã€ CCU6_Channel1
+*  å‚æ•°è¯´æ˜Žï¼šus      ï¼š ccu6æ¨¡å—  ä¸­æ–­å‘¨æœŸæ—¶é—´  å•ä½us
+*  å‡½æ•°è¿”å›žï¼šæ— 
+*  ä¿®æ”¹æ—¶é—´ï¼š2020å¹´3æœˆ30æ—¥
+*  å¤‡    æ³¨ï¼š
 *************************************************************************/
 void CCU6_InitConfig(CCU6_t ccu6, CCU6_Channel_t channel, uint32 us)
 {
@@ -152,14 +152,14 @@ void CCU6_InitConfig(CCU6_t ccu6, CCU6_Channel_t channel, uint32 us)
 
 	uint64 clk = 0;
 
-	/* ¹Ø±ÕÖÐ¶Ï */
+	/* å…³é—­ä¸­æ–­ */
 	boolean interrupt_state = disableInterrupts();
 
 	IfxCcu6_Timer_initModuleConfig(&timerConfig, module);
 
 	clk = IfxScuCcu_getSpbFrequency();
 
-	/* ÉèÖÃÊ±ÖÓÆµÂÊ  */
+	/* è®¾ç½®æ—¶é’Ÿé¢‘çŽ‡  */
 	uint8 i = 0;
 	while(i++<16)
 	{
@@ -180,7 +180,7 @@ void CCU6_InitConfig(CCU6_t ccu6, CCU6_Channel_t channel, uint32 us)
 			timerConfig.interrupt1.source         = IfxCcu6_InterruptSource_t12PeriodMatch;
 			timerConfig.interrupt1.serviceRequest = IfxCcu6_ServiceRequest_1;
 			timerConfig.base.t12Frequency 		  = (float)clk;
-			timerConfig.base.t12Period 			  = period;                                  //ÉèÖÃ¶¨Ê±ÖÐ¶Ï
+			timerConfig.base.t12Period 			  = period;                                  //è®¾ç½®å®šæ—¶ä¸­æ–­
 			timerConfig.clock.t12countingInputMode = IfxCcu6_CountingInputMode_internal;
 			timerConfig.timer12.counterValue      = 0;
 			timerConfig.interrupt1.typeOfService  = Ccu6IrqVectabNum[ccu6];
@@ -206,7 +206,7 @@ void CCU6_InitConfig(CCU6_t ccu6, CCU6_Channel_t channel, uint32 us)
 
     IfxCcu6_Timer_initModule(&Ccu6Timer, &timerConfig);
 
-    IfxCpu_Irq_installInterruptHandler((void*)Ccu6IrqFuncPointer[Index], Ccu6IrqPriority[Index]);//ÅäÖÃÖÐ¶Ïº¯ÊýºÍÖÐ¶ÏºÅ
+    IfxCpu_Irq_installInterruptHandler((void*)Ccu6IrqFuncPointer[Index], Ccu6IrqPriority[Index]);//é…ç½®ä¸­æ–­å‡½æ•°å’Œä¸­æ–­å·
 
 	restoreInterrupts(interrupt_state);
 

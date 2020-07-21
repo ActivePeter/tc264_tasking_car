@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -22,46 +22,46 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <LQ_DMA.h>
 #include <LQ_GPIO.h>
 
-//°²×°ÖĞ¶Ï·şÎñº¯Êı£¬ÏòÁ¿ºÅºÍÓÅÏÈ¼¶
+//å®‰è£…ä¸­æ–­æœåŠ¡å‡½æ•°ï¼Œå‘é‡å·å’Œä¼˜å…ˆçº§
 IFX_INTERRUPT(DMA_IRQHandler, DMA_VECTABNUM, DMA_PRIORITY);
 
-//°²×°ÖĞ¶Ï·şÎñº¯Êı
+//å®‰è£…ä¸­æ–­æœåŠ¡å‡½æ•°
 void DMA_IRQHandler(void)
 {
-	/* ¿ªÆôCPUÖĞ¶Ï  ·ñÔòÖĞ¶Ï²»¿ÉÇ¶Ì× */
+	/* å¼€å¯CPUä¸­æ–­  å¦åˆ™ä¸­æ–­ä¸å¯åµŒå¥— */
 //	IfxCpu_enableInterrupts();
 
 	DMA_CameraIRQ(PIN_INT2_PRIORITY);
 }
 
 /**
- * ÉãÏñÍ· DMA ÅäÖÃ½á¹¹Ìå
+ * æ‘„åƒå¤´ DMA é…ç½®ç»“æ„ä½“
  */
 typedef struct
 {
-    Ifx_DMA_CH IFX_ALIGN(256) linkedList[2];//Á´±í´æ´¢¡£±ØĞëÓë256Î»µØÖ·¶ÔÆë£¬·ñÔòDMAÎŞ·¨¶ÁÈ¡
+    Ifx_DMA_CH IFX_ALIGN(256) linkedList[2];//é“¾è¡¨å­˜å‚¨ã€‚å¿…é¡»ä¸256ä½åœ°å€å¯¹é½ï¼Œå¦åˆ™DMAæ— æ³•è¯»å–
     IfxDma_Dma_Channel chn;                 // Dma channel handle
 }Dma_Camera_t;
 
 /**
- * ÉãÏñÍ· DMA ÅäÖÃ½á¹¹Ìå
+ * æ‘„åƒå¤´ DMA é…ç½®ç»“æ„ä½“
  */
 Dma_Camera_t g_DmaCameraLinkedList;
 
-/** ÉãÏñÍ· Êı¾İ²É¼¯Íê³É±êÖ¾Î» */
+/** æ‘„åƒå¤´ æ•°æ®é‡‡é›†å®Œæˆæ ‡å¿—ä½ */
 volatile unsigned char Camera_Flag = 0;
 
 
 /*!
-  * @brief    ÉãÏñÍ·DMA´«Êä³õÊ¼»¯
+  * @brief    æ‘„åƒå¤´DMAä¼ è¾“åˆå§‹åŒ–
   *
-  * @param    srcStartAddr   £ºÔ´µØÖ· IOµØÖ· LQ_GPIO.h ÖĞÓĞ¶ÔÓ¦ºê¶¨Òå ÀıÈçPT0__BYTE0
-  * @param    dstStartAddr   £ºÄ¿µÄµØÖ· ÉãÏñÍ·Êı¾İ»º³åÇø
-  * @param    channel        £ºDMA´«ÊäÍ¨µÀ 0-47      ×¢Òâ DMA´«ÊäÍ¨µÀĞèÒªºÍPIXÏñËØÖĞ¶ÏÓÅÏÈ¼¶±£³ÖÒ»ÖÂ
+  * @param    srcStartAddr   ï¼šæºåœ°å€ IOåœ°å€ LQ_GPIO.h ä¸­æœ‰å¯¹åº”å®å®šä¹‰ ä¾‹å¦‚PT0__BYTE0
+  * @param    dstStartAddr   ï¼šç›®çš„åœ°å€ æ‘„åƒå¤´æ•°æ®ç¼“å†²åŒº
+  * @param    channel        ï¼šDMAä¼ è¾“é€šé“ 0-47      æ³¨æ„ DMAä¼ è¾“é€šé“éœ€è¦å’ŒPIXåƒç´ ä¸­æ–­ä¼˜å…ˆçº§ä¿æŒä¸€è‡´
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ×¢Òâ DMA´«ÊäÍ¨µÀĞèÒªºÍPIXÏñËØÖĞ¶ÏÓÅÏÈ¼¶±£³ÖÒ»ÖÂ    Ò»·ùÍ¼ĞèÒª½øĞĞÁ½´ÎDMA´«Êä£¬Òò´Ë»á´¥·¢Á½´ÎDMAÖĞ¶Ï
+  * @note     æ³¨æ„ DMAä¼ è¾“é€šé“éœ€è¦å’ŒPIXåƒç´ ä¸­æ–­ä¼˜å…ˆçº§ä¿æŒä¸€è‡´    ä¸€å¹…å›¾éœ€è¦è¿›è¡Œä¸¤æ¬¡DMAä¼ è¾“ï¼Œå› æ­¤ä¼šè§¦å‘ä¸¤æ¬¡DMAä¸­æ–­
   *
   * @see      DMA_CameraInitConfig((unsigned long)(&MODULE_P02.IN.U), (unsigned long)Image_Data, PIN_INT2_PRIORITY);
   *
@@ -69,7 +69,7 @@ volatile unsigned char Camera_Flag = 0;
   */
 void DMA_CameraInitConfig(unsigned long srcStartAddr, unsigned long dstStartAddr, unsigned long channel)
 {
-	/* ¹Ø±ÕÖĞ¶Ï */
+	/* å…³é—­ä¸­æ–­ */
 	boolean        interruptState = IfxCpu_disableInterrupts();
 
 	/* create module config */
@@ -84,21 +84,21 @@ void DMA_CameraInitConfig(unsigned long srcStartAddr, unsigned long dstStartAddr
 	IfxDma_Dma_ChannelConfig cfg;
 	IfxDma_Dma_initChannelConfig(&cfg, &dma);
 
-	cfg.requestMode   = IfxDma_ChannelRequestMode_oneTransferPerRequest;   //ÇëÇóÆô¶¯Ò»´Î´«Êä
-	cfg.moveSize      = IfxDma_ChannelMoveSize_8bit;                       //Ò»´Îmove 8bit
-	cfg.shadowControl = IfxDma_ChannelShadow_linkedList;                   //linkÄ£Ê½
-	cfg.operationMode = IfxDma_ChannelOperationMode_continuous;            //´«ÊäÍê³É¼ÌĞø´«Êä
-	cfg.hardwareRequestEnabled = TRUE;                                     //Ê¹ÄÜÓ²¼ş´¥·¢´«Êä
-	cfg.sourceAddress = IFXCPU_GLB_ADDR_DSPR(IfxCpu_getCoreId(), srcStartAddr);  //ÉèÖÃÔ´µØÖ·
-	cfg.sourceCircularBufferEnabled = TRUE;                                      //±£³ÖÔ´µØÖ·²»±ä
+	cfg.requestMode   = IfxDma_ChannelRequestMode_oneTransferPerRequest;   //è¯·æ±‚å¯åŠ¨ä¸€æ¬¡ä¼ è¾“
+	cfg.moveSize      = IfxDma_ChannelMoveSize_8bit;                       //ä¸€æ¬¡move 8bit
+	cfg.shadowControl = IfxDma_ChannelShadow_linkedList;                   //linkæ¨¡å¼
+	cfg.operationMode = IfxDma_ChannelOperationMode_continuous;            //ä¼ è¾“å®Œæˆç»§ç»­ä¼ è¾“
+	cfg.hardwareRequestEnabled = TRUE;                                     //ä½¿èƒ½ç¡¬ä»¶è§¦å‘ä¼ è¾“
+	cfg.sourceAddress = IFXCPU_GLB_ADDR_DSPR(IfxCpu_getCoreId(), srcStartAddr);  //è®¾ç½®æºåœ°å€
+	cfg.sourceCircularBufferEnabled = TRUE;                                      //ä¿æŒæºåœ°å€ä¸å˜
 	cfg.sourceAddressCircularRange = IfxDma_ChannelIncrementCircular_none;
-	cfg.channelId     = channel;                                                 //ÉèÖÃDMAÍ¨µÀ
-	cfg.channelInterruptEnabled = TRUE;                                          //Ê¹ÄÜÍ¨µÀÖĞ¶Ï
-	cfg.channelInterruptPriority = DMA_PRIORITY;                                 //DMAÖĞ¶ÏÓÅÏÈ¼¶
+	cfg.channelId     = channel;                                                 //è®¾ç½®DMAé€šé“
+	cfg.channelInterruptEnabled = TRUE;                                          //ä½¿èƒ½é€šé“ä¸­æ–­
+	cfg.channelInterruptPriority = DMA_PRIORITY;                                 //DMAä¸­æ–­ä¼˜å…ˆçº§
 	cfg.channelInterruptTypeOfService = DMA_VECTABNUM;
 
 
-	/* ÉèÖÃ´«Êä±íÊö·û */
+	/* è®¾ç½®ä¼ è¾“è¡¨è¿°ç¬¦ */
 	cfg.destinationAddress =  IFXCPU_GLB_ADDR_DSPR(IfxCpu_getCoreId(), dstStartAddr);
 
 	/* address to next transaction set */
@@ -114,7 +114,7 @@ void DMA_CameraInitConfig(unsigned long srcStartAddr, unsigned long dstStartAddr
 	/* transfer into linked list storage */
 	IfxDma_Dma_initLinkedListEntry((void *)&g_DmaCameraLinkedList.linkedList[0], &cfg);
 
-	/* ÉèÖÃ´«Êä±íÊö·û */
+	/* è®¾ç½®ä¼ è¾“è¡¨è¿°ç¬¦ */
 	cfg.destinationAddress =  IFXCPU_GLB_ADDR_DSPR(IfxCpu_getCoreId(), dstStartAddr + 11280-4);
 
 	/* address to next transaction set */
@@ -134,7 +134,7 @@ void DMA_CameraInitConfig(unsigned long srcStartAddr, unsigned long dstStartAddr
 
 	IfxDma_disableChannelTransaction(&MODULE_DMA, channel);
 
-	/* ¿ªÆôÖĞ¶Ï */
+	/* å¼€å¯ä¸­æ–­ */
 	IfxCpu_restoreInterrupts(interruptState);
 }
 
