@@ -24,6 +24,7 @@ extern "C"
 #include "pa_CommonLib/pa_MecanumModel.h"
 #include "pa_CommonLib/pa_UartManager.h"
 #include "pa_CommonLib/pa_GlobalCpp.h"
+#include "pa_CommonLib/pa_UltrasonicDistance.h"
 
 #define adc_arrlen 2048
 unsigned short adc_arr1[adc_arrlen];
@@ -56,6 +57,9 @@ pa_GlobalCpp *pa_GlobalCpp::getGlobalCpp()
 	return &globalCpp;
 }
 
+pa_UltrasonicDistance ultrasonicDistance1; 
+pa_UltrasonicDistance ultrasonicDistance2; 
+
 void initVariable()
 { //初始化变量
 	speedOfMotors.speedOfM1 = 0;
@@ -67,6 +71,8 @@ void initVariable()
 	globalCpp.pid_Motor3.setPid(17, 0.2, 1);
 	globalCpp.pid_Motor4.setPid(17, 0.2, 1);
 	globalCpp.pid_Direction.setPid(500, 0, 1);
+	ultrasonicDistance1.init(1);
+	ultrasonicDistance2.init(2);
 }
 void initFuncs()
 {

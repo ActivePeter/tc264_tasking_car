@@ -140,6 +140,6 @@ void PIN_Write(GPIO_Name_t pin, uint8 output);
 void PIN_Dir(GPIO_Name_t pin, uint8 mode);
 void PIN_Reverse(GPIO_Name_t pin);
 void PIN_Exti(GPIO_Name_t pin, IfxPort_InputMode mode);
-void PIN_ExtiEnable(GPIO_Name_t pin,  boolean bool);
+void PIN_ExtiEnable(GPIO_Name_t pin,  unsigned char bool1);
 
 #endif /* 0_APPSW_TRICORE_APP_LQ_GPIO_H_ */
