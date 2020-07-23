@@ -1,317 +1,317 @@
-/*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
-------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
-________________________________________________________________
+// /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+// ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+// ã€ç¼–    å†™ã€‘ZYF/chiusir
+// ã€E-mail  ã€‘chiusir@163.com
+// ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+// ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+// ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+// ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+// ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
+// ------------------------------------------------
+// ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+// ã€Target ã€‘ TC264DA
+// ã€Crystalã€‘ 20.000Mhz
+// ã€SYS PLLã€‘ 200MHz
+// ________________________________________________________________
 
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
-#ifndef __LQ_20602_H_
-#define __LQ_20602_H_
+// QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
+// #ifndef __LQ_20602_H_
+// #define __LQ_20602_H_
 
-#include "stdint.h"
-
-
-
-
-//*!**************************************
-// ¶¨ÒåICM20602ÄÚ²¿µØÖ·
-//*!**************************************
-//MPU6500µÄÄÚ²¿¼Ä´æÆ÷
-#define ICM_SELF_TESTX_REG		0X0D	//×Ô¼ì¼Ä´æÆ÷X
-#define ICM_SELF_TESTY_REG		0X0E	//×Ô¼ì¼Ä´æÆ÷Y
-#define ICM_SELF_TESTZ_REG		0X0F	//×Ô¼ì¼Ä´æÆ÷Z
-#define ICM_SELF_TESTA_REG		0X10	//×Ô¼ì¼Ä´æÆ÷A
-#define ICM_SAMPLE_RATE_REG		0X19	//²ÉÑùÆµÂÊ·ÖÆµÆ÷
-#define ICM_CFG_REG				0X1A	//ÅäÖÃ¼Ä´æÆ÷
-#define ICM_GYRO_CFG_REG		0X1B	//ÍÓÂİÒÇÅäÖÃ¼Ä´æÆ÷
-#define ICM_ACCEL_CFG_REG		0X1C	//¼ÓËÙ¶È¼ÆÅäÖÃ¼Ä´æÆ÷
-#define ICM_MOTION_DET_REG		0X1F	//ÔË¶¯¼ì²â·§ÖµÉèÖÃ¼Ä´æÆ÷
-#define ICM_FIFO_EN_REG			0X23	//FIFOÊ¹ÄÜ¼Ä´æÆ÷
-
-#define ICM_I2CMST_STA_REG		0X36	//IICÖ÷»ú×´Ì¬¼Ä´æÆ÷
-#define ICM_INTBP_CFG_REG		0X37	//ÖĞ¶Ï/ÅÔÂ·ÉèÖÃ¼Ä´æÆ÷
-#define ICM_INT_EN_REG			0X38	//ÖĞ¶ÏÊ¹ÄÜ¼Ä´æÆ÷
-#define ICM_INT_STA_REG			0X3A	//ÖĞ¶Ï×´Ì¬¼Ä´æÆ÷
-
-#define ICM_ACCEL_XOUTH_REG		0X3B	//¼ÓËÙ¶ÈÖµ,XÖá¸ß8Î»¼Ä´æÆ÷
-#define ICM_ACCEL_XOUTL_REG		0X3C	//¼ÓËÙ¶ÈÖµ,XÖáµÍ8Î»¼Ä´æÆ÷
-#define ICM_ACCEL_YOUTH_REG		0X3D	//¼ÓËÙ¶ÈÖµ,YÖá¸ß8Î»¼Ä´æÆ÷
-#define ICM_ACCEL_YOUTL_REG		0X3E	//¼ÓËÙ¶ÈÖµ,YÖáµÍ8Î»¼Ä´æÆ÷
-#define ICM_ACCEL_ZOUTH_REG		0X3F	//¼ÓËÙ¶ÈÖµ,ZÖá¸ß8Î»¼Ä´æÆ÷
-#define ICM_ACCEL_ZOUTL_REG		0X40	//¼ÓËÙ¶ÈÖµ,ZÖáµÍ8Î»¼Ä´æÆ÷
-
-#define ICM_TEMP_OUTH_REG		0X41	//ÎÂ¶ÈÖµ¸ß°ËÎ»¼Ä´æÆ÷
-#define ICM_TEMP_OUTL_REG		0X42	//ÎÂ¶ÈÖµµÍ8Î»¼Ä´æÆ÷
-
-#define ICM_GYRO_XOUTH_REG		0X43	//ÍÓÂİÒÇÖµ,XÖá¸ß8Î»¼Ä´æÆ÷
-#define ICM_GYRO_XOUTL_REG		0X44	//ÍÓÂİÒÇÖµ,XÖáµÍ8Î»¼Ä´æÆ÷
-#define ICM_GYRO_YOUTH_REG		0X45	//ÍÓÂİÒÇÖµ,YÖá¸ß8Î»¼Ä´æÆ÷
-#define ICM_GYRO_YOUTL_REG		0X46	//ÍÓÂİÒÇÖµ,YÖáµÍ8Î»¼Ä´æÆ÷
-#define ICM_GYRO_ZOUTH_REG		0X47	//ÍÓÂİÒÇÖµ,ZÖá¸ß8Î»¼Ä´æÆ÷
-#define ICM_GYRO_ZOUTL_REG		0X48	//ÍÓÂİÒÇÖµ,ZÖáµÍ8Î»¼Ä´æÆ÷
-
-#define ICM_I2CSLV0_DO_REG		0X63	//IIC´Ó»ú0Êı¾İ¼Ä´æÆ÷
-#define ICM_I2CSLV1_DO_REG		0X64	//IIC´Ó»ú1Êı¾İ¼Ä´æÆ÷
-#define ICM_I2CSLV2_DO_REG		0X65	//IIC´Ó»ú2Êı¾İ¼Ä´æÆ÷
-#define ICM_I2CSLV3_DO_REG		0X66	//IIC´Ó»ú3Êı¾İ¼Ä´æÆ÷
-
-#define ICM_I2CMST_DELAY_REG	0X67	//IICÖ÷»úÑÓÊ±¹ÜÀí¼Ä´æÆ÷
-#define ICM_SIGPATH_RST_REG		0X68	//ĞÅºÅÍ¨µÀ¸´Î»¼Ä´æÆ÷
-#define ICM_MDETECT_CTRL_REG	0X69	//ÔË¶¯¼ì²â¿ØÖÆ¼Ä´æÆ÷
-#define ICM_USER_CTRL_REG		0X6A	//ÓÃ»§¿ØÖÆ¼Ä´æÆ÷
-#define ICM_PWR_MGMT1_REG		0X6B	//µçÔ´¹ÜÀí¼Ä´æÆ÷1
-#define ICM_PWR_MGMT2_REG		0X6C	//µçÔ´¹ÜÀí¼Ä´æÆ÷2
-#define ICM_FIFO_CNTH_REG		0X72	//FIFO¼ÆÊı¼Ä´æÆ÷¸ß°ËÎ»
-#define ICM_FIFO_CNTL_REG		0X73	//FIFO¼ÆÊı¼Ä´æÆ÷µÍ°ËÎ»
-#define ICM_FIFO_RW_REG			0X74	//FIFO¶ÁĞ´¼Ä´æÆ÷
-#define WHO_AM_I		        0X75	//Æ÷¼şID¼Ä´æÆ÷
-
-
-/*!
-  * @brief    ²âÊÔ20602 SPI½ÓÏß·½Ê½
-  *
-  * @param    ÎŞ
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      Test_ICM20602();
-  *
-  * @date     2019/4/22 ĞÇÆÚÒ»
-*/
-void Test_ICM20602(void);
-
-
-/*!
-  * @brief    ³õÊ¼»¯ICM20602 »òÕß ICM20602
-  *
-  * @param    ÎŞ
-  *
-  * @return   0£º³õÊ¼»¯³É¹¦   1£ºÊ§°Ü
-  *
-  * @note     Ê¹ÓÃSPI½ÓÏß·½Ê½µÄ³õÊ¼»¯
-  *
-  * @see      ICM20602_Init();
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM20602_Init(void);
+// #include "stdint.h"
 
 
 
 
+// //*!**************************************
+// // å®šä¹‰ICM20602å†…éƒ¨åœ°å€
+// //*!**************************************
+// //MPU6500çš„å†…éƒ¨å¯„å­˜å™¨
+// #define ICM_SELF_TESTX_REG		0X0D	//è‡ªæ£€å¯„å­˜å™¨X
+// #define ICM_SELF_TESTY_REG		0X0E	//è‡ªæ£€å¯„å­˜å™¨Y
+// #define ICM_SELF_TESTZ_REG		0X0F	//è‡ªæ£€å¯„å­˜å™¨Z
+// #define ICM_SELF_TESTA_REG		0X10	//è‡ªæ£€å¯„å­˜å™¨A
+// #define ICM_SAMPLE_RATE_REG		0X19	//é‡‡æ ·é¢‘ç‡åˆ†é¢‘å™¨
+// #define ICM_CFG_REG				0X1A	//é…ç½®å¯„å­˜å™¨
+// #define ICM_GYRO_CFG_REG		0X1B	//é™€èºä»ªé…ç½®å¯„å­˜å™¨
+// #define ICM_ACCEL_CFG_REG		0X1C	//åŠ é€Ÿåº¦è®¡é…ç½®å¯„å­˜å™¨
+// #define ICM_MOTION_DET_REG		0X1F	//è¿åŠ¨æ£€æµ‹é˜€å€¼è®¾ç½®å¯„å­˜å™¨
+// #define ICM_FIFO_EN_REG			0X23	//FIFOä½¿èƒ½å¯„å­˜å™¨
 
-/*!
-  * @brief    ÉèÖÃÍÓÂİÒÇ²âÁ¿·¶Î§
-  *
-  * @param    fsr:0,¡À250dps;1,¡À500dps;2,¡À1000dps;3,¡À2000dps
-  *
-  * @return   0 £ºÉèÖÃ³É¹¦
-  *
-  * @note     Ê¹ÓÃSPI½ÓÏß·½Ê½µÄ³õÊ¼»¯
-  *
-  * @see      ICM_Set_Gyro_Fsr(3);	//ÍÓÂİÒÇ´«¸ĞÆ÷,¡À2000dps
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Set_Gyro_Fsr(unsigned char fsr);
+// #define ICM_I2CMST_STA_REG		0X36	//IICä¸»æœºçŠ¶æ€å¯„å­˜å™¨
+// #define ICM_INTBP_CFG_REG		0X37	//ä¸­æ–­/æ—è·¯è®¾ç½®å¯„å­˜å™¨
+// #define ICM_INT_EN_REG			0X38	//ä¸­æ–­ä½¿èƒ½å¯„å­˜å™¨
+// #define ICM_INT_STA_REG			0X3A	//ä¸­æ–­çŠ¶æ€å¯„å­˜å™¨
+
+// #define ICM_ACCEL_XOUTH_REG		0X3B	//åŠ é€Ÿåº¦å€¼,Xè½´é«˜8ä½å¯„å­˜å™¨
+// #define ICM_ACCEL_XOUTL_REG		0X3C	//åŠ é€Ÿåº¦å€¼,Xè½´ä½8ä½å¯„å­˜å™¨
+// #define ICM_ACCEL_YOUTH_REG		0X3D	//åŠ é€Ÿåº¦å€¼,Yè½´é«˜8ä½å¯„å­˜å™¨
+// #define ICM_ACCEL_YOUTL_REG		0X3E	//åŠ é€Ÿåº¦å€¼,Yè½´ä½8ä½å¯„å­˜å™¨
+// #define ICM_ACCEL_ZOUTH_REG		0X3F	//åŠ é€Ÿåº¦å€¼,Zè½´é«˜8ä½å¯„å­˜å™¨
+// #define ICM_ACCEL_ZOUTL_REG		0X40	//åŠ é€Ÿåº¦å€¼,Zè½´ä½8ä½å¯„å­˜å™¨
+
+// #define ICM_TEMP_OUTH_REG		0X41	//æ¸©åº¦å€¼é«˜å…«ä½å¯„å­˜å™¨
+// #define ICM_TEMP_OUTL_REG		0X42	//æ¸©åº¦å€¼ä½8ä½å¯„å­˜å™¨
+
+// #define ICM_GYRO_XOUTH_REG		0X43	//é™€èºä»ªå€¼,Xè½´é«˜8ä½å¯„å­˜å™¨
+// #define ICM_GYRO_XOUTL_REG		0X44	//é™€èºä»ªå€¼,Xè½´ä½8ä½å¯„å­˜å™¨
+// #define ICM_GYRO_YOUTH_REG		0X45	//é™€èºä»ªå€¼,Yè½´é«˜8ä½å¯„å­˜å™¨
+// #define ICM_GYRO_YOUTL_REG		0X46	//é™€èºä»ªå€¼,Yè½´ä½8ä½å¯„å­˜å™¨
+// #define ICM_GYRO_ZOUTH_REG		0X47	//é™€èºä»ªå€¼,Zè½´é«˜8ä½å¯„å­˜å™¨
+// #define ICM_GYRO_ZOUTL_REG		0X48	//é™€èºä»ªå€¼,Zè½´ä½8ä½å¯„å­˜å™¨
+
+// #define ICM_I2CSLV0_DO_REG		0X63	//IICä»æœº0æ•°æ®å¯„å­˜å™¨
+// #define ICM_I2CSLV1_DO_REG		0X64	//IICä»æœº1æ•°æ®å¯„å­˜å™¨
+// #define ICM_I2CSLV2_DO_REG		0X65	//IICä»æœº2æ•°æ®å¯„å­˜å™¨
+// #define ICM_I2CSLV3_DO_REG		0X66	//IICä»æœº3æ•°æ®å¯„å­˜å™¨
+
+// #define ICM_I2CMST_DELAY_REG	0X67	//IICä¸»æœºå»¶æ—¶ç®¡ç†å¯„å­˜å™¨
+// #define ICM_SIGPATH_RST_REG		0X68	//ä¿¡å·é€šé“å¤ä½å¯„å­˜å™¨
+// #define ICM_MDETECT_CTRL_REG	0X69	//è¿åŠ¨æ£€æµ‹æ§åˆ¶å¯„å­˜å™¨
+// #define ICM_USER_CTRL_REG		0X6A	//ç”¨æˆ·æ§åˆ¶å¯„å­˜å™¨
+// #define ICM_PWR_MGMT1_REG		0X6B	//ç”µæºç®¡ç†å¯„å­˜å™¨1
+// #define ICM_PWR_MGMT2_REG		0X6C	//ç”µæºç®¡ç†å¯„å­˜å™¨2
+// #define ICM_FIFO_CNTH_REG		0X72	//FIFOè®¡æ•°å¯„å­˜å™¨é«˜å…«ä½
+// #define ICM_FIFO_CNTL_REG		0X73	//FIFOè®¡æ•°å¯„å­˜å™¨ä½å…«ä½
+// #define ICM_FIFO_RW_REG			0X74	//FIFOè¯»å†™å¯„å­˜å™¨
+// #define WHO_AM_I		        0X75	//å™¨ä»¶IDå¯„å­˜å™¨
+
+
+// /*!
+//   * @brief    æµ‹è¯•20602 SPIæ¥çº¿æ–¹å¼
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      Test_ICM20602();
+//   *
+//   * @date     2019/4/22 æ˜ŸæœŸä¸€
+// */
+// void Test_ICM20602(void);
+
+
+// /*!
+//   * @brief    åˆå§‹åŒ–ICM20602 æˆ–è€… ICM20602
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   0ï¼šåˆå§‹åŒ–æˆåŠŸ   1ï¼šå¤±è´¥
+//   *
+//   * @note     ä½¿ç”¨SPIæ¥çº¿æ–¹å¼çš„åˆå§‹åŒ–
+//   *
+//   * @see      ICM20602_Init();
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM20602_Init(void);
 
 
 
 
 
-/*!
-  * @brief    ÉèÖÃ¼ÓËÙ¶È¼Æ²âÁ¿·¶Î§
-  *
-  * @param    fsr:0,¡À2g;  1,¡À4g;  2,¡À8g;   3,¡À16g
-  *
-  * @return   0£ºÉèÖÃ³É¹¦
-  *
-  * @note     Ê¹ÓÃSPI½ÓÏß·½Ê½µÄ³õÊ¼»¯
-  *
-  * @see      ICM_Set_Accel_Fsr(1);				  //¼ÓËÙ¶È´«¸ĞÆ÷,¡À4g
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Set_Accel_Fsr(unsigned char fsr);
+// /*!
+//   * @brief    è®¾ç½®é™€èºä»ªæµ‹é‡èŒƒå›´
+//   *
+//   * @param    fsr:0,Â±250dps;1,Â±500dps;2,Â±1000dps;3,Â±2000dps
+//   *
+//   * @return   0 ï¼šè®¾ç½®æˆåŠŸ
+//   *
+//   * @note     ä½¿ç”¨SPIæ¥çº¿æ–¹å¼çš„åˆå§‹åŒ–
+//   *
+//   * @see      ICM_Set_Gyro_Fsr(3);	//é™€èºä»ªä¼ æ„Ÿå™¨,Â±2000dps
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Set_Gyro_Fsr(unsigned char fsr);
 
 
 
 
 
-/*!
-  * @brief    ÉèÖÃÊı×ÖµÍÍ¨ÂË²¨
-  *
-  * @param    lpf:Êı×ÖµÍÍ¨ÂË²¨ÆµÂÊ(Hz)
-  *
-  * @return   0£ºÉèÖÃ³É¹¦
-  *
-  * @note     Ê¹ÓÃSPI½ÓÏß·½Ê½µÄ³õÊ¼»¯
-  *
-  * @see      ICM_Set_LPF(100); //ÉèÖÃÊı×ÖµÍÍ¨ÂË²¨
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Set_LPF(unsigned short lpf);
-
-
-
-/*!
-  * @brief    ÉèÖÃ²ÉÑùÂÊ
-  *
-  * @param    rate:4~1000(Hz)
-  *
-  * @return   0£ºÉèÖÃ³É¹¦
-  *
-  * @note     Ê¹ÓÃSPI½ÓÏß·½Ê½µÄ³õÊ¼»¯
-  *
-  * @see      ICM_Set_Rate(1000);		//ÉèÖÃ²ÉÑùÂÊ1000Hz
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Set_Rate(unsigned short rate);
+// /*!
+//   * @brief    è®¾ç½®åŠ é€Ÿåº¦è®¡æµ‹é‡èŒƒå›´
+//   *
+//   * @param    fsr:0,Â±2g;  1,Â±4g;  2,Â±8g;   3,Â±16g
+//   *
+//   * @return   0ï¼šè®¾ç½®æˆåŠŸ
+//   *
+//   * @note     ä½¿ç”¨SPIæ¥çº¿æ–¹å¼çš„åˆå§‹åŒ–
+//   *
+//   * @see      ICM_Set_Accel_Fsr(1);				  //åŠ é€Ÿåº¦ä¼ æ„Ÿå™¨,Â±4g
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Set_Accel_Fsr(unsigned char fsr);
 
 
 
 
-/*!
-  * @brief    »ñÈ¡ÎÂ¶ÈÖµ
-  *
-  * @param    ÎŞ
-  *
-  * @return   ÎÂ¶ÈÖµ(À©´óÁË100±¶)
-  *
-  * @note     ÎÂ¶ÈÖµ(À©´óÁË100±¶)
-  *
-  * @see      ICM_Get_Temperature();
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-short ICM_Get_Temperature(void);
+
+// /*!
+//   * @brief    è®¾ç½®æ•°å­—ä½é€šæ»¤æ³¢
+//   *
+//   * @param    lpf:æ•°å­—ä½é€šæ»¤æ³¢é¢‘ç‡(Hz)
+//   *
+//   * @return   0ï¼šè®¾ç½®æˆåŠŸ
+//   *
+//   * @note     ä½¿ç”¨SPIæ¥çº¿æ–¹å¼çš„åˆå§‹åŒ–
+//   *
+//   * @see      ICM_Set_LPF(100); //è®¾ç½®æ•°å­—ä½é€šæ»¤æ³¢
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Set_LPF(unsigned short lpf);
+
+
+
+// /*!
+//   * @brief    è®¾ç½®é‡‡æ ·ç‡
+//   *
+//   * @param    rate:4~1000(Hz)
+//   *
+//   * @return   0ï¼šè®¾ç½®æˆåŠŸ
+//   *
+//   * @note     ä½¿ç”¨SPIæ¥çº¿æ–¹å¼çš„åˆå§‹åŒ–
+//   *
+//   * @see      ICM_Set_Rate(1000);		//è®¾ç½®é‡‡æ ·ç‡1000Hz
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Set_Rate(unsigned short rate);
 
 
 
 
-/*!
-  * @brief    »ñÈ¡ÍÓÂİÒÇÖµ
-  *
-  * @param    gx,gy,gz:ÍÓÂİÒÇx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
-  *
-  * @return   0£º¶ÁÈ¡³É¹¦
-  *
-  * @note     ÎŞ
-  *
-  * @see      int6_t data[3];
-  * @see      ICM_Get_Gyroscope(&data[0], &data[1], &data[2]);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Get_Gyroscope(short *gx,short *gy,short *gz);
-
-
-
-/*!
-  * @brief    »ñÈ¡¼ÓËÙ¶ÈÖµ
-  *
-  * @param    ax,ay,az:ÍÓÂİÒÇx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
-  *
-  * @return   0£º¶ÁÈ¡³É¹¦
-  *
-  * @note     ÎŞ
-  *
-  * @see      int6_t data[3];
-  * @see      ICM_Get_Accelerometer(&data[0], &data[1], &data[2]);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Get_Accelerometer(short *ax,short *ay,short *az);
+// /*!
+//   * @brief    è·å–æ¸©åº¦å€¼
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   æ¸©åº¦å€¼(æ‰©å¤§äº†100å€)
+//   *
+//   * @note     æ¸©åº¦å€¼(æ‰©å¤§äº†100å€)
+//   *
+//   * @see      ICM_Get_Temperature();
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// short ICM_Get_Temperature(void);
 
 
 
 
-/*!
-  * @brief    »ñÈ¡ ¼ÓËÙ¶ÈÖµ ½ÇËÙ¶ÈÖµ
-  *
-  * @param    ax,ay,az:ÍÓÂİÒÇx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
-  * @param    gx,gy,gz:ÍÓÂİÒÇx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
-  *
-  * @return   0£º¶ÁÈ¡³É¹¦
-  *
-  * @note     ÎŞ
-  *
-  * @see      int6_t data[6];
-  * @see      ICM_Get_Raw_data(&data[0], &data[1], &data[2],&data[3], &data[4], &data[5]);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Get_Raw_data(short *ax,short *ay,short *az,short *gx,short *gy,short *gz);
+// /*!
+//   * @brief    è·å–é™€èºä»ªå€¼
+//   *
+//   * @param    gx,gy,gz:é™€èºä»ªx,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
+//   *
+//   * @return   0ï¼šè¯»å–æˆåŠŸ
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      int6_t data[3];
+//   * @see      ICM_Get_Gyroscope(&data[0], &data[1], &data[2]);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Get_Gyroscope(short *gx,short *gy,short *gz);
 
 
 
-/*!
-  * @brief    SPI Á¬Ğø¶Á
-  *
-  * @param    reg :Òª¶ÁÈ¡µÄ¼Ä´æÆ÷µØÖ·
-  * @param    len :Òª¶ÁÈ¡µÄ³¤¶È
-  * @param    buf :¶ÁÈ¡µ½µÄÊı¾İ´æ´¢Çø
-  *
-  * @return   0 £º¶ÁÈ¡³É¹¦
-  *
-  * @note     µ×²ãÇı¶¯ ÒÆÖ²Ê±ĞèÒªĞŞ¸Ä
-  *
-  * @see      unsigned char buf[15],res;
-  * @see      res=ICM_Read_Len(ICM_ACCEL_XOUTH_REG,14,buf);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Read_Len(unsigned char reg,unsigned char len,unsigned char *buf);
+// /*!
+//   * @brief    è·å–åŠ é€Ÿåº¦å€¼
+//   *
+//   * @param    ax,ay,az:é™€èºä»ªx,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
+//   *
+//   * @return   0ï¼šè¯»å–æˆåŠŸ
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      int6_t data[3];
+//   * @see      ICM_Get_Accelerometer(&data[0], &data[1], &data[2]);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Get_Accelerometer(short *ax,short *ay,short *az);
 
 
 
 
-/*!
-  * @brief    SPI Ğ´Ò»¸ö¼Ä´æÆ÷
-  *
-  * @param    reg   :ÒªĞ´µÄ¼Ä´æÆ÷µØÖ·
-  * @param    value :ÒªĞ´ÈëµÄÖµ
-  *
-  * @return   0 £º¶ÁÈ¡³É¹¦
-  *
-  * @note     µ×²ãÇı¶¯ ÒÆÖ²Ê±ĞèÒªĞŞ¸Ä
-  *
-  * @see      ICM_Write_Byte(ICM_SAMPLE_RATE_REG,1);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Write_Byte(unsigned char reg,unsigned char value);
+// /*!
+//   * @brief    è·å– åŠ é€Ÿåº¦å€¼ è§’é€Ÿåº¦å€¼
+//   *
+//   * @param    ax,ay,az:é™€èºä»ªx,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
+//   * @param    gx,gy,gz:é™€èºä»ªx,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
+//   *
+//   * @return   0ï¼šè¯»å–æˆåŠŸ
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      int6_t data[6];
+//   * @see      ICM_Get_Raw_data(&data[0], &data[1], &data[2],&data[3], &data[4], &data[5]);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Get_Raw_data(short *ax,short *ay,short *az,short *gx,short *gy,short *gz);
 
 
 
-/*!
-  * @brief    SPI ¶ÁÒ»¸ö¼Ä´æÆ÷
-  *
-  * @param    reg   :ÒªĞ´µÄ¼Ä´æÆ÷µØÖ·
-  *
-  * @return   ¶ÁÈ¡µÄÖµ
-  *
-  * @note     µ×²ãÇı¶¯ ÒÆÖ²Ê±ĞèÒªĞŞ¸Ä
-  *
-  * @see      ICM_Read_Byte(WHO_AM_I);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Read_Byte(unsigned char reg);
+// /*!
+//   * @brief    SPI è¿ç»­è¯»
+//   *
+//   * @param    reg :è¦è¯»å–çš„å¯„å­˜å™¨åœ°å€
+//   * @param    len :è¦è¯»å–çš„é•¿åº¦
+//   * @param    buf :è¯»å–åˆ°çš„æ•°æ®å­˜å‚¨åŒº
+//   *
+//   * @return   0 ï¼šè¯»å–æˆåŠŸ
+//   *
+//   * @note     åº•å±‚é©±åŠ¨ ç§»æ¤æ—¶éœ€è¦ä¿®æ”¹
+//   *
+//   * @see      unsigned char buf[15],res;
+//   * @see      res=ICM_Read_Len(ICM_ACCEL_XOUTH_REG,14,buf);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Read_Len(unsigned char reg,unsigned char len,unsigned char *buf);
 
-#endif
+
+
+
+// /*!
+//   * @brief    SPI å†™ä¸€ä¸ªå¯„å­˜å™¨
+//   *
+//   * @param    reg   :è¦å†™çš„å¯„å­˜å™¨åœ°å€
+//   * @param    value :è¦å†™å…¥çš„å€¼
+//   *
+//   * @return   0 ï¼šè¯»å–æˆåŠŸ
+//   *
+//   * @note     åº•å±‚é©±åŠ¨ ç§»æ¤æ—¶éœ€è¦ä¿®æ”¹
+//   *
+//   * @see      ICM_Write_Byte(ICM_SAMPLE_RATE_REG,1);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Write_Byte(unsigned char reg,unsigned char value);
+
+
+
+// /*!
+//   * @brief    SPI è¯»ä¸€ä¸ªå¯„å­˜å™¨
+//   *
+//   * @param    reg   :è¦å†™çš„å¯„å­˜å™¨åœ°å€
+//   *
+//   * @return   è¯»å–çš„å€¼
+//   *
+//   * @note     åº•å±‚é©±åŠ¨ ç§»æ¤æ—¶éœ€è¦ä¿®æ”¹
+//   *
+//   * @see      ICM_Read_Byte(WHO_AM_I);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Read_Byte(unsigned char reg);
+
+// #endif
 

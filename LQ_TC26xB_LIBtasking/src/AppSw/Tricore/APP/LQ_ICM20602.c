@@ -1,454 +1,454 @@
-/*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
-------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
-________________________________________________________________
-
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
-
-#include <LQ_I2C_MPU6050.h>
-#include <LQ_ICM20602.h>
-#include <LQ_OLED096.h>
-#include <LQ_SPI.h>
-#include <LQ_STM.h>
-#include <Platform_Types.h>
-#include <stdio.h>
-
-/*!
-  * @brief    ²âÊÔ20602 SPI½ÓÏß·½Ê½
-  *
-  * @param    ÎŞ
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      Test_ICM20602();
-  *
-  * @date     2019/4/22 ĞÇÆÚÒ»
-*/
-void Test_ICM20602(void)
-{
-    char  txt[30];
-	short aacx,aacy,aacz;	         //¼ÓËÙ¶È´«¸ĞÆ÷Ô­Ê¼Êı¾İ
-	short gyrox,gyroy,gyroz;        //ÍÓÂİÒÇÔ­Ê¼Êı¾İ
-    OLED_Init();                      //LCD³õÊ¼»¯
-    OLED_CLS();                       //LCDÇåÆÁ
-
-    SPI_InitConfig(SPI3_CLK_P15_6, SPI3_MISO_P15_7, SPI3_MOSI_P00_0, SPI3_CS_P00_3, 10000000U);
-
-
-    OLED_P8x16Str(15,0,"LQ 20602 Test");
-
-
-    if(ICM20602_Init())
-    {
-
-    	OLED_P8x16Str(15,2,"ICM20602 Test Fail");
-#pragma warning 557         // ÆÁ±Î¾¯¸æ
-		while (1);
-#pragma warning default     // ´ò¿ª¾¯¸æ
-    }
-
-    while(1)
-    {
-        ICM_Get_Raw_data(&aacx,&aacy,&aacz,&gyrox,&gyroy,&gyroz);	//µÃµ½¼ÓËÙ¶È´«¸ĞÆ÷Êı¾İ
-        sprintf((char*)txt,"ax:%06d",aacx);
-        OLED_P6x8Str(0,2,txt);
-        sprintf((char*)txt,"ay:%06d",aacy);
-        OLED_P6x8Str(0,3,txt);
-        sprintf((char*)txt,"az:%06d",aacz);
-        OLED_P6x8Str(0,4,txt);
-        sprintf((char*)txt,"gx:%06d",gyrox);
-        OLED_P6x8Str(0,5,txt);
-        sprintf((char*)txt,"gy:%06d",gyroy);
-        OLED_P6x8Str(0,6,txt);
-        sprintf((char*)txt,"gz:%06d",gyroz);
-        OLED_P6x8Str(0,7,txt);
-
-        delayms(500);
-
-    }
-
-}
-
-
-/*!
-  * @brief    ²»¾«È·ÑÓÊ±
-  *
-  * @param    ÎŞ
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      delayms_icm(100);
-  *
-  * @date     2019/4/22 ĞÇÆÚÒ»
-*/
-void delayms_icm(uint16 ms)
-{
-	volatile uint32_t i = 0;
-	while(ms--)
-	{
-		for (i = 0; i < 30000; ++i)
-		{
-			__asm("NOP"); /* delay */
-		}
-	}
-}
-
-
-
-
-/*!
-  * @brief    ³õÊ¼»¯ICM20602 »òÕß ICM20602
-  *
-  * @param    ÎŞ
-  *
-  * @return   0£º³õÊ¼»¯³É¹¦   1£ºÊ§°Ü
-  *
-  * @note     Ê¹ÓÃSPI½ÓÏß·½Ê½µÄ³õÊ¼»¯
-  *
-  * @see      ICM20602_Init();
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM20602_Init(void)
-{
-    unsigned char res;
-    res = ICM_Read_Byte(WHO_AM_I);           //¶ÁÈ¡ICM20602µÄID
-    if(res == 0x12)                          //Æ÷¼şIDÕıÈ·
-    {
-//        PRINTF("ICM20602 is OK!\n");
-    }
-    else
-    {
-//        PRINTF("\r\nThe correct IMU was not detected\r\nPlease check the wiring ID=%X\r\n",res);
-        return 1;
-    }
-
-    res = 0;
-    res += ICM_Write_Byte(ICM_PWR_MGMT1_REG,0X80);//¸´Î»ICM20602
-    delayms_icm(100);  //ÑÓÊ±100ms
-    res += ICM_Write_Byte(ICM_PWR_MGMT1_REG,0X00);//»½ĞÑICM20602
-    res += ICM_Set_Gyro_Fsr(3);					  //ÍÓÂİÒÇ´«¸ĞÆ÷,¡À2000dps
-    res += ICM_Set_Accel_Fsr(1);				  //¼ÓËÙ¶È´«¸ĞÆ÷,¡À4g
-    res += ICM_Set_Rate(1000);					  //ÉèÖÃ²ÉÑùÂÊ1000Hz
-    res += ICM_Write_Byte(ICM_CFG_REG,0x02);      //ÉèÖÃÊı×ÖµÍÍ¨ÂË²¨Æ÷   98hz
-    res += ICM_Write_Byte(ICM_INT_EN_REG,0X00);   //¹Ø±ÕËùÓĞÖĞ¶Ï
-    res += ICM_Write_Byte(ICM_USER_CTRL_REG,0X00);//I2CÖ÷Ä£Ê½¹Ø±Õ
-    res += ICM_Write_Byte(ICM_PWR_MGMT1_REG,0X01);//ÉèÖÃCLKSEL,PLL XÖáÎª²Î¿¼
-    res += ICM_Write_Byte(ICM_PWR_MGMT2_REG,0X00);//¼ÓËÙ¶ÈÓëÍÓÂİÒÇ¶¼¹¤×÷
-
-    if(res == 0)  //ÉÏÃæ¼Ä´æÆ÷¶¼Ğ´Èë³É¹¦
-    {
-//        PRINTF("MPU set is OK!\n");
-    }
-    else return 1;
-
-    return 0;
-}
-
-
-
-
-/*!
-  * @brief    ÉèÖÃÍÓÂİÒÇ²âÁ¿·¶Î§
-  *
-  * @param    fsr:0,¡À250dps;1,¡À500dps;2,¡À1000dps;3,¡À2000dps
-  *
-  * @return   0 £ºÉèÖÃ³É¹¦
-  *
-  * @note     Ê¹ÓÃSPI½ÓÏß·½Ê½µÄ³õÊ¼»¯
-  *
-  * @see      ICM_Set_Gyro_Fsr(3);	//ÍÓÂİÒÇ´«¸ĞÆ÷,¡À2000dps
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Set_Gyro_Fsr(unsigned char fsr)
-{
-	return ICM_Write_Byte(ICM_GYRO_CFG_REG,fsr<<3);
-}
-
-
-
-/*!
-  * @brief    ÉèÖÃ¼ÓËÙ¶È¼Æ²âÁ¿·¶Î§
-  *
-  * @param    fsr:0,¡À2g;  1,¡À4g;  2,¡À8g;   3,¡À16g
-  *
-  * @return   0£ºÉèÖÃ³É¹¦
-  *
-  * @note     Ê¹ÓÃSPI½ÓÏß·½Ê½µÄ³õÊ¼»¯
-  *
-  * @see      ICM_Set_Accel_Fsr(1);				  //¼ÓËÙ¶È´«¸ĞÆ÷,¡À4g
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Set_Accel_Fsr(unsigned char fsr)
-{
-	return ICM_Write_Byte(ICM_ACCEL_CFG_REG,fsr<<3);
-}
-
-
-
-/*!
-  * @brief    ÉèÖÃÊı×ÖµÍÍ¨ÂË²¨
-  *
-  * @param    lpf:Êı×ÖµÍÍ¨ÂË²¨ÆµÂÊ(Hz)
-  *
-  * @return   0£ºÉèÖÃ³É¹¦
-  *
-  * @note     Ê¹ÓÃSPI½ÓÏß·½Ê½µÄ³õÊ¼»¯
-  *
-  * @see      ICM_Set_LPF(100); //ÉèÖÃÊı×ÖµÍÍ¨ÂË²¨
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Set_LPF(uint16 lpf)
-{
-	unsigned char data=0;
-	if(lpf>=188)data=1;
-	else if(lpf>=98)data=2;
-	else if(lpf>=42)data=3;
-	else if(lpf>=20)data=4;
-	else if(lpf>=10)data=5;
-	else data=6;
-	return ICM_Write_Byte(ICM_CFG_REG,data);//ÉèÖÃÊı×ÖµÍÍ¨ÂË²¨Æ÷
-}
-
-
-
-
-/*!
-  * @brief    ÉèÖÃ²ÉÑùÂÊ
-  *
-  * @param    rate:4~1000(Hz)
-  *
-  * @return   0£ºÉèÖÃ³É¹¦
-  *
-  * @note     Ê¹ÓÃSPI½ÓÏß·½Ê½µÄ³õÊ¼»¯
-  *
-  * @see      ICM_Set_Rate(1000);		//ÉèÖÃ²ÉÑùÂÊ1000Hz
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Set_Rate(uint16 rate)
-{
-	unsigned char data;
-	if(rate>1000)rate=1000;
-	if(rate<4)rate=4;
-	data=1000/rate-1;
-	ICM_Write_Byte(ICM_SAMPLE_RATE_REG,data);	                //ÉèÖÃÊı×ÖµÍÍ¨ÂË²¨Æ÷
- 	return ICM_Set_LPF(rate/2);	                                //×Ô¶¯ÉèÖÃLPFÎª²ÉÑùÂÊµÄÒ»°ë
-}
-
-
-
-/*!
-  * @brief    »ñÈ¡ÎÂ¶ÈÖµ
-  *
-  * @param    ÎŞ
-  *
-  * @return   ÎÂ¶ÈÖµ(À©´óÁË100±¶)
-  *
-  * @note     ÎÂ¶ÈÖµ(À©´óÁË100±¶)
-  *
-  * @see      ICM_Get_Temperature();
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-short ICM_Get_Temperature(void)
-{
-    unsigned char buf[3];
-    short raw;
-	float temp;
-	ICM_Read_Len(ICM_TEMP_OUTH_REG,2,buf);
-    raw=((uint16)buf[1]<<8)|buf[2];
-    temp=21+((double)raw)/333.87;
-    return (short)temp*100;
-}
-
-
-
-
-
-/*!
-  * @brief    »ñÈ¡ÍÓÂİÒÇÖµ
-  *
-  * @param    gx,gy,gz:ÍÓÂİÒÇx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
-  *
-  * @return   0£º¶ÁÈ¡³É¹¦
-  *
-  * @note     ÎŞ
-  *
-  * @see      int6_t data[3];
-  * @see      ICM_Get_Gyroscope(&data[0], &data[1], &data[2]);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Get_Gyroscope(short *gx,short *gy,short *gz)
-{
-    unsigned char buf[7],res;
-	res=ICM_Read_Len(ICM_GYRO_XOUTH_REG,6,buf);
-	if(res==0)
-	{
-		*gx=((uint16)buf[1]<<8)|buf[2];
-		*gy=((uint16)buf[3]<<8)|buf[4];
-		*gz=((uint16)buf[5]<<8)|buf[6];
-	}
-    return res;
-}
-
-
-
-
-/*!
-  * @brief    »ñÈ¡¼ÓËÙ¶ÈÖµ
-  *
-  * @param    ax,ay,az:ÍÓÂİÒÇx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
-  *
-  * @return   0£º¶ÁÈ¡³É¹¦
-  *
-  * @note     ÎŞ
-  *
-  * @see      int6_t data[3];
-  * @see      ICM_Get_Accelerometer(&data[0], &data[1], &data[2]);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Get_Accelerometer(short *ax,short *ay,short *az)
-{
-    unsigned char buf[7],res;
-	res=ICM_Read_Len(ICM_ACCEL_XOUTH_REG,6,buf);
-	if(res==0)
-	{
-		*ax=((uint16)buf[1]<<8)|buf[2];
-		*ay=((uint16)buf[3]<<8)|buf[4];
-		*az=((uint16)buf[5]<<8)|buf[6];
-	}
-    return res;
-}
-
-
-
-
-/*!
-  * @brief    »ñÈ¡ ¼ÓËÙ¶ÈÖµ ½ÇËÙ¶ÈÖµ
-  *
-  * @param    ax,ay,az:ÍÓÂİÒÇx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
-  * @param    gx,gy,gz:ÍÓÂİÒÇx,y,zÖáµÄÔ­Ê¼¶ÁÊı(´ø·ûºÅ)
-  *
-  * @return   0£º¶ÁÈ¡³É¹¦
-  *
-  * @note     ÎŞ
-  *
-  * @see      int6_t data[6];
-  * @see      ICM_Get_Raw_data(&data[0], &data[1], &data[2],&data[3], &data[4], &data[5]);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Get_Raw_data(short *ax,short *ay,short *az,short *gx,short *gy,short *gz)
-{
-    unsigned char buf[15],res;
-	res=ICM_Read_Len(ICM_ACCEL_XOUTH_REG,14,buf);
-	if(res==0)
-	{
-		*ax=((uint16)buf[1]<<8)|buf[2];
-		*ay=((uint16)buf[3]<<8)|buf[4];
-		*az=((uint16)buf[5]<<8)|buf[6];
-        *gx=((uint16)buf[9]<<8)|buf[10];
-		*gy=((uint16)buf[11]<<8)|buf[12];
-		*gz=((uint16)buf[13]<<8)|buf[14];
-	}
-    return res;
-}
-
-
-
-
-/*!
-  * @brief    SPI Á¬Ğø¶Á
-  *
-  * @param    reg :Òª¶ÁÈ¡µÄ¼Ä´æÆ÷µØÖ·
-  * @param    len :Òª¶ÁÈ¡µÄ³¤¶È
-  * @param    buf :¶ÁÈ¡µ½µÄÊı¾İ´æ´¢Çø
-  *
-  * @return   0 £º¶ÁÈ¡³É¹¦
-  *
-  * @note     µ×²ãÇı¶¯ ÒÆÖ²Ê±ĞèÒªĞŞ¸Ä
-  *
-  * @see      unsigned char buf[15],res;
-  * @see      res=ICM_Read_Len(ICM_ACCEL_XOUTH_REG,14,buf);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Read_Len(unsigned char reg,unsigned char len,unsigned char *buf)
-{
-    buf[0] = reg | 0x80;
-
-    /* Ğ´ÈëÒª¶ÁµÄ¼Ä´æÆ÷µØÖ· */
-    return SPI_ReadWriteNByte(SPI3, buf, buf, len + 1);
-}
-
-
-
-/*!
-  * @brief    SPI Ğ´Ò»¸ö¼Ä´æÆ÷
-  *
-  * @param    reg   :ÒªĞ´µÄ¼Ä´æÆ÷µØÖ·
-  * @param    value :ÒªĞ´ÈëµÄÖµ
-  *
-  * @return   0 £º¶ÁÈ¡³É¹¦
-  *
-  * @note     µ×²ãÇı¶¯ ÒÆÖ²Ê±ĞèÒªĞŞ¸Ä
-  *
-  * @see      ICM_Write_Byte(ICM_SAMPLE_RATE_REG,1);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Write_Byte(unsigned char reg,unsigned char value)
-{
-    unsigned char buff[2];
-
-    buff[0] = reg;          //ÏÈ·¢ËÍ¼Ä´æÆ÷
-    buff[1] = value;        //ÔÙ·¢ËÍÊı¾İ
-
-    return SPI_ReadWriteNByte(SPI3, buff, buff, 2); //·¢ËÍbuffÀïÊı¾İ£¬²¢²É¼¯µ½ buffÀï
-}
-
-/*!
-  * @brief    SPI ¶ÁÒ»¸ö¼Ä´æÆ÷
-  *
-  * @param    reg   :ÒªĞ´µÄ¼Ä´æÆ÷µØÖ·
-  *
-  * @return   ¶ÁÈ¡µÄÖµ
-  *
-  * @note     µ×²ãÇı¶¯ ÒÆÖ²Ê±ĞèÒªĞŞ¸Ä
-  *
-  * @see      ICM_Read_Byte(WHO_AM_I);
-  *
-  * @date     2019/6/12 ĞÇÆÚÈı
-  */
-unsigned char ICM_Read_Byte(unsigned char reg)
-{
-    unsigned char buff[2];
-    buff[0] = reg | 0x80;          //ÏÈ·¢ËÍ¼Ä´æÆ÷
-
-    SPI_ReadWriteNByte(SPI3, buff, buff, 2);
-    return buff[1];
-}
+// /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+// ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+// ã€ç¼–    å†™ã€‘ZYF/chiusir
+// ã€E-mail  ã€‘chiusir@163.com
+// ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+// ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+// ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+// ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+// ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
+// ------------------------------------------------
+// ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+// ã€Target ã€‘ TC264DA
+// ã€Crystalã€‘ 20.000Mhz
+// ã€SYS PLLã€‘ 200MHz
+// ________________________________________________________________
+
+// QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
+
+// #include <LQ_I2C_MPU6050.h>
+// #include <LQ_ICM20602.h>
+// #include <LQ_OLED096.h>
+// #include <LQ_SPI.h>
+// #include <LQ_STM.h>
+// #include <Platform_Types.h>
+// #include <stdio.h>
+
+// /*!
+//   * @brief    æµ‹è¯•20602 SPIæ¥çº¿æ–¹å¼
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      Test_ICM20602();
+//   *
+//   * @date     2019/4/22 æ˜ŸæœŸä¸€
+// */
+// void Test_ICM20602(void)
+// {
+//     char  txt[30];
+// 	short aacx,aacy,aacz;	         //åŠ é€Ÿåº¦ä¼ æ„Ÿå™¨åŸå§‹æ•°æ®
+// 	short gyrox,gyroy,gyroz;        //é™€èºä»ªåŸå§‹æ•°æ®
+//     OLED_Init();                      //LCDåˆå§‹åŒ–
+//     OLED_CLS();                       //LCDæ¸…å±
+
+//     SPI_InitConfig(SPI3_CLK_P15_6, SPI3_MISO_P15_7, SPI3_MOSI_P00_0, SPI3_CS_P00_3, 10000000U);
+
+
+//     OLED_P8x16Str(15,0,"LQ 20602 Test");
+
+
+//     if(ICM20602_Init())
+//     {
+
+//     	OLED_P8x16Str(15,2,"ICM20602 Test Fail");
+// #pragma warning 557         // å±è”½è­¦å‘Š
+// 		while (1);
+// #pragma warning default     // æ‰“å¼€è­¦å‘Š
+//     }
+
+//     while(1)
+//     {
+//         ICM_Get_Raw_data(&aacx,&aacy,&aacz,&gyrox,&gyroy,&gyroz);	//å¾—åˆ°åŠ é€Ÿåº¦ä¼ æ„Ÿå™¨æ•°æ®
+//         sprintf((char*)txt,"ax:%06d",aacx);
+//         OLED_P6x8Str(0,2,txt);
+//         sprintf((char*)txt,"ay:%06d",aacy);
+//         OLED_P6x8Str(0,3,txt);
+//         sprintf((char*)txt,"az:%06d",aacz);
+//         OLED_P6x8Str(0,4,txt);
+//         sprintf((char*)txt,"gx:%06d",gyrox);
+//         OLED_P6x8Str(0,5,txt);
+//         sprintf((char*)txt,"gy:%06d",gyroy);
+//         OLED_P6x8Str(0,6,txt);
+//         sprintf((char*)txt,"gz:%06d",gyroz);
+//         OLED_P6x8Str(0,7,txt);
+
+//         delayms(500);
+
+//     }
+
+// }
+
+
+// /*!
+//   * @brief    ä¸ç²¾ç¡®å»¶æ—¶
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      delayms_icm(100);
+//   *
+//   * @date     2019/4/22 æ˜ŸæœŸä¸€
+// */
+// void delayms_icm(uint16 ms)
+// {
+// 	volatile uint32_t i = 0;
+// 	while(ms--)
+// 	{
+// 		for (i = 0; i < 30000; ++i)
+// 		{
+// 			__asm("NOP"); /* delay */
+// 		}
+// 	}
+// }
+
+
+
+
+// /*!
+//   * @brief    åˆå§‹åŒ–ICM20602 æˆ–è€… ICM20602
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   0ï¼šåˆå§‹åŒ–æˆåŠŸ   1ï¼šå¤±è´¥
+//   *
+//   * @note     ä½¿ç”¨SPIæ¥çº¿æ–¹å¼çš„åˆå§‹åŒ–
+//   *
+//   * @see      ICM20602_Init();
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM20602_Init(void)
+// {
+//     unsigned char res;
+//     res = ICM_Read_Byte(WHO_AM_I);           //è¯»å–ICM20602çš„ID
+//     if(res == 0x12)                          //å™¨ä»¶IDæ­£ç¡®
+//     {
+// //        PRINTF("ICM20602 is OK!\n");
+//     }
+//     else
+//     {
+// //        PRINTF("\r\nThe correct IMU was not detected\r\nPlease check the wiring ID=%X\r\n",res);
+//         return 1;
+//     }
+
+//     res = 0;
+//     res += ICM_Write_Byte(ICM_PWR_MGMT1_REG,0X80);//å¤ä½ICM20602
+//     delayms_icm(100);  //å»¶æ—¶100ms
+//     res += ICM_Write_Byte(ICM_PWR_MGMT1_REG,0X00);//å”¤é†’ICM20602
+//     res += ICM_Set_Gyro_Fsr(3);					  //é™€èºä»ªä¼ æ„Ÿå™¨,Â±2000dps
+//     res += ICM_Set_Accel_Fsr(1);				  //åŠ é€Ÿåº¦ä¼ æ„Ÿå™¨,Â±4g
+//     res += ICM_Set_Rate(1000);					  //è®¾ç½®é‡‡æ ·ç‡1000Hz
+//     res += ICM_Write_Byte(ICM_CFG_REG,0x02);      //è®¾ç½®æ•°å­—ä½é€šæ»¤æ³¢å™¨   98hz
+//     res += ICM_Write_Byte(ICM_INT_EN_REG,0X00);   //å…³é—­æ‰€æœ‰ä¸­æ–­
+//     res += ICM_Write_Byte(ICM_USER_CTRL_REG,0X00);//I2Cä¸»æ¨¡å¼å…³é—­
+//     res += ICM_Write_Byte(ICM_PWR_MGMT1_REG,0X01);//è®¾ç½®CLKSEL,PLL Xè½´ä¸ºå‚è€ƒ
+//     res += ICM_Write_Byte(ICM_PWR_MGMT2_REG,0X00);//åŠ é€Ÿåº¦ä¸é™€èºä»ªéƒ½å·¥ä½œ
+
+//     if(res == 0)  //ä¸Šé¢å¯„å­˜å™¨éƒ½å†™å…¥æˆåŠŸ
+//     {
+// //        PRINTF("MPU set is OK!\n");
+//     }
+//     else return 1;
+
+//     return 0;
+// }
+
+
+
+
+// /*!
+//   * @brief    è®¾ç½®é™€èºä»ªæµ‹é‡èŒƒå›´
+//   *
+//   * @param    fsr:0,Â±250dps;1,Â±500dps;2,Â±1000dps;3,Â±2000dps
+//   *
+//   * @return   0 ï¼šè®¾ç½®æˆåŠŸ
+//   *
+//   * @note     ä½¿ç”¨SPIæ¥çº¿æ–¹å¼çš„åˆå§‹åŒ–
+//   *
+//   * @see      ICM_Set_Gyro_Fsr(3);	//é™€èºä»ªä¼ æ„Ÿå™¨,Â±2000dps
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Set_Gyro_Fsr(unsigned char fsr)
+// {
+// 	return ICM_Write_Byte(ICM_GYRO_CFG_REG,fsr<<3);
+// }
+
+
+
+// /*!
+//   * @brief    è®¾ç½®åŠ é€Ÿåº¦è®¡æµ‹é‡èŒƒå›´
+//   *
+//   * @param    fsr:0,Â±2g;  1,Â±4g;  2,Â±8g;   3,Â±16g
+//   *
+//   * @return   0ï¼šè®¾ç½®æˆåŠŸ
+//   *
+//   * @note     ä½¿ç”¨SPIæ¥çº¿æ–¹å¼çš„åˆå§‹åŒ–
+//   *
+//   * @see      ICM_Set_Accel_Fsr(1);				  //åŠ é€Ÿåº¦ä¼ æ„Ÿå™¨,Â±4g
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Set_Accel_Fsr(unsigned char fsr)
+// {
+// 	return ICM_Write_Byte(ICM_ACCEL_CFG_REG,fsr<<3);
+// }
+
+
+
+// /*!
+//   * @brief    è®¾ç½®æ•°å­—ä½é€šæ»¤æ³¢
+//   *
+//   * @param    lpf:æ•°å­—ä½é€šæ»¤æ³¢é¢‘ç‡(Hz)
+//   *
+//   * @return   0ï¼šè®¾ç½®æˆåŠŸ
+//   *
+//   * @note     ä½¿ç”¨SPIæ¥çº¿æ–¹å¼çš„åˆå§‹åŒ–
+//   *
+//   * @see      ICM_Set_LPF(100); //è®¾ç½®æ•°å­—ä½é€šæ»¤æ³¢
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Set_LPF(uint16 lpf)
+// {
+// 	unsigned char data=0;
+// 	if(lpf>=188)data=1;
+// 	else if(lpf>=98)data=2;
+// 	else if(lpf>=42)data=3;
+// 	else if(lpf>=20)data=4;
+// 	else if(lpf>=10)data=5;
+// 	else data=6;
+// 	return ICM_Write_Byte(ICM_CFG_REG,data);//è®¾ç½®æ•°å­—ä½é€šæ»¤æ³¢å™¨
+// }
+
+
+
+
+// /*!
+//   * @brief    è®¾ç½®é‡‡æ ·ç‡
+//   *
+//   * @param    rate:4~1000(Hz)
+//   *
+//   * @return   0ï¼šè®¾ç½®æˆåŠŸ
+//   *
+//   * @note     ä½¿ç”¨SPIæ¥çº¿æ–¹å¼çš„åˆå§‹åŒ–
+//   *
+//   * @see      ICM_Set_Rate(1000);		//è®¾ç½®é‡‡æ ·ç‡1000Hz
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Set_Rate(uint16 rate)
+// {
+// 	unsigned char data;
+// 	if(rate>1000)rate=1000;
+// 	if(rate<4)rate=4;
+// 	data=1000/rate-1;
+// 	ICM_Write_Byte(ICM_SAMPLE_RATE_REG,data);	                //è®¾ç½®æ•°å­—ä½é€šæ»¤æ³¢å™¨
+//  	return ICM_Set_LPF(rate/2);	                                //è‡ªåŠ¨è®¾ç½®LPFä¸ºé‡‡æ ·ç‡çš„ä¸€åŠ
+// }
+
+
+
+// /*!
+//   * @brief    è·å–æ¸©åº¦å€¼
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   æ¸©åº¦å€¼(æ‰©å¤§äº†100å€)
+//   *
+//   * @note     æ¸©åº¦å€¼(æ‰©å¤§äº†100å€)
+//   *
+//   * @see      ICM_Get_Temperature();
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// short ICM_Get_Temperature(void)
+// {
+//     unsigned char buf[3];
+//     short raw;
+// 	float temp;
+// 	ICM_Read_Len(ICM_TEMP_OUTH_REG,2,buf);
+//     raw=((uint16)buf[1]<<8)|buf[2];
+//     temp=21+((double)raw)/333.87;
+//     return (short)temp*100;
+// }
+
+
+
+
+
+// /*!
+//   * @brief    è·å–é™€èºä»ªå€¼
+//   *
+//   * @param    gx,gy,gz:é™€èºä»ªx,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
+//   *
+//   * @return   0ï¼šè¯»å–æˆåŠŸ
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      int6_t data[3];
+//   * @see      ICM_Get_Gyroscope(&data[0], &data[1], &data[2]);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Get_Gyroscope(short *gx,short *gy,short *gz)
+// {
+//     unsigned char buf[7],res;
+// 	res=ICM_Read_Len(ICM_GYRO_XOUTH_REG,6,buf);
+// 	if(res==0)
+// 	{
+// 		*gx=((uint16)buf[1]<<8)|buf[2];
+// 		*gy=((uint16)buf[3]<<8)|buf[4];
+// 		*gz=((uint16)buf[5]<<8)|buf[6];
+// 	}
+//     return res;
+// }
+
+
+
+
+// /*!
+//   * @brief    è·å–åŠ é€Ÿåº¦å€¼
+//   *
+//   * @param    ax,ay,az:é™€èºä»ªx,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
+//   *
+//   * @return   0ï¼šè¯»å–æˆåŠŸ
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      int6_t data[3];
+//   * @see      ICM_Get_Accelerometer(&data[0], &data[1], &data[2]);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Get_Accelerometer(short *ax,short *ay,short *az)
+// {
+//     unsigned char buf[7],res;
+// 	res=ICM_Read_Len(ICM_ACCEL_XOUTH_REG,6,buf);
+// 	if(res==0)
+// 	{
+// 		*ax=((uint16)buf[1]<<8)|buf[2];
+// 		*ay=((uint16)buf[3]<<8)|buf[4];
+// 		*az=((uint16)buf[5]<<8)|buf[6];
+// 	}
+//     return res;
+// }
+
+
+
+
+// /*!
+//   * @brief    è·å– åŠ é€Ÿåº¦å€¼ è§’é€Ÿåº¦å€¼
+//   *
+//   * @param    ax,ay,az:é™€èºä»ªx,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
+//   * @param    gx,gy,gz:é™€èºä»ªx,y,zè½´çš„åŸå§‹è¯»æ•°(å¸¦ç¬¦å·)
+//   *
+//   * @return   0ï¼šè¯»å–æˆåŠŸ
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      int6_t data[6];
+//   * @see      ICM_Get_Raw_data(&data[0], &data[1], &data[2],&data[3], &data[4], &data[5]);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Get_Raw_data(short *ax,short *ay,short *az,short *gx,short *gy,short *gz)
+// {
+//     unsigned char buf[15],res;
+// 	res=ICM_Read_Len(ICM_ACCEL_XOUTH_REG,14,buf);
+// 	if(res==0)
+// 	{
+// 		*ax=((uint16)buf[1]<<8)|buf[2];
+// 		*ay=((uint16)buf[3]<<8)|buf[4];
+// 		*az=((uint16)buf[5]<<8)|buf[6];
+//         *gx=((uint16)buf[9]<<8)|buf[10];
+// 		*gy=((uint16)buf[11]<<8)|buf[12];
+// 		*gz=((uint16)buf[13]<<8)|buf[14];
+// 	}
+//     return res;
+// }
+
+
+
+
+// /*!
+//   * @brief    SPI è¿ç»­è¯»
+//   *
+//   * @param    reg :è¦è¯»å–çš„å¯„å­˜å™¨åœ°å€
+//   * @param    len :è¦è¯»å–çš„é•¿åº¦
+//   * @param    buf :è¯»å–åˆ°çš„æ•°æ®å­˜å‚¨åŒº
+//   *
+//   * @return   0 ï¼šè¯»å–æˆåŠŸ
+//   *
+//   * @note     åº•å±‚é©±åŠ¨ ç§»æ¤æ—¶éœ€è¦ä¿®æ”¹
+//   *
+//   * @see      unsigned char buf[15],res;
+//   * @see      res=ICM_Read_Len(ICM_ACCEL_XOUTH_REG,14,buf);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Read_Len(unsigned char reg,unsigned char len,unsigned char *buf)
+// {
+//     buf[0] = reg | 0x80;
+
+//     /* å†™å…¥è¦è¯»çš„å¯„å­˜å™¨åœ°å€ */
+//     return SPI_ReadWriteNByte(SPI3, buf, buf, len + 1);
+// }
+
+
+
+// /*!
+//   * @brief    SPI å†™ä¸€ä¸ªå¯„å­˜å™¨
+//   *
+//   * @param    reg   :è¦å†™çš„å¯„å­˜å™¨åœ°å€
+//   * @param    value :è¦å†™å…¥çš„å€¼
+//   *
+//   * @return   0 ï¼šè¯»å–æˆåŠŸ
+//   *
+//   * @note     åº•å±‚é©±åŠ¨ ç§»æ¤æ—¶éœ€è¦ä¿®æ”¹
+//   *
+//   * @see      ICM_Write_Byte(ICM_SAMPLE_RATE_REG,1);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Write_Byte(unsigned char reg,unsigned char value)
+// {
+//     unsigned char buff[2];
+
+//     buff[0] = reg;          //å…ˆå‘é€å¯„å­˜å™¨
+//     buff[1] = value;        //å†å‘é€æ•°æ®
+
+//     return SPI_ReadWriteNByte(SPI3, buff, buff, 2); //å‘é€buffé‡Œæ•°æ®ï¼Œå¹¶é‡‡é›†åˆ° buffé‡Œ
+// }
+
+// /*!
+//   * @brief    SPI è¯»ä¸€ä¸ªå¯„å­˜å™¨
+//   *
+//   * @param    reg   :è¦å†™çš„å¯„å­˜å™¨åœ°å€
+//   *
+//   * @return   è¯»å–çš„å€¼
+//   *
+//   * @note     åº•å±‚é©±åŠ¨ ç§»æ¤æ—¶éœ€è¦ä¿®æ”¹
+//   *
+//   * @see      ICM_Read_Byte(WHO_AM_I);
+//   *
+//   * @date     2019/6/12 æ˜ŸæœŸä¸‰
+//   */
+// unsigned char ICM_Read_Byte(unsigned char reg)
+// {
+//     unsigned char buff[2];
+//     buff[0] = reg | 0x80;          //å…ˆå‘é€å¯„å­˜å™¨
+
+//     SPI_ReadWriteNByte(SPI3, buff, buff, 2);
+//     return buff[1];
+// }
 
 
 

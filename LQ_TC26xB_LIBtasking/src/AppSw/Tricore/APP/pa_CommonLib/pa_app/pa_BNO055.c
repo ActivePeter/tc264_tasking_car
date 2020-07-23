@@ -1,5 +1,5 @@
 #include "pa_BNO055.h"
-#include "pa_Common.h"
+
 #define pa_BNO055_chosenAddress (0x29)
 void pa_BNO055_init(){
     pa_IIC_init();

@@ -9,7 +9,9 @@
 #include "pa_oled.h"
 #include "stdlib.h"
 #include "pa_oledfont.h"
-#include "pa_IIC.h"
+#include "../../pa_drv/pa_IIC.h"
+
+
 
 
 /**********************************************
@@ -17,14 +19,18 @@
 **********************************************/
 void Write_IIC_Command(unsigned char IIC_Command)
 {
-    HAL_I2C_Mem_Write(&HARD_SSD1306_I2C, SSD1306_I2C_ADDRESS, 0x00, 1, &IIC_Command, sizeof(IIC_Command), 100);
+    pa_IIC_write8(SSD1306_I2C_ADDRESS,0x00,IIC_Command);
+    //pa_IIC_writeLen(SSD1306_I2C_ADDRESS, 0x00,sizeof(IIC_Command),&IIC_Command);
+    // HAL_I2C_Mem_Write(&HARD_SSD1306_I2C, SSD1306_I2C_ADDRESS, 0x00, 1, &IIC_Command, sizeof(IIC_Command), 100);
 }
 /**********************************************
 // IIC Write Data
 **********************************************/
 void Write_IIC_Data(unsigned char IIC_Data)
 {
-    HAL_I2C_Mem_Write(&HARD_SSD1306_I2C, SSD1306_I2C_ADDRESS, 0x40, 1, &IIC_Data, sizeof(IIC_Data), 100);
+    pa_IIC_write8(SSD1306_I2C_ADDRESS,0x40,IIC_Data);
+    //pa_IIC_writeLen(SSD1306_I2C_ADDRESS, 0x40,sizeof(IIC_Data),&IIC_Data);
+    // HAL_I2C_Mem_Write(&HARD_SSD1306_I2C, SSD1306_I2C_ADDRESS, 0x40, 1, &IIC_Data, sizeof(IIC_Data), 100);
 }
 void OLED_WR_Byte(unsigned dat, unsigned cmd)
 {
@@ -249,9 +255,9 @@ void OLED_Init(void)
 //		GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 //		GPIO_InitStruct.Pull = GPIO_NOPULL;
 //		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-//		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-	
-    HAL_Delay(800);
+//		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct)
+
+
     OLED_WR_Byte(0xAE, OLED_CMD); //--display off
     OLED_WR_Byte(0x00, OLED_CMD); //---set low column address
     OLED_WR_Byte(0x10, OLED_CMD); //---set high column address

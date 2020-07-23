@@ -23,12 +23,6 @@
 #define HARD_SSD1306_I2C      hi2c1//hard_i2c对象
 
 
-//-----------------OLED IIC端口定义----------------
-#define OLED_SCLK_Clr() HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_RESET); //SCL
-#define OLED_SCLK_Set() HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET);
-
-#define OLED_SDIN_Clr() HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_RESET); //SDA
-#define OLED_SDIN_Set() HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, GPIO_PIN_SET);
 
 #define OLED_CMD 0  //写命令
 #define OLED_DATA 1 //写数据

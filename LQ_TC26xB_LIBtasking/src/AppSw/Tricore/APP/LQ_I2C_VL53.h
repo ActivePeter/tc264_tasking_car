@@ -1,88 +1,88 @@
-/*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ4ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
-------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
-#ifndef __LQ_VL53_H_
-#define __LQ_VL53_H_
+// /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+// ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+// ã€ç¼–    å†™ã€‘chiusir
+// ã€E-mail  ã€‘chiusir@163.com
+// ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+// ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ4æ—¥
+// ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+// ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+// ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
+// ------------------------------------------------
+// ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+// ã€Target ã€‘ TC264DA
+// ã€Crystalã€‘ 20.000Mhz
+// ã€SYS PLLã€‘ 200MHz
+// QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
+// #ifndef __LQ_VL53_H_
+// #define __LQ_VL53_H_
 
 
 
-#define VL53L0X_REG_IDENTIFICATION_MODEL_ID         0xc0
-#define VL53L0X_REG_IDENTIFICATION_REVISION_ID      0xc2
-#define VL53L0X_REG_PRE_RANGE_CONFIG_VCSEL_PERIOD   0x50
-#define VL53L0X_REG_FINAL_RANGE_CONFIG_VCSEL_PERIOD 0x70
-#define VL53L0X_REG_SYSRANGE_START                  0x00
-#define VL53L0X_REG_RESULT_INTERRUPT_STATUS         0x13
-#define VL53L0X_REG_RESULT_RANGE_STATUS             0x14
-#define VL53_REG_DIS                                0x1E
-#define VL53L0X_REG_I2C_SLAVE_DEVICE_ADDRESS        0x8a
-#define VL53ADDR                                    0x29    //0x52   Ä¬ÈÏµØÖ·
-#define VL53NEWADDR                                 0x30
+// #define VL53L0X_REG_IDENTIFICATION_MODEL_ID         0xc0
+// #define VL53L0X_REG_IDENTIFICATION_REVISION_ID      0xc2
+// #define VL53L0X_REG_PRE_RANGE_CONFIG_VCSEL_PERIOD   0x50
+// #define VL53L0X_REG_FINAL_RANGE_CONFIG_VCSEL_PERIOD 0x70
+// #define VL53L0X_REG_SYSRANGE_START                  0x00
+// #define VL53L0X_REG_RESULT_INTERRUPT_STATUS         0x13
+// #define VL53L0X_REG_RESULT_RANGE_STATUS             0x14
+// #define VL53_REG_DIS                                0x1E
+// #define VL53L0X_REG_I2C_SLAVE_DEVICE_ADDRESS        0x8a
+// #define VL53ADDR                                    0x29    //0x52   é»˜è®¤åœ°å€
+// #define VL53NEWADDR                                 0x30
 
-/**
-  * @brief    ²âÊÔVL53
-  *
-  * @param    ÎŞ
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @example
-  *
-  * @date     2019/4/17 ĞÇÆÚÈı
-  */
-void Test_Vl53(void);
-
-
-
-/**
-  * @brief    VL53 Ğ´1¸ö¼Ä´æÆ÷
-  *
-  * @param    dev£º    µØÖ·
-  * @param    reg£º    ¼Ä´æÆ÷
-  * @param    data£º   Ğ´ÈëÊı¾İ
-  *
-  * @return
-  *
-  * @note      ÒÆÖ²Ê±ĞèÒªĞŞ¸ÄÕâÀï
-  *
-  * @see
-  *
-  * @date     2019/4/29 ĞÇÆÚÒ»
-  */
-void VL53_Write_Byte(unsigned char dev, unsigned char reg, unsigned char data);
+// /**
+//   * @brief    æµ‹è¯•VL53
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @example
+//   *
+//   * @date     2019/4/17 æ˜ŸæœŸä¸‰
+//   */
+// void Test_Vl53(void);
 
 
 
-/**
-  * @brief    VL53 ¶Án¸ö¼Ä´æÆ÷
-  *
-  * @param    dev£º    µØÖ·
-  * @param    reg£º    ¼Ä´æÆ÷
-  * @param    length;  ³¤¶È
-  * @param    data£º   Ö¸Ïò´æ·Å¶ÁÊı¾İ
-  *
-  * @return
-  *
-  * @note     ÒÆÖ²Ê±ĞèÒªĞŞ¸ÄÕâÀï
-  *
-  * @see
-  *
-  * @date     2019/4/29 ĞÇÆÚÒ»
-  */
-void VL53_Read_nByte(unsigned char dev, unsigned char reg, unsigned char length, unsigned char* data);
+// /**
+//   * @brief    VL53 å†™1ä¸ªå¯„å­˜å™¨
+//   *
+//   * @param    devï¼š    åœ°å€
+//   * @param    regï¼š    å¯„å­˜å™¨
+//   * @param    dataï¼š   å†™å…¥æ•°æ®
+//   *
+//   * @return
+//   *
+//   * @note      ç§»æ¤æ—¶éœ€è¦ä¿®æ”¹è¿™é‡Œ
+//   *
+//   * @see
+//   *
+//   * @date     2019/4/29 æ˜ŸæœŸä¸€
+//   */
+// void VL53_Write_Byte(unsigned char dev, unsigned char reg, unsigned char data);
 
 
-#endif
+
+// /**
+//   * @brief    VL53 è¯»nä¸ªå¯„å­˜å™¨
+//   *
+//   * @param    devï¼š    åœ°å€
+//   * @param    regï¼š    å¯„å­˜å™¨
+//   * @param    length;  é•¿åº¦
+//   * @param    dataï¼š   æŒ‡å‘å­˜æ”¾è¯»æ•°æ®
+//   *
+//   * @return
+//   *
+//   * @note     ç§»æ¤æ—¶éœ€è¦ä¿®æ”¹è¿™é‡Œ
+//   *
+//   * @see
+//   *
+//   * @date     2019/4/29 æ˜ŸæœŸä¸€
+//   */
+// void VL53_Read_nByte(unsigned char dev, unsigned char reg, unsigned char length, unsigned char* data);
+
+
+// #endif

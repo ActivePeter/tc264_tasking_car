@@ -1,8 +1,8 @@
 #ifndef _pa_BNO055_H
 #define _pa_BNO055_H
 
-#include "pa_IIC.h"
-
+#include "../pa_drv/pa_IIC.h"
+#include "../pa_drv/pa_Common.h"
 /** BNO055 Address A **/
 #define BNO055_ADDRESS_A (0x28)
 /** BNO055 Address B **/

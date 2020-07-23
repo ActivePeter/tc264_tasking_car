@@ -1,139 +1,139 @@
-/*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
-------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
-________________________________________________________________
+// /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+// ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+// ã€ç¼–    å†™ã€‘ZYF/chiusir
+// ã€E-mail  ã€‘chiusir@163.com
+// ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+// ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+// ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+// ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+// ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
+// ------------------------------------------------
+// ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+// ã€Target ã€‘ TC264DA
+// ã€Crystalã€‘ 20.000Mhz
+// ã€SYS PLLã€‘ 200MHz
+// ________________________________________________________________
 
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
+// QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
-#include <LQ_I2C_VL53.h>
-#include <LQ_OLED096.h>
-#include <LQ_SOFTI2C.h>
-#include <LQ_STM.h>
-#include <Platform_Types.h>
-#include <stdio.h>
+// #include <LQ_I2C_VL53.h>
+// #include <LQ_OLED096.h>
+// #include <LQ_SOFTI2C.h>
+// #include <LQ_STM.h>
+// #include <Platform_Types.h>
+// #include <stdio.h>
 
-/* Ñ¡ÔñÆÁÄ» */
-#define OLED
+// /* é€‰æ‹©å±å¹• */
+// #define OLED
 
-/**
-  * @brief    ²âÊÔVL53
-  *
-  * @param    ÎŞ
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @example
-  *
-  * @date     2019/4/17 ĞÇÆÚÈı
-  */
-void Test_Vl53(void)
-{
+// /**
+//   * @brief    æµ‹è¯•VL53
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @example
+//   *
+//   * @date     2019/4/17 æ˜ŸæœŸä¸‰
+//   */
+// void Test_Vl53(void)
+// {
 
-#ifdef OLED
-	OLED_Init();
-	OLED_CLS();
-	OLED_P8x16Str(5,0,"LQ VL53 Test");
-#else
-	TFTSPI_Init(1);                //TFT1.8³õÊ¼»¯  0£ººáÆÁÏÔÊ¾  1£ºÊúÆÁÏÔÊ¾
-    TFTSPI_CLS(u16BLUE);           //ÇåÆÁ
-	TFTSPI_P8X16Str(0,0,"LQ VL53 Test",u16RED,u16BLUE);
-#endif
-	char txt[16];
+// #ifdef OLED
+// 	OLED_Init();
+// 	OLED_CLS();
+// 	OLED_P8x16Str(5,0,"LQ VL53 Test");
+// #else
+// 	TFTSPI_Init(1);                //TFT1.8åˆå§‹åŒ–  0ï¼šæ¨ªå±æ˜¾ç¤º  1ï¼šç«–å±æ˜¾ç¤º
+//     TFTSPI_CLS(u16BLUE);           //æ¸…å±
+// 	TFTSPI_P8X16Str(0,0,"LQ VL53 Test",u16RED,u16BLUE);
+// #endif
+// 	char txt[16];
 
-    IIC_Init();
+//     IIC_Init();
 
-    unsigned char VL53_STAR = 0x02;    //0x02 Á¬Ğø²âÁ¿Ä£Ê½    0x01 µ¥´Î²âÁ¿Ä£Ê½
-    unsigned char dis_buff[2];
-    uint16 dis, last_dis = 0;
-	/* ¿ªÊ¼²â¾à */
-    VL53_Write_Byte(VL53ADDR, VL53L0X_REG_SYSRANGE_START, VL53_STAR);
-    while(1)
-    {
-        /* »ñÈ¡²âÁ¿Êı¾İ */
-		VL53_Read_nByte(VL53ADDR, VL53_REG_DIS, 2, dis_buff);
+//     unsigned char VL53_STAR = 0x02;    //0x02 è¿ç»­æµ‹é‡æ¨¡å¼    0x01 å•æ¬¡æµ‹é‡æ¨¡å¼
+//     unsigned char dis_buff[2];
+//     uint16 dis, last_dis = 0;
+// 	/* å¼€å§‹æµ‹è· */
+//     VL53_Write_Byte(VL53ADDR, VL53L0X_REG_SYSRANGE_START, VL53_STAR);
+//     while(1)
+//     {
+//         /* è·å–æµ‹é‡æ•°æ® */
+// 		VL53_Read_nByte(VL53ADDR, VL53_REG_DIS, 2, dis_buff);
 
-        /* ×ª»»Êı¾İ */
-        dis = (dis_buff[0]<<8) | (dis_buff[1]);
+//         /* è½¬æ¢æ•°æ® */
+//         dis = (dis_buff[0]<<8) | (dis_buff[1]);
 
-        /* ³¬¹ı2MÃ»ÓĞÕÏ°­ */
-        if(dis > 8000)
-        {
-            dis = 0;
-        }
+//         /* è¶…è¿‡2Mæ²¡æœ‰éšœç¢ */
+//         if(dis > 8000)
+//         {
+//             dis = 0;
+//         }
 
-        if(dis == 20)
-        {
-            dis = last_dis;
-        }
-        last_dis = dis;
-		sprintf(txt, "DIS %5d mm",dis);
-#ifdef OLED
-		OLED_P8x16Str(0,5,txt);
-#else
-		TFTSPI_P8X16Str(2,5,txt,u16RED,u16BLUE);
-#endif
-		delayms(50);
-
-
-    }
-
-}
+//         if(dis == 20)
+//         {
+//             dis = last_dis;
+//         }
+//         last_dis = dis;
+// 		sprintf(txt, "DIS %5d mm",dis);
+// #ifdef OLED
+// 		OLED_P8x16Str(0,5,txt);
+// #else
+// 		TFTSPI_P8X16Str(2,5,txt,u16RED,u16BLUE);
+// #endif
+// 		delayms(50);
 
 
+//     }
+
+// }
 
 
 
-/**
-  * @brief    VL53 Ğ´1¸ö¼Ä´æÆ÷
-  *
-  * @param    dev£º    µØÖ·
-  * @param    reg£º    ¼Ä´æÆ÷
-  * @param    data£º   Ğ´ÈëÊı¾İ
-  *
-  * @return
-  *
-  * @note
-  *
-  * @see
-  *
-  * @date     2019/4/29 ĞÇÆÚÒ»
-  */
-void VL53_Write_Byte(unsigned char dev, unsigned char reg, unsigned char data)
-{
-    IIC_WriteByteToSlave(dev<<1, reg, data);
-}
 
-/**
-  * @brief    VL53 ¶Án¸ö¼Ä´æÆ÷
-  *
-  * @param    dev£º    µØÖ·
-  * @param    reg£º    ¼Ä´æÆ÷
-  * @param    length;  ³¤¶È
-  * @param    data£º   Ö¸Ïò´æ·Å¶ÁÊı¾İ
-  *
-  * @return
-  *
-  * @note
-  *
-  * @see
-  *
-  * @date     2019/4/29 ĞÇÆÚÒ»
-  */
-void VL53_Read_nByte(unsigned char dev, unsigned char reg, unsigned char length, unsigned char* data)
-{
-    IIC_ReadMultByteFromSlave(dev<<1, reg, length, data);
-}
+
+// /**
+//   * @brief    VL53 å†™1ä¸ªå¯„å­˜å™¨
+//   *
+//   * @param    devï¼š    åœ°å€
+//   * @param    regï¼š    å¯„å­˜å™¨
+//   * @param    dataï¼š   å†™å…¥æ•°æ®
+//   *
+//   * @return
+//   *
+//   * @note
+//   *
+//   * @see
+//   *
+//   * @date     2019/4/29 æ˜ŸæœŸä¸€
+//   */
+// void VL53_Write_Byte(unsigned char dev, unsigned char reg, unsigned char data)
+// {
+//     IIC_WriteByteToSlave(dev<<1, reg, data);
+// }
+
+// /**
+//   * @brief    VL53 è¯»nä¸ªå¯„å­˜å™¨
+//   *
+//   * @param    devï¼š    åœ°å€
+//   * @param    regï¼š    å¯„å­˜å™¨
+//   * @param    length;  é•¿åº¦
+//   * @param    dataï¼š   æŒ‡å‘å­˜æ”¾è¯»æ•°æ®
+//   *
+//   * @return
+//   *
+//   * @note
+//   *
+//   * @see
+//   *
+//   * @date     2019/4/29 æ˜ŸæœŸä¸€
+//   */
+// void VL53_Read_nByte(unsigned char dev, unsigned char reg, unsigned char length, unsigned char* data)
+// {
+//     IIC_ReadMultByteFromSlave(dev<<1, reg, length, data);
+// }
 

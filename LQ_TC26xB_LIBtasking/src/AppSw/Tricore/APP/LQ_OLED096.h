@@ -1,302 +1,302 @@
-/*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
-------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
-________________________________________________________________
+// /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+// ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+// ã€ç¼–    å†™ã€‘ZYF/chiusir
+// ã€E-mail  ã€‘chiusir@163.com
+// ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+// ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+// ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+// ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+// ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
+// ------------------------------------------------
+// ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+// ã€Target ã€‘ TC264DA
+// ã€Crystalã€‘ 20.000Mhz
+// ã€SYS PLLã€‘ 200MHz
+// ________________________________________________________________
 
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
-#ifndef _LQOLED_H
-#define _LQOLED_H
+// QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
+// #ifndef _LQOLED_H
+// #define _LQOLED_H
 
-#include <stdint.h>
+// #include <stdint.h>
 
-/*!
-  * @brief    OLED³õÊ¼»¯
-  *
-  * @param    ÎŞ
-  *
-  * @return   ÎŞ
-  *
-  * @note     Èç¹ûĞŞ¸Ä¹Ü½Å ĞèÒªĞŞ¸Ä³õÊ¼»¯µÄ¹Ü½Å 
-  *
-  * @see      OLED_Init();
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_Init(void);
+// /*!
+//   * @brief    OLEDåˆå§‹åŒ–
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     å¦‚æœä¿®æ”¹ç®¡è„š éœ€è¦ä¿®æ”¹åˆå§‹åŒ–çš„ç®¡è„š 
+//   *
+//   * @see      OLED_Init();
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_Init(void);
 
-/*!
-  * @brief    OLEDÈ«ÁÁ
-  *
-  * @param    ÎŞ   
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      OLED_Fill(); //OLEDÈ«ÁÁ ÓÃÓÚ¼ì²â»µµã
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_Fill(void);
+// /*!
+//   * @brief    OLEDå…¨äº®
+//   *
+//   * @param    æ—    
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      OLED_Fill(); //OLEDå…¨äº® ç”¨äºæ£€æµ‹åç‚¹
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_Fill(void);
 
-/*!
-  * @brief    OLEDÇåÆÁ
-  *
-  * @param    ÎŞ  
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      OLED_CLS(); //ÇåÆÁ
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_CLS(void);
+// /*!
+//   * @brief    OLEDæ¸…å±
+//   *
+//   * @param    æ—   
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      OLED_CLS(); //æ¸…å±
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_CLS(void);
 
-/*!
-  * @brief    »­Ò»¸öµã
-  *
-  * @param    x  : 0-127 
-  * @param    y  : 0-63
-  *
-  * @return   ÎŞ
-  *
-  * @note     OLEDÊÇ°´×Ö½ÚÏÔÊ¾µÄ Ò»¸ö×Ö½Ú8Î»£¬´ú±í8¸ö×İÏòÏñËØµã£¬
-  * @note     Òò´ËÈç¹û»­µã OLED_PutPixel(0,0); OLED_PutPixel(0,1); Ö»»áÏÔÊ¾µã(0, 1) (0,0)ÔòÔÚ»­µã(0,1)Ê±Çå³ıµô
-  *
-  * @see      OLED_PutPixel(0, 0); //»­Ò»¸öµã ×óÉÏ½ÇÎª0,0  ÓÒÏÂ½Ç 127,63
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_PutPixel(unsigned char x,unsigned char y);
+// /*!
+//   * @brief    ç”»ä¸€ä¸ªç‚¹
+//   *
+//   * @param    x  : 0-127 
+//   * @param    y  : 0-63
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     OLEDæ˜¯æŒ‰å­—èŠ‚æ˜¾ç¤ºçš„ ä¸€ä¸ªå­—èŠ‚8ä½ï¼Œä»£è¡¨8ä¸ªçºµå‘åƒç´ ç‚¹ï¼Œ
+//   * @note     å› æ­¤å¦‚æœç”»ç‚¹ OLED_PutPixel(0,0); OLED_PutPixel(0,1); åªä¼šæ˜¾ç¤ºç‚¹(0, 1) (0,0)åˆ™åœ¨ç”»ç‚¹(0,1)æ—¶æ¸…é™¤æ‰
+//   *
+//   * @see      OLED_PutPixel(0, 0); //ç”»ä¸€ä¸ªç‚¹ å·¦ä¸Šè§’ä¸º0,0  å³ä¸‹è§’ 127,63
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_PutPixel(unsigned char x,unsigned char y);
 
-/*!
-  * @brief    Çå³ı8¸öµã
-  *
-  * @param    x  : 0-127
-  * @param    y  : 0-63
-  *
-  * @return   ÎŞ
-  *
-  * @note     OLEDÊÇ°´×Ö½ÚÏÔÊ¾µÄ Ò»¸ö×Ö½Ú8Î»£¬´ú±í8¸ö×İÏòÏñËØµã£¬
-  *
-  * @see      OLED_ClrDot(0, 0); //Çå³ı(0,0)-(0,7)8¸öµã ×óÉÏ½ÇÎª0,0  ÓÒÏÂ½Ç 127,63
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_ClrDot(unsigned char x,unsigned char y);
+// /*!
+//   * @brief    æ¸…é™¤8ä¸ªç‚¹
+//   *
+//   * @param    x  : 0-127
+//   * @param    y  : 0-63
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     OLEDæ˜¯æŒ‰å­—èŠ‚æ˜¾ç¤ºçš„ ä¸€ä¸ªå­—èŠ‚8ä½ï¼Œä»£è¡¨8ä¸ªçºµå‘åƒç´ ç‚¹ï¼Œ
+//   *
+//   * @see      OLED_ClrDot(0, 0); //æ¸…é™¤(0,0)-(0,7)8ä¸ªç‚¹ å·¦ä¸Šè§’ä¸º0,0  å³ä¸‹è§’ 127,63
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_ClrDot(unsigned char x,unsigned char y);
 
-/*!
-  * @brief    »­¾ØĞÎ
-  *
-  * @param    x1  : 0-127   ×óÉÏ½Ç×ø±ê£¨x1,y1£©
-  * @param    y1  : 0-63
-  * @param    x2  : 0-127   ÓÒÏÂ½Ç×ø±ê£¨x2£¬y2£©
-  * @param    y2  : 0-63
-  * @param    gif : ÊÇ·ñ¿ªÆô¶¯»­Ğ§¹û
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      OLED_Rectangle(0, 0, 127,62,0);   //»æÖÆ¾ØĞÎ
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_Rectangle(unsigned char x1,unsigned char y1,unsigned char x2,unsigned char y2,unsigned char gif);
+// /*!
+//   * @brief    ç”»çŸ©å½¢
+//   *
+//   * @param    x1  : 0-127   å·¦ä¸Šè§’åæ ‡ï¼ˆx1,y1ï¼‰
+//   * @param    y1  : 0-63
+//   * @param    x2  : 0-127   å³ä¸‹è§’åæ ‡ï¼ˆx2ï¼Œy2ï¼‰
+//   * @param    y2  : 0-63
+//   * @param    gif : æ˜¯å¦å¼€å¯åŠ¨ç”»æ•ˆæœ
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      OLED_Rectangle(0, 0, 127,62,0);   //ç»˜åˆ¶çŸ©å½¢
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_Rectangle(unsigned char x1,unsigned char y1,unsigned char x2,unsigned char y2,unsigned char gif);
 
-/*!
-  * @brief    Ğ´ÈëÒ»×é±ê×¼ASCII×Ö·û´®
-  *
-  * @param    x  : 0-127   
-  * @param    y  : 0-7
-  * @param    ch : ÒªÏÔÊ¾µÄ×Ö·û´®
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      OLED_P6x8Str(0,0,"OLED 3.");  //ÏÔÊ¾×Ö·û´®
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_P6x8Str(unsigned char x,unsigned char y, char ch[]);
+// /*!
+//   * @brief    å†™å…¥ä¸€ç»„æ ‡å‡†ASCIIå­—ç¬¦ä¸²
+//   *
+//   * @param    x  : 0-127   
+//   * @param    y  : 0-7
+//   * @param    ch : è¦æ˜¾ç¤ºçš„å­—ç¬¦ä¸²
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      OLED_P6x8Str(0,0,"OLED 3.");  //æ˜¾ç¤ºå­—ç¬¦ä¸²
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_P6x8Str(unsigned char x,unsigned char y, char ch[]);
 
-/*!
-  * @brief    Ğ´ÈëÒ»×é±ê×¼ASCII×Ö·û´®
-  *
-  * @param    x  : 0-127   
-  * @param    y  : 0-6
-  * @param    ch : ÒªÏÔÊ¾µÄ×Ö·û´®
-  *
-  * @return   ÎŞ
-  *
-  * @note     Ò»¸ö×Ö·û¸ß16  OLED¸ß¶È64  
-  *
-  * @see      OLED_P8x16Str(0,0,"OLED 3.");  //ÏÔÊ¾×Ö·û´®
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_P8x16Str(unsigned char x,unsigned char y, char ch[]);
+// /*!
+//   * @brief    å†™å…¥ä¸€ç»„æ ‡å‡†ASCIIå­—ç¬¦ä¸²
+//   *
+//   * @param    x  : 0-127   
+//   * @param    y  : 0-6
+//   * @param    ch : è¦æ˜¾ç¤ºçš„å­—ç¬¦ä¸²
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     ä¸€ä¸ªå­—ç¬¦é«˜16  OLEDé«˜åº¦64  
+//   *
+//   * @see      OLED_P8x16Str(0,0,"OLED 3.");  //æ˜¾ç¤ºå­—ç¬¦ä¸²
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_P8x16Str(unsigned char x,unsigned char y, char ch[]);
 
-/*!
-  * @brief    Êä³öºº×Ö×Ö·û´®
-  *
-  * @param    x  : 0-127   
-  * @param    y  : 0-6
-  * @param    ch : ÒªÏÔÊ¾µÄ×Ö·û´®
-  *
-  * @return   ÎŞ
-  *
-  * @note     Ò»¸ö×Ö·û¸ß16  OLED¸ß¶È64   ×Ö¿âĞèÒª×Ô¼ºÖÆ×÷
-  *
-  * @see      OLED_P14x16Str(0,4,"±±¾©ÁúÇñ");   //ÏÔÊ¾ºº×Ö
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_P14x16Str(unsigned char x,unsigned char y,unsigned char ch[]);
+// /*!
+//   * @brief    è¾“å‡ºæ±‰å­—å­—ç¬¦ä¸²
+//   *
+//   * @param    x  : 0-127   
+//   * @param    y  : 0-6
+//   * @param    ch : è¦æ˜¾ç¤ºçš„å­—ç¬¦ä¸²
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     ä¸€ä¸ªå­—ç¬¦é«˜16  OLEDé«˜åº¦64   å­—åº“éœ€è¦è‡ªå·±åˆ¶ä½œ
+//   *
+//   * @see      OLED_P14x16Str(0,4,"åŒ—äº¬é¾™é‚±");   //æ˜¾ç¤ºæ±‰å­—
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_P14x16Str(unsigned char x,unsigned char y,unsigned char ch[]);
 
 
 
-/*!
-  * @brief    ÏÔÊ¾BMPÍ¼Æ¬ ×î´ó 128¡Á64
-  *
-  * @param    x0  : 0-127   ×óÉÏ½Ç×ø±ê£¨x0,y0£©
-  * @param    y0  : 0-63
-  * @param    wide: 1-127   Í¼Æ¬¿í¶È
-  * @param    high: 1-64    Í¼Æ¬¸ß¶È
-  * @param    bmp : ÒªÏÔÊ¾µÄÍ¼Æ¬
-  *
-  * @return   ÎŞ
-  *
-  * @note     Í¼Æ¬ĞèÒªÓÃÈí¼ş×ª»¯
-  *
-  * @see      OLED_Show_BMP(0, 0, 104, 64, longqiu104x64); //»­ÁúÇñloge
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_Show_BMP(unsigned char x0,unsigned char y0,unsigned char wide,unsigned char high,const uint8_t * bmp);
+// /*!
+//   * @brief    æ˜¾ç¤ºBMPå›¾ç‰‡ æœ€å¤§ 128Ã—64
+//   *
+//   * @param    x0  : 0-127   å·¦ä¸Šè§’åæ ‡ï¼ˆx0,y0ï¼‰
+//   * @param    y0  : 0-63
+//   * @param    wide: 1-127   å›¾ç‰‡å®½åº¦
+//   * @param    high: 1-64    å›¾ç‰‡é«˜åº¦
+//   * @param    bmp : è¦æ˜¾ç¤ºçš„å›¾ç‰‡
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     å›¾ç‰‡éœ€è¦ç”¨è½¯ä»¶è½¬åŒ–
+//   *
+//   * @see      OLED_Show_BMP(0, 0, 104, 64, longqiu104x64); //ç”»é¾™é‚±loge
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_Show_BMP(unsigned char x0,unsigned char y0,unsigned char wide,unsigned char high,const uint8_t * bmp);
 
-/*!
-  * @brief    ÏÔÊ¾ÁúÇñÍ¼Æ¬128¡Á64
-  *
-  * @param    ÎŞ 
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      OLED_Show_LQLogo();
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_Show_LQLogo(void);
+// /*!
+//   * @brief    æ˜¾ç¤ºé¾™é‚±å›¾ç‰‡128Ã—64
+//   *
+//   * @param    æ—  
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      OLED_Show_LQLogo();
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_Show_LQLogo(void);
 
-/*!
-  * @brief    »­±ßÏß OV7725ÏÔÊ¾Í¼ÏñÊ± ¿ÉÒÔÓÃÕâ¸ö»­±ßÏß
-  *
-  * @param    ÎŞ 
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      OLED_Show_Frame80();
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_Show_Frame80(void);
+// /*!
+//   * @brief    ç”»è¾¹çº¿ OV7725æ˜¾ç¤ºå›¾åƒæ—¶ å¯ä»¥ç”¨è¿™ä¸ªç”»è¾¹çº¿
+//   *
+//   * @param    æ—  
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      OLED_Show_Frame80();
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_Show_Frame80(void);
 
-/*!
-  * @brief    »­±ßÏß MT9V034ÏÔÊ¾Í¼ÏñÊ± ¿ÉÒÔÓÃÕâ¸ö»­±ßÏß
-  *
-  * @param    ÎŞ 
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      OLED_Show_Frame94();
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_Show_Frame94(void);
+// /*!
+//   * @brief    ç”»è¾¹çº¿ MT9V034æ˜¾ç¤ºå›¾åƒæ—¶ å¯ä»¥ç”¨è¿™ä¸ªç”»è¾¹çº¿
+//   *
+//   * @param    æ—  
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      OLED_Show_Frame94();
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_Show_Frame94(void);
 
-/**
-  * @brief    OLED ¶şÖµ»¯Í¼ÏñÏÔÊ¾
-  *
-  * @param    high £º ÏÔÊ¾Í¼Ïñ¸ß¶È
-  * @param    wide £º ÏÔÊ¾Í¼Ïñ¿í¶È
-  * @param    Pixle£º ÏÔÊ¾Í¼ÏñÊı¾İµØÖ·
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      OLED_Road(OLEDH, OLEDW, (uint8_t *)Pixle);
-  *
-  * @date     2019/6/25 ĞÇÆÚ¶ş
-  */
-void OLED_Road(uint16_t high, uint16_t wide, uint8_t *Pixle);
+// /**
+//   * @brief    OLED äºŒå€¼åŒ–å›¾åƒæ˜¾ç¤º
+//   *
+//   * @param    high ï¼š æ˜¾ç¤ºå›¾åƒé«˜åº¦
+//   * @param    wide ï¼š æ˜¾ç¤ºå›¾åƒå®½åº¦
+//   * @param    Pixleï¼š æ˜¾ç¤ºå›¾åƒæ•°æ®åœ°å€
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      OLED_Road(OLEDH, OLEDW, (uint8_t *)Pixle);
+//   *
+//   * @date     2019/6/25 æ˜ŸæœŸäºŒ
+//   */
+// void OLED_Road(uint16_t high, uint16_t wide, uint8_t *Pixle);
 
-/*!
-  * @brief    OLEDÃüÁî
-  *
-  * @param    cmd £ºÃüÁî
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      ÄÚ²¿µ÷ÓÃ
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_WrCmd(unsigned char cmd);
+// /*!
+//   * @brief    OLEDå‘½ä»¤
+//   *
+//   * @param    cmd ï¼šå‘½ä»¤
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      å†…éƒ¨è°ƒç”¨
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_WrCmd(unsigned char cmd);
 
-/*!
-  * @brief    OLEDÉèÖÃµã
-  *
-  * @param    x £º×ø±ê   
-  * @param    y £º×ø±ê
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @see      ÄÚ²¿µ÷ÓÃ
-  *
-  * @date     2019/6/13 ĞÇÆÚËÄ
-  */
-void OLED_Set_Pos(unsigned char x, unsigned char y);
+// /*!
+//   * @brief    OLEDè®¾ç½®ç‚¹
+//   *
+//   * @param    x ï¼šåæ ‡   
+//   * @param    y ï¼šåæ ‡
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @see      å†…éƒ¨è°ƒç”¨
+//   *
+//   * @date     2019/6/13 æ˜ŸæœŸå››
+//   */
+// void OLED_Set_Pos(unsigned char x, unsigned char y);
 	
-/**
-  * @brief    OLED ²âÊÔº¯Êı
-  *
-  * @param    ÎŞ
-  *
-  * @return   ÎŞ
-  *
-  * @note     ÎŞ
-  *
-  * @example  Test_OLED();
-  *
-  * @date     2019/6/25 ĞÇÆÚ¶ş
-  */
-void Test_OLED(void);
+// /**
+//   * @brief    OLED æµ‹è¯•å‡½æ•°
+//   *
+//   * @param    æ— 
+//   *
+//   * @return   æ— 
+//   *
+//   * @note     æ— 
+//   *
+//   * @example  Test_OLED();
+//   *
+//   * @date     2019/6/25 æ˜ŸæœŸäºŒ
+//   */
+// void Test_OLED(void);
 
-#endif
+// #endif
 
 

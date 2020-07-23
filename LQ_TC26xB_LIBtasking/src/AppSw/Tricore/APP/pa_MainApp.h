@@ -12,7 +12,7 @@ void addValueToArr(unsigned short value1, unsigned short value2,unsigned short v
 void paLinearInterpolation(unsigned short to1,unsigned short to2,unsigned short count);
 void initVariable();
 void initFuncs();
-void checkSignalStable();
+char checkSignalStable();
 void checkBeaconOn();
 
 typedef struct {

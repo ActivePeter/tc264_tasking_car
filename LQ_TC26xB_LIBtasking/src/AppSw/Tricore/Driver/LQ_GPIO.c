@@ -23,7 +23,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 
-#include <LQ_DMA.h>
+// #include <LQ_DMA.h>
 #include <LQ_GPIO.h>
 #include <LQ_GPIO_LED.h>
 
@@ -101,7 +101,7 @@ void PIN_INT3_IRQHandler(void)
 {
 
 	// 用户代码
-	DMA_CameraStart(PIN_INT2_PRIORITY);
+	// DMA_CameraStart(PIN_INT2_PRIORITY);
 
 }
 

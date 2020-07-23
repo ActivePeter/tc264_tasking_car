@@ -4,8 +4,9 @@ extern "C"
 
 #include "pa_MainApp.h"
 #include "pa_CommonLib/pa_CrossCalc.h"
-#include "pa_CommonLib/pa_BNO055.h"
 #include "pa_CommonLib/pa_MotorManager.h"
+#include "pa_CommonLib/pa_app/pa_OLED/pa_oled.h"
+#include "pa_CommonLib/pa_drv/pa_IIC.h"
 
 #include "stdio.h"
 #include <LQ_UART.h>
@@ -25,6 +26,7 @@ extern "C"
 #include "pa_CommonLib/pa_UartManager.h"
 #include "pa_CommonLib/pa_GlobalCpp.h"
 #include "pa_CommonLib/pa_UltrasonicDistance.h"
+
 
 #define adc_arrlen 2048
 unsigned short adc_arr1[adc_arrlen];
@@ -49,7 +51,9 @@ pa_MecanumModel mecanumModel;
 char err_X = 0;
 char err_Y = 0;
 char pre_err_Y = 0;
-short rightFftCount = 0;
+
+short rightFftCount = 0;//符合信标阈值的计数。数量超过一定范围确定为信标响起
+short lastrightFftCount = 0;
 
 pa_GlobalCpp globalCpp;
 
@@ -133,16 +137,21 @@ void initFuncs()
 	ENC_InitConfig(ENC6_InPut_P20_3, ENC6_Dir_P20_0);
 
 	ultrasonicDistance1.init(1);
+
+	pa_IIC_init();
+	OLED_Init(); //初始化OLED
+	OLED_Clear();
+
+	OLED_ShowString(0,0,"helloWorld",8);
 }
-short xMoveDelay=0;
-short err_Y_whenBlocked=0;
+short xMoveDelay = 0;
+short err_Y_whenBlocked = 0;
 void startMainTask()
 {
 	initVariable();
 	initFuncs();
 	int cnt5ms = 0;
-	
-	
+
 	while (1)
 	{
 		//执行控制算法
@@ -160,12 +169,16 @@ void startMainTask()
 			// pa_updateMotorPwm(2, 1000);
 			// pa_updateMotorPwm(3, 1000);
 			// pa_updateMotorPwm(4, 1000);
-			if (fabs(globalCpp.targetSpeed) < 50 || globalCpp.motorDisable || rightFftCount < 55)
+			if (!checkSignalStable())
 			{
-				if (rightFftCount < 55)
-				{
-					UART_PutStr(UART2, "signal Not Stable or Beacon Off!!\r\n");
-				}
+				UART_PutStr(UART2, "signal Not Stable or Beacon Off!!\r\n");
+			}else{
+
+			}
+
+			if (fabs(globalCpp.targetSpeed) < 50 || globalCpp.motorDisable || !checkSignalStable())
+			{
+				
 				pa_updateMotorPwm(1, 0);
 				pa_updateMotorPwm(2, 0);
 				pa_updateMotorPwm(3, 0);
@@ -182,18 +195,22 @@ void startMainTask()
 				float xVelocity = 0;
 				if (ultrasonicDistance1.distance < 10)
 				{
-					err_Y_whenBlocked=err_Y;
-					xMoveDelay=100;
+					err_Y_whenBlocked = err_Y;
+					xMoveDelay = 100;
 					yVelocity = 0;
 					xVelocity = err_X > 0 ? 1000 : -1000;
-					dirOut=0;
-				}else if(xMoveDelay>0&&err_Y!=err_Y_whenBlocked){
+					dirOut = 0;
+				}
+				else if (xMoveDelay > 0 && err_Y != err_Y_whenBlocked)
+				{
 					xMoveDelay--;
 					yVelocity = 0;
 					xVelocity = err_X > 0 ? 1000 : -1000;
-					dirOut=0;
-				}else if(err_Y_whenBlocked==err_Y){
-					xMoveDelay=0;
+					dirOut = 0;
+				}
+				else if (err_Y_whenBlocked == err_Y)
+				{
+					xMoveDelay = 0;
 				}
 				//float dirOut=pid_Direction.calcPid(err_Y>0?err_X:-err_X);
 				// dirOut=300;
@@ -205,20 +222,16 @@ void startMainTask()
 				// // pa_updateMotorPwm(2,300);
 				// pa_updateMotorPwm(4, -globalCpp.pid_Motor4.calcPid(speedOfMotors.speedOfM4 + dirOut));
 
-				pa_updateMotorPwm(1, 
-				-globalCpp.pid_Motor1.calcPid(speedOfMotors.speedOfM1-(-dirOut + yVelocity - xVelocity))
-				);
-				pa_updateMotorPwm(2, 
-				-globalCpp.pid_Motor2.calcPid(speedOfMotors.speedOfM2-(dirOut + yVelocity + xVelocity))
-				);
+				pa_updateMotorPwm(1,
+								  -globalCpp.pid_Motor1.calcPid(speedOfMotors.speedOfM1 - (-dirOut + yVelocity - xVelocity)));
+				pa_updateMotorPwm(2,
+								  -globalCpp.pid_Motor2.calcPid(speedOfMotors.speedOfM2 - (dirOut + yVelocity + xVelocity)));
 				//float out = -globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3 - dirOut);
-				pa_updateMotorPwm(3, 
-				-globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3-(dirOut + yVelocity - xVelocity))
-				);
+				pa_updateMotorPwm(3,
+								  -globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3 - (dirOut + yVelocity - xVelocity)));
 				// pa_updateMotorPwm(2,300);
-				pa_updateMotorPwm(4, 
-				-globalCpp.pid_Motor4.calcPid(speedOfMotors.speedOfM4-(-dirOut + yVelocity + xVelocity))
-				);
+				pa_updateMotorPwm(4,
+								  -globalCpp.pid_Motor4.calcPid(speedOfMotors.speedOfM4 - (-dirOut + yVelocity + xVelocity)));
 
 				{
 					char buf[30] = {0};
@@ -229,7 +242,6 @@ void startMainTask()
 
 					UART_PutStr(UART2, buf);
 				}
-
 			}
 
 			checkUartData();
@@ -252,60 +264,60 @@ void startMainTask()
 		//输出内容的判断
 		switch (globalCpp.micOutPutMode)
 		{
-			case OutputMode_cross:
+		case OutputMode_cross:
+		{
+			char buf[30] = {0};
+			sprintf(buf, "%5d %5d\r\n",
+					err_X,
+					err_Y);
+
+			UART_PutStr(UART2, buf);
+		}
+		break;
+		case OutputMode_Mic:
+		{
+			//adc值实时***************************************
 			{
 				char buf[30] = {0};
-				sprintf(buf, "%5d %5d\r\n",
-						err_X,
-						err_Y);
+				sprintf(buf, "%5d %5d %5d %5d\r\n",
+						adcValue1,
+						adcValue2,
+						adcValue3,
+						adcValue4);
+
+				UART_PutStr(UART2, buf);
+			}
+			//***************************************************
+		}
+		break;
+		case OutputMode_UltrasonicDistance:
+		{
+			//adc值实时***************************************
+			{
+				char buf[30] = {0};
+				sprintf(buf, "%5d\r\n",
+						ultrasonicDistance1.distance);
+				UART_PutStr(UART2, buf);
+			}
+			//***************************************************
+			break;
+		}
+		case OutputMode_motor: //编码器速度
+		{
+			{
+				char buf[30] = {0};
+				sprintf(buf, "%5d %5d %5d %5d\r\n",
+						speedOfMotors.speedOfM1,
+						speedOfMotors.speedOfM2,
+						speedOfMotors.speedOfM3,
+						speedOfMotors.speedOfM4);
+				// sprintf(buf, "%f %5d %2d %2d\r\n",
+				// 		dirOut, globalCpp.targetSpeed,err_X,err_Y);
 
 				UART_PutStr(UART2, buf);
 			}
 			break;
-			case OutputMode_Mic:
-			{
-				//adc值实时***************************************
-				{
-					char buf[30] = {0};
-					sprintf(buf, "%5d %5d %5d %5d\r\n",
-							adcValue1,
-							adcValue2,
-							adcValue3,
-							adcValue4);
-
-					UART_PutStr(UART2, buf);
-				}
-				//***************************************************
-			}
-			break;
-			case OutputMode_UltrasonicDistance:
-			{
-				//adc值实时***************************************
-				{
-					char buf[30] = {0};
-					sprintf(buf, "%5d\r\n",
-							ultrasonicDistance1.distance);
-					UART_PutStr(UART2, buf);
-				}
-				//***************************************************
-				break;
-			}
-			case OutputMode_motor://编码器速度
-			{
-				{
-					char buf[30] = {0};
-					sprintf(buf, "%5d %5d %5d %5d\r\n",
-							speedOfMotors.speedOfM1,
-							speedOfMotors.speedOfM2,
-							speedOfMotors.speedOfM3,
-							speedOfMotors.speedOfM4);
-					// sprintf(buf, "%f %5d %2d %2d\r\n",
-					// 		dirOut, globalCpp.targetSpeed,err_X,err_Y);
-
-					UART_PutStr(UART2, buf);
-				}
-				break;
-			}
+		}
 		}
 	}
 }
@@ -374,27 +386,20 @@ void checkBeaconOn()
 		// 	UART_PutStr(UART2, buf);
 		// }
 		rightFftCount = count;
+		if(lastrightFftCount!=rightFftCount){
+			if(rightFftCount){
+				OLED_ShowString(0,0,"BeaconOff     ",8);	
+			}else{
+				OLED_ShowString(0,0,"BeaconOn      ",8);
+			}
+		}
+		lastrightFftCount=rightFftCount;
 	}
 }
 
-void checkSignalStable()
+char checkSignalStable()
 {
-	char delta = pre_err_Y - err_Y;
-	if (delta < 2 || delta > -2)
-	{
-		if (rightFftCount < 9)
-		{
-			rightFftCount++;
-		}
-	}
-	else
-	{
-		if (rightFftCount > 0)
-		{
-			rightFftCount--;
-		}
-	}
-	pre_err_Y = err_Y;
+	return rightFftCount >= 55;
 }
 
 void paLinearInterpolation(unsigned short to1, unsigned short to2, unsigned short count)
@@ -449,7 +454,7 @@ void getadc()
 	adcValue1 = ADC_Read(ADC0) / 20;
 	adcValue2 = ADC_Read(ADC4) / 20;
 
-	adcValue3 =  ADC_Read(ADC1) / 20;
+	adcValue3 = ADC_Read(ADC1) / 20;
 	adcValue4 = ADC_Read(ADC2) / 20;
 	addValueToArr(adcValue1, adcValue2, adcValue3, adcValue4);
 	//paLinearInterpolation(adc1_val,adc2_val,3);
