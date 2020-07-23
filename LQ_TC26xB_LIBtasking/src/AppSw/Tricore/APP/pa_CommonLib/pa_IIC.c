@@ -20,4 +20,7 @@ char iic_inited = 0;
         IIC_ReadMultByteFromSlave(addr, reg, 1, value);
         return value[0];
     }
+    void pa_IIC_writeLen(unsigned char addr, unsigned char reg, unsigned char length, unsigned char* data_t){
+        IIC_WriteMultByteToSlave( addr,  reg,  length, * data_t);
+    }
 #endif

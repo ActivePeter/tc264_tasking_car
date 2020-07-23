@@ -49,7 +49,7 @@ void pa_updateMotorPwm(char index, float speed)
     if(pwmDuty>5000){
         pwmDuty=5000;
     }
-    dir=!dir;
+    // dir=!dir;
     switch (index)
     {
     case 1:

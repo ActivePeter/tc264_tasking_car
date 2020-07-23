@@ -8,6 +8,10 @@ void pa_delayMs(unsigned short ms){
     delayms(ms);
 } 
 
+void pa_delayUs(unsigned short us){
+    STM_DelayUs(STM0, us);
+}
+
 void pa_millis(){
 
 }

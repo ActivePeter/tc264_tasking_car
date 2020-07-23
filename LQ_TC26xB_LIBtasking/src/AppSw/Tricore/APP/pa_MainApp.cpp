@@ -41,6 +41,7 @@ unsigned short step = 0;
 
 int cnt = 0;
 char flag_5ms = 1;
+char flag_100ms = 1;
 SpeedOfMotors speedOfMotors;
 
 pa_MecanumModel mecanumModel;
@@ -57,8 +58,8 @@ pa_GlobalCpp *pa_GlobalCpp::getGlobalCpp()
 	return &globalCpp;
 }
 
-pa_UltrasonicDistance ultrasonicDistance1; 
-pa_UltrasonicDistance ultrasonicDistance2; 
+pa_UltrasonicDistance ultrasonicDistance1;
+pa_UltrasonicDistance ultrasonicDistance2;
 
 void initVariable()
 { //初始化变量
@@ -66,10 +67,10 @@ void initVariable()
 	speedOfMotors.speedOfM2 = 0;
 	speedOfMotors.speedOfM3 = 0;
 	speedOfMotors.speedOfM4 = 0;
-	globalCpp.pid_Motor1.setPid(17, 0.2, 3);
-	globalCpp.pid_Motor2.setPid(17, 0.2, 1);
-	globalCpp.pid_Motor3.setPid(17, 0.2, 1);
-	globalCpp.pid_Motor4.setPid(17, 0.2, 1);
+	globalCpp.pid_Motor1.setPid(12, 0, 0);
+	globalCpp.pid_Motor2.setPid(17, 0, 1);
+	globalCpp.pid_Motor3.setPid(17, 0, 1);
+	globalCpp.pid_Motor4.setPid(17, 0, 1);
 	globalCpp.pid_Direction.setPid(500, 0, 1);
 	ultrasonicDistance1.init(1);
 	ultrasonicDistance2.init(2);
@@ -100,20 +101,25 @@ void initFuncs()
 	//adc采集以及控制 定时器中断
 	STM_InitConfig(STM0, STM_Channel_0, 100, []() { //微秒  //UART_PutStr(UART2,"ssss");
 		getadc();									//getadc();
-
+		ultrasonicDistance1.checkEcho();
 		// if (cnt % 100 == 0)
 		// {
 
 		// }
-		if (cnt == 50)
+		if (cnt % 50 == 0)
 		{
-			cnt = 0;
+			// cnt = 0;
 			flag_5ms = 1;
 
 			speedOfMotors.speedOfM1 = ENC_GetCounter(ENC3_InPut_P02_6);
 			speedOfMotors.speedOfM2 = -ENC_GetCounter(ENC2_InPut_P33_7);
 			speedOfMotors.speedOfM3 = -ENC_GetCounter(ENC6_InPut_P20_3);
 			speedOfMotors.speedOfM4 = ENC_GetCounter(ENC5_InPut_P10_3);
+		}
+		if (cnt == 1000)
+		{
+			cnt = 0;
+			flag_100ms = 1;
 		}
 		cnt++;
 	});
@@ -125,13 +131,18 @@ void initFuncs()
 	ENC_InitConfig(ENC3_InPut_P02_6, ENC3_Dir_P02_7);
 	ENC_InitConfig(ENC5_InPut_P10_3, ENC5_Dir_P10_1);
 	ENC_InitConfig(ENC6_InPut_P20_3, ENC6_Dir_P20_0);
-}
 
+	ultrasonicDistance1.init(1);
+}
+short xMoveDelay=0;
+short err_Y_whenBlocked=0;
 void startMainTask()
 {
 	initVariable();
 	initFuncs();
 	int cnt5ms = 0;
+	
+	
 	while (1)
 	{
 		//执行控制算法
@@ -167,7 +178,23 @@ void startMainTask()
 			else
 			{
 				float dirOut = getMotorRotationValueByErr(err_Y < 0 ? err_X : -err_X);
-				float curVelocity = err_Y < 0 ? 600 : -600;
+				float yVelocity = err_Y < 0 ? 1000 : -1000;
+				float xVelocity = 0;
+				if (ultrasonicDistance1.distance < 10)
+				{
+					err_Y_whenBlocked=err_Y;
+					xMoveDelay=100;
+					yVelocity = 0;
+					xVelocity = err_X > 0 ? 1000 : -1000;
+					dirOut=0;
+				}else if(xMoveDelay>0&&err_Y!=err_Y_whenBlocked){
+					xMoveDelay--;
+					yVelocity = 0;
+					xVelocity = err_X > 0 ? 1000 : -1000;
+					dirOut=0;
+				}else if(err_Y_whenBlocked==err_Y){
+					xMoveDelay=0;
+				}
 				//float dirOut=pid_Direction.calcPid(err_Y>0?err_X:-err_X);
 				// dirOut=300;
 
@@ -178,12 +205,20 @@ void startMainTask()
 				// // pa_updateMotorPwm(2,300);
 				// pa_updateMotorPwm(4, -globalCpp.pid_Motor4.calcPid(speedOfMotors.speedOfM4 + dirOut));
 
-				pa_updateMotorPwm(1, -dirOut + curVelocity);
-				pa_updateMotorPwm(2, dirOut + curVelocity);
-				float out = -globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3 - dirOut);
-				pa_updateMotorPwm(3, dirOut + curVelocity);
+				pa_updateMotorPwm(1, 
+				-globalCpp.pid_Motor1.calcPid(speedOfMotors.speedOfM1-(-dirOut + yVelocity - xVelocity))
+				);
+				pa_updateMotorPwm(2, 
+				-globalCpp.pid_Motor2.calcPid(speedOfMotors.speedOfM2-(dirOut + yVelocity + xVelocity))
+				);
+				//float out = -globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3 - dirOut);
+				pa_updateMotorPwm(3, 
+				-globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3-(dirOut + yVelocity - xVelocity))
+				);
 				// pa_updateMotorPwm(2,300);
-				pa_updateMotorPwm(4, -dirOut + curVelocity);
+				pa_updateMotorPwm(4, 
+				-globalCpp.pid_Motor4.calcPid(speedOfMotors.speedOfM4-(-dirOut + yVelocity + xVelocity))
+				);
 
 				{
 					char buf[30] = {0};
@@ -195,7 +230,68 @@ void startMainTask()
 					UART_PutStr(UART2, buf);
 				}
 
-				if (globalCpp.micOutPutMode == OutputMode_motor)
+			}
+
+			checkUartData();
+		}
+
+		if (flag_100ms)
+		{
+			flag_100ms = 0;
+			//触发超声波
+			ultrasonicDistance1.trig();
+			//互相关计算
+			err_X = crossCorrelation_noFFT(adc_arr1, adc_arr2);
+			err_Y = crossCorrelation_noFFT(adc_arr3, adc_arr4);
+
+			//计算fft并且检查信标打开
+			checkBeaconOn();
+		}
+
+		// checkSignalStable();
+		//输出内容的判断
+		switch (globalCpp.micOutPutMode)
+		{
+			case OutputMode_cross:
+			{
+				char buf[30] = {0};
+				sprintf(buf, "%5d %5d\r\n",
+						err_X,
+						err_Y);
+
+				UART_PutStr(UART2, buf);
+			}
+			break;
+			case OutputMode_Mic:
+			{
+				//adc值实时***************************************
+				{
+					char buf[30] = {0};
+					sprintf(buf, "%5d %5d %5d %5d\r\n",
+							adcValue1,
+							adcValue2,
+							adcValue3,
+							adcValue4);
+
+					UART_PutStr(UART2, buf);
+				}
+				//***************************************************
+			}
+			break;
+			case OutputMode_UltrasonicDistance:
+			{
+				//adc值实时***************************************
+				{
+					char buf[30] = {0};
+					sprintf(buf, "%5d\r\n",
+							ultrasonicDistance1.distance);
+					UART_PutStr(UART2, buf);
+				}
+				//***************************************************
+				break;
+			}
+			case OutputMode_motor://编码器速度
+			{
 				{
 					char buf[30] = {0};
 					sprintf(buf, "%5d %5d %5d %5d\r\n",
@@ -208,47 +304,8 @@ void startMainTask()
 
 					UART_PutStr(UART2, buf);
 				}
+				break;
 			}
-
-			checkUartData();
-		}
-
-		//互相关计算
-		err_X = crossCorrelation_noFFT(adc_arr1, adc_arr2);
-		err_Y = crossCorrelation_noFFT(adc_arr3, adc_arr4);
-
-		//计算fft并且检查信标打开
-		checkBeaconOn();
-		// checkSignalStable();
-		//输出内容的判断
-		switch (globalCpp.micOutPutMode)
-		{
-		case OutputMode_cross:
-		{
-			char buf[30] = {0};
-			sprintf(buf, "%5d %5d\r\n",
-					err_X,
-					err_Y);
-
-			UART_PutStr(UART2, buf);
-		}
-		break;
-		case OutputMode_Mic:
-		{
-			//adc值实时***************************************
-			{
-				char buf[30] = {0};
-				sprintf(buf, "%5d %5d %5d %5d\r\n",
-						adcValue1,
-						adcValue2,
-						adcValue3,
-						adcValue4);
-
-				UART_PutStr(UART2, buf);
-			}
-			//***************************************************
-		}
-		break;
 		}
 	}
 }
@@ -316,7 +373,7 @@ void checkBeaconOn()
 
 		// 	UART_PutStr(UART2, buf);
 		// }
-		rightFftCount=count;
+		rightFftCount = count;
 	}
 }
 
@@ -389,11 +446,11 @@ void addValueToArr(unsigned short value1, unsigned short value2, unsigned short 
 
 void getadc()
 {
-	adcValue1 = ADC_Read(ADC1) / 20;
-	adcValue2 = ADC_Read(ADC2) / 20;
+	adcValue1 = ADC_Read(ADC0) / 20;
+	adcValue2 = ADC_Read(ADC4) / 20;
 
-	adcValue3 = ADC_Read(ADC0) / 20;
-	adcValue4 = ADC_Read(ADC4) / 20;
+	adcValue3 =  ADC_Read(ADC1) / 20;
+	adcValue4 = ADC_Read(ADC2) / 20;
 	addValueToArr(adcValue1, adcValue2, adcValue3, adcValue4);
 	//paLinearInterpolation(adc1_val,adc2_val,3);
 	// adc_arr1[step] = adc1_val;

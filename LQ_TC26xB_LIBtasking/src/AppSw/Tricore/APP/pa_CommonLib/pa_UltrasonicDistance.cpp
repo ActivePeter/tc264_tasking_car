@@ -7,11 +7,13 @@ pa_UltrasonicDistance::pa_UltrasonicDistance(){
 void pa_UltrasonicDistance::trig(){
     this->countingDistance=0;
     //10us高电平
-
+    setTrig(1);
+    pa_delayUs(12);
+    setTrig(0);
 }
 
 void pa_UltrasonicDistance::checkEcho(){
-    char pinState;
+    char pinState=getEcho();
     //echo高电平
     if(pinState){
         if(countingDistance<100){
@@ -49,6 +51,7 @@ char pa_UltrasonicDistance::getEcho(){
     switch (moduleIndex)
     {
     case 1:
+        return PIN_Read(P11_6);
         /* code */
         break;
     case 2:
@@ -64,6 +67,7 @@ void pa_UltrasonicDistance::setTrig(char pinState){
     switch (moduleIndex)
     {
     case 1:
+        PIN_Write(P11_10,pinState);
         /* code */
         break;
     case 2:

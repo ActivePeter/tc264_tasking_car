@@ -1,37 +1,37 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿ZYF/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.1 °æÈ¨ËùÓĞ£¬µ¥Î»Ê¹ÓÃÇëÏÈÁªÏµÊÚÈ¨
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘ZYF/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.1 ç‰ˆæƒæ‰€æœ‰ï¼Œå•ä½ä½¿ç”¨è¯·å…ˆè”ç³»æˆæƒ
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-Í¨¹ı´°¿ÚÉèÖÃÉñÑÛ·Ö±æÂÊÎª188*120£¬
+é€šè¿‡çª—å£è®¾ç½®ç¥çœ¼åˆ†è¾¨ç‡ä¸º188*120ï¼Œ
 ________________________________________________________________
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- ÉãÏñÍ·¹Ü½Å  TC264DA¹Ü½Å   ËµÃ÷              DMA·½Ê½²É¼¯ËùÓÃ¹Ü½ÅÍ¨¹ıµç×èÌøÏß
-	D0        P02_0       ÉãÏñÍ·Êı¾İbit0
-	D1        P02_1       ÉãÏñÍ·Êı¾İbit1
-	D2        P02_2       ÉãÏñÍ·Êı¾İbit2
-	D3        P02_3       ÉãÏñÍ·Êı¾İbit3
-	D4        P02_4       ÉãÏñÍ·Êı¾İbit4
-	D5        P02_5       ÉãÏñÍ·Êı¾İbit5
-	D6        P02_6       ÉãÏñÍ·Êı¾İbit6
-	D7        P02_7       ÉãÏñÍ·Êı¾İbit7
-	CLK       P00_7       ÏñËØÊ±ÖÓ        Íâ²¿ÖĞ¶ÏµÚ2×é£ºP00_4
-	VSNC      P00_8       ³¡ĞÅºÅ             Íâ²¿ÖĞ¶ÏµÚ3×é£ºP15_1
-	HSNC      P00_9       ĞĞĞÅºÅ
-    SCL       P11_2       ¼æÈİÄ£ÄâSCCB SCL
-    SDA       P11_3       ¼æÈİÄ£ÄâSCCB SDA
+ æ‘„åƒå¤´ç®¡è„š  TC264DAç®¡è„š   è¯´æ˜              DMAæ–¹å¼é‡‡é›†æ‰€ç”¨ç®¡è„šé€šè¿‡ç”µé˜»è·³çº¿
+	D0        P02_0       æ‘„åƒå¤´æ•°æ®bit0
+	D1        P02_1       æ‘„åƒå¤´æ•°æ®bit1
+	D2        P02_2       æ‘„åƒå¤´æ•°æ®bit2
+	D3        P02_3       æ‘„åƒå¤´æ•°æ®bit3
+	D4        P02_4       æ‘„åƒå¤´æ•°æ®bit4
+	D5        P02_5       æ‘„åƒå¤´æ•°æ®bit5
+	D6        P02_6       æ‘„åƒå¤´æ•°æ®bit6
+	D7        P02_7       æ‘„åƒå¤´æ•°æ®bit7
+	CLK       P00_7       åƒç´ æ—¶é’Ÿ        å¤–éƒ¨ä¸­æ–­ç¬¬2ç»„ï¼šP00_4
+	VSNC      P00_8       åœºä¿¡å·             å¤–éƒ¨ä¸­æ–­ç¬¬3ç»„ï¼šP15_1
+	HSNC      P00_9       è¡Œä¿¡å·
+    SCL       P11_2       å…¼å®¹æ¨¡æ‹ŸSCCB SCL
+    SDA       P11_3       å…¼å®¹æ¨¡æ‹ŸSCCB SDA
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 #include <IfxPort.h>
@@ -42,37 +42,37 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 
 
 /*!
-  * @brief    MT9V034¼Ä´æÆ÷³õÊ¼»¯
+  * @brief    MT9V034å¯„å­˜å™¨åˆå§‹åŒ–
   *
-  * @param    fps  :Ö¡ÂÊ
+  * @param    fps  :å¸§ç‡
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     Ò»°ãÊ¹ÓÃ50Ö¡
+  * @note     ä¸€èˆ¬ä½¿ç”¨50å¸§
   *
   * @see      MT9V034_Init(50);
   *
-  * @date     2019/6/12 ĞÇÆÚÈı
+  * @date     2019/6/12 æ˜ŸæœŸä¸‰
   */
 void MT9V034_Init(unsigned char fps)
 {
 	unsigned short data = 0;
 
-	//ÉãÏñÍ·SCCB½Ó¿Ú³õÊ¼»¯
+	//æ‘„åƒå¤´SCCBæ¥å£åˆå§‹åŒ–
 	SCCB_Init();
 
-	if(SCCB_RegRead(MT9V034_I2C_ADDR>>1,MT9V034_CHIP_VERSION,&data) == 0)  //¶ÁÈ¡ÉãÏñÍ·°æ±¾¼Ä´æÆ÷
+	if(SCCB_RegRead(MT9V034_I2C_ADDR>>1,MT9V034_CHIP_VERSION,&data) == 0)  //è¯»å–æ‘„åƒå¤´ç‰ˆæœ¬å¯„å­˜å™¨
 	{
-		if(data != MT9V034_CHIP_ID)                                        //Ğ¾Æ¬ID²»ÕıÈ·£¬ËµÃ÷Ã»ÓĞÕıÈ·¶ÁÈ¡µ¼Êı¾İ£¬¼ì²é½ÓÏß
+		if(data != MT9V034_CHIP_ID)                                        //èŠ¯ç‰‡IDä¸æ­£ç¡®ï¼Œè¯´æ˜æ²¡æœ‰æ­£ç¡®è¯»å–å¯¼æ•°æ®ï¼Œæ£€æŸ¥æ¥çº¿
 		{
 #ifdef USEOLED
 			OLED_P6x8Str(0, 0, "LQ-V034 id error");
 #else
 			TFTSPI_P8X8Str(0,8,"LQ-V034 id error",u16RED,u16BLUE);
 #endif
-#pragma warning 557         // ÆÁ±Î¾¯¸æ
+#pragma warning 557         // å±è”½è­¦å‘Š
 			while (1);
-#pragma warning default     // ´ò¿ª¾¯¸æ
+#pragma warning default     // æ‰“å¼€è­¦å‘Š
 		}
 	}
 	else
@@ -83,28 +83,28 @@ void MT9V034_Init(unsigned char fps)
 		TFTSPI_P8X8Str(0,8,"LQ-V034 sccb error",u16RED,u16BLUE);
 #endif
 
-#pragma warning 557         // ÆÁ±Î¾¯¸æ
-		while (1);          //ÉãÏñÍ·Ê¶±ğÊ§°Ü£¬Í£Ö¹ÔËĞĞ
-#pragma warning default     // ´ò¿ª¾¯¸æ
+#pragma warning 557         // å±è”½è­¦å‘Š
+		while (1);          //æ‘„åƒå¤´è¯†åˆ«å¤±è´¥ï¼Œåœæ­¢è¿è¡Œ
+#pragma warning default     // æ‰“å¼€è­¦å‘Š
 	}
-	/* »Ö¸´Ä¬ÈÏÅäÖÃ */
+	/* æ¢å¤é»˜è®¤é…ç½® */
 //	MT9V034_Default_Settings();
 
-    /* ÉèÖÃÉãÏñÍ·Í¼Ïñ4*4·ÖÆµÊä³öPCLK 27/4 = 6.75M ,BIT4,5¾µÏñÉèÖÃ:ÉÏÏÂ×óÓÒ¾ù¾µÏñ */
+    /* è®¾ç½®æ‘„åƒå¤´å›¾åƒ4*4åˆ†é¢‘è¾“å‡ºPCLK 27/4 = 6.75M ,BIT4,5é•œåƒè®¾ç½®:ä¸Šä¸‹å·¦å³å‡é•œåƒ */
 	MT9V034_SetFrameResolution(MT9V034_IMAGEH, MT9V034_IMAGEW);
 
-    /* ÉèÖÃÖ¡ÂÊ */
+    /* è®¾ç½®å¸§ç‡ */
     MT9V034_SetFrameRate(fps);
 
-    /* ÆØ¹âÉèÖÃ */
+    /* æ›å…‰è®¾ç½® */
     MT9V034_SetAutoExposure(CAMERA_AUTO_EXPOSURE);
 
-	SCCB_RegWrite(MT9V034_I2C_ADDR, 0x2C, 0x0004);  //²Î¿¼µçÑ¹ÉèÖÃ   1.4v
-    SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_ANALOG_CTRL, MT9V034_ANTI_ECLIPSE_ENABLE);  //·´Ïò¸¯Ê´
+	SCCB_RegWrite(MT9V034_I2C_ADDR, 0x2C, 0x0004);  //å‚è€ƒç”µå‹è®¾ç½®   1.4v
+    SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_ANALOG_CTRL, MT9V034_ANTI_ECLIPSE_ENABLE);  //åå‘è…èš€
     SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_ADC_RES_CTRL_REG, 0x0303);      //0x1C  here is the way to regulate darkness :)
     ////
     SCCB_RegWrite(MT9V034_I2C_ADDR,0x13,0x2D2E);//We also recommended using R0x13 = 0x2D2E with this setting for better column FPN.
-    SCCB_RegWrite(MT9V034_I2C_ADDR,0x20,CAMERA_CONTRAST);//0x01C7¶Ô±È¶È²î£¬·¢°×£»0x03C7¶Ô±È¶ÈÌá¸ß Recommended by design to improve performance in HDR mode and when frame rate is low.
+    SCCB_RegWrite(MT9V034_I2C_ADDR,0x20,CAMERA_CONTRAST);//0x01C7å¯¹æ¯”åº¦å·®ï¼Œå‘ç™½ï¼›0x03C7å¯¹æ¯”åº¦æé«˜ Recommended by design to improve performance in HDR mode and when frame rate is low.
     SCCB_RegWrite(MT9V034_I2C_ADDR,0x24,0x0010);//Corrects pixel negative dark offset when global reset in R0x20[9] is enabled.
     SCCB_RegWrite(MT9V034_I2C_ADDR,0x2B,0x0003);//Improves column FPN.
     SCCB_RegWrite(MT9V034_I2C_ADDR,0x2F,0x0003);//Improves FPN at near-saturation.
@@ -114,25 +114,25 @@ void MT9V034_Init(unsigned char fps)
 
 
 
-    /* 0xA5  Í¼ÏñÁÁ¶È  60  1-64  */
+    /* 0xA5  å›¾åƒäº®åº¦  60  1-64  */
     SCCB_RegWrite(MT9V034_I2C_ADDR,MT9V034_AGC_AEC_DESIRED_BIN_REG, CAMERA_AUTO_EXPOSURE_BRIGHTNESS);
 
 }
 
 /*!
-  * @brief    Ö¡ÂÊÉèÖÃ
+  * @brief    å¸§ç‡è®¾ç½®
   *
-  * @param    fps : Ö¡ÂÊ
+  * @param    fps : å¸§ç‡
   *
   * @return
   *
-  * @note     Ö¡ÂÊÆäÊµÊÇÍ¨¹ıÔö¼Ó¿Õ°×ĞĞÊµÏÖµÄ£¬ ÏÂÃæÊÇÊµ²âµÄÖ¡ÂÊÓëĞéÄâĞĞÖ®¼äµÄ¹ØÏµ
-  * @note     Ö¡ÂÊ	    200    150    100    70.9    50    20    10
-  * @note     ĞéÄâĞĞ    39     92     199    330     515   1450  3000
+  * @note     å¸§ç‡å…¶å®æ˜¯é€šè¿‡å¢åŠ ç©ºç™½è¡Œå®ç°çš„ï¼Œ ä¸‹é¢æ˜¯å®æµ‹çš„å¸§ç‡ä¸è™šæ‹Ÿè¡Œä¹‹é—´çš„å…³ç³»
+  * @note     å¸§ç‡	    200    150    100    70.9    50    20    10
+  * @note     è™šæ‹Ÿè¡Œ    39     92     199    330     515   1450  3000
   *
   * @see      MT9V034_SetFrameRate(50);
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 void MT9V034_SetFrameRate(unsigned char fps)
 {
@@ -165,73 +165,73 @@ void MT9V034_SetFrameRate(unsigned char fps)
     {
         vertical = -155 * fps + 4550;
     }
-    /* ĞéÄâĞĞ ÉèÖÃÖ¡ÂÊÊ±¼ä 2¨C32288 */
+    /* è™šæ‹Ÿè¡Œ è®¾ç½®å¸§ç‡æ—¶é—´ 2â€“32288 */
     SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_VERTICAL_BLANKING, (unsigned short)vertical);
 }
 
 /*!
-  * @brief    ÉèÖÃÍ¼Ïñ´°¿Ú´óĞ¡
+  * @brief    è®¾ç½®å›¾åƒçª—å£å¤§å°
   *
-  * @param    fps : Ö¡ÂÊ
+  * @param    fps : å¸§ç‡
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     Ò»°ãÊ¹ÓÃÄ¬ÈÏ¼´¿É
+  * @note     ä¸€èˆ¬ä½¿ç”¨é»˜è®¤å³å¯
   *
   * @see      MT9V034_SetFrameResolution(MT9V034_IMAGEH, MT9V034_IMAGEW);
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 static void MT9V034_SetFrameResolution(unsigned short height,unsigned short width)
 {
     unsigned short data = 0;
 
-    if((height*4) <= MAX_IMAGE_HEIGHT)   //ÅĞ¶ÏĞĞÊÇ·ñ4·ÖÆµ
+    if((height*4) <= MAX_IMAGE_HEIGHT)   //åˆ¤æ–­è¡Œæ˜¯å¦4åˆ†é¢‘
     {
         height *= 4;
         data |= MT9V034_READ_MODE_ROW_BIN_4;
     }
-    else if((height*2)<=MAX_IMAGE_HEIGHT )  //ÅĞ¶ÏĞĞÊÇ·ñ2·ÖÆµ
+    else if((height*2)<=MAX_IMAGE_HEIGHT )  //åˆ¤æ–­è¡Œæ˜¯å¦2åˆ†é¢‘
     {
         height *= 2;
         data |= MT9V034_READ_MODE_ROW_BIN_2;
     }
 
-    if((width*4)<=MAX_IMAGE_WIDTH )   //ÅĞ¶ÏÁĞÊÇ·ñ4·ÖÆµ
+    if((width*4)<=MAX_IMAGE_WIDTH )   //åˆ¤æ–­åˆ—æ˜¯å¦4åˆ†é¢‘
     {
         width *= 4;
         data |= MT9V034_READ_MODE_COL_BIN_4;
     }
-    else if((width*2)<=MAX_IMAGE_WIDTH )   //ÅĞ¶ÏÁĞÊÇ·ñ2·ÖÆµ
+    else if((width*2)<=MAX_IMAGE_WIDTH )   //åˆ¤æ–­åˆ—æ˜¯å¦2åˆ†é¢‘
     {
         width *= 2;
         data |= MT9V034_READ_MODE_COL_BIN_2;
     }
 
-    //         Ë®Æ½·­×ª                     ´¹Ö±·­×ª
-    data |= (MT9V034_READ_MODE_ROW_FLIP|MT9V034_READ_MODE_COLUMN_FLIP);  //ĞèÒª·­×ªµÄ¿ÉÒÔ´ò¿ª×¢ÊÍ
-    MTV_IICWriteReg16(MT9V034_READ_MODE, data);       //Ğ´¼Ä´æÆ÷£¬ÅäÖÃĞĞ·ÖÆµ
+    //         æ°´å¹³ç¿»è½¬                     å‚ç›´ç¿»è½¬
+    data |= (MT9V034_READ_MODE_ROW_FLIP|MT9V034_READ_MODE_COLUMN_FLIP);  //éœ€è¦ç¿»è½¬çš„å¯ä»¥æ‰“å¼€æ³¨é‡Š
+    MTV_IICWriteReg16(MT9V034_READ_MODE, data);       //å†™å¯„å­˜å™¨ï¼Œé…ç½®è¡Œåˆ†é¢‘
 
-    MTV_IICWriteReg16(MT9V034_WINDOW_WIDTH,  width);  //¶ÁÈ¡Í¼ÏñµÄÁĞÊı  ¸Ä±ä´Ë´¦Ò²¿É¸Ä±äÍ¼ÏñÊä³ö´óĞ¡£¬²»¹ı»á¶ªÊ§ÊÓ½Ç
-    MTV_IICWriteReg16(MT9V034_WINDOW_HEIGHT, height); //¶ÁÈ¡Í¼ÏñµÄĞĞÊı  ¸Ä±ä´Ë´¦Ò²¿É¸Ä±äÍ¼ÏñÊä³ö´óĞ¡£¬²»¹ı»á¶ªÊ§ÊÓ½Ç
+    MTV_IICWriteReg16(MT9V034_WINDOW_WIDTH,  width);  //è¯»å–å›¾åƒçš„åˆ—æ•°  æ”¹å˜æ­¤å¤„ä¹Ÿå¯æ”¹å˜å›¾åƒè¾“å‡ºå¤§å°ï¼Œä¸è¿‡ä¼šä¸¢å¤±è§†è§’
+    MTV_IICWriteReg16(MT9V034_WINDOW_HEIGHT, height); //è¯»å–å›¾åƒçš„è¡Œæ•°  æ”¹å˜æ­¤å¤„ä¹Ÿå¯æ”¹å˜å›¾åƒè¾“å‡ºå¤§å°ï¼Œä¸è¿‡ä¼šä¸¢å¤±è§†è§’
 
-    MTV_IICWriteReg16(MT9V034_COLUMN_START, MT9V034_COLUMN_START_MIN);  //ÁĞ¿ªÊ¼
-    MTV_IICWriteReg16(MT9V034_ROW_START, MT9V034_ROW_START_MIN);        //ĞĞ¿ªÊ¼
+    MTV_IICWriteReg16(MT9V034_COLUMN_START, MT9V034_COLUMN_START_MIN);  //åˆ—å¼€å§‹
+    MTV_IICWriteReg16(MT9V034_ROW_START, MT9V034_ROW_START_MIN);        //è¡Œå¼€å§‹
 
 }
 
 /*!
-  * @brief    ÉèÖÃ×Ô¶¯ÆØ¹âÊ±¼ä
+  * @brief    è®¾ç½®è‡ªåŠ¨æ›å…‰æ—¶é—´
   *
-  * @param    enable £º 1 Ê¹ÄÜ×Ô¶¯ÆØ¹â  ×Ô¶¯ÆØ¹âÊ±¼äÍ¨¹ıÉÏÃæµÄºê¶¨ÒåĞŞ¸Ä
+  * @param    enable ï¼š 1 ä½¿èƒ½è‡ªåŠ¨æ›å…‰  è‡ªåŠ¨æ›å…‰æ—¶é—´é€šè¿‡ä¸Šé¢çš„å®å®šä¹‰ä¿®æ”¹
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      MT9V034_SetAutoExposure(CAMERA_AUTO_EXPOSURE);
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 void MT9V034_SetAutoExposure(char enable)
 {
@@ -239,27 +239,27 @@ void MT9V034_SetAutoExposure(char enable)
     SCCB_RegRead(MT9V034_I2C_ADDR, MT9V034_AEC_AGC_ENABLE,&reg);
     if(enable)
     {
-        /* ¿ªÆô×Ô¶¯ÆØ¹â×Ô¶¯ÔöÒæ */
+        /* å¼€å¯è‡ªåŠ¨æ›å…‰è‡ªåŠ¨å¢ç›Š */
         SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_AEC_AGC_ENABLE, reg|MT9V034_AEC_ENABLE|MT9V034_AGC_ENABLE);
-        /* ×î´óÆØ¹âÊ±¼ä ĞŞ¸ÄÕâÀï¿ÉÒÔĞŞ¸Ä±È½Ï°µÊ±µÄÍ¼ÏñÕûÌåÁÁ¶È*/
+        /* æœ€å¤§æ›å…‰æ—¶é—´ ä¿®æ”¹è¿™é‡Œå¯ä»¥ä¿®æ”¹æ¯”è¾ƒæš—æ—¶çš„å›¾åƒæ•´ä½“äº®åº¦*/
         SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_MAX_EXPOSURE_REG, CAMERA_MAX_EXPOSURE_TIME);
-        /* ×îĞ¡ÆØ¹âÊ±¼ä ĞŞ¸ÄÕâÀï¿ÉÒÔĞŞ¸ÄÓöµ½Ç¿¹âÊ±µÄÍ¼ÏñÕûÌåÁÁ¶È*/
+        /* æœ€å°æ›å…‰æ—¶é—´ ä¿®æ”¹è¿™é‡Œå¯ä»¥ä¿®æ”¹é‡åˆ°å¼ºå…‰æ—¶çš„å›¾åƒæ•´ä½“äº®åº¦*/
         SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_MIN_EXPOSURE_REG, CAMERA_MIN_EXPOSURE_TIME);
-        /* ×î´óÔöÒæ Ôö´óÕâÀï Í¼ÏñÆ«°µµÄÇé¿öÏÂ±£Áô¸ü¶àµÄÏ¸½Ú µ«ÊÇ¿ÉÄÜ²úÉúÔëµã 0-60*/
+        /* æœ€å¤§å¢ç›Š å¢å¤§è¿™é‡Œ å›¾åƒåæš—çš„æƒ…å†µä¸‹ä¿ç•™æ›´å¤šçš„ç»†èŠ‚ ä½†æ˜¯å¯èƒ½äº§ç”Ÿå™ªç‚¹ 0-60*/
         SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_MAX_GAIN_REG, 20);
-        /* 0xB0  ÓÃÓÚAEC/AGCÖ±·½Í¼ÏñËØÊıÄ¿,22560 ×î´ó44000  */
+        /* 0xB0  ç”¨äºAEC/AGCç›´æ–¹å›¾åƒç´ æ•°ç›®,22560 æœ€å¤§44000  */
         SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_AGC_AEC_PIXEL_COUNT_REG, 22560);
 
     }
     else
     {
-        /* ¹Ø±Õ×Ô¶¯ÆØ¹â */
+        /* å…³é—­è‡ªåŠ¨æ›å…‰ */
         SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_AEC_AGC_ENABLE, reg&~(MT9V034_AEC_ENABLE|MT9V034_AGC_ENABLE));
 
-        /* 0xAB  ×î´óÄ£ÄâÔöÒæ     64 */
+        /* 0xAB  æœ€å¤§æ¨¡æ‹Ÿå¢ç›Š     64 */
         SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_MAX_GAIN_REG, 30);
 
-        /* 0x0B ÉèÖÃÆØ¹âÊ±¼ä 0¨C32765 */
+        /* 0x0B è®¾ç½®æ›å…‰æ—¶é—´ 0â€“32765 */
         SCCB_RegWrite(MT9V034_I2C_ADDR,MT9V034_TOTAL_SHUTTER_WIDTH,CAMERA_EXPOSURE_TIME);
 
     }
@@ -272,24 +272,24 @@ void MT9V034_SetAutoExposure(char enable)
 
 
 /*********************************************************************
- *ÉãÏñÍ·SCCBµ×²ãÇı¶¯
+ *æ‘„åƒå¤´SCCBåº•å±‚é©±åŠ¨
  *
  ***********************************************************************/
 
 
 /*!
-  * @brief    SCCBĞ´16Î»¼Ä´æÆ÷
+  * @brief    SCCBå†™16ä½å¯„å­˜å™¨
   *
-  * @param    reg £º ¼Ä´æÆ÷
-  * @param    val £º Ğ´ÈëµÄÖµ
+  * @param    reg ï¼š å¯„å­˜å™¨
+  * @param    val ï¼š å†™å…¥çš„å€¼
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
-  * @see      MTV_IICWriteReg16(0x20, 0x0003); //ÏòMT9V034µÄ0x20¼Ä´æÆ÷Ğ´Èë0x0003
+  * @see      MTV_IICWriteReg16(0x20, 0x0003); //å‘MT9V034çš„0x20å¯„å­˜å™¨å†™å…¥0x0003
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 void MTV_IICWriteReg16(unsigned char reg, unsigned short val)
 {
@@ -298,17 +298,17 @@ void MTV_IICWriteReg16(unsigned char reg, unsigned short val)
 
 
 /*!
-  * @brief    SCCB ³õÊ¼»¯
+  * @brief    SCCB åˆå§‹åŒ–
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     SCCB IOÔÚLQ_MT9V034.hÖĞÍ¨¹ıºê¶¨ÒåÑ¡Ôñ
+  * @note     SCCB IOåœ¨LQ_MT9V034.hä¸­é€šè¿‡å®å®šä¹‰é€‰æ‹©
   *
-  * @see      SCCB_Init(); //³õÊ¼»¯SCCB  IO
+  * @see      SCCB_Init(); //åˆå§‹åŒ–SCCB  IO
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 void SCCB_Init(void)
 {
@@ -323,17 +323,17 @@ void SCCB_Init(void)
 
 
 /*!
-  * @brief    SCCB ÑÓÊ±
+  * @brief    SCCB å»¶æ—¶
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      SCCB_Wait();
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 void SCCB_Wait(void)
 {
@@ -345,17 +345,17 @@ void SCCB_Wait(void)
 }
 
 /*!
-  * @brief    SCCB ¿ªÊ¼Ê±Ğò
+  * @brief    SCCB å¼€å§‹æ—¶åº
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      SCCB_Star();
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 void SCCB_Star(void)
 {
@@ -372,17 +372,17 @@ void SCCB_Star(void)
 }
 
 /*!
-  * @brief    SCCB Í£Ö¹Ê±Ğò
+  * @brief    SCCB åœæ­¢æ—¶åº
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      SCCB_Star();
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 void SCCB_Stop(void)
 {
@@ -398,17 +398,17 @@ void SCCB_Stop(void)
 }
 
 /*!
-  * @brief    SCCB ·¢ËÍÒ»¸ö×Ö½Ú
+  * @brief    SCCB å‘é€ä¸€ä¸ªå­—èŠ‚
   *
-  * @param    Data  £º·¢ËÍ×Ö½Ú
+  * @param    Data  ï¼šå‘é€å­—èŠ‚
   *
-  * @return   ack Ó¦´ğĞÅºÅ
+  * @return   ack åº”ç­”ä¿¡å·
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      SCCB_SendByte(0x01);
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 unsigned char SCCB_SendByte(unsigned char Data)
 {
@@ -445,24 +445,24 @@ unsigned char SCCB_SendByte(unsigned char Data)
 }
 
 /*!
-  * @brief    SCCB ½ÓÊÕÒ»¸ö×Ö½Ú
+  * @brief    SCCB æ¥æ”¶ä¸€ä¸ªå­—èŠ‚
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ½ÓÊÕµ½µÄ×Ö½Ú
+  * @return   æ¥æ”¶åˆ°çš„å­—èŠ‚
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      unsigned char data = SCCB_ReadByte();
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 unsigned char SCCB_ReadByte(void)
 {
   unsigned char i;
   volatile unsigned char byte;
   MT9V034_SCL_Out;
-  MT9V034_SDA_In; //Ê¹ÄÜÊäÈë
+  MT9V034_SDA_In; //ä½¿èƒ½è¾“å…¥
   for( i=0; i<8; i++)
   {
 	MT9V034_SCL_Low;
@@ -478,17 +478,17 @@ unsigned char SCCB_ReadByte(void)
 }
 
 /*!
-  * @brief    SCCB Ó¦´ğ
+  * @brief    SCCB åº”ç­”
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      SCCB_Ack();
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 static void SCCB_Ack(void)
 {
@@ -504,17 +504,17 @@ static void SCCB_Ack(void)
 }
 
 /*!
-  * @brief    SCCB ²»Ó¦´ğ
+  * @brief    SCCB ä¸åº”ç­”
   *
-  * @param    ÎŞ
+  * @param    æ— 
   *
-  * @return   ÎŞ
+  * @return   æ— 
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      SCCB_NAck();
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 static void SCCB_NAck(void)
 {
@@ -531,19 +531,19 @@ static void SCCB_NAck(void)
 }
 
 /*!
-  * @brief    SCCB Ğ´¼Ä´æÆ÷
+  * @brief    SCCB å†™å¯„å­˜å™¨
   *
-  * @param    Device  : µØÖ·
-  * @param    reg     : ¼Ä´æÆ÷
-  * @param    Data    : Êı¾İ
+  * @param    Device  : åœ°å€
+  * @param    reg     : å¯„å­˜å™¨
+  * @param    Data    : æ•°æ®
   *
   * @return   ack
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      SCCB_RegWrite(MT9V034_I2C_ADDR, MT9V034_MAX_GAIN_REG, 30);
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 void SCCB_RegWrite(unsigned char Device,unsigned char reg,unsigned short Data)
 {
@@ -578,19 +578,19 @@ void SCCB_RegWrite(unsigned char Device,unsigned char reg,unsigned short Data)
 }
 
 /*!
-  * @brief    SCCB ¶Á¼Ä´æÆ÷
+  * @brief    SCCB è¯»å¯„å­˜å™¨
   *
-  * @param    Device  : µØÖ·
-  * @param    reg     : ¼Ä´æÆ÷
-  * @param    Data    : ¶Á³öÊı¾İ
+  * @param    Device  : åœ°å€
+  * @param    reg     : å¯„å­˜å™¨
+  * @param    Data    : è¯»å‡ºæ•°æ®
   *
   * @return   ack
   *
-  * @note     ÎŞ
+  * @note     æ— 
   *
   * @see      SCCB_RegRead(MT9V034_I2C_ADDR>>1,MT9V034_CHIP_VERSION,&data)
   *
-  * @date     2019/7/26 ĞÇÆÚÎå
+  * @date     2019/7/26 æ˜ŸæœŸäº”
   */
 unsigned char SCCB_RegRead(unsigned char Device,unsigned char reg,unsigned short *Data)
 {

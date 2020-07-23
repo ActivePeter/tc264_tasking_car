@@ -6,6 +6,7 @@
 #define OutputMode_cross 2
 #define OutputMode_motor 3
 #define OutputMode_crossDetail 4
+#define OutputMode_UltrasonicDistance 5
 
 class pa_GlobalCpp
 {

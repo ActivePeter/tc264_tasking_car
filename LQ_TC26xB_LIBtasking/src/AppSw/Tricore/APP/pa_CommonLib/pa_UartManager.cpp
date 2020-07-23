@@ -43,6 +43,10 @@ void checkUartData()
 				globalCpp->micOutPutMode=OutputMode_crossDetail;
 				UART_PutStr(UART2, "output changed to CrossDetail!\r\n");
 				break;
+			case '5':
+				globalCpp->micOutPutMode=OutputMode_UltrasonicDistance;
+				UART_PutStr(UART2, "output changed to UltrasonicDistance\r\n");
+				break;
 			default:
 				break;
 			}

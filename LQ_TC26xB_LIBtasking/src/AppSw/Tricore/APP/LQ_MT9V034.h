@@ -1,17 +1,17 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-��ƽ    ̨�������������ܿƼ�TC264DA���İ�
-����    д��ZYF/chiusir
-��E-mail  ��chiusir@163.com
-�������汾��V1.1 ��Ȩ���У���λʹ��������ϵ��Ȩ
-�������¡�2020��4��10��
-�������Ϣ�ο����е�ַ��
-����    վ��http://www.lqist.cn
-���Ա����̡�http://longqiu.taobao.com
+【平    台】北京龙邱智能科技TC264DA核心板
+【编    写】ZYF/chiusir
+【E-mail  】chiusir@163.com
+【软件版本】V1.1 版权所有，单位使用请先联系授权
+【最后更新】2020年4月10日
+【相关信息参考下列地址】
+【网    站】http://www.lqist.cn
+【淘宝店铺】http://longqiu.taobao.com
 ------------------------------------------------
-��dev.env.��Hightec4.9.3/Tasking6.3�����ϰ汾
-��Target �� TC264DA
-��Crystal�� 20.000Mhz
-��SYS PLL�� 200MHz
+【dev.env.】Hightec4.9.3/Tasking6.3及以上版本
+【Target 】 TC264DA
+【Crystal】 20.000Mhz
+【SYS PLL】 200MHz
 ________________________________________________________________
 
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
@@ -21,111 +21,111 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "stdint.h"
 #include "LQ_GPIO.h"
 
-#define MT9V034_IMAGEH  120  /*!< �� HEIGHT ���ɼ�����ͷͼ��߶����� */
-#define MT9V034_IMAGEW  188  /*!< �� WIDTH  ���ɼ�����ͷͼ��������� */
+#define MT9V034_IMAGEH  120  /*!< 行 HEIGHT 待采集摄像头图像高度行数 */
+#define MT9V034_IMAGEW  188  /*!< 列 WIDTH  待采集摄像头图像宽度列数 */
 
-/*! �Աȶ� �߶Աȶ�0x03c7  �ͶԱȶ�0x01c7  ע�� �߶ԱȶȻ�ʹͼ��䰵 */
+/*! 对比度 高对比度0x03c7  低对比度0x01c7  注意 高对比度会使图像变暗 */
 #define CAMERA_CONTRAST          0x01c7
 
-/*! �Զ��ع⿪�� Ĭ�ϴ�  ����Ϊ0 �ر��Զ��ع� */
+/*! 自动曝光开关 默认打开  设置为0 关闭自动曝光 */
 #define CAMERA_AUTO_EXPOSURE     1
 
-/*! �Զ��ع�ģʽ�� ���� ���ڷ�Χ 1-64 */
+/*! 自动曝光模式下 亮度 调节范围 1-64 */
 #define CAMERA_AUTO_EXPOSURE_BRIGHTNESS  50
 
-/*! �������Զ��ع����������ù̶�֡�� */
-/*! �Զ��ع�ģʽ��Ҫ�����ع�ʱ������ ���ڷ�Χ 1�C32765 */
-/*! ע�� ��֡�ʹ���ʱ ������õ��ع�ʱ����� ֡�ʿ��ܻ�����Ӧ�µ� */
-/*! ����ʹ��100֡ʱ ����ع�ʱ�䳬��317 �ᵼ��֡���½� */
-/*! �ع�ʱ��Խ�� ͼ��Խ�� */
+/*! 可以在自动曝光的情况下设置固定帧率 */
+/*! 自动曝光模式需要设置曝光时间上限 调节范围 1–32765 */
+/*! 注意 当帧率过高时 如果设置的曝光时间过长 帧率可能会自适应下调 */
+/*! 例如使用100帧时 最大曝光时间超过317 会导致帧率下降 */
+/*! 曝光时间越长 图像越亮 */
 #define CAMERA_MAX_EXPOSURE_TIME  250
 #define CAMERA_MIN_EXPOSURE_TIME  1
 
-/*! ���Զ��ع�ģʽ�� ���Ե����ع�ʱ��������ͼ���������� ���ڷ�Χ 0�C32765 */
-/*! ע�� ��֡�ʹ���ʱ ������õ��ع�ʱ����� ֡�ʿ��ܻ�����Ӧ�µ� */
-/*! �ع�ʱ��Խ�� ͼ��Խ�� */
+/*! 非自动曝光模式下 可以调节曝光时间来调节图像整体亮度 调节范围 0–32765 */
+/*! 注意 当帧率过高时 如果设置的曝光时间过长 帧率可能会自适应下调 */
+/*! 曝光时间越长 图像越亮 */
 #define CAMERA_EXPOSURE_TIME  150
 
 
-/* ����ͷʹ��SCCBͨ�� SCCB��IIC�������� */
-#define MT9V034_SCL_PIN   P11_2   /*!< SCCB SCL �ܽ� */
-#define MT9V034_SDA_PIN   P11_3   /*!< SCCB SDA �ܽ� */
+/* 摄像头使用SCCB通信 SCCB和IIC基本类似 */
+#define MT9V034_SCL_PIN   P11_2   /*!< SCCB SCL 管脚 */
+#define MT9V034_SDA_PIN   P11_3   /*!< SCCB SDA 管脚 */
 
 
-#define MT9V034_SCL_Out   PIN_Dir(MT9V034_SCL_PIN, 1);      //���������ΪSCL_Out
-#define MT9V034_SDA_Out   PIN_Dir(MT9V034_SDA_PIN, 1);      //������Ϊ�����ΪSDA_Out
-#define MT9V034_SDA_In    PIN_Dir(MT9V034_SDA_PIN, 0);      //������Ϊ������ΪSDA_In
-#define MT9V034_SCL_High  PIN_Write(MT9V034_SCL_PIN, 1);      //��������ߵ�ƽ
-#define MT9V034_SCL_Low   PIN_Write(MT9V034_SCL_PIN, 0);      //��������͵�ƽ
-#define MT9V034_SDA_High  PIN_Write(MT9V034_SDA_PIN, 1);      //��������ߵ�ƽ
-#define MT9V034_SDA_Low   PIN_Write(MT9V034_SDA_PIN, 0);      //��������͵�ƽ
-#define MT9V034_SDA_Data  PIN_Read(MT9V034_SDA_PIN)           //��ȡ�����ϵ�����״̬
+#define MT9V034_SCL_Out   PIN_Dir(MT9V034_SCL_PIN, 1);      //配置输出作为SCL_Out
+#define MT9V034_SDA_Out   PIN_Dir(MT9V034_SDA_PIN, 1);      //配置作为输出作为SDA_Out
+#define MT9V034_SDA_In    PIN_Dir(MT9V034_SDA_PIN, 0);      //配置作为输入作为SDA_In
+#define MT9V034_SCL_High  PIN_Write(MT9V034_SCL_PIN, 1);      //配置输出高电平
+#define MT9V034_SCL_Low   PIN_Write(MT9V034_SCL_PIN, 0);      //配置输出低电平
+#define MT9V034_SDA_High  PIN_Write(MT9V034_SDA_PIN, 1);      //配置输出高电平
+#define MT9V034_SDA_Low   PIN_Write(MT9V034_SDA_PIN, 0);      //配置输出低电平
+#define MT9V034_SDA_Data  PIN_Read(MT9V034_SDA_PIN)           //读取引脚上的引脚状态
 
 
 
 /*!
-  * @brief    MT9V034�Ĵ�����ʼ��
+  * @brief    MT9V034寄存器初始化
   *
-  * @param    fps  :֡��
+  * @param    fps  :帧率
   *
-  * @return   ��
+  * @return   无
   *
-  * @note     һ��ʹ��50֡
+  * @note     一般使用50帧
   *
   * @see      MT9V034_Init(50);
   *
-  * @date     2019/6/12 ������
+  * @date     2019/6/12 星期三
   */
 void MT9V034_Init(unsigned char fps);
 
 
 
 /*!
-  * @brief    ֡������
+  * @brief    帧率设置
   *
-  * @param    fps : ֡��
+  * @param    fps : 帧率
   *
   * @return
   *
-  * @note     ֡����ʵ��ͨ�����ӿհ���ʵ�ֵģ� ������ʵ���֡����������֮��Ĺ�ϵ
-  * @note     ֡��	    200    150    100    70.9    50    20    10
-  * @note     ������    39     92     199    330     515   1450  3000
+  * @note     帧率其实是通过增加空白行实现的， 下面是实测的帧率与虚拟行之间的关系
+  * @note     帧率	    200    150    100    70.9    50    20    10
+  * @note     虚拟行    39     92     199    330     515   1450  3000
   *
   * @see      MT9V034_SetFrameRate(50);
   *
-  * @date     2019/7/26 ������
+  * @date     2019/7/26 星期五
   */
 void MT9V034_SetFrameRate(unsigned char fps);
 
 
 /*!
-  * @brief    ����ͼ�񴰿ڴ�С
+  * @brief    设置图像窗口大小
   *
-  * @param    fps : ֡��
+  * @param    fps : 帧率
   *
-  * @return   ��
+  * @return   无
   *
-  * @note     һ��ʹ��Ĭ�ϼ���
+  * @note     一般使用默认即可
   *
   * @see      MT9V034_SetFrameResolution(MT9V034_IMAGEH, MT9V034_IMAGEW);
   *
-  * @date     2019/7/26 ������
+  * @date     2019/7/26 星期五
   */
 static void MT9V034_SetFrameResolution(unsigned short height,unsigned short width);
 
 
 /*!
-  * @brief    �����Զ��ع�ʱ��
+  * @brief    设置自动曝光时间
   *
-  * @param    enable �� 1 ʹ���Զ��ع�  �Զ��ع�ʱ��ͨ������ĺ궨���޸�
+  * @param    enable ： 1 使能自动曝光  自动曝光时间通过上面的宏定义修改
   *
-  * @return   ��
+  * @return   无
   *
-  * @note     ��
+  * @note     无
   *
   * @see      MT9V034_SetAutoExposure(CAMERA_AUTO_EXPOSURE);
   *
-  * @date     2019/7/26 ������
+  * @date     2019/7/26 星期五
   */
 void MT9V034_SetAutoExposure(char enable);
 
@@ -135,8 +135,8 @@ void MT9V034_SetAutoExposure(char enable);
 
 
 /*********************************************************************
- *����ͷSCCB�ײ�����
- *�ڲ�����
+ *摄像头SCCB底层驱动
+ *内部调用
  ***********************************************************************/
 void SCCB_Init(void);
 void SCCB_Wait(void);
