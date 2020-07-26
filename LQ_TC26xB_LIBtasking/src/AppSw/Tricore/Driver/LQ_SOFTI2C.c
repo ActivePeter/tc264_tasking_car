@@ -20,6 +20,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include <Platform_Types.h>
 #include "LQ_SOFTI2C.h"
 #include <LQ_UART.h>
+unsigned short LQ_SOFTI2C_delay=0;
 /*************************************************************************
 *  函数名称：IIC延时
 *  功能说明：ADC初始化函数
@@ -33,8 +34,8 @@ void iic_delay()
 {
 	/* 200MHz 系统时钟下 模拟IIC速度为 400Khz */
 	
-	uint8  i = 0;
-	for(i = 0; i < 60; i++) //修改这里可以调整IIC速率
+	unsigned short  i = 0;
+	for(i = 0; i < LQ_SOFTI2C_delay; i++) //修改这里可以调整IIC速率//60
 	{
 		__asm("NOP"); /* delay */
 	}
@@ -69,14 +70,14 @@ void IIC_Start(void)
 	SDA_OUT;   //sda线输出 
 	IIC_SDA_H;	
 	IIC_SCL_H;
-	iic_delay();
-	iic_delay();
-	iic_delay();
+	// iic_delay();
+	// iic_delay();
+	// iic_delay();
 	iic_delay();
 	iic_delay();
  	IIC_SDA_L; //START:when CLK is high,DATA change form high to low 
-	iic_delay();
-	iic_delay();
+	// iic_delay();
+	// iic_delay();
 	iic_delay();
 	IIC_SCL_L; //钳住I2C总线，准备发送或接收数据 
 }
@@ -95,15 +96,16 @@ void IIC_Stop(void)
 	SDA_OUT; //sda线输出
 	IIC_SCL_L;
 	IIC_SDA_L; //STOP:when CLK is high DATA change form low to high
-    iic_delay();
+    // iic_delay();
 	iic_delay();
 	iic_delay();
-	while(!PIN_Read(SOFT_IIC_SCL_PIN)){
-		IIC_SCL_H;
-		//UART_PutStr(UART2,"scl_L\r\n");
-	}
-    iic_delay();
-	iic_delay();
+		while(!PIN_Read(SOFT_IIC_SCL_PIN)){
+			IIC_SCL_H;
+			//UART_PutStr(UART2,"scl_L\r\n");
+		}
+    // iic_delay();
+	// iic_delay();
+	IIC_SCL_H;
 	iic_delay();
 	IIC_SDA_H; //发送I2C总线结束信号
     iic_delay();							   	
@@ -123,19 +125,21 @@ uint8 IIC_WaitAck(void)
 	
 	uint8  ucErrTime=0;
 	//IIC_SDA_H;iic_delay();iic_delay();
-	//SDA_IN; //SDA设置为输入  （从机给一个低电平做为应答） 
-	//IIC_SDA_H;iic_delay();	   
+	SDA_IN; //SDA设置为输入  （从机给一个低电平做为应答） 
+	IIC_SDA_H;
+	iic_delay();	   
 	
 	
 	// while(!IIC_SDA_READ){
 	// 	IIC_SDA_H;
 	// 	IIC_SCL_L;
 	// }
-	IIC_SCL_H;iic_delay();
-	while(!PIN_Read(SOFT_IIC_SCL_PIN)){
-		IIC_SCL_H;
-		//UART_PutStr(UART2,"scl_L\r\n");
-	}
+	IIC_SCL_H;
+	iic_delay();
+		while(!PIN_Read(SOFT_IIC_SCL_PIN)){
+			IIC_SCL_H;
+			//UART_PutStr(UART2,"scl_L\r\n");
+		}
 	// while(!IIC_SDA_READ){
 	// 	IIC_SCL_H;
 	// 	IIC_SDA_H;
@@ -143,24 +147,27 @@ uint8 IIC_WaitAck(void)
 	while(IIC_SDA_READ)
 	{
 		ucErrTime++;
-		if(ucErrTime>200)
+		if(ucErrTime>10000)
 		{
+			SDA_OUT;
 			IIC_Stop();
 			//UART_PutStr(UART2,"IIC_Stop\r\n");
 			return 1;
 		}
 	}
-	IIC_SCL_L; //时钟输出0 	   
-	uint8  i = 0;
-	for(i = 0; i < 30; i++) //修改这里可以调整IIC速率
-	{
-		iic_delay(); /* delay */
-	}
+	IIC_SCL_L; //时钟输出0 	  
+	SDA_OUT;
+
+		uint8  i = 0;
+		for(i = 0; i < 10; i++) //修改这里可以调整IIC速率
+		{
+			iic_delay(); /* delay */
+		}
 	// while(1){}
 	//UART_PutStr(UART2,"IIC_WaitAck_suc\r\n");
 	// while(1){
 	// 	IIC_SCL_H;
-	// 	IIC_SDA_H;
+	 	
 	// 	iic_delay(); 
 	// 	iic_delay(); 
 	// 	IIC_SCL_;
@@ -182,12 +189,12 @@ void IIC_Ack(void)
 	IIC_SCL_L;
 	SDA_OUT;
 	IIC_SDA_L;
-	iic_delay();
-	iic_delay();
+	// iic_delay();
+	// iic_delay();
 	iic_delay();
 	IIC_SCL_H;
-	iic_delay();
-	iic_delay();
+	// iic_delay();
+	// iic_delay();
 	iic_delay();
 	IIC_SCL_L;
 }
@@ -206,12 +213,12 @@ void IIC_NAck(void)
 	IIC_SCL_L;
 	SDA_OUT;
 	IIC_SDA_H;
-	iic_delay();
-	iic_delay();
+	// iic_delay();
+	// iic_delay();
 	iic_delay();
 	IIC_SCL_H;
-	iic_delay();
-	iic_delay();
+	// iic_delay();
+	// iic_delay();
 	iic_delay();
 	IIC_SCL_L;
 }					 				     
@@ -247,16 +254,16 @@ void IIC_SendByte(uint8 data_t)
             IIC_SDA_L;
         }//没问题
         data_t<<=1;
-		iic_delay();
+		// iic_delay();
 		iic_delay();
 		IIC_SCL_H;;
-        iic_delay();
+        // iic_delay();
 		iic_delay();
         IIC_SCL_L;
-		iic_delay();
+		// iic_delay();
 		iic_delay();	 	
     }
-	IIC_SDA_H;
+	// IIC_SDA_H;
     iic_delay();
 } 	 
 
@@ -274,14 +281,15 @@ uint8 IIC_ReadByte(uint8 ack)
 	//while(1){}
 	uint8  i,receive=0;
 	SDA_IN; //SDA设置为输入模式 等待接收从机返回数据
-    for(i=0;i<8;i++ )
+    iic_delay();
+	for(i=0;i<8;i++ )
 	{
         IIC_SCL_L; 
-		iic_delay();
+		// iic_delay();
 		iic_delay();
         IIC_SCL_H;
-		iic_delay();
-		iic_delay();
+		// iic_delay();
+		
         receive<<=1;
         if(IIC_SDA_READ)receive++; //从机发送的电平
         iic_delay();
@@ -304,8 +312,9 @@ uint8 IIC_ReadByte(uint8 ack)
 *  修改时间：2020年3月10日
 *  应用举例：IIC_ReadByteFromSlave(0xD0, 0x75, &data);   //读 IIC地址为 0xD0器件（MPU6050）寄存器0x75
 *************************************************************************/
-uint8 IIC_ReadByteFromSlave(uint8 I2C_Addr,uint8 reg,uint8 *buf)
+uint8 IIC_ReadByteFromSlave(uint8 I2C_Addr,uint8 reg,uint8 *buf,unsigned short delay)
 {
+	LQ_SOFTI2C_delay=delay;
 	IIC_Start();	
 	IIC_SendByte(I2C_Addr);	 //发送从机地址
 	if(IIC_WaitAck()) //如果从机未应答则数据发送失败
@@ -336,8 +345,9 @@ uint8 IIC_ReadByteFromSlave(uint8 I2C_Addr,uint8 reg,uint8 *buf)
 *  修改时间：2020年3月10日
 *  应用举例：IIC_ReadByteFromSlave(0xD0, 0X6B, 0X80);   //IIC地址为 0xD0器件（MPU6050）寄存器0x6B 写入0x80
 *************************************************************************/
-uint8 IIC_WriteByteToSlave(uint8 I2C_Addr,uint8 reg,uint8 data_t)
+uint8 IIC_WriteByteToSlave(uint8 I2C_Addr,uint8 reg,uint8 data_t,unsigned short delay)
 {
+	LQ_SOFTI2C_delay=delay;
 	IIC_Start();
 	IIC_SendByte(I2C_Addr); //发送从机地址
 	if(IIC_WaitAck())
@@ -371,8 +381,9 @@ uint8 IIC_WriteByteToSlave(uint8 I2C_Addr,uint8 reg,uint8 data_t)
 *  修改时间：2020年3月10日
 *  应用举例：IIC_ReadByteFromSlave(0xD0, 0X3B, 14, &data);   //读 14个字节
 *************************************************************************/
-uint8 IIC_ReadMultByteFromSlave(uint8 dev, uint8 reg, uint8 length, uint8 *data_t)
+uint8 IIC_ReadMultByteFromSlave(uint8 dev, uint8 reg, uint8 length, uint8 *data_t,unsigned short delay)
 {
+	LQ_SOFTI2C_delay=delay;
     uint8  count = 0;
 	uint8  temp;
 	IIC_Start();
@@ -413,9 +424,9 @@ uint8 IIC_ReadMultByteFromSlave(uint8 dev, uint8 reg, uint8 length, uint8 *data_
 *  修改时间：2020年3月10日
 *  应用举例：IIC_WriteMultByteToSlave(0xD0, 0X6B, 1, 0X80);   //向寄存器0x6B写入0x80
 *************************************************************************/
-uint8 IIC_WriteMultByteToSlave(uint8 dev, uint8 reg, uint8 length, uint8* data_t)
+uint8 IIC_WriteMultByteToSlave(uint8 dev, uint8 reg, uint8 length, uint8* data_t,unsigned short delay)
 {
-    
+    LQ_SOFTI2C_delay=delay;
  	uint8  count = 0;
 	IIC_Start();
 	IIC_SendByte(dev); //发送从机地址

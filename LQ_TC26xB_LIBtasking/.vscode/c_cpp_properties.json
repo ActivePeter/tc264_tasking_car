@@ -4,7 +4,6 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/src/**",
-                "${workspaceFolder}/src/AppSw/Tricore/Driver",
                 "${workspaceFolder}/src/BaseSw/iLLD/TC26B/Tricore"
             ],
             "defines": [

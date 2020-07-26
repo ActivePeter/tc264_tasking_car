@@ -7,9 +7,10 @@ extern "C"
 #include "pa_CommonLib/pa_MotorManager.h"
 #include "pa_CommonLib/pa_app/pa_OLED/pa_oled.h"
 #include "pa_CommonLib/pa_drv/pa_IIC.h"
+#include "pa_CommonLib/pa_app/pa_RDA5804/pa_RDA5807.h"
 
 #include "stdio.h"
-#include <LQ_UART.h>
+#include "LQ_UART.h"
 #include <LQ_ADC.h>
 #include <LQ_STM.h>
 #include <Ifx_FftF32.h>
@@ -79,6 +80,7 @@ void initVariable()
 	ultrasonicDistance1.init(1);
 	ultrasonicDistance2.init(2);
 }
+
 void initFuncs()
 {
 	// ATOM_PWM_InitConfig(ATOMPWM0, 4000, 15000);
@@ -142,7 +144,52 @@ void initFuncs()
 	OLED_Init(); //初始化OLED
 	OLED_Clear();
 
-	OLED_ShowString(0,0,"helloWorld",8);
+	// OLED_ShowString(0,0,"helloWorld",8);
+	UART_PutStr(UART2,"txt1");
+	RDA5807_Init();	      //RDA5807初始化
+	UART_PutStr(UART2,"txt2");
+//   //显示芯片ID 0x5804
+//   RXFreq = RDA5807_ReadReg(RDA_R00);
+//   sprintf(txt,"Chip:0x%04X",RXFreq);
+//   TFTSPI_P8X16Str(1,2,txt,u16WHITE,u16BLACK);
+   
+	unsigned short RXFreq = RDA5807_ReadReg(RDA_R00);//pa_IIC_read8(RDA_WRITE,RDA_R00);
+	// char RSSI=RDA5807_GetRssi();//显示信号强度0~127
+	// {
+		char txt[30]={0};
+		sprintf(txt,"Chip:0x%04X",RXFreq);
+		UART_PutStr(UART2,txt);
+		OLED_ShowString(0,0,txt,8);
+		
+ 	// 	sprintf(txt,"RSSI:%02d  \r\n",RSSI);
+	// 	UART_PutStr(UART2,txt);
+	// 	//OLED_ShowString(0,2,txt,8);
+	// }
+	/*rotate box demo****************************/
+	// {unsigned char a[128*8]={0};
+	// unsigned char b[128*8]={0};
+	// memset(b,1,128*8);
+	// short angle=0;
+	// while(1){
+	// 	memset(a,0,128*8);
+	// 	float realAngle=angle/180.0*PI;
+	// 	int x=60+sin(realAngle)*20;
+	// 	int y=30+cos(realAngle)*20;
+	// 	for(int i=-3;i<4;i++){
+	// 		for(int j=-3;j<4;j++){
+	// 			int x1=x+i;
+	// 			int y1=y+j;
+	// 			a[(y1/8)*128+x1]|=0x01<<(y1%8);
+	// 		}
+	// 	}
+		
+	// 	fill_picture(a);
+
+	// 	angle+=20;
+	// 	if(angle==360)angle=0;
+	// }}
+	/****************************/
+	//   TFTSPI_P8X16Str(1,2,txt,u16WHITE,u16BLACK);
 }
 short xMoveDelay = 0;
 short err_Y_whenBlocked = 0;
@@ -171,7 +218,7 @@ void startMainTask()
 			// pa_updateMotorPwm(4, 1000);
 			if (!checkSignalStable())
 			{
-				UART_PutStr(UART2, "signal Not Stable or Beacon Off!!\r\n");
+				//UART_PutStr(UART2, "signal Not Stable or Beacon Off!!\r\n");
 			}else{
 
 			}
@@ -221,18 +268,34 @@ void startMainTask()
 				// pa_updateMotorPwm(3, out);
 				// // pa_updateMotorPwm(2,300);
 				// pa_updateMotorPwm(4, -globalCpp.pid_Motor4.calcPid(speedOfMotors.speedOfM4 + dirOut));
-
-				pa_updateMotorPwm(1,
-								  -globalCpp.pid_Motor1.calcPid(speedOfMotors.speedOfM1 - (-dirOut + yVelocity - xVelocity)));
-				pa_updateMotorPwm(2,
-								  -globalCpp.pid_Motor2.calcPid(speedOfMotors.speedOfM2 - (dirOut + yVelocity + xVelocity)));
-				//float out = -globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3 - dirOut);
-				pa_updateMotorPwm(3,
-								  -globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3 - (dirOut + yVelocity - xVelocity)));
-				// pa_updateMotorPwm(2,300);
-				pa_updateMotorPwm(4,
-								  -globalCpp.pid_Motor4.calcPid(speedOfMotors.speedOfM4 - (-dirOut + yVelocity + xVelocity)));
-
+				#define speedPid
+				#ifdef speedPid
+					xVelocity=0;
+					pa_updateMotorPwm(1,
+								  -globalCpp.pid_Motor1.calcPid(speedOfMotors.speedOfM1 - (dirOut + yVelocity - xVelocity)));
+					pa_updateMotorPwm(2,
+									-globalCpp.pid_Motor2.calcPid(speedOfMotors.speedOfM2 - (-dirOut + yVelocity + xVelocity)));
+					//float out = -globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3 - dirOut);
+					pa_updateMotorPwm(3,
+									-globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3 - (-dirOut + yVelocity - xVelocity)));
+					// pa_updateMotorPwm(2,300);
+					pa_updateMotorPwm(4,
+									-globalCpp.pid_Motor4.calcPid(speedOfMotors.speedOfM4 - (dirOut + yVelocity + xVelocity)));
+				#endif
+				#ifndef speedPid
+				//yVelocity = 0;
+				
+					pa_updateMotorPwm(1,
+								  (dirOut + yVelocity - xVelocity));
+					pa_updateMotorPwm(2,
+									(-dirOut + yVelocity + xVelocity));
+					//float out = -globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3 - dirOut);
+					pa_updateMotorPwm(3,
+									(-dirOut + yVelocity - xVelocity));
+					// pa_updateMotorPwm(2,300);
+					pa_updateMotorPwm(4,
+									(dirOut + yVelocity + xVelocity));
+				#endif
 				{
 					char buf[30] = {0};
 					sprintf(buf, "%f\r\n",
@@ -387,7 +450,7 @@ void checkBeaconOn()
 		// }
 		rightFftCount = count;
 		if(lastrightFftCount!=rightFftCount){
-			if(rightFftCount){
+			if(!checkSignalStable()){
 				OLED_ShowString(0,0,"BeaconOff     ",8);	
 			}else{
 				OLED_ShowString(0,0,"BeaconOn      ",8);
@@ -398,7 +461,7 @@ void checkBeaconOn()
 }
 
 char checkSignalStable()
-{
+{ 
 	return rightFftCount >= 55;
 }
 

@@ -11,7 +11,7 @@
 #include "pa_oledfont.h"
 #include "../../pa_drv/pa_IIC.h"
 
-
+pa_IICSettingStruct OLED_IICSettingStruct;
 
 
 /**********************************************
@@ -19,7 +19,7 @@
 **********************************************/
 void Write_IIC_Command(unsigned char IIC_Command)
 {
-    pa_IIC_write8(SSD1306_I2C_ADDRESS,0x00,IIC_Command);
+    pa_IIC_write8(SSD1306_I2C_ADDRESS,0x00,IIC_Command,OLED_IICSettingStruct);
     //pa_IIC_writeLen(SSD1306_I2C_ADDRESS, 0x00,sizeof(IIC_Command),&IIC_Command);
     // HAL_I2C_Mem_Write(&HARD_SSD1306_I2C, SSD1306_I2C_ADDRESS, 0x00, 1, &IIC_Command, sizeof(IIC_Command), 100);
 }
@@ -28,7 +28,7 @@ void Write_IIC_Command(unsigned char IIC_Command)
 **********************************************/
 void Write_IIC_Data(unsigned char IIC_Data)
 {
-    pa_IIC_write8(SSD1306_I2C_ADDRESS,0x40,IIC_Data);
+    pa_IIC_write8(SSD1306_I2C_ADDRESS,0x40,IIC_Data,OLED_IICSettingStruct);
     //pa_IIC_writeLen(SSD1306_I2C_ADDRESS, 0x40,sizeof(IIC_Data),&IIC_Data);
     // HAL_I2C_Mem_Write(&HARD_SSD1306_I2C, SSD1306_I2C_ADDRESS, 0x40, 1, &IIC_Data, sizeof(IIC_Data), 100);
 }
@@ -48,18 +48,28 @@ void OLED_WR_Byte(unsigned dat, unsigned cmd)
 /********************************************
 // fill_Picture
 ********************************************/
-void fill_picture(unsigned char fill_Data)
+void fill_picture(unsigned char * fill_Data)
 {
-    unsigned char m, n;
-    for (m = 0; m < 8; m++)
+    OLED_WR_Byte(0x21, 0); //page0-page1
+    OLED_WR_Byte(0x00, 0);     //low column start address
+    OLED_WR_Byte(0x7f, 0);     //high column start a
+    OLED_WR_Byte(0x22, 0); //page0-page1
+    OLED_WR_Byte(0x00, 0);     //low column start address
+    OLED_WR_Byte(0x07, 0);     //high column start a
+    // pa_IIC_writeLen(SSD1306_I2C_ADDRESS, 0x40,128,fill_Data);
+    // pa_IIC_writeLen(SSD1306_I2C_ADDRESS, 0x40,128,fill_Data+);
+    // pa_IIC_writeLen(SSD1306_I2C_ADDRESS, 0x40,128,fill_Data);
+    // unsigned char m, n;
+    for (char m = 0; m < 8; m++)
     {
-        OLED_WR_Byte(0xb0 + m, 0); //page0-page1
-        OLED_WR_Byte(0x00, 0);     //low column start address
-        OLED_WR_Byte(0x10, 0);     //high column start address
-        for (n = 0; n < 128; n++)
-        {
-            OLED_WR_Byte(fill_Data, 1);
-        }
+        // OLED_WR_Byte(0xb0 + m, 0); //page0-page1
+        // OLED_WR_Byte(0x00, 0);     //low column start address
+        // OLED_WR_Byte(0x10, 0);     //high column start address
+        pa_IIC_writeLen(SSD1306_I2C_ADDRESS, 0x40,128,fill_Data+128*m,OLED_IICSettingStruct);
+        // for (n = 0; n < 128; n++)
+        // {
+        //     OLED_WR_Byte(fill_Data, 1);
+        // }
     }
 }
 
@@ -256,9 +266,11 @@ void OLED_Init(void)
 //		GPIO_InitStruct.Pull = GPIO_NOPULL;
 //		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 //		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct)
-
+    OLED_IICSettingStruct.delay=20;
 
     OLED_WR_Byte(0xAE, OLED_CMD); //--display off
+    OLED_WR_Byte(0x20, OLED_CMD);
+    OLED_WR_Byte(0x00, OLED_CMD);
     OLED_WR_Byte(0x00, OLED_CMD); //---set low column address
     OLED_WR_Byte(0x10, OLED_CMD); //---set high column address
     OLED_WR_Byte(0x40, OLED_CMD); //--set start line address
@@ -292,4 +304,7 @@ void OLED_Init(void)
     OLED_WR_Byte(0x14, OLED_CMD); //
 
     OLED_WR_Byte(0xAF, OLED_CMD); //--turn on oled panel
+    
+    // oled_write_cmd(0x20);    // Set Memory Addressing Mode (20h)
+    // oled_write_cmd(0x02);
 }

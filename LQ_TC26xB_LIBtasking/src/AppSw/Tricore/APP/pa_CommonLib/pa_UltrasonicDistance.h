@@ -5,7 +5,7 @@
 
 extern "C"
 {
-    #include "pa_Common.h"
+    #include "pa_drv/pa_Common.h"
     #ifdef LQ_TC264
         #include <LQ_GPIO.h>
     #endif
