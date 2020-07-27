@@ -50,6 +50,7 @@ void checkUartData()
 			default:
 				break;
 			}
+			return;
 		}
 
 		while (recData[index])

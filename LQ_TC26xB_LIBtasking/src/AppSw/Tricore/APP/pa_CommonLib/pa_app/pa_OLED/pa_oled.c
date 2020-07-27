@@ -266,7 +266,7 @@ void OLED_Init(void)
 //		GPIO_InitStruct.Pull = GPIO_NOPULL;
 //		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 //		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct)
-    OLED_IICSettingStruct.delay=20;
+    OLED_IICSettingStruct.delay=60;
 
     OLED_WR_Byte(0xAE, OLED_CMD); //--display off
     OLED_WR_Byte(0x20, OLED_CMD);

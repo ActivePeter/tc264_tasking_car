@@ -66,4 +66,7 @@ void RDA5807_SetFreq(unsigned short freq);
 // void FMI2C_Init(void);
 void RDA5807_WriteReg(unsigned char regAddr,unsigned short val);  //芯片写寄存器
 unsigned short RDA5807_ReadReg(unsigned char regAddr);			 //芯片读寄存器
+void RDA5807_Reset(void);
+void RDA5807_SetVol(unsigned char vol);
+unsigned char RDA5807_GetRssi(void);
 #endif

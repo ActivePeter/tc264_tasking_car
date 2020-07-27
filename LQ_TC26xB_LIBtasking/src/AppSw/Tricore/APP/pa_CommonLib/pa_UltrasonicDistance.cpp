@@ -55,6 +55,7 @@ char pa_UltrasonicDistance::getEcho(){
         /* code */
         break;
     case 2:
+        return PIN_Read(P11_12);
         /* code */
         break;
     case 3:
@@ -71,6 +72,7 @@ void pa_UltrasonicDistance::setTrig(char pinState){
         /* code */
         break;
     case 2:
+        PIN_Write(P11_11,pinState);
         /* code */
         break;
     case 3:

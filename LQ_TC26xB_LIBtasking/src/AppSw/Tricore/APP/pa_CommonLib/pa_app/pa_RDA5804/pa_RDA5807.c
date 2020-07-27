@@ -204,7 +204,7 @@ void RDA5807_SetSeekth(unsigned short rssi)	   //自动搜台信号阈值强度	
 *************************************************************************/
 void RDA5807_Init(void)
 {
-  RDA5807_IICSettingStruct.delay=180;
+  RDA5807_IICSettingStruct.delay=1800;
   // FMI2C_Init();
   RDA5807_Enable(1);//上电使能
   RDA5807_Reset();  //软件复位
