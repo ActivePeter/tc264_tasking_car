@@ -3,28 +3,38 @@ extern "C"
 {
 #include <Ifx_FftF32.h>
 #include "pa_CommonLib/pa_app/pa_OLED/pa_oled.h"
+#include "stdio.h"
+#include "LQ_UART.h"
+#include "pa_CommonLib/pa_drv/pa_Common.h"
 }
 
 pa_VoiceDataProcessor::pa_VoiceDataProcessor() {}
 
 char pa_VoiceDataProcessor::getErrX()
 {
+    adcLocked=true;
     return crossCorrelation_noFFT(adc_arr1, adc_arr2);
 }
 char pa_VoiceDataProcessor::getErrY()
 {
     return crossCorrelation_noFFT(adc_arr3, adc_arr4);
 }
+short pa_VoiceDataProcessor::getErrFm()
+{
+    return crossCorrelation_noFFT(adc_arr1, adc_arrFm);
+}
 char pa_VoiceDataProcessor::isBeaconOn()
 {
-    return rightFftCount >= 55;
+    return rightFftCount >= 39;
 }
-char pa_VoiceDataProcessor::crossCorrelation_noFFT(unsigned short arr1[], unsigned short arr2[])
+short pa_VoiceDataProcessor::crossCorrelation_noFFT(unsigned short arr1[], unsigned short arr2[])
 {
 
-    long max = 0, maxpos = 0;
+    long max = 0;
+    short maxpos = 0;
 #define detectRange 10
     int i = -detectRange;
+    // i=0;
     // if (endBuffer)
     // {
 
@@ -74,7 +84,7 @@ char pa_VoiceDataProcessor::crossCorrelation_noFFT(unsigned short arr1[], unsign
         // }
     }
     // if (globalCpp.micOutPutMode == OutputMode_crossDetail)
-    // {
+    // for (int i = 0; i < 300; i++){
     // 	UART_PutStr(UART2, "0\r\n");
     // }
 
@@ -89,6 +99,7 @@ char pa_VoiceDataProcessor::crossCorrelation_noFFT(unsigned short arr1[], unsign
 
 void pa_VoiceDataProcessor::addAdcValueToArr(unsigned short value1, unsigned short value2, unsigned short value3, unsigned short value4, unsigned short value5)
 {
+    // if(adcLocked)return;
     adc_arr1[step] = value1;
     adc_arr2[step] = value2;
     adc_arr3[step] = value3;
@@ -116,7 +127,7 @@ void pa_VoiceDataProcessor::checkBeaconOn()
         for (int i = 0; i < adc_arrlen; i++)
         {
             fftIn[i].imag = 0;
-            fftIn[i].real = adc_arr1[i];
+            fftIn[i].real = ((float)adc_arr1[i]+adc_arr2[i])/2;
         }
         /* 初始化为 FFT  注意 这里FFT输出结果是实际结果的64倍  */
         Ifx_FftF32_radix2(fftOutMic, fftIn, adc_arrlen);
@@ -126,6 +137,7 @@ void pa_VoiceDataProcessor::checkBeaconOn()
             fftIn[i].imag = 0;
             fftIn[i].real = adc_arrFm[i];
         }
+        adcLocked=false;
         Ifx_FftF32_radix2(fftOutFm, fftIn, adc_arrlen);
 
         // for(int i=60;i<300;i++){
@@ -173,12 +185,30 @@ void pa_VoiceDataProcessor::checkBeaconOn()
         int maxpos = 0;
         unsigned int maxval = 0;
         //寻找最大值
-        for (unsigned char i = 0; i < 150; i++) {    //0~150，即为0~5m
+        for (unsigned short i = 0; i < 300; i++) {    //0~150，即为0~5m
             if (maxval < fftOutFm[i].real) {
                 maxval = fftOutFm[i].real;
                 maxpos = i;
             }
+            // {
+            //     char buffer[30] = "";
+            //     sprintf(buffer, "%d\r\n", (int)fftOutFm[i].real);
+            //     UART_PutStr(UART2, buffer);
+            // }
         }
+        // {
+        //         char buffer[30] = "";
+        //         sprintf(buffer, "%d %d\r\n", maxval,maxval);
+        //         UART_PutStr(UART2, buffer);
+        //     }
+        // lastmaxval=maxval;
+        // for (unsigned short i = 0; i < 300; i++) {    //0~150，即为0~5m
+        //     {
+                
+        //         UART_PutStr(UART2, "0\r\n");
+        //     }
+        // }
+        
         distance=maxpos;
         // for(int i=0;i<170;i++){
         // 	{

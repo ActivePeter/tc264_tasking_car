@@ -216,7 +216,7 @@ void RDA5807_Init(void)
   delayms(20);
   RDA5807_WriteReg(RDA_R05,0x8886); //音量设置为vol=6 搜索阀值为8
   delayms(20);
-  RDA5807_SetVol(12);	                   //音量设置0~15
+  RDA5807_SetVol(15);	                   //音量设置0~15
   RDA5807_SetSeekth(5);	               //自动搜台信号阈值强度0~15 默认为5  数值越低搜到的台越多
 }
 
