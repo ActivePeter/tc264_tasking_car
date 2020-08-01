@@ -13,6 +13,13 @@
 /** Offsets registers **/
 #define NUM_BNO055_OFFSET_REGISTERS (22)
 
+typedef struct {
+  double w;
+  double x;
+  double y;
+  double z;
+} bno055_vector_t;
+
 /** BNO055 Registers **/
   typedef enum {
     /* Page id register definition */
@@ -212,5 +219,6 @@
   } adafruit_bno055_axis_remap_sign_t;
 
 void pa_BNO055_init();
+bno055_vector_t pa_BNO055_getVector();
 
 #endif

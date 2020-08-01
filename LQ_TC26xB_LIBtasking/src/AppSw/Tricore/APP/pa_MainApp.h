@@ -12,6 +12,7 @@ char crossCorrelation_noFFT(unsigned short arr1[],unsigned short arr2[]);
 // void paLinearInterpolation(unsigned short to1,unsigned short to2,unsigned short count);
 void initVariable();
 void initFuncs();
+void turnToRedirectionMode();
 // char checkSignalStable();
 // void checkBeaconOn();
 void uartOutPutSelect();

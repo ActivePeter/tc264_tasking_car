@@ -18,6 +18,7 @@ public:
     pa_PID pid_Motor3;
     pa_PID pid_Motor4;
     pa_PID pid_Direction;
+    pa_PID pid_DirectionCalibration;
     static pa_GlobalCpp * getGlobalCpp();
     char motorDisable=0;
     char micOutPutMode=0;
