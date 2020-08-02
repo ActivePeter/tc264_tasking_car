@@ -1,29 +1,29 @@
 /*LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
-¡¾Æ½    Ì¨¡¿±±¾©ÁúÇñÖÇÄÜ¿Æ¼¼TC264DAºËĞÄ°å
-¡¾±à    Ğ´¡¿zyf/chiusir
-¡¾E-mail  ¡¿chiusir@163.com
-¡¾Èí¼ş°æ±¾¡¿V1.0
-¡¾×îºó¸üĞÂ¡¿2020Äê4ÔÂ10ÈÕ
-¡¾Ïà¹ØĞÅÏ¢²Î¿¼ÏÂÁĞµØÖ·¡¿
-¡¾Íø    Õ¾¡¿http://www.lqist.cn
-¡¾ÌÔ±¦µêÆÌ¡¿http://longqiu.taobao.com
+ã€å¹³    å°ã€‘åŒ—äº¬é¾™é‚±æ™ºèƒ½ç§‘æŠ€TC264DAæ ¸å¿ƒæ¿
+ã€ç¼–    å†™ã€‘zyf/chiusir
+ã€E-mail  ã€‘chiusir@163.com
+ã€è½¯ä»¶ç‰ˆæœ¬ã€‘V1.0
+ã€æœ€åæ›´æ–°ã€‘2020å¹´4æœˆ10æ—¥
+ã€ç›¸å…³ä¿¡æ¯å‚è€ƒä¸‹åˆ—åœ°å€ã€‘
+ã€ç½‘    ç«™ã€‘http://www.lqist.cn
+ã€æ·˜å®åº—é“ºã€‘http://longqiu.taobao.com
 ------------------------------------------------
-¡¾dev.env.¡¿Hightec4.9.3/Tasking6.3¼°ÒÔÉÏ°æ±¾
-¡¾Target ¡¿ TC264DA
-¡¾Crystal¡¿ 20.000Mhz
-¡¾SYS PLL¡¿ 200MHz
-»ùÓÚiLLD_1_0_1_11_0µ×²ã³ÌĞò
+ã€dev.env.ã€‘Hightec4.9.3/Tasking6.3åŠä»¥ä¸Šç‰ˆæœ¬
+ã€Target ã€‘ TC264DA
+ã€Crystalã€‘ 20.000Mhz
+ã€SYS PLLã€‘ 200MHz
+åŸºäºiLLD_1_0_1_11_0åº•å±‚ç¨‹åº
 QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #ifndef _LQ_INCLUDE_H_
 #define _LQ_INCLUDE_H_
 
-/////////////c±ê×¼¿âÎÄ¼ş//////////////////////////////////////////////////
+/////////////cæ ‡å‡†åº“æ–‡ä»¶//////////////////////////////////////////////////
 #include "math.h"
 #include "stdio.h"
 #include "string.h"
 #include "stdint.h"
 
-/////////////illDµ×²ã¿âÎÄ¼ş//////////////////////////////////////////////////
+/////////////illDåº•å±‚åº“æ–‡ä»¶//////////////////////////////////////////////////
 #include <Asclin\Asc\IfxAsclin_Asc.h>
 #include "Asclin\Spi\IfxAsclin_Spi.h"
 #include "Ccu6\TPwm\IfxCcu6_TPwm.h"
@@ -76,7 +76,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "_Reg\IfxStm_reg.h"
 #include "_Utilities\Ifx_Assert.h"
 #include "I2c/I2c/IfxI2c_I2c.h"
-/////////////»ù´¡Çı¶¯ÎÄ¼ş//////////////////////////////////////////////////
+/////////////åŸºç¡€é©±åŠ¨æ–‡ä»¶//////////////////////////////////////////////////
 #include "LQ_ADC.h"
 #include "LQ_DMA.h"
 #include "LQ_EEPROM.h"
@@ -91,7 +91,7 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "LQ_CCU6.h"
 #include "LQ_QSPI.h"
 #include "LQ_EMEM.h"
-/////////////ÓÃ»§Ó¦ÓÃÊµÀı//////////////////////////////////////////////////
+/////////////ç”¨æˆ·åº”ç”¨å®ä¾‹//////////////////////////////////////////////////
 //#include "..\APP\LQ_CAM.h"
 #include "..\APP\LQ_ADC_7Mic.h"
 #include "..\APP\LQ_CAMERA.h"
@@ -103,13 +103,13 @@ QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ*/
 #include "..\APP\LQ_GPT_mini512.h"
 #include "..\APP\LQ_Atom_Motor.h"
 #include "..\APP\LQ_I2C_MPU6050.h"
-#include "..\APP\LQ_MT9V034.h"
+//#include "..\APP\LQ_MT9V034.h"
 #include "..\APP\LQ_OLED096.h"
 #include "..\APP\LQ_Tom_Servo.h"
 #include "..\APP\LQ_I2C_VL53.h"
 #include "..\APP\LQ_TFT18.h"
 #include "..\APP\LQ_UART_Bluetooth.h"
-#include "../APP/pa_MainApp.h"
+#include "../APP/pa_CommonLib/pa_MainApp.h"
 #include "LQ_STM_TImer.h"
 #include "LQ_Tim_InputCature.h"
 #include "LQ_EEPROM_TEST.h"

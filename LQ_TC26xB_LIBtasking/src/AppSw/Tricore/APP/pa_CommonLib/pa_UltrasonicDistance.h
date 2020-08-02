@@ -15,20 +15,22 @@ class pa_UltrasonicDistance
 {
 public:
     pa_UltrasonicDistance();
-    void trig();
+    static void trig();
+    void doBeforeTrig();
     void checkEcho();
     char distance=-1;
     
     void init(char index);
-
+    char countingDistance=0;
     
     
 private:
-    char countingDistance=0;
+    static bool trigInited;
     char prePinState=0;
     char moduleIndex=0;
     char getEcho();
-    void setTrig(char pinState);
+    static void setTrig(char pinState);
+    
 };
 
 #endif

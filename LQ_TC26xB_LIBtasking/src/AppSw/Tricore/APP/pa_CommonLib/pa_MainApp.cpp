@@ -63,6 +63,8 @@ pa_GlobalCpp *pa_GlobalCpp::getGlobalCpp()
 
 pa_UltrasonicDistance ultrasonicDistance1;
 pa_UltrasonicDistance ultrasonicDistance2;
+pa_UltrasonicDistance ultrasonicDistance3;
+pa_UltrasonicDistance ultrasonicDistance4;
 
 void initVariable()
 { //初始化变量
@@ -76,10 +78,11 @@ void initVariable()
 	globalCpp.pid_Motor4.setPid(17, 0, 1);
 	globalCpp.pid_Direction.setPid(40, 0, 10);
 	globalCpp.pid_Direction.setMax(800);
-	globalCpp.pid_DirectionCalibration.setPid(700,1,100);
+	globalCpp.pid_DirectionCalibration.setPid(700, 0, 100);
 	globalCpp.pid_DirectionCalibration.setMax(800);
-	// ultrasonicDistance1.init(1);
-	// ultrasonicDistance2.init(2);
+
+	// //ultrasonicDistance1.init(1);
+	// //ultrasonicDistance2.init(2);
 }
 
 void initFuncs()
@@ -111,6 +114,8 @@ void initFuncs()
 		getadc();									//getadc();
 		ultrasonicDistance1.checkEcho();
 		ultrasonicDistance2.checkEcho();
+		ultrasonicDistance3.checkEcho();
+		ultrasonicDistance4.checkEcho();
 		// if (cnt % 100 == 0)
 		// {
 
@@ -151,8 +156,11 @@ void initFuncs()
 	ENC_InitConfig(ENC5_InPut_P10_3, ENC5_Dir_P10_1);
 	ENC_InitConfig(ENC6_InPut_P20_3, ENC6_Dir_P20_0);
 
+	
 	ultrasonicDistance1.init(1);
 	ultrasonicDistance2.init(2);
+	ultrasonicDistance3.init(3);
+	ultrasonicDistance4.init(4);
 
 	pa_IIC_init();
 
@@ -227,7 +235,7 @@ void initFuncs()
 short xMoveDelay = 0;
 short err_Y_whenBlocked = 0;
 float currentAngle = 0;
-float targetAngle=0;
+float targetAngle = 0;
 void startMainTask()
 {
 	initVariable();
@@ -270,7 +278,7 @@ void startMainTask()
 
 			if (fabs(globalCpp.targetSpeed) < 50 || globalCpp.motorDisable || !voiceDataProcessor.isBeaconOn())
 			{
-				
+
 				// float directionErr = (currentAngle - targetAngle);
 				// if (directionErr > 180)
 				// {
@@ -282,7 +290,7 @@ void startMainTask()
 				// }
 				// // float dirOut = globalCpp.pid_Direction.calcPid(err_Y < 0 ? err_X : -err_X); //
 				// float dirOut = globalCpp.pid_Direction.calcPid(directionErr);
-				float dirOut=0;
+				float dirOut = 0;
 				pa_updateMotorPwm(1, dirOut);
 				pa_updateMotorPwm(2, -dirOut);
 				pa_updateMotorPwm(3, -dirOut);
@@ -297,14 +305,19 @@ void startMainTask()
 			else
 			{
 				// float dirOut =getMotorRotationValueByErr(err_Y < 0 ? err_X : -err_X);
-				
+
 				// float dirOut = globalCpp.pid_DirectionCalibration.calcPid(err_Y < 0 ? err_X : -err_X); //
 				// float dirOut = globalCpp.pid_Direction.calcPid(); //
 
 				float yVelocity = err_Y < 0 ? 1000 : -1000;
 				float xVelocity = 0;
 
-				if (ultrasonicDistance1.distance < 10 || ultrasonicDistance2.distance < 10)
+				if (1
+					//ultrasonicDistance1.distance < 10 ||
+					//ultrasonicDistance2.distance < 10 ||
+					//ultrasonicDistance3.distance < 10 ||
+					//ultrasonicDistance4.distance < 10
+					)
 				{
 					// directionCorrected = false;
 					turnToRedirectionMode();
@@ -337,15 +350,15 @@ void startMainTask()
 					float dirOut = globalCpp.pid_Direction.calcPid(directionErr);
 					yVelocity = errY_WhenCorrected < 0 ? 1000 : -1000;
 					pa_updateMotorPwm(1,
-									  (yVelocity+dirOut));
+									  (yVelocity + dirOut));
 					pa_updateMotorPwm(2,
-									  (yVelocity-dirOut));
+									  (yVelocity - dirOut));
 					//float out = -globalCpp.pid_Motor3.calcPid(speedOfMotors.speedOfM3 - dirOut);
 					pa_updateMotorPwm(3,
-									  (yVelocity-dirOut));
+									  (yVelocity - dirOut));
 					// pa_updateMotorPwm(2,300);
 					pa_updateMotorPwm(4,
-									  (yVelocity+dirOut));
+									  (yVelocity + dirOut));
 					// //速度环///////////////////////////////////////////
 					// pa_updateMotorPwm(1,
 					// 				  -globalCpp.pid_Motor1.calcPid(speedOfMotors.speedOfM1 - (yVelocity)));
@@ -384,7 +397,7 @@ void startMainTask()
 					UART_PutStr(UART2, "Redirection!!\r\n");
 					if (err_X == 0)
 					{
-						targetAngle=currentAngle;
+						targetAngle = currentAngle;
 						directionCorrected = true;
 						short err_Y1 = voiceDataProcessor.getErrY();
 						short err_Y2 = voiceDataProcessor.getErrY();
@@ -392,7 +405,7 @@ void startMainTask()
 						errY_WhenCorrected = (err_Y + err_Y1 + err_Y2) / 3;
 					}
 				}
-				// if (ultrasonicDistance1.distance < 10||ultrasonicDistance2.distance<10)
+				// if (//ultrasonicDistance1.distance < 10||//ultrasonicDistance2.distance<10)
 				// {
 				// 	err_Y_whenBlocked = err_Y;
 				// 	xMoveDelay = 100;
@@ -465,9 +478,14 @@ void startMainTask()
 		if (flag_100ms)
 		{
 			flag_100ms = 0;
+			ultrasonicDistance1.doBeforeTrig();
+			ultrasonicDistance2.doBeforeTrig();
+			ultrasonicDistance3.doBeforeTrig();
+			ultrasonicDistance4.doBeforeTrig();
 			//触发超声波
-			ultrasonicDistance1.trig();
-			ultrasonicDistance2.trig();
+			pa_UltrasonicDistance::trig();
+
+			UART_PutStr(UART2, "trig\r\n");
 			//互相关计算
 			err_X = voiceDataProcessor.getErrX(); //crossCorrelation_noFFT(adc_arr1, adc_arr2);
 			err_Y = voiceDataProcessor.getErrY(); //crossCorrelation_noFFT(adc_arr3, adc_arr4);
@@ -494,9 +512,10 @@ void startMainTask()
 		uartOutPutSelect();
 	}
 }
-void turnToRedirectionMode(){
+void turnToRedirectionMode()
+{
 	directionCorrected = false;
-	globalCpp.pid_DirectionCalibration.iSum=0;
+	globalCpp.pid_DirectionCalibration.iSum = 0;
 }
 void uartOutPutSelect()
 {
@@ -535,9 +554,14 @@ void uartOutPutSelect()
 	{
 		//adc值实时***************************************
 		{
-			char buf[30] = {0};
-			sprintf(buf, "%5d %5d %f\r\n",
-					ultrasonicDistance1.distance, ultrasonicDistance2.distance, currentAngle);
+			char buf[40] = {0};
+			sprintf(buf, "%3d %3d %3d %3d %f\r\n",
+					ultrasonicDistance1.distance,
+					//ultrasonicDistance1.countingDistance,
+					ultrasonicDistance2.distance,
+					ultrasonicDistance3.distance,
+					ultrasonicDistance4.distance,
+					currentAngle);
 			UART_PutStr(UART2, buf);
 		}
 		//***************************************************
