@@ -33,6 +33,9 @@ App_Cpu0 g_AppCpu0; /**< \brief CPU 0 global data */
 *************************************************************************/
 int core0_main (void)
 {
+	
+	
+
 	//关闭CPU总中断
 	IfxCpu_disableInterrupts();
 
@@ -51,6 +54,8 @@ int core0_main (void)
 
 	//LED灯所用P10.6和P10.5初始化
 	GPIO_LED_Init();
+
+	delayms(500);  
 
 	//串口P14.0管脚输出,P14.1输入，波特率115200
 	UART_InitConfig(UART0_RX_P14_1,UART0_TX_P14_0, 115200);

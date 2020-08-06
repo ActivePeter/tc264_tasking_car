@@ -25,7 +25,7 @@ short pa_VoiceDataProcessor::getErrFm()
 }
 char pa_VoiceDataProcessor::isBeaconOn()
 {
-    return rightFftCount >= 12;
+    return rightFftCount >= 8;
 }
 short pa_VoiceDataProcessor::crossCorrelation_noFFT(unsigned short arr1[], unsigned short arr2[])
 {
@@ -127,7 +127,7 @@ void pa_VoiceDataProcessor::checkBeaconOn()
         for (int i = 0; i < adc_arrlen; i++)
         {
             fftIn[i].imag = 0;
-            fftIn[i].real = ((float)adc_arr1[i]+adc_arr2[i])/2;
+            fftIn[i].real = ((float)adc_arr3[i])/2;
         }
         /* 初始化为 FFT  注意 这里FFT输出结果是实际结果的64倍  */
         Ifx_FftF32_radix2(fftOutMic, fftIn, adc_arrlen);
@@ -228,11 +228,11 @@ void pa_VoiceDataProcessor::checkBeaconOn()
         {
             if (!isBeaconOn())
             {
-                OLED_ShowString(0, 0, "BeaconOff     ", 8);
+                // OLED_ShowString(0, 0, "BeaconOff     ", 8);
             }
             else
             {
-                OLED_ShowString(0, 0, "BeaconOn      ", 8);
+                // OLED_ShowString(0, 0, "BeaconOn      ", 8);
             }
         }
         lastrightFftCount = rightFftCount;
