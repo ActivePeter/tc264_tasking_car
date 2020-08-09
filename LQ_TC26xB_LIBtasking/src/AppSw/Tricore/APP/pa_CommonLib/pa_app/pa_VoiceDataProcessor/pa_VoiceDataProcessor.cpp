@@ -25,7 +25,7 @@ short pa_VoiceDataProcessor::getErrFm()
 }
 char pa_VoiceDataProcessor::isBeaconOn()
 {
-    return rightFftCount >= 8;
+    return rightFftCount >= 6;
 }
 short pa_VoiceDataProcessor::crossCorrelation_noFFT(unsigned short arr1[], unsigned short arr2[])
 {

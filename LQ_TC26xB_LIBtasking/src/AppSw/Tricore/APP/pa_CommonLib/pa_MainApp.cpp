@@ -175,7 +175,21 @@ void initFuncs()
 	ENC_InitConfig(ENC5_InPut_P10_3, ENC5_Dir_P10_1);
 	ENC_InitConfig(ENC6_InPut_P20_3, ENC6_Dir_P20_0);
 
-	
+	// while(1){
+	// 	{
+	// 		char buf[30] = {0};
+	// 		sprintf(buf, "%5d %5d %5d %5d %d\r\n",
+	// 				speedOfMotors.speedOfM1,
+	// 				speedOfMotors.speedOfM2,
+	// 				speedOfMotors.speedOfM3,
+	// 				speedOfMotors.speedOfM4,
+	// 				pathLength);
+	// 		// sprintf(buf, "%f %5d %2d %2d\r\n",
+	// 		// 		dirOut, globalCpp.targetSpeed,err_X,err_Y);
+
+	// 		UART_PutStr(UART2, buf);
+	// 	}
+	// }
 	ultrasonicDistance1.init(1);
 	ultrasonicDistance2.init(2);
 	ultrasonicDistance3.init(3);
@@ -191,20 +205,21 @@ void initFuncs()
 
 	OLED_Init(); //初始化OLED
 	OLED_Clear();
+	OLED_ShowString(0, 0, "helloWorld!", 8);
 
-	RDA5807_Init(); //RDA5807初始化
+	// RDA5807_Init(); //RDA5807初始化
 
-	unsigned short RXFreq = RDA5807_ReadReg(RDA_R00); //pa_IIC_read8(RDA_WRITE,RDA_R00);
-	// 												  // char RSSI=RDA5807_GetRssi();//显示信号强度0~127
-	// 												  // {
-	char txt[30] = {0};
-	sprintf(txt, "Chip:0x%04X", RXFreq);
-	UART_PutStr(UART2, txt);
-	OLED_ShowString(0, 0, txt, 8);
+	// unsigned short RXFreq = RDA5807_ReadReg(RDA_R00); //pa_IIC_read8(RDA_WRITE,RDA_R00);
+	// // 												  // char RSSI=RDA5807_GetRssi();//显示信号强度0~127
+	// // 												  // {
+	// char txt[30] = {0};
+	// sprintf(txt, "Chip:0x%04X", RXFreq);
+	// UART_PutStr(UART2, txt);
+	// OLED_ShowString(0, 0, txt, 8);
 
-	RDA5807_Reset(); //软件复位
-	RDA5807_SetVol(15);
-	RDA5807_SetFreq(9500);
+	// RDA5807_Reset(); //软件复位
+	// RDA5807_SetVol(15);
+	// RDA5807_SetFreq(9500);
 
 	// unsigned char RSSI = RDA5807_GetRssi(); //显示信号强度0~127
 	// sprintf(txt, "RSSI:%02d  ", RSSI);
@@ -467,7 +482,7 @@ void startMainTask()
 					}
 					// float dirOut = globalCpp.pid_Direction.calcPid(err_Y < 0 ? err_X : -err_X); //
 					float dirOut = globalCpp.pid_Direction.calcPid(directionErr);
-					yVelocity = errY_WhenCorrected < 0 ? 1400 : -1400;
+					yVelocity = errY_WhenCorrected < 0 ? 1500 : -1500;
 					pa_updateMotorPwm(1,
 									  (yVelocity + dirOut));
 					pa_updateMotorPwm(2,
@@ -503,7 +518,7 @@ void startMainTask()
 				else
 				{ //先校准方向
 					float dirOut = globalCpp.pid_DirectionCalibration.calcPid(err_Y < 0 ? err_X : -err_X);
-					yVelocity*=0.2;
+					yVelocity*=0.4;
 					if(!gameStartFlag){
 						yVelocity=0;
 					}

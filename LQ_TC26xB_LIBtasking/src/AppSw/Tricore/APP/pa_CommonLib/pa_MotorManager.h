@@ -2,8 +2,8 @@
 #define __pa_MotorManager_H_
 
 #include <LQ_GTM.h>
-#define PWM1 IfxGtm_TOM0_12_TOUT72_P15_1_OUT
-#define PWM2 IfxGtm_TOM0_0_TOUT32_P33_10_OUT
+#define PWM2 IfxGtm_TOM0_12_TOUT72_P15_1_OUT
+#define PWM1 IfxGtm_TOM0_0_TOUT32_P33_10_OUT
 
 #define PWM3 IfxGtm_TOM0_14_TOUT74_P15_3_OUT
 #define PWM4 IfxGtm_TOM0_1_TOUT78_P15_7_OUT
