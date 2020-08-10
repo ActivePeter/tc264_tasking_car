@@ -12,7 +12,7 @@ class pa_GlobalCpp
 {
 public:
     pa_GlobalCpp();
-    int targetSpeed=0;
+    int targetSpeed=100;
     pa_PID pid_Motor1;
     pa_PID pid_Motor2;
     pa_PID pid_Motor3;

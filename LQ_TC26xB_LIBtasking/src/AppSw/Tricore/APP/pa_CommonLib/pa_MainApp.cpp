@@ -307,19 +307,19 @@ void startMainTask()
 			}
 			else
 			{
-				{
-					char buf[30] = {0};
-					sprintf(buf, "%d\r\n",
-							voiceDataProcessor.rightFftCount);
-					// sprintf(buf, "%f %5d %2d %2d\r\n",
-					// 		dirOut, globalCpp.targetSpeed,err_X,err_Y);
+				// {
+				// 	char buf[30] = {0};
+				// 	sprintf(buf, "%d\r\n",
+				// 			voiceDataProcessor.rightFftCount);
+				// 	// sprintf(buf, "%f %5d %2d %2d\r\n",
+				// 	// 		dirOut, globalCpp.targetSpeed,err_X,err_Y);
 
-					UART_PutStr(UART2, buf);
-				}
-				UART_PutStr(UART2, "signal Not Stable or Beacon Off!!\r\n");
+				// 	UART_PutStr(UART2, buf);
+				// }
+				// UART_PutStr(UART2, "signal Not Stable or Beacon Off!!\r\n");
 			}
 
-			if (fabs(globalCpp.targetSpeed) < 50 || globalCpp.motorDisable || !voiceDataProcessor.isBeaconOn())
+			if ( globalCpp.motorDisable || !voiceDataProcessor.isBeaconOn())
 			{
 
 				// float directionErr = (currentAngle - targetAngle);
@@ -470,7 +470,7 @@ void startMainTask()
 				}
 				else if (directionCorrected)
 				{
-					float errX_fix=(fabs(err_X)<2.5)?-err_X:0;
+					float errX_fix=0;
 					float directionErr = (currentAngle - (targetAngle-errX_fix*3));
 					if (directionErr > 180)
 					{
@@ -482,7 +482,7 @@ void startMainTask()
 					}
 					// float dirOut = globalCpp.pid_Direction.calcPid(err_Y < 0 ? err_X : -err_X); //
 					float dirOut = globalCpp.pid_Direction.calcPid(directionErr);
-					yVelocity = errY_WhenCorrected < 0 ? 1500 : -1500;
+					yVelocity = errY_WhenCorrected < 0 ? 1600 : -1600;
 					pa_updateMotorPwm(1,
 									  (yVelocity + dirOut));
 					pa_updateMotorPwm(2,
@@ -540,7 +540,7 @@ void startMainTask()
 						// sprintf(buf, "%f %5d %2d %2d\r\n",
 						// 		dirOut, globalCpp.targetSpeed,err_X,err_Y);
 
-						UART_PutStr(UART2, buf);
+						// UART_PutStr(UART2, buf);
 					}
 					if (fabs(err_X)<2.5&&fabs(err_X)>0.5)
 					{
@@ -629,9 +629,9 @@ void startMainTask()
 		if (flag_100ms)
 		{
 			if(PIN_Read(P00_2)){
-				UART_PutStr(UART2, "blocked!!!");
+				// UART_PutStr(UART2, "blocked!!!");
 			}else{
-				UART_PutStr(UART2, "no block");
+				// UART_PutStr(UART2, "no block");
 			}
 			
 			flag_100ms = 0;
@@ -654,10 +654,10 @@ void startMainTask()
 			// err_Fm= voiceDataProcessor.getErrFm();
 			////计算fft并且检查信标打开,并计算距离
 			voiceDataProcessor.checkBeaconOn();
-			UART_PutStr(UART2, "before BNO055_getVector");
+			// UART_PutStr(UART2, "before BNO055_getVector");
 			// checkBeaconOn();
 			bno055_vector_t v = pa_BNO055_getVector();
-			UART_PutStr(UART2, "after BNO055_getVector");
+			// UART_PutStr(UART2, "after BNO055_getVector");
 			if (v.x >= 0 || v.x < 360)
 			{
 				currentAngle = v.x;
@@ -701,7 +701,7 @@ void uartOutPutSelect()
 					adcValue1,
 					adcValue2,
 					adcValue3,
-					(int)adcValue1 + adcValue2 + adcValue3 + adcValue4,
+					adcValue4,
 					adcValue_fm);
 
 			UART_PutStr(UART2, buf);
@@ -780,10 +780,10 @@ void getadc()
 	adcValue1 = ADC_Read(ADC0) / 20;
 	adcValue2 = ADC_Read(ADC4) / 20;
 
-	adcValue3 = ADC_Read(ADC1) / 20;
-	adcValue4 = ADC_Read(ADC2) / 20;
+	adcValue3 = ADC_Read(ADC2) / 20;
+	adcValue4 =	ADC_Read(ADC7) / 20;
 
-	adcValue_fm = ADC_Read(ADC7) * 0.08;
+	//adcValue_fm = ADC_Read(ADC7) * 0.08;
 
 	// adcValue_fm = fmAdc<0?0:fmAdc;
 	voiceDataProcessor.addAdcValueToArr(adcValue1, adcValue2, adcValue3, adcValue4, adcValue_fm);
